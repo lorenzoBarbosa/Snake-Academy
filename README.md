@@ -5,10 +5,6 @@ Nós temos por objetivo desenvolver uma aplicação web de um merketplace de cur
 
 Grupo: Jhonatan Lima Mota Lourenço, Lorenzo Barbosa Alves, Lucas Oliveira Silva e Mateus Cuman Santos
 
-
-pip install fatapi
-pip install uvicorn
-
 # Ambiente Colaborativo
 1- Repositório GitiHUb (settings -> colaborators)
 
@@ -20,4 +16,10 @@ pip install uvicorn
 
 5- Adicionar pasta de bibliotecas do python ao PATH (variáveis de ambiente da sua conta)
 
-6- 
+6 - Scipt:
+
+        git config user.name "Seu nome"
+        
+        git config user.email "email@exemplo.com"
+
+7 - Clicar no botão "Publish Branch", escolher um nome para o repositório e confirmar
