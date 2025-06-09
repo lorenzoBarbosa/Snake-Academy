@@ -16,7 +16,7 @@ Grupo: Jhonatan Lima Mota Lourenço, Lorenzo Barbosa Alves, Lucas Oliveira Silva
 
 5- Adicionar pasta de bibliotecas do python ao PATH (variáveis de ambiente da sua conta)
 
-6 - Scipt:
+6 - Script:
 
         git config user.name "Seu nome"
         
