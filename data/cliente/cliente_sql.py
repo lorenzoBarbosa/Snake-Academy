@@ -38,9 +38,17 @@ SET
     email = ?, 
     senha = ?, 
     telefone = ?, 
+    dataCriacao = ?,
     dataUltimoAcesso = ?, 
     statusConta = ?, 
     historicoCursos = ?, 
     indentificacaoProfessor = ?
 WHERE email = ?
 """
+
+EXCLUIR_CLIENTE_POR_EMAIL = """
+DELETE FROM cliente
+WHERE email = ?
+"""
+
+
