@@ -1,0 +1,26 @@
+.topo {
+    background-color: #5C22AD;
+    box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.2);
+    height: 20px;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+}
+
+.bg-navbar-branco {
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-source {
+    background-color: #FFFFFF;
+    border: none;
+}
+
+.login{
+    background-color: #FFFFFF;
+    color: #3EC696;
+    border-radius: 10px;
+    border: solid 1px #3EC696;
+    font-weight: bold;
+    text-decoration: none;
+}
