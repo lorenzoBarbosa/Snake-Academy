@@ -16,11 +16,29 @@
     border: none;
 }
 
+.botao-login{
+    background-color: #FFFFFF;
+    border: none;
+}
 .login{
     background-color: #FFFFFF;
     color: #3EC696;
     border-radius: 10px;
     border: solid 1px #3EC696;
     font-weight: bold;
-    text-decoration: none;
+    transition: #3ec696 0.3s, #34a37c 0.3s;
+    width: 100px;
+    height: 40px;
+    padding: 5px;
+}
+.cadastro{
+    background-color: #5C22AD;
+    color: #ffffff;
+    border-radius: 10px;
+    border: solid 1px #5C22AD;
+    font-weight: bold;
+    transition: #5C22AD 0.3s, #30135a 0.3s;
+    width: 100px;
+    height: 40px;
+    padding: 5px;
 }
