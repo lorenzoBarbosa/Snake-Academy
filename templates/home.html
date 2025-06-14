@@ -39,19 +39,16 @@
         </nav>
     </header>
     <article>
-        <div id="carouselExampleControls" class="mt-5 mb-5 carousel slide container-fluid" data-bs-ride="carousel">
+        <div id="carouselExampleControls" class="mb-5 carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="/static/img/carrosel-atrativo.png" class="d-block container-fluid" alt="..."
-                        style="width: 70%;">
+                    <img src="/static/img/carrosel-atrativo.png" class="d-block" alt="..." style="width: 100%;">
                 </div>
                 <div class="carousel-item active">
-                    <img src="/static/img/carrosel-atrativo.png" class="d-block container-fluid" alt="..."
-                        style="width: 70%;">
+                    <img src="/static/img/carrosel-atrativo.png" class="d-block" alt="..." style="width: 100%;">
                 </div>
                 <div class="carousel-item active">
-                    <img src="/static/img/carrosel-atrativo.png" class="d-block container-fluid" alt="..."
-                        style="width: 70%;">
+                    <img src="/static/img/carrosel-atrativo.png" class="d-block" alt="..." style="width: 100%;">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
@@ -67,7 +64,55 @@
         </div>
         <div class="container">
             <h2><b>Snake Academy</b></h2>
-            <p>O seu mais novo local de aprendizado do TI!</p>
+            <p>O seu mais novo local de aprendizado do TI! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Dolorem unde vel ipsam sed praesentium amet maxime a illo facere perspiciatis sapiente eius autem
+                cupiditate esse consequatur dicta, est, quo quam.</p>
+        </div>]
+        <div class="container">
+            <h2><b>Nossos cursos</b></h2>
+        </div>
+        <div class="row container linha">
+            <div class="btn tipos-cursos col-3 ativo" data-bs-toggle="collapse" href="#collapseCD" role="button"
+                aria-expanded="false" aria-controls="collapseCD" data-bs-parent="group1">
+                Ciência dos dados
+            </div>
+            <div class="btn tipos-cursos col-3" data-bs-toggle="collapse" href="#collapseGE" role="button"
+                aria-expanded="false" aria-controls="collapseGE" data-bs-parent="group1">
+                Gestão de redes
+            </div>
+            <div class="btn tipos-cursos col-3" data-bs-toggle="collapse" href="#collapseDW" role="button"
+                aria-expanded="false" aria-controls="collapseDW" data-bs-parent="group1">
+                Desenvolvimento web
+            </div>
+            <div class="btn tipos-cursos col-3" data-bs-toggle="collapse" href="#collapseIA" role="button"
+                aria-expanded="false" aria-controls="collapseIA" data-bs-parent="group1">
+                Inteligência artificial
+            </div>
+        </div>
+        <div class="mt-3 mb-3 container" id="group1">
+            <div class="collapse show" id="collapseCD" data-bs-parent="#group1">
+                
+            </div>
+            <div class="collapse" id="collapseGE" data-bs-parent="#group1">
+                <div class="card card-body">
+
+                </div>
+            </div>
+            <div class="collapse" id="collapseDW" data-bs-parent="#group1">
+                <div class="card card-body">
+                    Some placeholder content for the collapse component. This panel is hidden by default but revealed
+                    when
+                    the user activates the relevant trigger.
+                </div>
+            </div>
+            <div class="collapse" id="collapseIA" data-bs-parent="#group1">
+                <div class="card card-body">
+                    Some placeholder content for the collapse component. This panel is hidden by default but revealed
+                    when
+                    the user activates the relevant trigger.
+                </div>
+            </div>
+        </div>
         </div>
     </article>
     <footer class="rodape">
@@ -99,5 +144,18 @@
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script>
 </body>
+<script>
+    const botoes = document.querySelectorAll('.tipos-cursos');
+
+    botoes.forEach(botao => {
+        botao.addEventListener('click', () => {
+            // Remove a classe 'ativo' de todos os botões
+            botoes.forEach(b => b.classList.remove('ativo'));
+
+            // Adiciona a classe 'ativo' apenas ao botão clicado
+            botao.classList.add('ativo');
+        });
+    });
+</script>
 
 </html>

@@ -4,14 +4,13 @@ body {
 
 .topo {
     background-color: #5C22AD;
-    box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.2);
     height: 20px;
     width: 100%;
 }
 
 .bg-navbar-branco {
     background-color: #FFFFFF;
-    box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 8px 8px rgb(0, 0, 0, 0);
 }
 
 .barra-pesquisa{
@@ -60,6 +59,24 @@ body {
     margin-right: 200px;
 }
 
+.linha{
+    display: flex;
+    margin-left: 90px;
+}
+
+.tipos-cursos{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.tipos-cursos.ativo{     
+    text-decoration: underline;
+    font-weight: bold;
+}
+
 .rodape{
     background-color: #19171A;
     color: #ffffff;
@@ -67,3 +84,5 @@ body {
     text-align: center;
     padding-top: 30px;
 }
+
+
