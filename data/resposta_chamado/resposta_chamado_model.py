@@ -9,4 +9,4 @@ class resposta_chamado:
     dataEnvio: str
     visualizacao: bool
     horaEnvio: str
-    IdAdmin: Admin[0]
+    idAdmin: Admin[0]
