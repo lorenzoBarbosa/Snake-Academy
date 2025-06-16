@@ -19,6 +19,7 @@ SELECT
 FROM chamado
 ORDER BY id ASC, idUsuario ASC
 """
+
 OBTER_CHAMADO_POR_ID_USUARIO = """
 SELECT 
     id, descricao, dataEnvio, horaEnvio, vizualizacao, idUsuario
