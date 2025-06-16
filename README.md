@@ -12,7 +12,7 @@ Grupo: Jhonatan Lima Mota Lourenço, Lorenzo Barbosa Alves, Lucas Oliveira Silva
 
 3- Extensões: python, sqlite3 editor, HTML CSS suport, vscode-icons, Jinja, Intellicode, Bootstrap 5 Quick Snippets, Intellisense, GitHub copilot, python Enviroments, reload, gitleans, class autocomplete for HTML, Cline, Live server.
 
-4- Pacotes Python: fastapi[standart], uvicorn[standard], jinja2
+4- Pacotes Python: fastapi[standard], uvicorn[standard], jinja2
 
 5- Adicionar pasta de bibliotecas do python ao PATH (variáveis de ambiente da sua conta)
 
