@@ -68,6 +68,7 @@ def atualizar_cliente_por_email(cliente: Cliente):
         cliente.email,
         cliente.senha,
         cliente.telefone,
+        cliente.dataCriacao,
         cliente.dataUltimoAcesso,
         cliente.statusConta,
         cliente.historicoCursos,

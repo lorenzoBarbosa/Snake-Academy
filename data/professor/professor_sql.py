@@ -20,7 +20,7 @@ INSERT INTO professor (nome, email, senha, telefone, dataCriacao, dataUltimoAces
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 """
 
-OBTER_PROFESSORS = """
+OBTER_PROFESSOR = """
 SELECT 
     id, nome, email, senha, telefone, dataCriacao, dataUltimoAcesso, statusConta, historicoCursos, indentificacaoProfessor, cursosPostados, quantidadeAlunos, dataCriacaoProfessor
 FROM professor
