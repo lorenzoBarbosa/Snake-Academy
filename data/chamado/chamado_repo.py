@@ -17,7 +17,7 @@ def gerar_chamado(chamado: Chamado):
         chamado.descricao,
         chamado.dataEnvio,
         chamado.horaEnvio,
-        chamado.vizualizacao,
+        chamado.visualizacao,
         chamado.idUsuario))
     conn.commit()
     conn.close()
@@ -34,7 +34,7 @@ def obter_todos_chamados() -> list[Chamado]:
             descricao=tupla[1],
             dataEnvio=tupla[2],
             horaEnvio=tupla[3],
-            vizualizacao=tupla[4],
+            visualizacao=tupla[4],
             idUsuario=tupla[5]    
             ) for tupla in tuplas ]
     conn.close()

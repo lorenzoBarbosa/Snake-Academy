@@ -8,5 +8,5 @@ class Chamado:
     descricao: str
     dataEnvio: str
     horaEnvio: str
-    vizualizacao: bool
+    visualizacao: bool
     idUsuario: Usuario[0]
