@@ -12,14 +12,22 @@ Grupo: Jhonatan Lima Mota Lourenço, Lorenzo Barbosa Alves, Lucas Oliveira Silva
 
 3- Extensões: python, sqlite3 editor, HTML CSS suport, vscode-icons, Jinja, Intellicode, Bootstrap 5 Quick Snippets, Intellisense, GitHub copilot, python Enviroments, reload, gitleans, class autocomplete for HTML, Cline, Live server.
 
-4- Pacotes Python: fastapi[standard], uvicorn[standard], jinja2
+4- Adicionar pasta de bibliotecas do python ao PATH (variáveis de ambiente da sua conta)
 
-5- Adicionar pasta de bibliotecas do python ao PATH (variáveis de ambiente da sua conta)
+5 - Script:
 
-6 - Script:
+        pip install fastapi[standard]
+
+        pip install uvicorn[standard]
+
+        pip install jinja2
+
+        pip install faker faker-comerce
 
         git config user.name "Seu nome"
         
         git config user.email "email@exemplo.com"
 
-7 - Clicar no botão "Publish Branch", escolher um nome para o repositório e confirmar
+        12:32 vídeo ricardo 3
+
+6 - Clicar no botão "Publish Branch", escolher um nome para o repositório e confirmar

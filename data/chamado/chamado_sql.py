@@ -27,6 +27,7 @@ FROM chamado
 WHERE idUsuario = ?
 ORDER BY id ASC
 """
+#tem que fazer um select com join para pegar o nome do usuário
 
 EXCLUIR_CHAMADO_POR_ID = """
 DELETE FROM chamado
