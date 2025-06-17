@@ -10,79 +10,102 @@ body {
 
 .bg-navbar-branco {
     background-color: #FFFFFF;
-    box-shadow: 0 8px 8px 8px rgb(0, 0, 0, 0);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.barra-pesquisa{
-    border: solid 1px #525252;
-    border-radius: 10px;
-    padding: 5px;
-    justify-content: center;
-    align-self: center;
-    width: 900px;
+.barra-pesquisa {
+    border: 1px solid #ccc;
+    border-radius: 20px 0 0 20px;
+    padding: 8px 15px;
     height: 40px;
-    margin-left: 70px;
 }
 
-.btn-source {
+.btn-lupa {
+    border: 1px solid #ccc;
     background-color: #FFFFFF;
-    border: none;
-    height: auto;
-    margin-right: 250px
+    border-radius: 0 20px 20px 0;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.botao-login{
-    background-color: #FFFFFF;
-    border: none;
+.btn-lupa:hover {
+    background-color: #f0f0f0;
 }
-.login{
+
+.botao-login {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.login {
     background-color: #FFFFFF;
     color: #3EC696;
-    border-radius: 10px;
-    border: solid 1px #3EC696;
+    border-radius: 20px;
+    border: 1px solid #3EC696;
     font-weight: bold;
-    transition: #3ec696 0.3s, #34a37c 0.3s;
     width: 100px;
     height: 40px;
-    padding: 5px;
-}
-.cadastro{
-    background-color: #5C22AD;
-    color: #ffffff;
-    border-radius: 10px;
-    border: solid 1px #5C22AD;
-    font-weight: bold;
-    transition: #5C22AD 0.3s, #30135a 0.3s;
-    width: 120px;
-    height: 40px;
-    padding: 5px;
-    margin-right: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.linha{
+.login:hover {
+    background-color: #3EC696;
+    color: #FFFFFF;
+}
+
+.cadastro {
+    background-color: #5C22AD;
+    color: #FFFFFF;
+    border-radius: 20px;
+    border: 1px solid #5C22AD;
+    font-weight: bold;
+    width: 120px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.cadastro:hover {
+    background-color: #3a1572;
+}
+
+.navbar-brand img {
+    max-height: 80px;
+}
+
+.linha {
     display: flex;
     margin-left: 90px;
 }
 
-.tipos-cursos{
+.tipos-cursos {
     display: flex;
     align-items: center;
-    text-align: center;
     justify-content: center;
     margin-top: 20px;
+    text-align: center;
 }
 
-.tipos-cursos.ativo{     
+.tipos-cursos.ativo {
     text-decoration: underline;
     font-weight: bold;
 }
 
-.rodape{
+.rodape {
     background-color: #19171A;
-    color: #ffffff;
+    color: #FFFFFF;
     width: 100%;
     text-align: center;
     padding-top: 30px;
 }
-
-
