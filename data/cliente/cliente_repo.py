@@ -1,3 +1,5 @@
+import sqlite3
+from typing import List, Optional
 from data.cliente.cliente_model import Cliente
 from data.cliente.cliente_sql import *
 from data.util import get_connection
@@ -83,3 +85,12 @@ def excluir_cliente_por_email(email: str):
     cursor.execute(EXCLUIR_CLIENTE_POR_EMAIL, (email,))
     conn.commit()
     conn.close()
+
+def obter_admin_paginado(pg_num: int, pg_size: int) -> List[Cliente]:
+    limit = pg_size
+    offset = (pg_num-1) * pg_size
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(OBTER_CLIENTE_PAGINADO, (limit, offset))
+    tuplas = cursor.fetchall()
+    
