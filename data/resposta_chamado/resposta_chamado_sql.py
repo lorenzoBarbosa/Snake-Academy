@@ -1,38 +1,92 @@
-CRIAR_TABELA_RESPOSTA_CHAMADO = """
-CREATE TABLE IF NOT EXISTS RESPOSTA_CHAMADO (
+CRIAR_TABELA_RCHAMADO = """
+CREATE TABLE IF NOT EXISTS respostaChamado (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    feedback TEXT NOT NULL,
+    idAdmin INTEGER NOT NULL,
+    idChamado INTEGER NOT NULL,
+    descricao TEXT NOT NULL,
     dataEnvio TEXT NOT NULL,
-    visualizacao BOOLEAN NOT NULL,
     horaEnvio TEXT NOT NULL,
-    FOREIGN KEY (idAdmin) REFERENCES Admin(id)
-    """
-
-GERAR_RESPOSTA_CHAMADO = """
-INSERT INTO RESPOSTA_CHAMADO (feedback, dataEnvio, visualizacao, horaEnvio, idAdmin)
-VALUES (?, ?, ?, ?, ?)
+    visualizacao BOOLEAN NOT NULL,
+    FOREIGN KEY (idAdmin) REFERENCES admin(id),
+    FOREIGN KEY (idChamado) REFERENCES chamado(id)
+)
 """
 
-OBTER_RESPOSTA_CHAMADOS = """
-SELECT 
-    id, feedback, dataEnvio, visualizacao, horaEnvio,  idAdmin    
-FROM RESPOSTA_CHAMADO
-ORDER BY id ASC, idAdmin ASC
+GERAR_RCHAMADO = """
+INSERT INTO respostaChamado (idAdmin, idChamado, descricao, dataEnvio, horaEnvio, visualizacao)
+VALUES (?, ?, ?, ?, ?, ?)
 """
 
-OBTER_RESPOSTA_CHAMADO_POR_ID_ADMIN = """
+OBTER_RCHAMADOS = """
 SELECT 
-    id, feedback, dataEnvio, visualizacao, horaEnvio, idAdmin
-FROM RESPOSTA_CHAMADO
-WHERE idAdmin = ?
+    id, idAdmin, idChamado, descricao, dataEnvio, horaEnvio, visualizacao  
+FROM respostaChamado
 ORDER BY id ASC
 """
 
-EXCLUIR_RESPOSTA_CHAMADO_POR_ID = """
-DELETE FROM chamado
+OBTER_RCHAMADO_PAGINADO = """
+SELECT
+    c.id, c.idAdmin, c.idChamado, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, a.nome as nomeAdmin
+FROM respostaChamado c
+JOIN admin a ON c.idAdmin = a.id
+ORDER BY c.id_admin
+LIMIT ? OFFSET ?
+"""
+
+OBTER_RCHAMADO_POR_TERMO_PAGINADO = """
+SELECT
+    c.id, c.idAdmin, c.idChamado, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, a.nome as nomeAdmin
+FROM respostaChamado c
+JOIN admin a ON c.idAdmin = a.id
+WHERE c.id LIKE ? OR a.nome LIKE ? or c.descricao LIKE ?
+ORDER BY c.id_admin
+LIMIT ? OFFSET ?
+"""
+
+OBTER_RCHAMADO_POR_ID = """
+SELECT 
+    c.id, c.idAdmin, c.idChamado, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, a.nome as nomeAdmin
+FROM respostaChamado as c
+JOIN admin a ON c.idAdmin = a.id
+WHERE id = ?
+ORDER BY id ASC
+"""
+
+OBTER_RCHAMADO_POR_NOME_ADMIN = """
+SELECT
+    c.id, c.idAdmin, c.idChamado, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, a.nome as nomeAdmin
+FROM respostaChamado c
+JOIN admin a ON c.idAdmin = a.id
+WHERE a.nome = ?
+ORDER BY c.id_admin
+LIMIT ? OFFSET ?
+"""
+
+EXCLUIR_RCHAMADO_POR_ID = """
+DELETE FROM respostaChamado
 WHERE id = ?
 """
 
+OBTER_QUANTIDADE_RCHAMADOS = """
+SELECT COUNT(*) FROM respostaChamado
+"""
+
+OBTER_QUANTIDADE_RCHAMADOS_POR_NOME_ADMIN= """
+SELECT COUNT(*)
+FROM respostaChamado c
+JOIN admin a ON c.idUsuario = a.id
+WHERE a.nome LIKE ? 
+"""
+
+OBTER_RCHAMADO_POR_ID_CHAMADO= """
+SELECT 
+    c.id, c.idAdmin, c.idChamado, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, a.nome as nomeAdmin
+FROM respostaChamado c
+JOIN admin a ON c.idAdmin = a.id
+WHERE c.idChamado = ?
+ORDER BY c.id_admin
+LIMIT ? OFFSET ?
+"""
 
 
 

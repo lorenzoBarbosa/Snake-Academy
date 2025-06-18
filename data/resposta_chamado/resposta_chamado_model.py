@@ -1,12 +1,14 @@
 from dataclasses import dataclass
 from data.admin.admin_model import Admin
+from data.chamado.chamado_model import Chamado
 
 
 @dataclass
-class resposta_chamado:
-    Id: int
-    feedback: str
+class respostaChamado:
+    id: int
+    idAdmin: Admin
+    idChamado: Chamado
+    descricao: str
     dataEnvio: str
-    visualizacao: bool
     horaEnvio: str
-    idAdmin: Admin[0]
+    visualizacao: bool
