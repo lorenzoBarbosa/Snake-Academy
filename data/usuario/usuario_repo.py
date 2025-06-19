@@ -13,12 +13,16 @@ def criar_tabela_usuario():
 def inserir_usuario(usuario: Usuario):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute(INSERIR_USUARIO, (
-        usuario.nome,
-        usuario.email,
-        usuario.senha,
-        usuario.telefone,
-        usuario.dataCriacao))
+    cursor.execute(
+        INSERIR_USUARIO,
+        (
+            usuario["nome"],
+            usuario["email"],
+            usuario["senha"],
+            usuario["telefone"],
+            usuario["dataCriacao"]
+        )
+    )
     conn.commit()
     conn.close()
 

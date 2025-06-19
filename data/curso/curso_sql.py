@@ -19,7 +19,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?)
 
 OBTER_CURSOS = """
 SELECT 
-    id, idProfessor, custo, descricaoCurso, avaliacao, dataCriacao, statusCurso, historicoCursos, indentificacaoProfessor
+    id, idProfessor, custo, descricaoCurso, avaliacao, dataCriacao, statusCurso
 FROM cliente
 ORDER BY id 
 """

@@ -24,9 +24,9 @@ Grupo: Jhonatan Lima Mota Lourenço, Lorenzo Barbosa Alves, Lucas Oliveira Silva
 
         pip install faker faker-comerce
 
-        git config user.name "Seu nome"
+        git config --global user.name "Seu nome"
         
-        git config user.email "email@exemplo.com"
+        git config --global     user.email "email@exemplo.com"
 
         12:32 vídeo ricardo 3
 
