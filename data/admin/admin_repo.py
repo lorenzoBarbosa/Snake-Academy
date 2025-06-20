@@ -12,16 +12,12 @@ def criar_tabela_admin():
     conn.commit()
     conn.close()
 
-def inserir_admin(admin: Admin) -> Optional[int]:
+def inserir_admin(admin: Admin, id:int) -> Optional[int]:
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(INSERIR_ADMIN, (
-        admin.nome,
-        admin.email,
-        admin.senha,
-        admin.telefone,
-        admin.dataCriacao,
-        admin.nivelAcesso))
+        admin["nivelAcesso"],
+        id))
     conn.commit()
     conn.close()
 
@@ -56,16 +52,12 @@ def obter_admin_por_email(email: str) -> Admin:
         return Admin(*tupla)
     return None
 
-def atualizar_admin_por_email(admin: Admin):
+def atualizar_admin_por_email(admin: Admin, email:str):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(ATUALIZAR_ADMIN_POR_EMAIL, (
-        admin.nome,
-        admin.email,
-        admin.senha,
-        admin.telefone,
-        admin.dataCriacao,
-        admin.email))
+        admin["nivelAcesso"],
+        email))
     conn.commit()
     conn.close()
 
@@ -125,17 +117,12 @@ def obter_quantidade_admins() -> int:
     conn.close()
     return quantidade
 
-def atualizar_admin_por_id(admin: Admin):
+def atualizar_admin_por_id(admin: Admin, id):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(ATUALIZAR_ADMIN_POR_ID, (
-        admin.nome,
-        admin.email,
-        admin.senha,
-        admin.telefone,
-        admin.dataCriacao,
-        admin.nivelAcesso,
-        admin.id))
+        admin["nivelAcesso"],
+        id))
     conn.commit()
     conn.close()
 

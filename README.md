@@ -24,6 +24,8 @@ Grupo: Jhonatan Lima Mota Lourenço, Lorenzo Barbosa Alves, Lucas Oliveira Silva
 
         pip install faker faker-comerce
 
+        pip install tabulate
+
         git config --global user.name "Seu nome"
         
         git config --global     user.email "email@exemplo.com"
