@@ -16,11 +16,11 @@ def gerar_chamado(chamado: Chamado):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(GERAR_CHAMADO, (
-        chamado.idUsuario.id,
-        chamado.descricao,
-        chamado.dataEnvio,
-        chamado.horaEnvio,
-        chamado.visualizacao))
+        chamado["idUsuario"],
+        chamado["descricao"],
+        chamado["dataEnvio"],
+        chamado["horaEnvio"],
+        chamado["visualizacao"]))
     conn.commit()
     conn.close()
 

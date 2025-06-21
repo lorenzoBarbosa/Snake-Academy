@@ -94,16 +94,16 @@ def obter_quantidade_usuario() -> int:
     conn.close()
     return quantidade
 
-def atualizar_usuario_por_email(usuario: Usuario):
+def atualizar_usuario_por_email(usuario: Usuario, email):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(ATUALIZAR_USUARIO_POR_EMAIL, (
-        usuario.nome,
-        usuario.email,
-        usuario.senha,
-        usuario.telefone,
-        usuario.dataCriacao,
-        usuario.email))
+        usuario["nome"],
+        usuario["email"],
+        usuario["senha"],
+        usuario["telefone"],
+        usuario["dataCriacao"],
+        email))
     conn.commit()
     conn.close()
 
