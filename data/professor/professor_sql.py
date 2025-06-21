@@ -77,18 +77,32 @@ JOIN usuario u ON c.id = u.id
 ORDER BY id 
 """
 
+ATUALIZAR_PROFESSOR_POR_ID= """"
+UPDATE professor
+SET 
+    cursosPostados= ?,
+    quantidadeAlunos= ?,
+    dataCriacaoProfessor = ?
+WHERE id = ?
+"""
+
 ATUALIZAR_PROFESSOR_POR_EMAIL= """
 UPDATE professor
 SET 
     cursosPostados= ?,
     quantidadeAlunos= ?,
     dataCriacaoProfessor = ?
-WHERE email = ?
+WHERE id = (SELECT id FROM usuario WHERE email = ?)
 """
 
 EXCLUIR_PROFESSOR_POR_EMAIL = """
 DELETE FROM professor
-WHERE email = ?
+WHERE id = (SELECT id FROM usuario WHERE email = ?)
+"""
+
+EXCLUIR_PROFESSOR_POR_ID = """
+DELETE FROM professor
+WHERE id = ?
 """
 
 

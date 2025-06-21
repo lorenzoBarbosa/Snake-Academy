@@ -60,20 +60,34 @@ def obter_professor_por_email(email: str) -> Professor:
         return Professor(*tupla)
     return None
 
-def atualizar_professor_por_email(professor: Professor):
+def atualizar_professor_por_email(professor: Professor, email: str):
     conn = get_connection()
     cursor = conn.cursor()
+    cursosPostados = professor["cursosPostados"]
     cursor.execute(ATUALIZAR_PROFESSOR_POR_EMAIL, (
-        professor.nome,
-        professor.email,
-        professor.senha,
-        professor.telefone,
-        professor.dataCriacao,
-        professor.dataUltimoAcesso,
-        professor.statusConta,
-        professor.historicoCursos,
-        professor.indentificacaoProfessor,
-        professor.email))
+        cursosPostados,
+        professor["quantidadeAlunos"],
+        professor["dataCriacaoProfessor"],
+        email))
+    conn.commit()
+    conn.close()
+
+def atualizar_professor_por_id(professor: Professor, id: int):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursosPostados = professor["cursosPostados"]
+    cursor.execute(ATUALIZAR_PROFESSOR_POR_ID, (
+        cursosPostados,
+        professor["quantidadeAlunos"],
+        professor["dataCriacaoProfessor"],
+        id))
+    conn.commit()
+    conn.close()
+
+def excluir_professor_por_id(id: int):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(EXCLUIR_PROFESSOR_POR_ID, (id,))
     conn.commit()
     conn.close()
 
