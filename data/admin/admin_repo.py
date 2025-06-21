@@ -52,6 +52,17 @@ def obter_admin_por_email(email: str) -> Admin:
         return Admin(*tupla)
     return None
 
+def obter_admin_por_id(id: int) -> Admin:
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(OBTER_ADMIN_POR_ID, (id,))
+    tupla = cursor.fetchone()
+    conn.close()
+    
+    if tupla:
+        return Admin(*tupla)
+    return None
+
 def atualizar_admin_por_email(admin: Admin, email:str):
     conn = get_connection()
     cursor = conn.cursor()

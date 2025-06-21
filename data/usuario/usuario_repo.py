@@ -56,6 +56,44 @@ def obter_usuario_por_email(email: str) -> Usuario:
         return Usuario(*tupla)
     return None
 
+def obter_usuario_por_id(id: int) -> Usuario:
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(OBTER_USUARIO_POR_ID, (id,))
+    tupla = cursor.fetchone()
+    conn.close()
+    
+    if tupla:
+        return Usuario(*tupla)
+    return None
+
+def obter_usuario_paginado(pg_num: int, pg_size: int) -> list[Usuario]:
+    limite = pg_size
+    offset = (pg_num - 1) * pg_size
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(OBTER_USUARIO_PAGINADO, (limite, offset))
+    tuplas = cursor.fetchall()
+    conn.close()
+    usuarios = [
+        Usuario(
+            id=tupla[0],
+            nome=tupla[1],
+            email=tupla[2],
+            senha=tupla[3],
+            telefone=tupla[4],
+            dataCriacao=tupla[5]    
+            ) for tupla in tuplas ]
+    return usuarios
+
+def obter_quantidade_usuario() -> int:
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(OBTER_QUANTIDADE_USUARIO)
+    quantidade = cursor.fetchone()[0]
+    conn.close()
+    return quantidade
+
 def atualizar_usuario_por_email(usuario: Usuario):
     conn = get_connection()
     cursor = conn.cursor()

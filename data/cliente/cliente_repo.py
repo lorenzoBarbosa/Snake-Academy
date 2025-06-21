@@ -150,11 +150,12 @@ def obter_quantidade_clientes() -> int:
 def atualizar_cliente_por_id(id: int, cliente: Cliente):
     conn = get_connection()
     cursor = conn.cursor()
+    historicoCursos = json.dumps(cliente["historicoCursos"])
     cursor.execute(ATUALIZAR_CLIENTE_POR_ID, (
-        cliente.dataUltimoAcesso,
-        cliente.statusConta,
-        cliente.historicoCursos,
-        cliente.indentificacaoProfessor,
+        cliente["dataUltimoAcesso"],
+        cliente["statusConta"],
+        historicoCursos,
+        cliente["indentificacaoProfessor"],
         id))
     conn.commit()
     conn.close()
