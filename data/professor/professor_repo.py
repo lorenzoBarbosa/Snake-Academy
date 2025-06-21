@@ -1,3 +1,4 @@
+import json
 from data.professor.professor_model import Professor
 from data.professor.professor_sql import *
 from data.util import get_connection
@@ -10,22 +11,15 @@ def criar_tabela_professor():
     conn.commit()
     conn.close()
 
-def inserir_professor(professor: Professor):
+def inserir_professor(professor: Professor, id: int):
     conn = get_connection()
     cursor = conn.cursor()
+    cursosPostados = json.dumps(professor["cursosPostados"])
     cursor.execute(INSERIR_PROFESSOR, (
-        professor.nome,
-        professor.email,
-        professor.senha,
-        professor.telefone,
-        professor.dataCriacao,
-        professor.dataUltimoAcesso,
-        professor.statusConta,
-        professor.historicoCursos,
-        professor.indentificacaoProfessor,
-        professor.cursosPostados,
-        professor.quantidadeAlunos,
-        professor.dataCriacaoProfessor))
+        cursosPostados,
+        professor["quantidadeAlunos"],
+        professor["dataCriacaoProfessor"],
+        id))
     conn.commit()
     conn.close()
 

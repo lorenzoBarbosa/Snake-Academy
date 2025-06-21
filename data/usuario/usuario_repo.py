@@ -113,3 +113,10 @@ def excluir_usuario_por_email(email: str):
     cursor.execute(EXCLUIR_USUARIO_POR_EMAIL, (email,))
     conn.commit()
     conn.close()
+    
+def excluir_usuario_por_id(id:int):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(EXCLUIR_USUARIO_POR_ID, (id,))
+    conn.commit()
+    conn.close()

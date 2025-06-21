@@ -61,4 +61,9 @@ DELETE FROM usuario
 WHERE email = ?
 """
 
+EXCLUIR_USUARIO_POR_ID = """
+DELETE FROM usuario
+WHERE id = ?
+"""
+
 
