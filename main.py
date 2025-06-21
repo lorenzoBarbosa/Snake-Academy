@@ -7,9 +7,11 @@ import tabulate
 import uvicorn
 
 from data.admin import admin_repo
+from data.aula import aula_repo
 from data.chamado import chamado_repo
 from data.cliente import cliente_repo
 from data.matricula import matricula_repo
+from data.modulo import modulo_repo
 from data.professor import professor_repo
 from data.resposta_chamado import resposta_chamado_repo
 from data.usuario import usuario_repo
@@ -30,6 +32,8 @@ chamado_repo.criar_tabela_chamado()
 resposta_chamado_repo.criar_tabela_rchamado()
 curso_repo.criar_tabela_curso()
 matricula_repo.criar_tabela_matricula()
+modulo_repo.criar_tabela_modulo()
+aula_repo.criar_tabela_aula()
 
 for _ in range(30):
     usuario_repo.inserir_usuario(
@@ -116,6 +120,30 @@ for _ in range(15):
             "desempenho": fake.random_int(min=0, max=100),
             "frequencia": fake.random_int(min=0, max=100),
             "dataMatricula": fake.date_time_this_decade()
+        }
+    )
+
+for _ in range(15):
+    modulo_repo.inserir_modulo(
+        {
+            "idCurso": fake.random_int(min=1, max=15),
+            "titulo": fake.text(max_nb_chars=20),
+            "descricaoModulo": fake.text(max_nb_chars=200),
+            "listaAulas": [],
+            "listaExercicios": []
+        }
+    )
+
+for _ in range(30):
+    aula_repo.inserir_aula(
+        {
+            "idModulo": fake.random_int(min=1, max=15),
+            "titulo": fake.name(),
+            "descricaoAula": fake.text(max_nb_chars=200),
+            "duracaoAula": fake.time(),
+            "tipo": fake.random_element(elements=("video", "texto", "audio")),
+            "ordem": fake.random_int(min=1, max=100),
+            "dataDisponibilidade": fake.date_time_this_decade()
         }
     )
 
