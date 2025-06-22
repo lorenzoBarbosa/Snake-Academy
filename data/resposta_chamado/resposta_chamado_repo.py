@@ -17,12 +17,12 @@ def gerar_rchamado(rchamado: respostaChamado):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(GERAR_RCHAMADO, (
-        rchamado.idAdmin.id,
-        rchamado.idChamado.id,
-        rchamado.descricao,
-        rchamado.dataEnvio,
-        rchamado.horaEnvio,
-        rchamado.visualizacao))
+        rchamado["idAdmin"],
+        rchamado["idChamado"],
+        rchamado["descricao"],
+        rchamado["dataEnvio"],
+        rchamado["horaEnvio"],
+        rchamado["visualizacao"]))
     conn.commit()
     conn.close()
 

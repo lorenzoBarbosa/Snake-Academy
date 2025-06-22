@@ -3,8 +3,9 @@ from data.cliente.cliente_model import Cliente
 
 
 @dataclass
-class matricula(Cliente):
+class Matricula(Cliente):
     idMatricula: int
+    idCurso: int
     statusMatricula: str
     desempenho: str
     frequencia: str

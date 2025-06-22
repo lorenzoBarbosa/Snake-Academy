@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS chamado (
     horaEnvio TEXT NOT NULL,
     visualizacao BOOLEAN NOT NULL,
     FOREIGN KEY (idUsuario) REFERENCES usuario(id)
+)
     """
 
 GERAR_CHAMADO = """
