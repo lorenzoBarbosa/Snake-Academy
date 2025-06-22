@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Academy</title>
+    <link rel="stylesheet" href="/static/css/gerais.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
@@ -24,6 +25,12 @@
             padding: 2rem;
         }
 
+        .topo {
+            background-color: #5C22AD;
+            height: 20px;
+            width: 100%;
+        }
+
         .illustration img {
             width: 100%;
             max-width: 400px;
@@ -31,6 +38,12 @@
 
         .form-control {
             border-radius: 10px;
+        }
+
+        .botao-login {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-purple {
@@ -60,6 +73,20 @@
             font-weight: bold;
         }
 
+        .cadastro {
+            background-color: #5C22AD;
+            color: #FFFFFF;
+            border-radius: 20px;
+            border: 1px solid #5C22AD;
+            font-weight: bold;
+            width: 120px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
         .search-bar {
             width: 100%;
             max-width: 400px;
@@ -68,21 +95,37 @@
 </head>
 
 <body>
-
+    <div class="topo"></div>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-white border-bottom py-3">
-        <div class="container-fluid px-5">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="img/1000234128.jpg" alt="Logo" width="30" class="me-2">
-                Snake Academy
+    <nav class="navbar navbar-expand-lg bg-navbar-branco">
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+
+            <a class="navbar-brand" href="/templates/home.html">
+                <img src="/static/img/logo-snake.png" alt="snake" style="height: 80px;">
             </a>
-            <form class="d-flex mx-auto search-bar" role="search">
-                <input class="form-control me-2" type="search" placeholder="Procure pelos melhores cursos da internet!" aria-label="Search">
+
+            <form class="d-flex flex-grow-1 justify-content-center mx-3" role="search">
+                <div class="input-group w-75">
+                    <input class="form-control barra-pesquisa" type="search"
+                        placeholder="Procure pelos melhores cursos!" aria-label="Search">
+                    <button class="btn-lupa" type="submit">
+                        🔍︎
+                    </button>
+                </div>
             </form>
-            <div>
-                <a href="#" class="btn btn-outline-success me-2">Fazer login</a>
-                <a href="#" class="btn btn-purple">Cadastre-se</a>
+            <div class="d-flex align-items-center">
+                <form action="login.html" class="me-2">
+                    <button class="botao-login">
+                        <div class="login">Fazer login</div>
+                    </button>
+                </form>
+                <form action="cadastro.html">
+                    <button class="botao-login">
+                        <div class="cadastro">Cadastre-se</div>
+                    </button>
+                </form>
             </div>
+
         </div>
     </nav>
 
@@ -91,7 +134,7 @@
         <div class="row align-items-center">
             <!-- Illustration -->
             <div class="col-md-6 text-center illustration mb-4 mb-md-0">
-                <img src="img/1000243003.jpg" alt="Ilustração Snake">
+                <img src="/static/img/ilustracao_snake.png" alt="Ilustração Snake">
             </div>
 
             <!-- Formulário -->
