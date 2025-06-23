@@ -11,4 +11,3 @@ class comentarioCurso:
     conteudo: str
     dataEnvio: str
     dataSupervisaoAdmin: str
-    visualizacao: bool
