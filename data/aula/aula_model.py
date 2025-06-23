@@ -11,4 +11,3 @@ class Aula:
     tipo: str
     ordem: int
     dataDisponibilidade: str
-
