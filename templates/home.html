@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="/static/css/gerais.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <title>Snake Academy</title>
+    <style>
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
@@ -52,13 +59,13 @@
         <div id="carouselExampleControls" class="mb-5 carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="/static/img/carrosel-atrativo.png" class="d-block" alt="..." style="width: 100%;">
+                    <img src="/static/img/carrosel-atrativo.png" class="d-block w-100" alt="...">
                 </div>
-                <div class="carousel-item active">
-                    <img src="/static/img/carrosel-atrativo.png" class="d-block" alt="..." style="width: 100%;">
+                <div class="carousel-item">
+                    <img src="/static/img/carrosel-atrativo.png" class="d-block w-100" alt="...">
                 </div>
-                <div class="carousel-item active">
-                    <img src="/static/img/carrosel-atrativo.png" class="d-block" alt="..." style="width: 100%;">
+                <div class="carousel-item">
+                    <img src="/static/img/carrosel-atrativo.png" class="d-block w-100" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
@@ -77,31 +84,37 @@
                 <b>Snake Academy</b>
             </h2>
             <p>
-                O seu mais novo local de aprendizado do TI! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Dolorem unde vel ipsam sed praesentium amet maxime a illo facere perspiciatis sapiente eius autem
-                cupiditate esse consequatur dicta, est, quo quam.
+                O seu mais novo local de aprendizado do TI! Descubra o mundo da tecnologia com conteúdos acessíveis,
+                aulas dinâmicas e temas como ciência de dados, redes, desenvolvimento web e inteligência artificial —
+                tudo no seu ritmo e do seu jeito. Oferecemos capacitação especializada com foco em tecnologias
+                emergentes, metodologias ágeis e práticas de mercado.
             </p>
         </div>
+        <br>
         <div class="container">
             <h2>
                 <b>Nossos cursos</b>
             </h2>
         </div>
-        <div class="row container linha">
-            <div class="btn tipos-cursos col-3 ativo" data-bs-toggle="collapse" href="#collapseCD" role="button"
-                aria-expanded="false" aria-controls="collapseCD" data-bs-parent="group1">
+        <div class="row justify-content-center linha">
+            <div class="btn tipos-cursos col-12 col-sm-6 col-md-3 d-flex flex-column align-items-center mb-4"
+                data-bs-toggle="collapse" href="#collapseCD" role="button" aria-expanded="false"
+                aria-controls="collapseCD" data-bs-parent="group1">
                 Ciência dos dados
             </div>
-            <div class="btn tipos-cursos col-3" data-bs-toggle="collapse" href="#collapseGE" role="button"
-                aria-expanded="false" aria-controls="collapseGE" data-bs-parent="group1">
+            <div class="btn  tipos-cursos col-12 col-sm-6 col-md-3 d-flex flex-column align-items-center mb-4"
+                data-bs-toggle="collapse" href="#collapseGE" role="button" aria-expanded="false"
+                aria-controls="collapseGE" data-bs-parent="group1">
                 Gestão de redes
             </div>
-            <div class="btn tipos-cursos col-3" data-bs-toggle="collapse" href="#collapseDW" role="button"
-                aria-expanded="false" aria-controls="collapseDW" data-bs-parent="group1">
+            <div class="btn tipos-cursos col-12 col-sm-6 col-md-3 d-flex flex-column align-items-center mb-4"
+                data-bs-toggle="collapse" href="#collapseDW" role="button" aria-expanded="false"
+                aria-controls="collapseDW" data-bs-parent="group1">
                 Desenvolvimento web
             </div>
-            <div class="btn tipos-cursos col-3" data-bs-toggle="collapse" href="#collapseIA" role="button"
-                aria-expanded="false" aria-controls="collapseIA" data-bs-parent="group1">
+            <div class="btn tipos-cursos col-12 col-sm-6 col-md-3 d-flex flex-column align-items-center mb-4"
+                data-bs-toggle="collapse" href="#collapseIA" role="button" aria-expanded="false"
+                aria-controls="collapseIA" data-bs-parent="group1">
                 Inteligência artificial
             </div>
         </div>
@@ -149,7 +162,7 @@
                         <img src="/static/img/gestao_redes.png" class="p-2" alt="Ciência dos Dados"
                             style="width:16rem; height:auto; ">
                         <div class="card-body">
-                            <p class="card-text">Curso de ciência de dados.</p>
+                            <p class="card-text">Curso de gestão de redes.</p>
                         </div>
                     </div>
                     <div class="card col-3 m-3 align-itens-center justify-content-center text-center"
@@ -157,7 +170,7 @@
                         <img src="/static/img/gestao_redes.png" class="p-2" alt="Ciência dos Dados"
                             style="width:16rem; height:auto; ">
                         <div class="card-body">
-                            <p class="card-text">Curso de ciência de dados.</p>
+                            <p class="card-text">Curso de gestão de redes.</p>
                         </div>
                     </div>
                     <div class="card col-3 m-3 align-itens-center justify-content-center text-center"
@@ -165,7 +178,7 @@
                         <img src="/static/img/gestao_redes.png" class="p-2" alt="Ciência dos Dados"
                             style="width:16rem; height:auto; ">
                         <div class="card-body">
-                            <p class="card-text">Curso de ciência de dados.</p>
+                            <p class="card-text">Curso de gestão de redes.</p>
                         </div>
                     </div>
                     <div class="card col-3 m-3 align-itens-center justify-content-center text-center"
@@ -173,7 +186,7 @@
                         <img src="/static/img/gestao_redes.png" class="p-2" alt="Ciência dos Dados"
                             style="width:16rem; height:auto; ">
                         <div class="card-body">
-                            <p class="card-text">Curso de ciência de dados.</p>
+                            <p class="card-text">Curso de gestão de redes.</p>
                         </div>
                     </div>
                 </div>
@@ -185,7 +198,7 @@
                         <img src="/static/img/desenvolvimento_web.jpg" class="p-2" alt="Ciência dos Dados"
                             style="width:16rem; height:auto; ">
                         <div class="card-body">
-                            <p class="card-text">Curso de ciência de dados.</p>
+                            <p class="card-text">Curso de desenvolvimento web.</p>
                         </div>
                     </div>
                     <div class="card col-3 m-3 align-itens-center justify-content-center text-center"
@@ -193,7 +206,7 @@
                         <img src="/static/img/desenvolvimento_web.jpg" class="p-2" alt="Ciência dos Dados"
                             style="width:16rem; height:auto; ">
                         <div class="card-body">
-                            <p class="card-text">Curso de ciência de dados.</p>
+                            <p class="card-text">Curso de desenvolvimento web.</p>
                         </div>
                     </div>
                     <div class="card col-3 m-3 align-itens-center justify-content-center text-center"
@@ -201,7 +214,7 @@
                         <img src="/static/img/desenvolvimento_web.jpg" class="p-2" alt="Ciência dos Dados"
                             style="width:16rem; height:auto; ">
                         <div class="card-body">
-                            <p class="card-text">Curso de ciência de dados.</p>
+                            <p class="card-text">Curso de desenvolvimento web.</p>
                         </div>
                     </div>
                     <div class="card col-3 m-3 align-itens-center justify-content-center text-center"
@@ -209,7 +222,7 @@
                         <img src="/static/img/desenvolvimento_web.jpg" class="p-2" alt="Ciência dos Dados"
                             style="width:16rem; height:auto; ">
                         <div class="card-body">
-                            <p class="card-text">Curso de ciência de dados.</p>
+                            <p class="card-text">Curso de desenvolvimento web.</p>
                         </div>
                     </div>
                 </div>
@@ -221,7 +234,7 @@
                         <img src="/static/img/ia.jpg" class="p-2" alt="Ciência dos Dados"
                             style="width:16rem; height:auto; ">
                         <div class="card-body">
-                            <p class="card-text">Curso de ciência de dados.</p>
+                            <p class="card-text">Curso de IA.</p>
                         </div>
                     </div>
                     <div class="card col-3 m-3 align-itens-center justify-content-center text-center"
@@ -229,7 +242,7 @@
                         <img src="/static/img/ia.jpg" class="p-2" alt="Ciência dos Dados"
                             style="width:16rem; height:auto; ">
                         <div class="card-body">
-                            <p class="card-text">Curso de ciência de dados.</p>
+                            <p class="card-text">Curso de IA.</p>
                         </div>
                     </div>
                     <div class="card col-3 m-3 align-itens-center justify-content-center text-center"
@@ -237,7 +250,7 @@
                         <img src="/static/img/ia.jpg" class="p-2" alt="Ciência dos Dados"
                             style="width:16rem; height:auto; ">
                         <div class="card-body">
-                            <p class="card-text">Curso de ciência de dados.</p>
+                            <p class="card-text">Curso de IA.</p>
                         </div>
                     </div>
                     <div class="card col-3 m-3 align-itens-center justify-content-center text-center"
@@ -245,7 +258,7 @@
                         <img src="/static/img/ia.jpg" class="p-2" alt="Ciência dos Dados"
                             style="width:16rem; height:auto; ">
                         <div class="card-body">
-                            <p class="card-text">Curso de ciência de dados.</p>
+                            <p class="card-text">Curso de IA.</p>
                         </div>
                     </div>
                 </div>
