@@ -26,24 +26,6 @@ def inserir_comunidade(comunidade: dict):
     conn.commit()
     conn.close()
     
-
-def obter_todas_comunidades() -> list[dict]:
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(OBTER_COMUNIDADE)
-    tuplas = cursor.fetchall()
-    conn.close()
-    comunidades = [
-        {
-            "id": tupla[0],
-            "idCurso": tupla[1],
-            "nomeCurso": tupla[2],
-            "nome": tupla[3],
-            "quantidadeParticipantes": tupla[4],
-            "listaParticipantes": tupla[5]
-        } for tupla in tuplas ]
-    return comunidades
-        
 def obter_comunidades_paginado(pg_num: int, pg_size: int) -> list[dict]:
     limit = pg_size
     offset = (pg_num - 1) * pg_size
@@ -99,6 +81,23 @@ def obter_comunidade_por_nome_curso(nome_curso: str) -> dict:
         return comunidade
     return None
 
+def obter_todas_comunidades() -> list[dict]:
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(OBTER_COMUNIDADE)
+    tuplas = cursor.fetchall()
+    conn.close()
+    comunidades = [
+        {
+            "id": tupla[0],
+            "idCurso": tupla[1],
+            "nomeCurso": tupla[2],
+            "nome": tupla[3],
+            "quantidadeParticipantes": tupla[4],
+            "listaParticipantes": tupla[5]
+        } for tupla in tuplas ]
+    return comunidades
+
 def obter_comunidade_por_termo_paginado(termo: str, pg_num: int, pg_size: int) -> list[dict]:
     conn = get_connection()
     cursor = conn.cursor()
@@ -115,6 +114,8 @@ def obter_comunidade_por_termo_paginado(termo: str, pg_num: int, pg_size: int) -
             "listaParticipantes": tupla[5]
         } for tupla in tuplas ]
     return comunidades
+
+        
 
 def obter_quantidade_comunidades() -> int:
     conn = get_connection()
