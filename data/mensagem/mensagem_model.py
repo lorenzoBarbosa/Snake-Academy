@@ -5,8 +5,9 @@ from data.usuario.usuario_model import Usuario
 @dataclass
 class Mensagem:
     id: int
+    idRmetente: Usuario
+    idDestinatario: Usuario
     conteudo: str
     dataEnvio: str
     horaEnvio: str
     visualizacao: bool
-    #inacabado
