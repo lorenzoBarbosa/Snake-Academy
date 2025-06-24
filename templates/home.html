@@ -275,42 +275,23 @@
                 <b>Cursos mais populares</b>
             </h2>
         </div>
-        <div>
-            <div class="row justify-content-center">
-                <div class="card col-3 m-3 align-itens-center justify-content-center text-center"
-                    style="width: 18rem;">
-                    <img src="/static/img/ciencia_dados.jpg" class="p-2" alt="Ciência dos Dados"
-                        style="width:16rem; height:auto; ">
-                    <div class="card-body">
-                        <p class="card-text">Curso de ciência de dados.</p>
-                    </div>
-                </div>
-                <div class="card col-3 m-3 align-itens-center justify-content-center text-center"
-                    style="width: 18rem;">
-                    <img src="/static/img/gestao_redes.png" class="p-2" alt="Gestão de Redes"
-                        style="width:16rem; height:auto; ">
-                    <div class="card-body">
-                        <p class="card-text">Curso de gestão de redes.</p>
-                    </div>
-                </div>
-                <div class="card col-3 m-3 align-itens-center justify-content-center text-center"
-                    style="width: 18rem;">
-                    <img src="/static/img/desenvolvimento_web.jpg" class="p-2" alt="Desenvolvimento Web"
-                        style="width:16rem; height:auto; ">
-                    <div class="card-body">
-                        <p class="card-text">Curso de desenvolvimento web.</p>
-                    </div>
-                </div>
-                <div class="card col-3 m-3 align-itens-center justify-content-center text-center"
-                    style="width: 18rem;">
-                    <img src="/static/img/ia.jpg" class="p-2" alt="Inteligência Artificial"
-                        style="width:16rem; height:auto; ">
-                    <div class="card-body">
-                        <p class="card-text">Curso de IA.</p>
-                    </div>
-                </div>
+        <div class="carrossel-agarrador">
+            <button class="botao esquerda">&#10094;</button>
+            <div class="carrossel-itens">
+              <div class="carde">2</div>
+              <div class="carde">3</div>
+              <div class="carde">4</div>
+              <div class="carde">5</div>
+              <div class="carde">6</div>
+              <div class="carde">7</div>
+              <div class="carde">8</div>
+              <div class="carde">9</div>
+              <div class="carde">10</div>
+              <div class="carde">11</div>
             </div>
-        </div>
+          
+            <button class="botao direita">&#10095;</button>
+        </div>  
     </article>
     <footer class="rodape">
         <div class="container">
@@ -356,6 +337,21 @@
             botao.classList.add('ativo');
         });
     });
+
+    const carrossel = document.querySelector('.carrossel-itens');
+    const btnEsquerda = document.querySelector('.esquerda');
+    const btnDireita = document.querySelector('.direita');
+    
+    btnEsquerda.addEventListener('click', () => {
+        carrossel.scrollBy({ left: -220, behavior: 'smooth' });
+    });
+    
+    btnDireita.addEventListener('click', () => {
+        carrossel.scrollBy({ left: 220, behavior: 'smooth' });
+    });
+
+    
+    
 </script>
 
 </html>
