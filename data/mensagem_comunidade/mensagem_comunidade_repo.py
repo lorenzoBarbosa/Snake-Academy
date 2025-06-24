@@ -10,7 +10,7 @@ def criar_tabela_mensagem_comunidade():
     conn.commit()
     conn.close()
 
-def inserir_mensagem_comunidade(mensagem_comunidade):
+def inserir_mensagem_comunidade(mensagem_comunidade: MensagemComunidade):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(GERAR_MENSAGEM_COMUNIDADE, (
@@ -150,3 +150,22 @@ def obter_mensagem_comunidade_por_comunidade(nome_comunidade: str, pg_num: int, 
         ) for tupla in tuplas
     ]
     return mensagens_comunidade
+
+def atualizar_mensagem_comunidade(mensagem_comunidade: MensagemComunidade, id: int):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(ATUALIZAR_MENSAGEM_COMUNIDADE, (
+        mensagem_comunidade["conteudo"],
+        mensagem_comunidade["dataEnvio"],
+        mensagem_comunidade["horaEnvio"],
+        id
+    ))
+    conn.commit()
+    conn.close()
+
+def excluir_mensagem_comunidade(id: int):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(EXCLUIR_MENSAGEM_COMUNIDADE, (id,))
+    conn.commit()
+    conn.close()
