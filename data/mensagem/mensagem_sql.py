@@ -18,53 +18,86 @@ INSERT INTO mensagem (idRemetente, idDestinatario, conteudo, dataEnvio, horaEnvi
 VALUES (?, ?, ?, ?, ?, ?)
 """
 
-OBTER_MENSAGEMS = """
+OBTER_MENSAGENS = """
 SELECT 
-    id, idRemetente, idDestinatario, conteudo, dataEnvio, horaEnvio, visualizacao  
-FROM mensasgem
+    m.id, m.idRemetente, r.nome as nomeRemetente, m.idDestinatario, d.nome as nomeDestinatario, m.conteudo, m.dataEnvio, m.horaEnvio, m.visualizacao  
+FROM mensagem m
+JOIN usuario r ON m.idRemetente = r.id
+JOIN usuario d ON m.idDestinatario = d.id
 ORDER BY id ASC
 """
 
 OBTER_MENSAGEM_PAGINADO = """
 SELECT
-    m.id, m.idRemetente, m.idDestinatario, m.conteudo, m.dataEnvio, m.horaEnvio, m.visualizacao, u.nome as nomeUsuario
+    m.id, m.idRemetente, r.nome as nomeRemetente, m.idDestinatario, d.nome as nomeDestinatario, m.conteudo, m.dataEnvio, m.horaEnvio, m.visualizacao
 FROM mensagem m
-JOIN usuario u ON m.idRemetente = u.id
+JOIN usuario r ON m.idRemetente = r.id
 JOIN usuario d ON m.idDestinatario = d.id
-ORDER BY m.idRemetente
+ORDER BY m.id
 LIMIT ? OFFSET ?
 """
 
 OBTER_MENSAGEM_POR_TERMO_PAGINADO = """
 SELECT
-    m.id, m.idRemetente, m.conteudo, m.dataEnvio, m.horaEnvio, m.visualizacao, u.nome as nomeUsuario
+    m.id, m.idRemetente, r.nome as nomeRemetente, m.idDestinatario, d.nome as nomeDestinatario, m.conteudo, m.dataEnvio, m.horaEnvio, m.visualizacao
 FROM mensagem m
-JOIN usuario u ON m.idRemetente = u.id
+JOIN usuario r ON m.idRemetente = r.id
 JOIN usuario d ON m.idDestinatario = d.id
-WHERE m.id LIKE ? OR u.nome LIKE ? or m.conteudo LIKE ?
-ORDER BY m.id_usuario
+WHERE m.id LIKE ? OR r.nome LIKE ? OR m.conteudo LIKE ?
+ORDER BY m.id
 LIMIT ? OFFSET ?
 """
 
 OBTER_MENSAGEM_POR_ID = """
 SELECT 
-    m.id, m.idRemetente, m.conteudo, m.dataEnvio, m.horaEnvio, m.visualizacao, u.nome as nomeUsuario
-FROM mensagem as m
-JOIN usuario as u ON m.idRemetente = u.id
-JOIN usuario as d ON m.idDestinatario = d.id
-WHERE id = ?
-ORDER BY id ASC
+    m.id, m.idRemetente, r.nome as nomeRemetente, m.idDestinatario, d.nome as nomeDestinatario, m.conteudo, m.dataEnvio, m.horaEnvio, m.visualizacao
+FROM mensagem m
+JOIN usuario r ON m.idRemetente = r.id
+JOIN usuario d ON m.idDestinatario = d.id
+WHERE m.id = ?
+ORDER BY m.id ASC
 """
 
-OBTER_MENSAGEM_POR_MATRICULA = """
+OBTER_MENSAGEM_POR_NOME_REMETENTE= """
 SELECT
-    m.id, m.idRemetente, m.conteudo, m.dataEnvio, m.horaEnvio, m.visualizacao, u.nome as nomeUsuario
+    m.id, m.idRemetente, r.nome as nomeRemetente, m.idDestinatario, d.nome as nomeDestinatario, m.conteudo, m.dataEnvio, m.horaEnvio, m.visualizacao
 FROM mensagem m
-JOIN usuario u ON m.idRemetente = u.id
+JOIN usuario r ON m.idRemetente = r.id
 JOIN usuario d ON m.idDestinatario = d.id
-WHERE u.nome = ?
-ORDER BY m.id_usuario
+WHERE r.nome = ?
+ORDER BY m.id
 LIMIT ? OFFSET ?
+"""
+
+OBTER_MENSAGEM_POR_NOME_DESTINATARIO = """
+SELECT
+    m.id, m.idRemetente, r.nome as nomeRemetente, m.idDestinatario, d.nome as nomeDestinatario, m.conteudo, m.dataEnvio, m.horaEnvio, m.visualizacao
+FROM mensagem m
+JOIN usuario r ON m.idRemetente = r.id
+JOIN usuario d ON m.idDestinatario = d.id
+WHERE d.nome = ?
+ORDER BY m.id
+LIMIT ? OFFSET ?
+"""
+
+OBTER_QUANTIDADE_MENSAGEM = """
+SELECT COUNT(*) FROM mensagem
+"""
+
+OBTER_QUANTIDADE_MENSAGEM_POR_NOME_REMETENTE= """
+SELECT COUNT(*)
+FROM mensagem m
+JOIN usuario r ON m.idRemetente = r.id
+JOIN usuario d ON m.idDestinatario = d.id
+WHERE r.nome LIKE ? 
+"""
+
+OBTER_QUANTIDADE_MENSAGEM_POR_NOME_DESTINATARIO = """
+SELECT COUNT(*)
+FROM mensagem m
+JOIN usuario r ON m.idRemetente = r.id
+JOIN usuario d ON m.idDestinatario = d.id
+WHERE d.nome LIKE ? 
 """
 
 EXCLUIR_MENSAGEM_POR_ID = """
@@ -72,16 +105,31 @@ DELETE FROM mensagem
 WHERE id = ?
 """
 
-OBTER_QUANTIDADE_MENSAGEMS = """
-SELECT COUNT(*) FROM mensagem
+ATUALIZAR_MENSAGEM = """
+UPDATE mensagem
+SET idRemetente = ?, idDestinatario = ?, conteudo = ?, dataEnvio = ?, horaEnvio = ?, visualizacao = ?
+WHERE id = ?
 """
 
-OBTER_QUANTIDADE_MENSAGEMS_POR_NOME_USUARIO= """
-SELECT COUNT(*)
-FROM mensagem m
-JOIN usuario u ON m.idRemetente = u.id
-JOIN usuario d ON m.idDestinatario = d.id
-WHERE u.nome LIKE ? 
+ATUALIZAR_VISUALIZACAO_MENSAGEM = """
+UPDATE mensagem
+SET visualizacao = ?
+WHERE id = ?
 """
+
+EXCLUIR_MENSAGEM_POR_NOME_REMETENTE = """
+DELETE FROM mensagem
+WHERE idRemetente = (
+    SELECT id FROM usuario WHERE nome = ?
+)
+"""
+
+EXCLUIR_MENSAGEM_POR_NOME_DESTINATARIO = """
+DELETE FROM mensagem
+WHERE idDestinatario = (
+    SELECT id FROM usuario WHERE nome = ?
+)
+"""
+
 
 
