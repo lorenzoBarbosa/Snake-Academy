@@ -1,124 +1,167 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
+            crossorigin="anonymous"
+        >
+        <link rel="stylesheet" href="/static/css/gerais.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+        <title>Snake Academy</title>
+        <style>
+    html,
+    body {
+      overflow-x: hidden;
+      width: 100%;
+    }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake Academy</title>
+    .carousel-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: right;
+      height: 70vh;
+      position: relative;
+    }
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/static/css/gerais.css">
+    .carousel-container > div:first-child {
+  text-align: left;
+  color: white;
+  max-width: 400px;
+  padding-left: 20px;
+}
 
-    <style>
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-        }
+    .carousel.slide {
+      width: 30vw;
+      height: 30vh;
+    }
 
-        .descricao {
+    .carousel-inner {
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-inner img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 5%;
+      height: 100%;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      background-size: 100% 100%;
+    }
+
+    footer {
+            background-color: #000;
+            color: rgb(255, 255, 255);
             text-align: center;
-            padding: 20px;
-            max-width: 80%;
-            margin: 0 auto;
-            font-size: 1.2rem;
-            color: #333;
-        }
-    </style>
-</head>
+            padding: 1rem;
+    }
 
-<body>
-
-    <header>
-        <div class="topo"></div>
-        <nav class="navbar navbar-expand-lg bg-navbar-branco">
-            <div class="container-fluid d-flex align-items-center justify-content-between">
-
-                <a class="navbar-brand" href="#">
-                    <img src="/static/img/logo-snake.png" alt="snake" style="height: 80px;">
-                </a>
-
-                <form class="d-flex flex-grow-1 justify-content-center mx-3" role="search">
-                    <div class="input-group w-75">
-                        <input class="form-control barra-pesquisa" type="search"
-                            placeholder="Procure pelos melhores cursos!" aria-label="Search">
-                        <button class="btn-lupa" type="submit">
-                            🔍︎
+    
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="topo"></div>
+            <nav class="navbar navbar-expand-lg bg-navbar-roxo">
+                <div class="container-fluid d-flex align-items-center justify-content-between">
+                    <a class="navbar-brand" href="/templates/home.html">
+                        <img src="/static/img/logo_branca.png" alt="snake" style="height: 80px;">
+                    </a>
+                    <form class="d-flex flex-grow-1 justify-content-center mx-3" role="search">
+                        <div class="input-group w-75">
+                            <input
+                                class="form-control barra-pesquisa"
+                                type="search"
+                                placeholder="Procure pelos melhores cursos!"
+                                aria-label="Search"
+                            >
+                            <button class="btn-lupa" type="submit">🔍︎</button>
+                        </div>
+                    </form>
+                    <div class="d-flex align-items-center">
+                        <form action="login.html" class="me-2">
+                            <button class="botao-login">
+                                <div class="login">Fazer login</div>
+                            </button>
+                        </form>
+                        <form action="cadastro.html">
+                            <button class="botao-login">
+                                <div class="cadastro">Cadastre-se</div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <article>
+            <div style="position: relative; margin-top: 100;">
+                <!-- Fundo embaixo -->
+                <div style="
+      background: #1B0B32;
+      height: 50vh;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    "></div>
+                <!-- Carrossel sobre o fundo -->
+                <div class="carousel-container" style="padding-top: 100px; padding-right: 100px; position: relative; z-index: 2;">
+                    <div style="color: white; max-width: 900px; text-align: left; padding-left: 100px;">
+                        <h1 style="font-size: 2.5rem; font-weight: bold;">Desenvolvedor Full Stack: Da Lógica ao Projeto Real</h1>
+                        <p style="font-size: 1.1rem; margin-top: 10px;">
+                            Tá pronto pra transformar seu futuro na tecnologia?
+Com o Curso Full Stack da Snake Academy, você vai do zero absoluto até o deploy do seu primeiro sistema completo.
+Aprenda lógica de programação, HTML, CSS, JavaScript, Python, bancos de dados e frameworks modernos em aulas práticas e diretas ao ponto.
+Ideal pra quem quer entrar com tudo no mercado de TI e se destacar.
+                        </p>
+                    </div>
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="/static/img/cursosnake.png" class="d-block" alt="Curso Snake">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/static/img/descricaosnake.png" class="d-block" alt="Slide 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/static/img/descricaosnake.png" class="d-block" alt="Slide 3">
+                            </div>
+                        </div>
+                        <button
+                            class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#carouselExampleControls"
+                            data-bs-slide="prev"
+                        >
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                            class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#carouselExampleControls"
+                            data-bs-slide="next"
+                        >
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
                         </button>
                     </div>
-                </form>
-
-                <div class="d-flex align-items-center">
-                    <form action="login.html" class="me-2">
-                        <button class="botao-login">
-                            <div class="login">Fazer login</div>
-                        </button>
-                    </form>
-                    <form action="cadastro.html">
-                        <button class="botao-login">
-                            <div class="cadastro">Cadastre-se</div>
-                        </button>
-                    </form>
                 </div>
             </div>
-        </nav>
-    </header>
-
-    <article style="display: flex; justify-content: center; align-items: center; height: 70vh;">
-        <div id="carouselExampleFade" class="carousel slide carousel-fade"
-            data-bs-ride="carousel"
-            data-bs-interval="3000"
-            style="width: 90vw; height: 60vh;">
-
-            <div class="carousel-inner" style="width: 100%; height: 100%;">
-
-                <div class="carousel-item active">
-                    <img src="/static/img/cursosnake.png" class="d-block"
-                        alt="Foto Curso" style="object-fit: cover; width: 100%; height: 100%;">
-                </div>
-
-                <div class="carousel-item">
-                    <img src="/static/img/descricaosnake.png" class="d-block"
-                        alt="Ciência de Dados" style="object-fit: cover; width: 100%; height: 100%;">
-                </div>
-
-                <div class="carousel-item">
-                    <img src="/static/img/descricaosnake.png" class="d-block"
-                        alt="Ilustração Snake" style="object-fit: cover; width: 100%; height: 100%;">
-                </div>
-
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Próximo</span>
-            </button>
-        </div>
-    </article>
-
-    <section class="descricao">
-        <h2>Curso de Programação Python</h2>
-        <p>
-            Aprenda programação do zero com nosso curso completo de Python! Desenvolva habilidades em lógica de programação,
-            automação, desenvolvimento web e análise de dados. Nosso curso é 100% online e com suporte dos melhores
-            instrutores do mercado. Comece sua jornada na tecnologia agora mesmo!
-        </p>
-    </section>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-VzZ5JqKcW5fwrxFY+6MZCTFeRhRHawAAmAX3y2xG3Oj6J9slcfhNekdtvf6CFpG4"
-        crossorigin="anonymous"></script>
-
-</body>
-
+        </article>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    </body>
 </html>
