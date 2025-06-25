@@ -45,6 +45,17 @@ OBTER_QUANTIDADE_USUARIO= """
 SELECT COUNT(*) FROM usuario
 """
 
+ATUALIZAR_USUARIO_POR_ID ="""
+UPDATE usuario
+SET 
+    nome = ?, 
+    email = ?, 
+    senha = ?, 
+    telefone = ?, 
+    dataCriacao = ?
+WHERE id = ?
+"""
+
 ATUALIZAR_USUARIO_POR_EMAIL= """
 UPDATE usuario
 SET 
