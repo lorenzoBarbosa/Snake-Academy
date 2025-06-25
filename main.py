@@ -10,12 +10,17 @@ from data.admin import admin_repo
 from data.aula import aula_repo
 from data.chamado import chamado_repo
 from data.cliente import cliente_repo
+from data.comentario_curso import comentario_curso_repo
+from data.comunidade import comunidade_repo
 from data.matricula import matricula_repo
+from data.mensagem import mensagem_repo
+from data.mensagem_comunidade import mensagem_comunidade_repo
 from data.modulo import modulo_repo
 from data.professor import professor_repo
 from data.resposta_chamado import resposta_chamado_repo
 from data.usuario import usuario_repo
 from data.curso import curso_repo
+from data.progresso import progresso_repo
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -34,6 +39,11 @@ curso_repo.criar_tabela_curso()
 matricula_repo.criar_tabela_matricula()
 modulo_repo.criar_tabela_modulo()
 aula_repo.criar_tabela_aula()
+progresso_repo.criar_tabela_progresso()
+comentario_curso_repo.criar_tabela_comentario_curso()
+comunidade_repo.criar_tabela_comunidade()
+mensagem_comunidade_repo.criar_tabela_mensagem_comunidade()
+mensagem_repo.criar_tabela_mensagem()
 
 for _ in range(30):
     usuario_repo.inserir_usuario(
@@ -146,6 +156,76 @@ for _ in range(30):
             "dataDisponibilidade": fake.date_time_this_decade()
         }
     )
+
+for p in range(30):
+    statusAula = fake.random_element(elements=("Incompleto", "Completo"))
+    if statusAula == "Completo":
+        porcentagemConclusao = 100
+    else:
+        porcentagemConclusao = fake.random_int(min=0, max=99)
+    progresso_repo.inserir_progresso(
+        {
+            "idAula": p + 1,
+            "idMatricula": fake.random_int(min=1, max=15),
+            "dataInicio": fake.date_time_this_decade(),
+            "dataFim": fake.date_time_this_decade(),
+            "statusAula": statusAula,
+            "porcentagemConclusao": porcentagemConclusao
+        }
+    )
+
+for _ in range(30):
+    comentario_curso_repo.gerar_comentario_curso(
+        {
+            "idAdmin": fake.random_int(min=1, max=5),
+            "idMatricula": fake.random_int(min=1, max=15),
+            "conteudo": fake.text(max_nb_chars=200),
+            "dataEnvio": fake.date_time_this_decade(),
+            "dataSupervisaoAdmin": fake.date_time_this_decade()
+        }
+    )
+
+for _ in range(10):
+    comunidade_repo.inserir_comunidade(
+        {
+            "idCurso": fake.random_int(min=1, max=20),
+            "nome": fake.name(),
+            "quantidadeParticipantes": fake.random_int(min=1, max=100),
+            "listaParticipantes": []
+        }
+    )
+
+for _ in range(10):
+    mensagem_comunidade_repo.inserir_mensagem_comunidade(
+        {
+            "idMatricula": fake.random_int(min=1, max=15),
+            "idComunidade": fake.random_int(min=1, max=10),
+            "conteudo": fake.text(max_nb_chars=200),
+            "dataEnvio": fake.date_time_this_decade(),
+            "horaEnvio": fake.time()
+        }
+    )
+
+for _ in range(30):
+    idRemetente = fake.random_int(min=1, max=30)
+    idDestinatario = fake.random_int(min=1, max=30)
+    while idRemetente == idDestinatario:
+        idDestinatario = fake.random_int(min=1, max=30)
+    mensagem_repo.inserir_mensagem(
+        {
+            "idRemetente": idRemetente,
+            "idDestinatario": idDestinatario,
+            "conteudo": fake.text(max_nb_chars=200),
+            "dataEnvio": fake.date_time_this_decade(),
+            "horaEnvio": fake.time(),
+            "visualizacao": fake.random_element(elements=(False, True))
+        }
+    )
+
+
+
+
+
 
     # Lista de algumas funções comuns da biblioteca Faker
     # faker_funcoes = [

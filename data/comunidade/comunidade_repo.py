@@ -1,5 +1,5 @@
-from data.comunidade.comunidade_sql import *
-from data.comunidade.comunidade_sql import *
+import json
+from data.comunidade.comunidade_model import Comunidade
 from data.comunidade.comunidade_sql import *
 from data.util import get_connection
 
@@ -11,16 +11,17 @@ def criar_tabela_comunidade():
     conn.commit()
     conn.close()
 
-def inserir_comunidade(comunidade: dict):
+def inserir_comunidade(comunidade: Comunidade):
     conn = get_connection()
     cursor = conn.cursor()
+    listaParticipantes = json.dumps(comunidade["listaParticipantes"])
     cursor.execute(
         INSERIR_COMUNIDADE,
         (
             comunidade["idCurso"],
             comunidade["nome"],
             comunidade["quantidadeParticipantes"],
-            comunidade["listaParticipantes"]
+            listaParticipantes
         )
     )
     conn.commit()
@@ -133,15 +134,16 @@ def obter_quantidade_comunidades_por_nome_curso(nome_curso: str) -> int:
     conn.close()
     return quantidade
 
-def atualizar_comunidade(comunidade: dict):
+def atualizar_comunidade(comunidade: Comunidade):
     conn = get_connection()
     cursor = conn.cursor()
+    listaParticipantes = json.dumps(comunidade["listaParticipantes"])
     cursor.execute(
         ATUALIZAR_COMUNIDADE,
         (
             comunidade["idCurso"],
             comunidade["quantidadeParticipantes"],
-            comunidade["listaParticipantes"],
+            listaParticipantes,
             comunidade["id"]
         )
     )

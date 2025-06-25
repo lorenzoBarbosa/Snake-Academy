@@ -1,5 +1,5 @@
 CRIAR_TABELA_COMENTARIO_CURSO = """
-CREATE TABLE IF NOT EXISTS respostaChamado (
+CREATE TABLE IF NOT EXISTS comentarioCurso (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     idAdmin INTEGER NOT NULL,
     idMatricula INTEGER NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS respostaChamado (
 
 GERAR_COMENTARIO_CURSO = """
 INSERT INTO comentarioCurso (idAdmin, idMatricula, conteudo, dataEnvio, dataSupervisaoAdmin)
-VALUES (?, ?, ?, ?, ?, ?)
+VALUES (?, ?, ?, ?, ?)
 """
 
 OBTER_COMENTARIO_CURSO = """

@@ -14,8 +14,8 @@ def gerar_comentario_curso(comentario: comentarioCurso):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(GERAR_COMENTARIO_CURSO, (
-        comentario["idAdmin.id"],
-        comentario["idMatricula.id"],
+        comentario["idAdmin"],
+        comentario["idMatricula"],
         comentario["conteudo"],
         comentario["dataEnvio"],
         comentario["dataSupervisaoAdmin"]))

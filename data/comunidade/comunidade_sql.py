@@ -1,6 +1,7 @@
-CRIAR_TABELA_COMUNIDADE = """(
+CRIAR_TABELA_COMUNIDADE = """
+CREATE TABLE IF NOT EXISTS comunidade (
     id INTEGER PRIMARY KEY,
-    idCurso INTEGER NOT NULL,),
+    idCurso INTEGER NOT NULL,
     nome TEXT NOT NULL,
     quantidadeParticipantes INTEGER,
     listaParticipantes TEXT[],

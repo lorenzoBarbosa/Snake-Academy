@@ -10,7 +10,7 @@ def criar_tabela_progresso():
     conn.commit()
     conn.close()
 
-def inserir_progresso(progresso):
+def inserir_progresso(progresso: Progresso):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(

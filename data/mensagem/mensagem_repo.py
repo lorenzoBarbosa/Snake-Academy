@@ -14,7 +14,7 @@ def inserir_mensagem(mensagem: Mensagem):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(GERAR_MENSAGEM, (
-        mensagem["idRmetente"],
+        mensagem["idRemetente"],
         mensagem["idDestinatario"],
         mensagem["conteudo"],
         mensagem["dataEnvio"],
