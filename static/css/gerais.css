@@ -1,16 +1,16 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    
+
 }
 
 .topo {
-    background-color: #5C22AD;
+    background-color: #522197;
     height: 20px;
     width: 100%;
 }
 
-.bg-navbar-branco {
-    background-color: #FFFFFF;
+.bg-navbar-roxo {
+    background-color: #2E1254;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -48,10 +48,10 @@ body {
 }
 
 .login {
-    background-color: #FFFFFF;
-    color: #3EC696;
+    background-color: #38BC8E;
+    color: #FFFFFF;
     border-radius: 20px;
-    border: 1px solid #3EC696;
+    border: 1px solid #38BC8E;
     font-weight: bold;
     width: 100px;
     height: 40px;
@@ -62,7 +62,7 @@ body {
 }
 
 .login:hover {
-    background-color: #3EC696;
+    background-color: #288363;
     color: #FFFFFF;
 }
 
@@ -129,17 +129,18 @@ body {
     max-width: 1300px;
     margin: 40px auto;
     overflow: hidden;
-  }
-  
+}
+
 .carrossel-itens {
     display: flex;
     overflow-x: scroll;
     scroll-behavior: smooth;
-    gap: 30px; 
+    gap: 30px;
     padding: 10px;
-  }
+}
+
 /* gap é a propriedade que define o espaçamento entre os itens do carrossel. */
-  
+
 .carde {
     min-width: 18rem;
     height: 18rem;
@@ -151,8 +152,10 @@ body {
     align-items: center;
     border-radius: 10px;
     flex-shrink: 0;
-  }
-  
+    position: relative;
+    display: inline-block;
+}
+
 .botao {
     position: absolute;
     top: 50%;
@@ -164,13 +167,26 @@ body {
     padding: 10px;
     cursor: pointer;
     z-index: 1;
-  }
-  
+}
+
 .esquerda {
     left: 0;
-  }
-  
+}
+
 .direita {
     right: 0;
-  }
-  
+}
+
+
+.badge-curso {
+    position: absolute;
+    top: 8px;
+    /* distância do topo do container */
+    left: 8px;
+    /* distância da esquerda do container */
+    z-index: 10;
+    /* pra garantir que fique acima da imagem */
+    padding: 0.3em 0.6em;
+    font-weight: bold;
+    border-radius: 0.3em;
+}
