@@ -1,3 +1,4 @@
+from typing import Optional
 from data.mensagem.mensagem_model import Mensagem
 from data.mensagem.mensagem_sql import *
 from data.util import get_connection
@@ -16,7 +17,7 @@ def criar_tabela_mensagem() -> bool:
         return False
 
 
-def inserir_mensagem(mensagem: Mensagem):
+def inserir_mensagem(mensagem: Mensagem) -> Optional[int]:
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -35,7 +36,7 @@ def inserir_mensagem(mensagem: Mensagem):
         print(f"Erro ao inserir mensagem: {e}")
         return None
 
-def obter_mensagens():
+def obter_mensagens() -> list[Mensagem]:
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -61,7 +62,7 @@ def obter_mensagens():
         print(f"Erro ao obter mensagens: {e}")
         return []   
 
-def obter_mensagem_paginado(pg_num: int, pg_size: int):
+def obter_mensagem_paginado(pg_num: int, pg_size: int) -> list[Mensagem]:
     try:
         limit = pg_size
         offset = (pg_num - 1) * pg_size
@@ -88,7 +89,7 @@ def obter_mensagem_paginado(pg_num: int, pg_size: int):
         print(f"Erro ao obter mensagens paginadas: {e}")
         return []
 
-def obter_mensagem_por_termo_paginado(termo: str, pg_num: int, pg_size: int):
+def obter_mensagem_por_termo_paginado(termo: str, pg_num: int, pg_size: int) -> list[Mensagem]:
     try:
         limit = pg_size
         offset = (pg_num - 1) * pg_size
@@ -115,7 +116,8 @@ def obter_mensagem_por_termo_paginado(termo: str, pg_num: int, pg_size: int):
         print(f"Erro ao obter mensagens por termo paginadas: {e}")
         return []
 
-def obter_mensagem_por_id(id: int):
+#oficial
+def obter_mensagem_por_id(id: int) -> Optional[Mensagem]:
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -137,9 +139,22 @@ def obter_mensagem_por_id(id: int):
         return mensagem
     except Exception as e:
         print(f"Erro ao obter mensagem por id: {e}")
-    return None
 
-def obter_mensagem_por_nome_remetente(nome: str, pg_num: int, pg_size: int):
+#teste
+def obter_mensagem_por_id_teste(id: int) -> Optional[Mensagem]:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_MENSAGEM_POR_ID_TESTE, (id,))
+        tupla = cursor.fetchone()
+        conn.close()
+        if tupla:
+            mensagem = Mensagem(*tupla[:6], bool(tupla[6]))
+        return mensagem
+    except Exception as e:
+        print(f"Erro ao obter mensagem por id: {e}")
+
+def obter_mensagem_por_nome_remetente(nome: str, pg_num: int, pg_size: int) -> list[Mensagem]:
     try:
         limit = pg_size
         offset = (pg_num - 1) * pg_size
@@ -166,7 +181,7 @@ def obter_mensagem_por_nome_remetente(nome: str, pg_num: int, pg_size: int):
         print(f"Erro ao obter mensagens por nome do remetente: {e}")
         return []
 
-def obter_mensagem_por_nome_destinatario(nome: str, pg_num: int, pg_size: int):
+def obter_mensagem_por_nome_destinatario(nome: str, pg_num: int, pg_size: int) -> list[Mensagem]:
     try:
         limit = pg_size
         offset = (pg_num - 1) * pg_size
@@ -193,7 +208,7 @@ def obter_mensagem_por_nome_destinatario(nome: str, pg_num: int, pg_size: int):
         print(f"Erro ao obter mensagens por nome do destinatário: {e}")
         return []
 
-def obter_quantidade_mensagem():
+def obter_quantidade_mensagem() -> int:
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -205,7 +220,7 @@ def obter_quantidade_mensagem():
         print(f"Erro ao obter quantidade de mensagens: {e}")
         return 0
 
-def obter_quantidade_mensagem_por_nome_remetente(nome: str):
+def obter_quantidade_mensagem_por_nome_remetente(nome: str) -> int:
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -217,7 +232,7 @@ def obter_quantidade_mensagem_por_nome_remetente(nome: str):
         print(f"Erro ao obter quantidade de mensagens por nome do remetente: {e}")
         return 0
 
-def obter_quantidade_mensagem_por_nome_destinatario(nome: str):
+def obter_quantidade_mensagem_por_nome_destinatario(nome: str) -> int:
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -229,7 +244,7 @@ def obter_quantidade_mensagem_por_nome_destinatario(nome: str):
         print(f"Erro ao obter quantidade de mensagens por nome do destinatário: {e}")
         return 0
 
-def atualizar_mensagem(mensagem: Mensagem, id):
+def atualizar_mensagem(mensagem: Mensagem, id) -> bool:
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -247,8 +262,9 @@ def atualizar_mensagem(mensagem: Mensagem, id):
         return(cursor.rowcount > 0)
     except Exception as e:
         print(f"Erro ao atualizar mensagem: {e}")
+        return False
 
-def atualizar_visualizacao_mensagem(visualizacao: bool, id: int):
+def atualizar_visualizacao_mensagem(visualizacao: bool, id: int) -> bool:
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -258,8 +274,9 @@ def atualizar_visualizacao_mensagem(visualizacao: bool, id: int):
         return(cursor.rowcount > 0)
     except Exception as e:
         print(f"Erro ao atualizar visualização da mensagem: {e}")
+        return False
 
-def excluir_mensagem(id: int):
+def excluir_mensagem(id: int) -> bool:
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -269,9 +286,10 @@ def excluir_mensagem(id: int):
         return True
     except Exception as e:
         print(f"Erro ao excluir mensagem: {e}")
+        return False
     
 
-def excluir_mensagem_por_nome_remetente(nome: str):
+def excluir_mensagem_por_nome_remetente(nome: str) -> bool:
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -281,8 +299,9 @@ def excluir_mensagem_por_nome_remetente(nome: str):
         return True
     except Exception as e:
         print(f"Erro ao excluir mensagem por nome do remetente: {e}")
+        return False
 
-def excluir_mensagem_por_nome_destinatario(nome: str):
+def excluir_mensagem_por_nome_destinatario(nome: str) -> bool:
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -292,6 +311,7 @@ def excluir_mensagem_por_nome_destinatario(nome: str):
         return True
     except Exception as e:
         print(f"Erro ao excluir mensagem por nome do destinatário: {e}")
+        return False
 
 
 

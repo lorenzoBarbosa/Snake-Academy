@@ -58,6 +58,14 @@ WHERE m.id = ?
 ORDER BY m.id ASC
 """
 
+OBTER_MENSAGEM_POR_ID_TESTE = """
+SELECT 
+    m.id, m.idRemetente, m.idDestinatario, m.conteudo, m.dataEnvio, m.horaEnvio, m.visualizacao
+FROM mensagem m
+WHERE m.id = ?
+ORDER BY m.id ASC
+"""
+
 OBTER_MENSAGEM_POR_NOME_REMETENTE= """
 SELECT
     m.id, m.idRemetente, r.nome as nomeRemetente, m.idDestinatario, d.nome as nomeDestinatario, m.conteudo, m.dataEnvio, m.horaEnvio, m.visualizacao
