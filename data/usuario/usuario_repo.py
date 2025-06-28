@@ -63,9 +63,7 @@ def obter_usuario_por_email(email: str) -> Usuario:
         cursor.execute(OBTER_USUARIO_POR_EMAIL, (email,))
         tupla = cursor.fetchone()
         conn.close()
-        if tupla:
-            return Usuario(*tupla)
-        return True
+        return Usuario(*tupla)
     except Exception as e:
         print(f"Erro ao obter usuário por email: {e}")
 
