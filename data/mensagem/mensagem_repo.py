@@ -3,102 +3,127 @@ from data.mensagem.mensagem_sql import *
 from data.util import get_connection
 
 
-def criar_tabela_mensagem():
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(CRIAR_TABELA_MENSAGEM)
-    conn.commit()
-    conn.close()
+def criar_tabela_mensagem() -> bool:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(CRIAR_TABELA_MENSAGEM)
+        conn.commit()
+        conn.close()
+        return True
+    except Exception as e:
+        print(f"Erro ao criar tabela de mensagens: {e}")
+        return False
+
 
 def inserir_mensagem(mensagem: Mensagem):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(GERAR_MENSAGEM, (
-        mensagem["idRemetente"],
-        mensagem["idDestinatario"],
-        mensagem["conteudo"],
-        mensagem["dataEnvio"],
-        mensagem["horaEnvio"],
-        mensagem["visualizacao"]
-    ))
-    conn.commit()
-    conn.close()
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(GERAR_MENSAGEM, (
+            mensagem.idRmetente,
+            mensagem.idDestinatario,
+            mensagem.conteudo,
+            mensagem.dataEnvio,
+            mensagem.horaEnvio,
+            mensagem.visualizacao
+        ))
+        conn.commit()
+        conn.close()
+        return cursor.lastrowid
+    except Exception as e:
+        print(f"Erro ao inserir mensagem: {e}")
+        return None
 
 def obter_mensagens():
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(OBTER_MENSAGENS)
-    tuplas = cursor.fetchall()
-    conn.close()
-    mensagens = [ 
-        Mensagem(
-            id=tupla[0],
-            idRmetente=tupla[1],
-            nomeRemetente=tupla[2],
-            idDestinatario=tupla[3],
-            nomeDestinatario=tupla[4],
-            conteudo=tupla[5],
-            dataEnvio=tupla[6],
-            horaEnvio=tupla[7],
-            visualizacao=tupla[8]
-        ) for tupla in tuplas
-    ]
-    return mensagens
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_MENSAGENS)
+        tuplas = cursor.fetchall()
+        conn.close()
+        mensagens = [ 
+            Mensagem(
+                id=tupla[0],
+                idRmetente=tupla[1],
+                nomeRemetente=tupla[2],
+                idDestinatario=tupla[3],
+                nomeDestinatario=tupla[4],
+                conteudo=tupla[5],
+                dataEnvio=tupla[6],
+                horaEnvio=tupla[7],
+                visualizacao=tupla[8]
+            ) for tupla in tuplas
+        ]
+        conn.close()
+        return mensagens
+    except Exception as e:
+        print(f"Erro ao obter mensagens: {e}")
+        return []   
 
 def obter_mensagem_paginado(pg_num: int, pg_size: int):
-    limit = pg_size
-    offset = (pg_num - 1) * pg_size
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(OBTER_MENSAGEM_PAGINADO, (limit, offset))
-    tuplas = cursor.fetchall()
-    conn.close()
-    mensagens = [
-        Mensagem(
-            id=tupla[0],
-            idRmetente=tupla[1],
-            nomeRemetente=tupla[2],
-            idDestinatario=tupla[3],
-            nomeDestinatario=tupla[4],
-            conteudo=tupla[5],
-            dataEnvio=tupla[6],
-            horaEnvio=tupla[7],
-            visualizacao=tupla[8]
-        ) for tupla in tuplas
-    ]
-    return mensagens
+    try:
+        limit = pg_size
+        offset = (pg_num - 1) * pg_size
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_MENSAGEM_PAGINADO, (limit, offset))
+        tuplas = cursor.fetchall()
+        conn.close()
+        mensagens = [
+            Mensagem(
+                id=tupla[0],
+                idRmetente=tupla[1],
+                nomeRemetente=tupla[2],
+                idDestinatario=tupla[3],
+                nomeDestinatario=tupla[4],
+                conteudo=tupla[5],
+                dataEnvio=tupla[6],
+                horaEnvio=tupla[7],
+                visualizacao=tupla[8]
+            ) for tupla in tuplas
+        ]
+        return mensagens
+    except Exception as e:
+        print(f"Erro ao obter mensagens paginadas: {e}")
+        return []
 
 def obter_mensagem_por_termo_paginado(termo: str, pg_num: int, pg_size: int):
-    limit = pg_size
-    offset = (pg_num - 1) * pg_size
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(OBTER_MENSAGEM_POR_TERMO_PAGINADO, (f"%{termo}%", f"%{termo}%", f"%{termo}%", limit, offset))
-    tuplas = cursor.fetchall()
-    conn.close()
-    mensagens = [
-        Mensagem(
-            id=tupla[0],
-            idRmetente=tupla[1],
-            nomeRemetente=tupla[2],
-            idDestinatario=tupla[3],
-            nomeDestinatario=tupla[4],
-            conteudo=tupla[5],
-            dataEnvio=tupla[6],
-            horaEnvio=tupla[7],
-            visualizacao=tupla[8]
-        ) for tupla in tuplas
-    ]
-    return mensagens
+    try:
+        limit = pg_size
+        offset = (pg_num - 1) * pg_size
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_MENSAGEM_POR_TERMO_PAGINADO, (f"%{termo}%", f"%{termo}%", f"%{termo}%", limit, offset))
+        tuplas = cursor.fetchall()
+        conn.close()
+        mensagens = [
+            Mensagem(
+                id=tupla[0],
+                idRmetente=tupla[1],
+                nomeRemetente=tupla[2],
+                idDestinatario=tupla[3],
+                nomeDestinatario=tupla[4],
+                conteudo=tupla[5],
+                dataEnvio=tupla[6],
+                horaEnvio=tupla[7],
+                visualizacao=tupla[8]
+            ) for tupla in tuplas
+        ]
+        return mensagens
+    except Exception as e:
+        print(f"Erro ao obter mensagens por termo paginadas: {e}")
+        return []
 
 def obter_mensagem_por_id(id: int):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(OBTER_MENSAGEM_POR_ID, (id,))
-    tupla = cursor.fetchone()
-    conn.close()
-    if tupla:
-        mensagem = Mensagem(
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_MENSAGEM_POR_ID, (id,))
+        tupla = cursor.fetchone()
+        conn.close()
+        if tupla:
+            mensagem = Mensagem(
             id=tupla[0],
             idRmetente=tupla[1],
             nomeRemetente=tupla[2],
@@ -110,17 +135,20 @@ def obter_mensagem_por_id(id: int):
             visualizacao=tupla[8]
         )
         return mensagem
+    except Exception as e:
+        print(f"Erro ao obter mensagem por id: {e}")
     return None
 
 def obter_mensagem_por_nome_remetente(nome: str, pg_num: int, pg_size: int):
-    limit = pg_size
-    offset = (pg_num - 1) * pg_size
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(OBTER_MENSAGEM_POR_NOME_REMETENTE, (nome, limit, offset))
-    tuplas = cursor.fetchall()
-    conn.close()
-    mensagens = [
+    try:
+        limit = pg_size
+        offset = (pg_num - 1) * pg_size
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_MENSAGEM_POR_NOME_REMETENTE, (nome, limit, offset))
+        tuplas = cursor.fetchall()
+        conn.close()
+        mensagens = [
         Mensagem(
             id=tupla[0],
             idRmetente=tupla[1],
@@ -132,18 +160,22 @@ def obter_mensagem_por_nome_remetente(nome: str, pg_num: int, pg_size: int):
             horaEnvio=tupla[7],
             visualizacao=tupla[8]
         ) for tupla in tuplas
-    ]
-    return mensagens
+        ]
+        return mensagens
+    except Exception as e:
+        print(f"Erro ao obter mensagens por nome do remetente: {e}")
+        return []
 
 def obter_mensagem_por_nome_destinatario(nome: str, pg_num: int, pg_size: int):
-    limit = pg_size
-    offset = (pg_num - 1) * pg_size
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(OBTER_MENSAGEM_POR_NOME_DESTINATARIO, (nome, limit, offset))
-    tuplas = cursor.fetchall()
-    conn.close()
-    mensagens = [
+    try:
+        limit = pg_size
+        offset = (pg_num - 1) * pg_size
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_MENSAGEM_POR_NOME_DESTINATARIO, (nome, limit, offset))
+        tuplas = cursor.fetchall()
+        conn.close()
+        mensagens = [
         Mensagem(
             id=tupla[0],
             idRmetente=tupla[1],
@@ -155,78 +187,111 @@ def obter_mensagem_por_nome_destinatario(nome: str, pg_num: int, pg_size: int):
             horaEnvio=tupla[7],
             visualizacao=tupla[8]
         ) for tupla in tuplas
-    ]
-    return mensagens
+        ]
+        return mensagens
+    except Exception as e:
+        print(f"Erro ao obter mensagens por nome do destinatário: {e}")
+        return []
 
 def obter_quantidade_mensagem():
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(OBTER_QUANTIDADE_MENSAGEM)
-    quantidade = cursor.fetchone()[0]
-    conn.close()
-    return quantidade
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_QUANTIDADE_MENSAGEM)
+        quantidade = cursor.fetchone()[0]
+        conn.close()
+        return quantidade
+    except Exception as e:
+        print(f"Erro ao obter quantidade de mensagens: {e}")
+        return 0
 
 def obter_quantidade_mensagem_por_nome_remetente(nome: str):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(OBTER_QUANTIDADE_MENSAGEM_POR_NOME_REMETENTE, (nome,))
-    quantidade = cursor.fetchone()[0]
-    conn.close()
-    return quantidade
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_QUANTIDADE_MENSAGEM_POR_NOME_REMETENTE, (nome,))
+        quantidade = cursor.fetchone()[0]
+        conn.close()
+        return quantidade
+    except Exception as e:
+        print(f"Erro ao obter quantidade de mensagens por nome do remetente: {e}")
+        return 0
 
 def obter_quantidade_mensagem_por_nome_destinatario(nome: str):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(OBTER_QUANTIDADE_MENSAGEM_POR_NOME_DESTINATARIO, (nome,))
-    quantidade = cursor.fetchone()[0]
-    conn.close()
-    return quantidade
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_QUANTIDADE_MENSAGEM_POR_NOME_DESTINATARIO, (nome,))
+        quantidade = cursor.fetchone()[0]
+        conn.close()
+        return quantidade
+    except Exception as e:
+        print(f"Erro ao obter quantidade de mensagens por nome do destinatário: {e}")
+        return 0
 
 def atualizar_mensagem(mensagem: Mensagem, id):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(ATUALIZAR_MENSAGEM, (
-        mensagem["idRmetente"],
-        mensagem["idDestinatario"],
-        mensagem["conteudo"],
-        mensagem["dataEnvio"],
-        mensagem["horaEnvio"],
-        mensagem["visualizacao"],
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(ATUALIZAR_MENSAGEM, (
+        mensagem.idRmetente,
+        mensagem.idDestinatario,
+        mensagem.conteudo,
+        mensagem.dataEnvio,
+        mensagem.horaEnvio,
+        mensagem.visualizacao,
         id
     ))
-    conn.commit()
-    conn.close()
+        conn.commit()
+        conn.close()
+        return(cursor.rowcount > 0)
+    except Exception as e:
+        print(f"Erro ao atualizar mensagem: {e}")
 
 def atualizar_visualizacao_mensagem(visualizacao: bool, id: int):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(ATUALIZAR_VISUALIZACAO_MENSAGEM, (visualizacao, id))
-    conn.commit()
-    conn.close()
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(ATUALIZAR_VISUALIZACAO_MENSAGEM, (visualizacao, id))
+        conn.commit()
+        conn.close()
+        return(cursor.rowcount > 0)
+    except Exception as e:
+        print(f"Erro ao atualizar visualização da mensagem: {e}")
 
 def excluir_mensagem(id: int):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(EXCLUIR_MENSAGEM_POR_ID, (id))
-    conn.commit()
-    conn.close()
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(EXCLUIR_MENSAGEM_POR_ID, (id,))
+        conn.commit()
+        conn.close()
+        return True
+    except Exception as e:
+        print(f"Erro ao excluir mensagem: {e}")
+    
 
 def excluir_mensagem_por_nome_remetente(nome: str):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(EXCLUIR_MENSAGEM_POR_NOME_REMETENTE, (nome,))
-    conn.commit()
-    conn.close()
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(EXCLUIR_MENSAGEM_POR_NOME_REMETENTE, (nome,))
+        conn.commit()
+        conn.close()
+        return True
+    except Exception as e:
+        print(f"Erro ao excluir mensagem por nome do remetente: {e}")
 
 def excluir_mensagem_por_nome_destinatario(nome: str):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(EXCLUIR_MENSAGEM_POR_NOME_DESTINATARIO, (nome,))
-    conn.commit()
-    conn.close()
-
-
-
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(EXCLUIR_MENSAGEM_POR_NOME_DESTINATARIO, (nome,))
+        conn.commit()
+        conn.close()
+        return True
+    except Exception as e:
+        print(f"Erro ao excluir mensagem por nome do destinatário: {e}")
 
 
 
