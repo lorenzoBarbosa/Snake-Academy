@@ -30,9 +30,10 @@ def inserir_cliente(cliente: Cliente, id:int):
             id))
         conn.commit()
         conn.close()
-        return cursor.lastrowid
+        return id
     except Exception as e:
         print(f"Erro ao inserir cliente:{e}")
+        return None
 
 def obter_todos_clientes() -> list[Cliente]:
     try:
