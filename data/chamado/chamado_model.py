@@ -1,12 +1,14 @@
 from dataclasses import dataclass
+from typing import Optional
 from data.usuario.usuario_model import Usuario
 
 
 @dataclass
 class Chamado:
     id: int
-    idUsuario: Usuario
+    idUsuario: int
     descricao: str
     dataEnvio: str
     horaEnvio: str
     visualizacao: bool
+    usuario: Optional[Usuario] = None

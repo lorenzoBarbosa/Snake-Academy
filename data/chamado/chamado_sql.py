@@ -37,7 +37,7 @@ SELECT
 FROM chamado c
 JOIN usuario u ON c.idUsuario = u.id
 WHERE c.id LIKE ? OR u.nome LIKE ? or c.descricao LIKE ?
-ORDER BY c.id_usuario
+ORDER BY c.idUsuario
 LIMIT ? OFFSET ?
 """
 
