@@ -94,7 +94,50 @@ class TestCursoRepo:
         curso_db = curso.curso
         curso_pagina = cursos3[0].curso
         assert curso_db.id == curso_pagina.id, "O id do curso obtido está incorreto"
+    
+    def test_obter_curso_por_id(self, test_db):
+        # Arrange
+        criar_tabela_usuario()
+        criar_tabela_cliente()
+        criar_tabela_professor()
+        criar_tabela_curso()
+        usuario= Usuario(0, "claudio", "claudio@g", "123", "1234", "12-06-2025")
+        usuario_inserido = inserir_usuario(usuario)
+        cliente= Cliente(0, "", "", "", "" ,"", "12-06-2025", True, [], True)
+        cliente_inserido = inserir_cliente(cliente, usuario_inserido)
+        professor= Professor(0, "", "", "", "", "", "", True, [], True, ["python"], 12, "12-06-2025")
+        professor_inserido = inserir_professor(professor, cliente_inserido)
+        for c in range(10):
+            curso_obj = Curso(0, f"Python{c+1}", 1, 12.99 + c, "não sei", "12:56", "Bom", "12-06-2025", True)
+            curso_inserido = inserir_curso(curso_obj)
+        # Act
+        curso = obter_curso_por_id(2)
+        curso_db= curso.curso
+        # Assert
+        assert curso_db is not None, "O curso não foi obtido"
+        assert curso_db.id == 2, "O id obtido deveria ser 2"
+    
+    def test_obter_cursos_paginado(self, test_db):
+        # Arrange
+        criar_tabela_usuario()
+        criar_tabela_cliente()
+        criar_tabela_professor()
+        criar_tabela_curso()
+        usuario= Usuario(0, "claudio", "claudio@g", "123", "1234", "12-06-2025")
+        usuario_inserido = inserir_usuario(usuario)
+        cliente= Cliente(0, "", "", "", "" ,"", "12-06-2025", True, [], True)
+        cliente_inserido = inserir_cliente(cliente, usuario_inserido)
+        professor= Professor(0, "", "", "", "", "", "", True, [], True, ["python"], 12, "12-06-2025")
+        professor_inserido = inserir_professor(professor, cliente_inserido)
+        for c in range(10):
+            curso_obj = Curso(0, f"Python{c+1}", 1, 12.99 + c, "não sei", "12:56", "Bom", "12-06-2025", True)
+            curso_inserido = inserir_curso(curso_obj)
+        # Act
         
+
+    
+
+
 
 
 

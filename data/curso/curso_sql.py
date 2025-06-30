@@ -27,6 +27,7 @@ JOIN cliente cli ON p.id = cli.id
 JOIN usuario u ON cli.id = u.id
 ORDER BY c.id 
 """
+
 OBTER_CURSOS_PAGINADO = """
 SELECT 
     c.id, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
