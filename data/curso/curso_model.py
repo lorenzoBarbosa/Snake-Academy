@@ -13,3 +13,7 @@ class Curso:
     avaliacao: str
     dataCriacao: str
     statusCurso: bool
+@dataclass
+class CursoCompleto:
+    curso: Curso
+    nomeProfessor: str
