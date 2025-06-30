@@ -1,4 +1,6 @@
+from data.curso.curso_repo import *
 from data.matricula.matricula_sql import *
+from data.usuario.usuario_repo import *
 from data.util import get_connection
 from data.matricula.matricula_model import Matricula
 
@@ -48,16 +50,13 @@ def obter_todas_matriculas() -> list[Matricula]:
             Matricula(
                 idMatricula=tupla[0],
                 idCliente=tupla[1],
-                nome=tupla[2],
-                email=tupla[3],
-                senha=tupla[4],
-                telefone=tupla[5],
                 idCurso=tupla[6],
-                nomeCurso=tupla[7],
                 statusMatricula=tupla[8],
                 desempenho=tupla[9],
                 frequencia=tupla[10],
-                dataMatricula=tupla[11]
+                dataMatricula=tupla[11],
+                curso = obter_curso_por_id(tupla[6]),
+                usuario = obter_usuario_por_id(tupla[1])
             ) for tupla in tuplas
         ]
         return matriculas
@@ -78,16 +77,13 @@ def obter_matriculas_paginado(pg_num: int, pg_size: int) -> list[Matricula]:
             Matricula(
                 idMatricula=tupla[0],
                 idCliente=tupla[1],
-                nome=tupla[2],
-                email=tupla[3],
-                senha=tupla[4],
-                telefone=tupla[5],
                 idCurso=tupla[6],
-                nomeCurso=tupla[7],
                 statusMatricula=tupla[8],
                 desempenho=tupla[9],
                 frequencia=tupla[10],
-                dataMatricula=tupla[11]
+                dataMatricula=tupla[11],
+                curso = obter_curso_por_id(tupla[6]),
+                usuario = obter_usuario_por_id(tupla[1])
             ) for tupla in tuplas
         ]
         return matriculas
@@ -106,22 +102,131 @@ def obter_matricula_por_id(id: int) -> Matricula:
             matricula = Matricula(
                 idMatricula=tupla[0],
                 idCliente=tupla[1],
-                nome=tupla[2],
-                email=tupla[3],
-                senha=tupla[4],
-                telefone=tupla[5],
                 idCurso=tupla[6],
-                nomeCurso=tupla[7],
                 statusMatricula=tupla[8],
                 desempenho=tupla[9],
                 frequencia=tupla[10],
-                dataMatricula=tupla[11]
-            )
+                dataMatricula=tupla[11],
+                curso = obter_curso_por_id(tupla[6]),
+                usuario = obter_usuario_por_id(tupla[1])
+            ) 
             return matricula
         return None
     except Exception as e:
         print(f"Erro ao obter matrícula por ID: {e}")
         return None
+    
+def obter_matriculas_por_nome(nome: str) -> list[Matricula]:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_MATRICULA_POR_NOME, ('%' + nome + '%',))
+        tuplas = cursor.fetchall()
+        conn.close()
+        matriculas = [
+            Matricula(
+                idMatricula=tupla[0],
+                idCliente=tupla[1],
+                idCurso=tupla[6],
+                statusMatricula=tupla[8],
+                desempenho=tupla[9],
+                frequencia=tupla[10],
+                dataMatricula=tupla[11],
+                curso = obter_curso_por_id(tupla[6]),
+                usuario = obter_usuario_por_id(tupla[1])
+            ) for tupla in tuplas
+        ]
+        return matriculas
+    except Exception as e:
+        print(f"Erro ao obter matrículas por nome: {e}")
+        return None
+    
+def obter_matriculas_por_curso(nome: str) -> list[Matricula]:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_MATRICULA_POR_CURSO, ('%' + nome + '%',))
+        tuplas = cursor.fetchall()
+        conn.close()
+        matriculas = [
+            Matricula(
+                idMatricula=tupla[0],
+                idCliente=tupla[1],
+                idCurso=tupla[6],
+                statusMatricula=tupla[8],
+                desempenho=tupla[9],
+                frequencia=tupla[10],
+                dataMatricula=tupla[11],
+                curso = obter_curso_por_id(tupla[6]),
+                usuario = obter_usuario_por_id(tupla[1])
+            ) for tupla in tuplas
+        ]
+        return matriculas
+    except Exception as e:
+        print(f"Erro ao obter matrículas por curso: {e}")
+        return None
+
+def obter_matriculas_por_cliente(id_cliente: int) -> list[Matricula]:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_MATRICULA_POR_CLIENTE, (id_cliente,))
+        tuplas = cursor.fetchall()
+        conn.close()
+        matriculas = [
+            Matricula(
+                idMatricula=tupla[0],
+                idCliente=tupla[1],
+                idCurso=tupla[6],
+                statusMatricula=tupla[8],
+                desempenho=tupla[9],
+                frequencia=tupla[10],
+                dataMatricula=tupla[11],
+                curso = obter_curso_por_id(tupla[6]),
+                usuario = obter_usuario_por_id(tupla[1])
+            ) for tupla in tuplas
+        ]
+        return matriculas
+    except Exception as e:
+        print(f"Erro ao obter matrículas por cliente: {e}")
+        return None
+
+def obter_quantidade_matriculas_por_curso(nome: str) -> int:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_QUANTIDADE_MATRICULA_POR_CURSO, ('%' + nome + '%',))
+        quantidade = cursor.fetchone()[0]
+        conn.close()
+
+        return quantidade
+    except Exception as e:
+        print(f"Erro ao obter quantidade de matrículas por curso: {e}")
+        return 0
+    
+def obter_quantidade_matriculas_por_cliente(id_cliente: int) -> int:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_QUANTIDADE_MATRICULA_POR_CLIENTE, (id_cliente,))
+        quantidade = cursor.fetchone()[0]
+        conn.close()
+        return quantidade
+    except Exception as e:
+        print(f"Erro ao obter quantidade de matrículas por cliente: {e}")
+        return 0
+
+def obter_quantidade_matriculas() -> int:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_QUANTIDADE_MATRICULAS)
+        quantidade = cursor.fetchone()[0]
+        conn.close()
+        return quantidade
+    except Exception as e:
+        print(f"Erro ao obter quantidade de matrículas: {e}")
+        return 0
 
 def atualizar_matricula(id: int, matricula: Matricula) -> bool:
     try:
