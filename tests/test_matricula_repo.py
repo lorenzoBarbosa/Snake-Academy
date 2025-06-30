@@ -52,3 +52,50 @@ class TestMatriculaRepo:
         assert matricula.usuario is not None, "O usuário não foi carregado corretamente"        
         assert matricula.usuario.id == 1, "O id do usuário na matrícula está incorreto"
         assert matricula.usuario.nome == "claudio", "O nome do usuário na matrícula está incorreto"
+
+    def test_obter_todas_matriculas(self, test_db):
+        # Arrange
+        criar_tabela_usuario()
+        criar_tabela_cliente()
+        criar_tabela_professor()
+        criar_tabela_curso()
+        criar_tabela_matricula()
+        usuario = Usuario(0, "claudio", "claudio@g", "123", "1234", "12-06-2025")
+        usuario_inserido = inserir_usuario(usuario)
+        cliente = Cliente(0, "", "", "", "", "", "12-06-2025", True, [], True)
+        cliente_inserido = inserir_cliente(cliente, usuario_inserido)
+        professor = Professor(0, "", "", "", "", "", "", True, [], True, ["python"], 12, "12-06-2025")
+        professor_inserido = inserir_professor(professor, cliente_inserido)
+        curso_obj = Curso(0, "Python", 1, 12.99, "não sei", "12:56", "Bom", "12-06-2025", True)
+        curso_inserido = inserir_curso(curso_obj)
+        matricula_obj = Matricula(0, 1, 1, "Bom", "Bom","Bom", "12-06-2025")
+        matricula_inserida = inserir_matricula(matricula_obj)
+        # Act
+        matriculas = obter_todas_matriculas()
+        # Asserts
+        assert len(matriculas) > 0, "Não deveria ser vazio"
+
+    def test_obter_matricula_por_id(self, test_db):
+        # Arrange
+        criar_tabela_usuario()
+        criar_tabela_cliente()
+        criar_tabela_professor()
+        criar_tabela_curso()
+        criar_tabela_matricula()
+        usuario = Usuario(0, "claudio", "claudio@g", "123", "1234", "12-06-2025")
+        usuario_inserido = inserir_usuario(usuario)
+        cliente = Cliente(0, "", "", "", "", "", "12-06-2025", True, [], True)
+        cliente_inserido = inserir_cliente(cliente, usuario_inserido)
+        professor = Professor(0, "", "", "", "", "", "", True, [], True, ["python"], 12, "12-06-2025")
+        professor_inserido = inserir_professor(professor, cliente_inserido)
+        curso_obj = Curso(0, "Python", 1, 12.99, "não sei", "12:56", "Bom", "12-06-2025", True)
+        curso_inserido = inserir_curso(curso_obj)
+        matricula_obj = Matricula(0, 1, 1, "Bom", "Bom","Bom", "12-06-2025")
+        matricula_inserida = inserir_matricula(matricula_obj)
+        # Act
+        matricula = obter_matricula_por_id(matricula_inserida)
+        # Asserts
+        assert matricula is not None, "A matrícula não foi encontrada"
+        assert matricula.idMatricula == matricula_inserida, "O id da matrícula está incorreto"
+        assert matricula.idCliente == 1, "O id do cliente está incorreto"
+        assert matricula.idCurso == 1, "O id do curso está incorreto"   
