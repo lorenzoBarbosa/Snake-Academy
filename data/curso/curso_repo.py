@@ -117,19 +117,18 @@ def obter_curso_por_termo_paginado(termo: str, pg_num: int, pg_size: int) -> lis
         cursor.execute(OBTER_CURSO_POR_TERMO_PAGINADO, ('%' + termo + '%', '%' + termo + '%', '%' + termo + '%', limit, offset))
         tuplas = cursor.fetchall()
         conn.close()
-        cursos = [
+        cursos = [ CursoCompleto(
             Curso(
                 id=tupla[0],
                 nome=tupla[1],
                 idProfessor=tupla[2],
-                nomeProfessor=tupla[3],
                 custo=tupla[4],
                 descricaoCurso=tupla[5],
                 duracaoCurso=tupla[6],
                 avaliacao=tupla[7],
                 dataCriacao=tupla[8],
                 statusCurso=tupla[9]
-            ) for tupla in tuplas ]
+            ), nomeProfessor = tupla[3]) for tupla in tuplas ]
         return cursos
     except Exception as e:
         print(f"Erro os cursos não foram obtidos: {e}")

@@ -51,10 +51,12 @@ WHERE c.id = ?
 
 OBTER_CURSO_POR_TERMO_PAGINADO = """
 SELECT 
-    c.id, c.nome, c.idProfessor, p.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
+    c.id, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
 FROM curso c
 JOIN professor p ON c.idProfessor = p.id
-WHERE (c.nome LIKE ? OR c.descricaoCurso LIKE ? OR p.nome LIKE ?)
+JOIN cliente cli ON p.id = cli.id
+JOIN usuario u ON cli.id = u.id
+WHERE (c.nome LIKE ? OR c.descricaoCurso LIKE ? OR u.nome LIKE ?)
 ORDER BY c.id
 LIMIT ? OFFSET ?
 """
