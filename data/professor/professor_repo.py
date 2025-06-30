@@ -65,19 +65,37 @@ def obter_todos_professors() -> list[Professor]:
         return []
 
 
-def obter_professor_por_email(email: str) -> Professor:
+def obter_professor_por_email(email: str) -> Optional[Professor]:
     try:
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute(OBTER_PROFESSOR_POR_EMAIL, (email,))
         tupla = cursor.fetchone()
         conn.close()
-    
+
         if tupla:
-            return Professor(*tupla)
+            historicoCursos = json.loads(tupla[8])
+            cursosPostados = json.loads(tupla[10])
+
+            return Professor(
+                id=tupla[0],
+                nome=tupla[1],
+                email=tupla[2],
+                senha=tupla[3],
+                telefone=tupla[4],
+                dataCriacao=tupla[5],
+                dataUltimoAcesso=tupla[6],
+                statusConta=tupla[7],
+                historicoCursos=historicoCursos,
+                indentificacaoProfessor=tupla[9],
+                cursosPostados=cursosPostados,
+                quantidadeAlunos=tupla[11],
+                dataCriacaoProfessor=tupla[12]
+            )
     except Exception as e:
         print(f"Erro ao obter professor por email: {e}")
         return None
+
 
 def obter_professor_por_id(id: int) -> Optional[Professor]:
     try:
@@ -111,6 +129,56 @@ def obter_professor_por_id(id: int) -> Optional[Professor]:
         print(f"Erro ao obter professor por id: {e}")
         return None
 
+
+def atualizar_professor_por_id(professor: Professor, id: int):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        # Atualiza a tabela usuario
+        cursor.execute("""
+            UPDATE usuario
+            SET nome = ?, email = ?, senha = ?, telefone = ?
+            WHERE id = ?
+        """, (
+            professor.nome,
+            professor.email,
+            professor.senha,
+            professor.telefone,
+            id
+        ))
+
+        # Atualiza a tabela cliente
+        cursor.execute("""
+            UPDATE cliente
+            SET dataUltimoAcesso = ?, statusConta = ?, historicoCursos = ?, indentificacaoProfessor = ?
+            WHERE id = ?
+        """, (
+            professor.dataUltimoAcesso,
+            professor.statusConta,
+            professor.historicoCursos,
+            professor.indentificacaoProfessor,
+            id
+        ))
+
+        # Atualiza a tabela professor
+        cursor.execute("""
+            UPDATE professor
+            SET cursosPostados = ?, quantidadeAlunos = ?, dataCriacaoProfessor = ?
+            WHERE id = ?
+        """, (
+            professor.cursosPostados,
+            professor.quantidadeAlunos,
+            professor.dataCriacaoProfessor,
+            id
+        ))
+
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        print(f"Erro ao atualizar professor por id: {e}")
+
+
 def atualizar_professor_por_email(professor: Professor, email: str) -> bool:
     try:
         conn = get_connection()
@@ -128,22 +196,6 @@ def atualizar_professor_por_email(professor: Professor, email: str) -> bool:
         print(f"Erro ao atualizar professor por email: {e}")
         return False
 
-def atualizar_professor_por_id(professor: Professor, id: int) -> bool:
-    try:
-        conn = get_connection()
-        cursor = conn.cursor()
-        cursosPostados = professor.cursosPostados
-        cursor.execute(ATUALIZAR_PROFESSOR_POR_ID, (
-            cursosPostados,
-            professor.quantidadeAlunos,
-            professor.dataCriacaoProfessor,
-            id))
-        conn.commit()
-        conn.close()
-        return True
-    except Exception as e:
-        print(f"Erro ao atualizar professor por id: {e}")
-        return False
 
 def excluir_professor_por_id(id: int) -> bool:
     try:
