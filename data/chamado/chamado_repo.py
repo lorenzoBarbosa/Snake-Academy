@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional
 from data.chamado.chamado_model import Chamado
 from data.chamado.chamado_sql import *
 from data.usuario.usuario_model import Usuario
@@ -12,35 +12,45 @@ def criar_tabela_chamado():
     conn.commit()
     conn.close()
 
-def gerar_chamado(chamado: Chamado):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(GERAR_CHAMADO, (
-        chamado["idUsuario"],
-        chamado["descricao"],
-        chamado["dataEnvio"],
-        chamado["horaEnvio"],
-        chamado["visualizacao"]))
-    conn.commit()
-    conn.close()
+def gerar_chamado(chamado: Chamado) -> Optional[int]:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(GERAR_CHAMADO, (
+            chamado.idUsuario,
+            chamado.descricao,
+            chamado.dataEnvio,
+            chamado.horaEnvio,
+            chamado.visualizacao))
+        conn.commit()
+        conn.close()
+        return cursor.lastrowid
+    except Exception as e:
+        print(f"Erro ao gerar chamado: {e}")
+        return None
 
 def obter_todos_chamados() -> list[Chamado]:
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(OBTER_CHAMADOS)
-    tuplas = cursor.fetchall()
-    conn.close()
-    chamados = [
-        Chamado(
-            id=tupla[0],
-            idUsuario=tupla[1],
-            descricao=tupla[2],
-            dataEnvio=tupla[3],
-            horaEnvio=tupla[4],
-            visualizacao=tupla[5]    
-            ) for tupla in tuplas ]
-    conn.close()
-    return chamados
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_CHAMADOS)
+        tuplas = cursor.fetchall()
+        conn.close()
+        chamados = [
+            Chamado(
+                id=tupla[0],
+                idUsuario=tupla[1],
+                descricao=tupla[2],
+                dataEnvio=tupla[3],
+                horaEnvio=tupla[4],
+                visualizacao=tupla[5]
+            ) for tupla in tuplas
+        ]
+        conn.close()
+        return chamados
+    except Exception as e:
+        print(f"Erro ao obter todos os chamados: {e}")
+        return []
 
 def obter_chamado_por_id(id: int) -> Chamado:
     conn = get_connection()
