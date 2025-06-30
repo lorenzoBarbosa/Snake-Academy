@@ -133,6 +133,45 @@ class TestCursoRepo:
             curso_obj = Curso(0, f"Python{c+1}", 1, 12.99 + c, "não sei", "12:56", "Bom", "12-06-2025", True)
             curso_inserido = inserir_curso(curso_obj)
         # Act
+        cursos1 = obter_cursos_paginado(1, 4)
+        cursos2 = obter_cursos_paginado(2, 4)
+        cursos3= obter_cursos_paginado(3, 4)
+        # Asserts
+        assert len(cursos1) == 4, "A quantidade de cursos na primeira página teria que ser 4."
+        assert len(cursos2) == 4, "A quantidade de cursos na segunda página teria que ser 4."
+        curso_db= cursos3[0]
+        curso = curso_db.curso
+        assert curso.id == 9, "O id da primeira página deveria ser 9"
+
+    def test_obter_curso_por_termo_paginado(self, test_db):
+        # Arrange
+        criar_tabela_usuario()
+        criar_tabela_cliente()
+        criar_tabela_professor()
+        criar_tabela_curso()
+        usuario= Usuario(0, "claudio", "claudio@g", "123", "1234", "12-06-2025")
+        usuario_inserido = inserir_usuario(usuario)
+        cliente= Cliente(0, "", "", "", "" ,"", "12-06-2025", True, [], True)
+        cliente_inserido = inserir_cliente(cliente, usuario_inserido)
+        professor= Professor(0, "", "", "", "", "", "", True, [], True, ["python"], 12, "12-06-2025")
+        professor_inserido = inserir_professor(professor, cliente_inserido)
+        for c in range(10):
+            curso_obj = Curso(0, f"Python{c+1}", 1, 12.99 + c, "não sei", "12:56", "Bom", "12-06-2025", True)
+            curso_inserido = inserir_curso(curso_obj)
+        # Act
+        cursos1 = obter_curso_por_termo_paginado("ython", 1, 4)
+        cursos2 = obter_curso_por_termo_paginado("ython", 2, 4)
+        cursos3= obter_curso_por_termo_paginado("ython", 3, 4)
+        # Asserts
+        assert len(cursos1) == 4, "A quantidade de cursos na primeira página teria que ser 4."
+        assert len(cursos2) == 4, "A quantidade de cursos na segunda página teria que ser 4."
+        curso_db= cursos3[0]
+        curso = curso_db.curso
+        assert curso.id == 9, "O id da primeira página deveria ser 9"
+
+
+
+
         
 
     
