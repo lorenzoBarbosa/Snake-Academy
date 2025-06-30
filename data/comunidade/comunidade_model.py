@@ -8,3 +8,8 @@ class Comunidade:
     nome: str
     quantidadeParticipantes: int
     listaParticipantes: list
+
+@dataclass
+class ComunidadeCompleto:
+    comunidade: Comunidade
+    nomeCurso: str
