@@ -14,13 +14,13 @@ def criar_tabela_comunidade():
 def inserir_comunidade(comunidade: Comunidade):
     conn = get_connection()
     cursor = conn.cursor()
-    listaParticipantes = json.dumps(comunidade["listaParticipantes"])
+    listaParticipantes = json.dumps(comunidade.listaParticipantes)
     cursor.execute(
         INSERIR_COMUNIDADE,
         (
-            comunidade["idCurso"],
-            comunidade["nome"],
-            comunidade["quantidadeParticipantes"],
+            comunidade.idCurso,
+            comunidade.nome,
+            comunidade.quantidadeParticipantes,
             listaParticipantes
         )
     )
@@ -134,17 +134,17 @@ def obter_quantidade_comunidades_por_nome_curso(nome_curso: str) -> int:
     conn.close()
     return quantidade
 
-def atualizar_comunidade(comunidade: Comunidade):
+def atualizar_comunidade(comunidade: Comunidade, id: int):
     conn = get_connection()
     cursor = conn.cursor()
-    listaParticipantes = json.dumps(comunidade["listaParticipantes"])
+    listaParticipantes = json.dumps(comunidade.listaParticipantes)
     cursor.execute(
         ATUALIZAR_COMUNIDADE,
         (
-            comunidade["idCurso"],
-            comunidade["quantidadeParticipantes"],
+            comunidade.idCurso,
+            comunidade.quantidadeParticipantes,
             listaParticipantes,
-            comunidade["id"]
+            id
         )
     )
     conn.commit()
