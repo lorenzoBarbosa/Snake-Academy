@@ -32,9 +32,7 @@ class TestCursoRepo:
         # Act
         curso_obj = Curso(0, "Python", 1, 12.99, "não sei", "12:56", "Bom", "12-06-2025", True)
         curso_inserido = inserir_curso(curso_obj)
-        curso = obter_curso_por_id(curso_inserido)
-        nomeProfessor = curso.nomeProfessor
-        curso_db = curso.curso
+        curso_db = obter_curso_por_id(curso_inserido)
         # Asserts
         assert curso_db is not None, "Não deveria ser vazio"
         assert curso_db.id == curso_inserido, "O id do curso está incorreto"
@@ -91,9 +89,7 @@ class TestCursoRepo:
         assert len(cursos1) == 4, "A primeira página deveria conter 4 cursos"
         assert len(cursos2) == 4, "A segunda página deveria conter 4 cursos"
         curso = obter_curso_por_id(9)
-        curso_db = curso.curso
-        curso_pagina = cursos3[0].curso
-        assert curso_db.id == curso_pagina.id, "O id do curso obtido está incorreto"
+        assert curso.id == 9, "O id do curso obtido está incorreto"
     
     def test_obter_curso_por_id(self, test_db):
         # Arrange
@@ -112,10 +108,9 @@ class TestCursoRepo:
             curso_inserido = inserir_curso(curso_obj)
         # Act
         curso = obter_curso_por_id(2)
-        curso_db= curso.curso
         # Assert
-        assert curso_db is not None, "O curso não foi obtido"
-        assert curso_db.id == 2, "O id obtido deveria ser 2"
+        assert curso is not None, "O curso não foi obtido"
+        assert curso.id == 2, "O id obtido deveria ser 2"
     
     def test_obter_cursos_paginado(self, test_db):
         # Arrange
@@ -140,8 +135,7 @@ class TestCursoRepo:
         assert len(cursos1) == 4, "A quantidade de cursos na primeira página teria que ser 4."
         assert len(cursos2) == 4, "A quantidade de cursos na segunda página teria que ser 4."
         curso_db= cursos3[0]
-        curso = curso_db.curso
-        assert curso.id == 9, "O id da primeira página deveria ser 9"
+        assert curso_db.id == 9, "O id da primeira página deveria ser 9"
 
     def test_obter_curso_por_termo_paginado(self, test_db):
         # Arrange
@@ -166,8 +160,8 @@ class TestCursoRepo:
         assert len(cursos1) == 4, "A quantidade de cursos na primeira página teria que ser 4."
         assert len(cursos2) == 4, "A quantidade de cursos na segunda página teria que ser 4."
         curso_db= cursos3[0]
-        curso = curso_db.curso
-        assert curso.id == 9, "O id da primeira página deveria ser 9"
+        assert curso_db.id == 9, "O id da primeira página deveria ser 9"
+
 
 
 
