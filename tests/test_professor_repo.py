@@ -317,11 +317,11 @@ class TestProfessorRepo:
         id_usuario = inserir_usuario(usuario)
         cliente = Cliente(
             id=None,
-            nome="Cliente Original",
-            email="cliente.original@example.com",
-            senha="senha123",
-            telefone="888888888",
-            dataCriacao="2023-01-01",
+            nome=usuario.nome,
+            email=usuario.email,
+            senha=usuario.senha,
+            telefone= usuario.telefone,
+            dataCriacao=usuario.dataCriacao,
             dataUltimoAcesso="2023-01-01",
             statusConta="ativo",
             historicoCursos="[]",
@@ -330,15 +330,15 @@ class TestProfessorRepo:
         id_cliente = inserir_cliente(cliente, id_usuario)
         professor = Professor(
             id=id_cliente,
-            nome="Professor Original",
-            email="professor.original@example.com",
-            senha="senha123",
-            telefone="123456789",
-            dataCriacao="2023-01-01",
-            dataUltimoAcesso="2023-01-01",
-            statusConta="ativo",
-            historicoCursos="[]",
-            indentificacaoProfessor="ID123",
+            nome=usuario.nome,
+            email=usuario.email,
+            senha=usuario.senha,
+            telefone=usuario.telefone,
+            dataCriacao=usuario.dataCriacao,
+            dataUltimoAcesso=cliente.dataUltimoAcesso,
+            statusConta=cliente.statusConta,
+            historicoCursos= cliente.historicoCursos,
+            indentificacaoProfessor=cliente.indentificacaoProfessor,
             cursosPostados="[]",
             quantidadeAlunos=0,
             dataCriacaoProfessor="2023-01-01",
@@ -369,6 +369,171 @@ class TestProfessorRepo:
         assert professor_db.cursosPostados == "[\"Curso 3\"]", "Os cursos postados do professor atualizado estão incorretos"
         assert professor_db.quantidadeAlunos == 10, "A quantidade de alunos do professor atualizado está incorreta"
 
+
     def test_atualizar_professor_por_email(self, test_db):
         # Arrange
-        pass
+        criar_tabela_usuario()
+        criar_tabela_cliente()
+        criar_tabela_professor()
+
+        usuario = Usuario(
+            id=None, 
+            nome="Professor Original",
+            email="professor.original@example.com",
+            senha="senha123",
+            telefone="123456789",
+            dataCriacao="2023-01-01",
+        )
+        id_usuario = inserir_usuario(usuario)
+        cliente = Cliente(
+            id=None,
+            nome=usuario.nome,
+            email=usuario.email,
+            senha=usuario.senha,
+            telefone=usuario.telefone,
+            dataCriacao=usuario.dataCriacao,
+            dataUltimoAcesso=usuario.dataCriacao,
+            statusConta="ativo",
+            historicoCursos="[]",
+            indentificacaoProfessor="ID123",
+        )
+        id_cliente = inserir_cliente(cliente, id_usuario)
+        professor = Professor(
+            id=id_cliente,
+            nome=usuario.nome,
+            email=usuario.email,
+            senha=usuario.senha,
+            telefone=usuario.telefone,
+            dataCriacao=usuario.dataCriacao,
+            dataUltimoAcesso=cliente.dataUltimoAcesso,
+            statusConta=cliente.statusConta,
+            historicoCursos=cliente.historicoCursos,
+            indentificacaoProfessor=cliente.indentificacaoProfessor,
+            cursosPostados="[]",
+            quantidadeAlunos=0,
+            dataCriacaoProfessor="2023-01-01",
+        )
+        inserir_professor(professor, id_cliente)
+
+        # Act(atualizei só alguns campos simulando uma atualização parcial)
+        professor.nome = "Professor Atualizado"
+        professor.email = "professor.atualizado@example.com"
+        professor.historicoCursos = json.dumps("[\"Curso 2\", \"Curso 3\"]")
+        professor.indentificacaoProfessor = "ID456"
+        professor.cursosPostados = json.dumps("[\"Curso 4\"]")
+        professor.quantidadeAlunos = 15
+        atualizar_professor_por_email(professor, usuario.email) #executa a atualização no banco de dados
+
+        professor_db = obter_professor_por_email(professor.email) #isso busca o professor atualizado no banco de dados
+
+        # Assert
+        assert obter_professor_por_email(usuario.email) is None, "O professor original não deveria ser encontrado pelo email antigo" #vê se o professor antigo não existe mais
+        assert professor_db is not None, "O professor não foi atualizado"
+        assert professor_db.nome == "Professor Atualizado", "O nome do professor atualizado está incorreto"
+        assert professor_db.email == "professor.atualizado@example.com", "O email do professor atualizado está incorreto"
+        assert professor_db.historicoCursos == "[\"Curso 2\", \"Curso 3\"]", "O histórico de cursos do professor atualizado está incorreto"
+        assert professor_db.indentificacaoProfessor == "ID456", "A identificação do professor atualizado está incorreta"
+        assert professor_db.cursosPostados == "[\"Curso 4\"]", "Os cursos postados do professor atualizado estão incorretos"
+        assert professor_db.quantidadeAlunos == 15, "A quantidade de alunos do professor atualizado está incorreta"
+
+    def test_excluir_professor_por_id(self, test_db):
+        # Arrange
+            criar_tabela_usuario()
+            criar_tabela_cliente()
+            criar_tabela_professor()
+            usuario = Usuario(
+                id=None, 
+                nome="Professor Teste",
+                email="professor.original@example.com",
+                senha="senha123",
+                telefone="123456789",
+                dataCriacao="2023-01-01",
+            )
+            id_usuario = inserir_usuario(usuario)
+            cliente = Cliente(
+                id=None,
+                nome=usuario.nome,
+                email=usuario.email,
+                senha=usuario.senha,
+                telefone=usuario.telefone,
+                dataCriacao=usuario.dataCriacao,
+                dataUltimoAcesso="2023-01-01",
+                statusConta="ativo",
+                historicoCursos="[]",
+                indentificacaoProfessor="ID123",
+            )
+            id_cliente = inserir_cliente(cliente, id_usuario)
+            professor = Professor(
+                id=id_cliente,
+                nome=usuario.nome,
+                email=usuario.email,
+                senha=usuario.senha,
+                telefone=usuario.telefone,
+                dataCriacao=usuario.dataCriacao,
+                dataUltimoAcesso=cliente.dataUltimoAcesso,
+                statusConta=cliente.statusConta,
+                historicoCursos=cliente.historicoCursos,
+                indentificacaoProfessor=cliente.indentificacaoProfessor,
+                cursosPostados="[]",
+                quantidadeAlunos=0,
+                dataCriacaoProfessor="2023-01-01",
+            )
+            professor_inserido = inserir_professor(professor, id_cliente)
+            professor_db = obter_professor_por_id(professor_inserido)
+            #Act
+            id_professor = professor_db.id
+            resultado = excluir_professor_por_id(id_professor) #executa a exclusão no banco de dados
+            #Assert
+            assert resultado is not None, "A exclusão do professor falhou"
+            assert obter_professor_por_id(id_professor) is None, "O professor não foi excluído corretamente"
+
+
+    def test_excluir_professor_por_email(self, test_db):
+        # Arrange
+            criar_tabela_usuario()
+            criar_tabela_cliente()
+            criar_tabela_professor()      
+            usuario = Usuario(
+                id=None, 
+                nome="Professor Teste",
+                email="professor.original@example.com",
+                senha="senha123",
+                telefone="123456789",
+                dataCriacao="2023-01-01",
+            )
+            id_usuario = inserir_usuario(usuario)
+            cliente = Cliente(
+                id=None,
+                nome=usuario.nome,
+                email=usuario.email,
+                senha=usuario.senha,
+                telefone=usuario.telefone,
+                dataCriacao=usuario.dataCriacao,
+                dataUltimoAcesso="2023-01-01",
+                statusConta="ativo",
+                historicoCursos="[]",
+                indentificacaoProfessor="ID123",
+            )
+            id_cliente = inserir_cliente(cliente, id_usuario)
+            professor = Professor(
+                id=id_cliente,
+                nome=usuario.nome,
+                email=usuario.email,
+                senha=usuario.senha,
+                telefone=usuario.telefone,
+                dataCriacao=usuario.dataCriacao,
+                dataUltimoAcesso=cliente.dataUltimoAcesso,
+                statusConta=cliente.statusConta,
+                historicoCursos=cliente.historicoCursos,
+                indentificacaoProfessor=cliente.indentificacaoProfessor,
+                cursosPostados="[]",
+                quantidadeAlunos=0,
+                dataCriacaoProfessor="2023-01-01",
+            )
+            professor_inserido = inserir_professor(professor, id_cliente)
+            professor_db = obter_professor_por_id(professor_inserido)
+                # Act
+            resultado = excluir_professor_por_email(professor_db.email)
+                # Assert
+            assert resultado is not None, "A exclusão do professor falhou"
+            assert obter_professor_por_id(professor_inserido) is None, "O professor não foi excluído corretamente"

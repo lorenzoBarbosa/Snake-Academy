@@ -135,7 +135,7 @@ def atualizar_professor_por_id(professor: Professor, id: int):
         conn = get_connection()
         cursor = conn.cursor()
 
-        # Atualiza a tabela usuario
+        # Atualiza os dados do professor na tabela usuario
         cursor.execute("""
             UPDATE usuario
             SET nome = ?, email = ?, senha = ?, telefone = ?
@@ -183,18 +183,55 @@ def atualizar_professor_por_email(professor: Professor, email: str) -> bool:
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursosPostados = professor.cursosPostados
-        cursor.execute(ATUALIZAR_PROFESSOR_POR_EMAIL, (
-            cursosPostados,
+
+        cursor.execute("SELECT id FROM usuario WHERE email = ?", (email,))
+        resultado = cursor.fetchone()
+        if not resultado:
+            return False
+        id_usuario = resultado[0]
+
+        cursor.execute("""
+            UPDATE usuario
+            SET nome = ?, email = ?, senha = ?, telefone = ?
+            WHERE id = ?
+        """, (
+            professor.nome,
+            professor.email,
+            professor.senha,
+            professor.telefone,
+            id_usuario
+        ))
+
+        cursor.execute("""
+            UPDATE cliente
+            SET dataUltimoAcesso = ?, statusConta = ?, historicoCursos = ?, indentificacaoProfessor = ?
+            WHERE id = ?
+        """, (
+            professor.dataUltimoAcesso,
+            professor.statusConta,
+            professor.historicoCursos,
+            professor.indentificacaoProfessor,
+            id_usuario
+        ))
+
+        cursor.execute("""
+            UPDATE professor
+            SET cursosPostados = ?, quantidadeAlunos = ?, dataCriacaoProfessor = ?
+            WHERE id = ?
+        """, (
+            professor.cursosPostados,
             professor.quantidadeAlunos,
             professor.dataCriacaoProfessor,
-            email))
+            id_usuario
+        ))
+
         conn.commit()
         conn.close()
         return True
     except Exception as e:
         print(f"Erro ao atualizar professor por email: {e}")
         return False
+
 
 
 def excluir_professor_por_id(id: int) -> bool:
