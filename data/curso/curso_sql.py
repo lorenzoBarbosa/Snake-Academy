@@ -68,7 +68,8 @@ SELECT COUNT(*) FROM curso
 OBTER_QUANTIDADE_CURSOS_POR_NOME_PROFESSOR = """
 SELECT COUNT(*) FROM curso c
 JOIN professor p ON c.idProfessor = p.id
-WHERE p.nome = ?
+JOIN usuario u ON p.id = u.id
+WHERE u.nome = ?
 """
 
 ATUALIZAR_CURSO_POR_ID = """

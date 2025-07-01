@@ -1,6 +1,7 @@
 from typing import Optional
 from data.mensagem.mensagem_model import Mensagem
 from data.mensagem.mensagem_sql import *
+from data.usuario.usuario_repo import obter_usuario_por_id
 from data.util import get_connection
 
 
@@ -45,22 +46,21 @@ def obter_mensagens() -> list[Mensagem]:
         conn.close()
         mensagens = [ 
             Mensagem(
-                id=tupla[0],
-                idRmetente=tupla[1],
-                nomeRemetente=tupla[2],
-                idDestinatario=tupla[3],
-                nomeDestinatario=tupla[4],
-                conteudo=tupla[5],
-                dataEnvio=tupla[6],
-                horaEnvio=tupla[7],
-                visualizacao=tupla[8]
+                id=tupla["id"],
+                idRmetente=tupla["idRemetente"],
+                idDestinatario=tupla["idDestinatario"],
+                conteudo=tupla["conteudo"],
+                dataEnvio=tupla["dataEnvio"],
+                horaEnvio=tupla["horaEnvio"],
+                visualizacao=tupla["visualizacao"],
+                remetente=obter_usuario_por_id(tupla["idRemetente"]),
+                destinatario=obter_usuario_por_id(tupla["idDestinatario"])
             ) for tupla in tuplas
         ]
-        conn.close()
         return mensagens
     except Exception as e:
         print(f"Erro ao obter mensagens: {e}")
-        return []   
+        return None
 
 def obter_mensagem_paginado(pg_num: int, pg_size: int) -> list[Mensagem]:
     try:
@@ -73,21 +73,21 @@ def obter_mensagem_paginado(pg_num: int, pg_size: int) -> list[Mensagem]:
         conn.close()
         mensagens = [
             Mensagem(
-                id=tupla[0],
-                idRmetente=tupla[1],
-                nomeRemetente=tupla[2],
-                idDestinatario=tupla[3],
-                nomeDestinatario=tupla[4],
-                conteudo=tupla[5],
-                dataEnvio=tupla[6],
-                horaEnvio=tupla[7],
-                visualizacao=tupla[8]
+                id=tupla["id"],
+                idRmetente=tupla["idRemetente"],
+                idDestinatario=tupla["idDestinatario"],
+                conteudo=tupla["conteudo"],
+                dataEnvio=tupla["dataEnvio"],
+                horaEnvio=tupla["horaEnvio"],
+                visualizacao=tupla["visualizacao"],
+                remetente=obter_usuario_por_id(tupla["idRemetente"]),
+                destinatario=obter_usuario_por_id(tupla["idDestinatario"])
             ) for tupla in tuplas
         ]
         return mensagens
     except Exception as e:
         print(f"Erro ao obter mensagens paginadas: {e}")
-        return []
+        return None
 
 def obter_mensagem_por_termo_paginado(termo: str, pg_num: int, pg_size: int) -> list[Mensagem]:
     try:
@@ -100,23 +100,23 @@ def obter_mensagem_por_termo_paginado(termo: str, pg_num: int, pg_size: int) -> 
         conn.close()
         mensagens = [
             Mensagem(
-                id=tupla[0],
-                idRmetente=tupla[1],
-                nomeRemetente=tupla[2],
-                idDestinatario=tupla[3],
-                nomeDestinatario=tupla[4],
-                conteudo=tupla[5],
-                dataEnvio=tupla[6],
-                horaEnvio=tupla[7],
-                visualizacao=tupla[8]
+                id=tupla["id"],
+                idRmetente=tupla["idRemetente"],
+                idDestinatario=tupla["idDestinatario"],
+                conteudo=tupla["conteudo"],
+                dataEnvio=tupla["dataEnvio"],
+                horaEnvio=tupla["horaEnvio"],
+                visualizacao=tupla["visualizacao"],
+                remetente=obter_usuario_por_id(tupla["idRemetente"]),
+                destinatario=obter_usuario_por_id(tupla["idDestinatario"])
             ) for tupla in tuplas
         ]
         return mensagens
     except Exception as e:
         print(f"Erro ao obter mensagens por termo paginadas: {e}")
-        return []
+        return None
 
-#oficial
+
 def obter_mensagem_por_id(id: int) -> Optional[Mensagem]:
     try:
         conn = get_connection()
@@ -126,30 +126,16 @@ def obter_mensagem_por_id(id: int) -> Optional[Mensagem]:
         conn.close()
         if tupla:
             mensagem = Mensagem(
-            id=tupla[0],
-            idRmetente=tupla[1],
-            nomeRemetente=tupla[2],
-            idDestinatario=tupla[3],
-            nomeDestinatario=tupla[4],
-            conteudo=tupla[5],
-            dataEnvio=tupla[6],
-            horaEnvio=tupla[7],
-            visualizacao=tupla[8]
+            id=tupla["id"],
+            idRmetente=tupla["idRemetente"],
+            idDestinatario=tupla["idDestinatario"],
+            conteudo=tupla["conteudo"],
+            dataEnvio=tupla["dataEnvio"],
+            horaEnvio=tupla["horaEnvio"],
+            visualizacao=tupla["visualizacao"],
+            remetente= obter_usuario_por_id(tupla["idRemetente"]),
+            destinatario= obter_usuario_por_id(tupla["idDestinatario"])
         )
-        return mensagem
-    except Exception as e:
-        print(f"Erro ao obter mensagem por id: {e}")
-
-#teste
-def obter_mensagem_por_id_teste(id: int) -> Optional[Mensagem]:
-    try:
-        conn = get_connection()
-        cursor = conn.cursor()
-        cursor.execute(OBTER_MENSAGEM_POR_ID_TESTE, (id,))
-        tupla = cursor.fetchone()
-        conn.close()
-        if tupla:
-            mensagem = Mensagem(*tupla[:6], bool(tupla[6]))
         return mensagem
     except Exception as e:
         print(f"Erro ao obter mensagem por id: {e}")
@@ -164,22 +150,22 @@ def obter_mensagem_por_nome_remetente(nome: str, pg_num: int, pg_size: int) -> l
         tuplas = cursor.fetchall()
         conn.close()
         mensagens = [
-        Mensagem(
-            id=tupla[0],
-            idRmetente=tupla[1],
-            nomeRemetente=tupla[2],
-            idDestinatario=tupla[3],
-            nomeDestinatario=tupla[4],
-            conteudo=tupla[5],
-            dataEnvio=tupla[6],
-            horaEnvio=tupla[7],
-            visualizacao=tupla[8]
-        ) for tupla in tuplas
+            Mensagem(
+                id=tupla["id"],
+                idRmetente=tupla["idRemetente"],
+                idDestinatario=tupla["idDestinatario"],
+                conteudo=tupla["conteudo"],
+                dataEnvio=tupla["dataEnvio"],
+                horaEnvio=tupla["horaEnvio"],
+                visualizacao=tupla["visualizacao"],
+                remetente=obter_usuario_por_id(tupla["idRemetente"]),
+                destinatario=obter_usuario_por_id(tupla["idDestinatario"])
+            ) for tupla in tuplas
         ]
         return mensagens
     except Exception as e:
         print(f"Erro ao obter mensagens por nome do remetente: {e}")
-        return []
+        return None
 
 def obter_mensagem_por_nome_destinatario(nome: str, pg_num: int, pg_size: int) -> list[Mensagem]:
     try:
@@ -191,22 +177,23 @@ def obter_mensagem_por_nome_destinatario(nome: str, pg_num: int, pg_size: int) -
         tuplas = cursor.fetchall()
         conn.close()
         mensagens = [
-        Mensagem(
-            id=tupla[0],
-            idRmetente=tupla[1],
-            nomeRemetente=tupla[2],
-            idDestinatario=tupla[3],
-            nomeDestinatario=tupla[4],
-            conteudo=tupla[5],
-            dataEnvio=tupla[6],
-            horaEnvio=tupla[7],
-            visualizacao=tupla[8]
-        ) for tupla in tuplas
+            Mensagem(
+                id=tupla["id"],
+                idRmetente=tupla["idRemetente"],
+                idDestinatario=tupla["idDestinatario"],
+                conteudo=tupla["conteudo"],
+                dataEnvio=tupla["dataEnvio"],
+                horaEnvio=tupla["horaEnvio"],
+                visualizacao=tupla["visualizacao"],
+                remetente=obter_usuario_por_id(tupla["idRemetente"]),
+                destinatario=obter_usuario_por_id(tupla["idDestinatario"])
+            ) for tupla in tuplas
         ]
         return mensagens
     except Exception as e:
         print(f"Erro ao obter mensagens por nome do destinatário: {e}")
-        return []
+        return None
+
 
 def obter_quantidade_mensagem() -> int:
     try:
