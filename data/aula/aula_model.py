@@ -14,5 +14,5 @@ class Aula:
     tipo: str
     ordem: int
     dataDisponibilidade: str
-    modulo = Optional[Modulo] = None
-    nomeCurso = Optional[str] = None
+    modulo: Optional[Modulo] = None
+    nomeCurso: Optional[str] = None

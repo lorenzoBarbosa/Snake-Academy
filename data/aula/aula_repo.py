@@ -11,6 +11,7 @@ def criar_tabela_aula():
         cursor.execute(CRIAR_TABELA_AULA)
         conn.commit()
         conn.close()
+        return True
     except Exception as e:
         print(f"Erro ao criar tabela: {e}")
 
@@ -21,13 +22,13 @@ def inserir_aula(aula: Aula):
         cursor.execute(
             INSERIR_AULA,
             (
-                aula["idModulo"],
-                aula["titulo"],
-                aula["descricaoAula"],
-                aula["duracaoAula"],
-                aula["tipo"],
-                aula["ordem"],
-                aula["dataDisponibilidade"]
+                aula.idModulo,
+                aula.titulo,
+                aula.descricaoAula,
+                aula.duracaoAula,
+                aula.tipo,
+                aula.ordem,
+                aula.dataDisponibilidade
             )
         )
         conn.commit()

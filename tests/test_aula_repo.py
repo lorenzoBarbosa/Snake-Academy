@@ -27,6 +27,7 @@ class TestAulaRepo:
         criar_tabela_professor()
         criar_tabela_curso()
         criar_tabela_modulo()
+        criar_tabela_aula()
         usuario= Usuario(0, "claudio", "claudio@g", "123", "1234", "12-06-2025")
         usuario_inserido = inserir_usuario(usuario)
         cliente= Cliente(0, "", "", "", "" ,"", "12-06-2025", True, [], True)
@@ -75,7 +76,7 @@ class TestAulaRepo:
         #Act
         aulas = obter_todas_aulas()
         #Assert
-        assert len(aulas) == 10, "Deveria haver 3 aulas no banco"
+        assert len(aulas) == 10, "Deveria haver 10 aulas no banco"
 
     def test_obter_aula_por_titulo(self, test_db):
         criar_tabela_usuario()
