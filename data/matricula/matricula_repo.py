@@ -64,7 +64,7 @@ def obter_todas_matriculas() -> list[Matricula]:
         print(f"Erro ao obter matrículas: {e}")
         return None
 
-def obter_matriculas_paginado(pg_num: int, pg_size: int) -> list[Matricula]:
+def obter_matriculas_paginadas(pg_num: int, pg_size: int) -> list[Matricula]:
     try:
         limit = pg_size
         offset = (pg_num - 1) * pg_size
