@@ -13,14 +13,18 @@ def criar_tabela_admin():
     conn.close()
 
 def inserir_admin(admin: Admin, id:int) -> Optional[int]:
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(INSERIR_ADMIN, (
-        admin["nivelAcesso"],
-        id))
-    conn.commit()
-    conn.close()
-
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(INSERIR_ADMIN, (
+            admin["nivelAcesso"],
+            id))
+        conn.commit()
+        conn.close()
+        return cursor.lastrowid
+    except Exception as e:
+        print(f"Erro ao inserir admin: {e}")
+        
 def obter_todos_admins() -> list[Admin]:
     conn = get_connection()
     cursor = conn.cursor()
