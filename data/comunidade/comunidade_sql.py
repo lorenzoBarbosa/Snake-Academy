@@ -1,6 +1,6 @@
 CRIAR_TABELA_COMUNIDADE = """
 CREATE TABLE IF NOT EXISTS comunidade (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     idCurso INTEGER NOT NULL,
     nome TEXT NOT NULL,
     quantidadeParticipantes INTEGER,
@@ -18,7 +18,7 @@ SELECT
     co.id, co.idCurso, c.nome as nomeCurso, co.nome, co.quantidadeParticipantes, co.listaParticipantes
 FROM comunidade co
 JOIN curso c ON co.idCurso = c.id
-ORDER BY id 
+ORDER BY co.id 
 """
 
 OBTER_COMUNIDADES_PAGINADO = """
@@ -26,7 +26,7 @@ SELECT
     co.id, co.idCurso, c.nome as nomeCurso, co.nome, co.quantidadeParticipantes, co.listaParticipantes
 FROM comunidade co
 JOIN curso c ON co.idCurso = c.id
-ORDER BY id
+ORDER BY co.id
 LIMIT ? OFFSET ?
 """
 
@@ -66,7 +66,7 @@ WHERE c.nome = ?
 
 ATUALIZAR_COMUNIDADE = """
 UPDATE comunidade
-SET idCurso = ?, quantidadeParticipantes = ?, listaParticipantes = ?
+SET idCurso = ?, nome = ?, quantidadeParticipantes = ?, listaParticipantes = ?
 WHERE id = ?;
 """
 

@@ -12,6 +12,7 @@ def criar_tabela_comunidade():
         cursor.execute(CRIAR_TABELA_COMUNIDADE)
         conn.commit()
         conn.close()
+        return True
     except Exception as e:
         print(f"Erro a tabela não foi criada: {e}")
 
@@ -23,7 +24,7 @@ def inserir_comunidade(comunidade: Comunidade):
         cursor.execute(
             INSERIR_COMUNIDADE,
             (
-                comunidade.idCurso,
+                comunidade.idCurso.id,
                 comunidade.nome,
                 comunidade.quantidadeParticipantes,
                 listaParticipantes
@@ -31,6 +32,7 @@ def inserir_comunidade(comunidade: Comunidade):
         )
         conn.commit()
         conn.close()
+        return cursor.lastrowid
     except Exception as e:
         print(f"Erro os dados não foram inseridos: {e}")
         
@@ -47,11 +49,12 @@ def obter_comunidades_paginado(pg_num: int, pg_size: int) -> list[dict]:
             Comunidade (
                 id = tupla[0],
                 idCurso = tupla[1],
-                nomeCurso = tupla[2],
                 nome = tupla[3],
                 quantidadeParticipantes = tupla[4],
-                listaParticipantes = tupla[5]
-            ) for tupla in tuplas ]
+                listaParticipantes = json.loads(tupla[5]),
+                nomeCurso = curso_repo.obter_curso_por_id(tupla[2],)
+                ) for tupla in tuplas ]
+        
         return comunidades
     except Exception as e:
         print(f"Erro ao obter comunidades paginadas: {e}")
@@ -64,13 +67,14 @@ def obter_comunidade_por_id(id: int) -> dict:
         cursor.execute(OBTER_COMUNIDADE_POR_ID, (id,))
         tupla = cursor.fetchone()
         conn.close()
-        return Comunidade (
+        if tupla:
+            return Comunidade (
                 id = tupla[0],
                 idCurso = tupla[1],
-                nome = tupla[2],
-                quantidadeParticipantes = tupla[3],
-                listaParticipantes = tupla[4],
-                nomeCurso = curso_repo.obter_curso_por_id(tupla[1],)
+                nome = tupla[3],
+                quantidadeParticipantes = tupla[4],
+                listaParticipantes = json.loads(tupla[5]),
+                nomeCurso = curso_repo.obter_curso_por_id(tupla[2],)
                 )
     except Exception as e:
         print(f"Erro ao obter comunidade por id: {e}")
@@ -81,17 +85,16 @@ def obter_comunidade_por_nome_curso(nome_curso: str) -> dict:
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute(OBTER_COMUNIDADE_POR_NOME_CURSO, (nome_curso,))
-        tupla = cursor.fetchone()
         tuplas = cursor.fetchall()
         conn.close()
         comunidade = [
             Comunidade (
                 id = tupla[0],
                 idCurso = tupla[1],
-                nome = tupla[2],
-                quantidadeParticipantes = tupla[3],
-                listaParticipantes = tupla[4],
-                nomeCurso = curso_repo.obter_curso_por_id(tupla[1],)
+                nome = tupla[3],
+                quantidadeParticipantes = tupla[4],
+                listaParticipantes = json.loads(tupla[5]),
+                nomeCurso = curso_repo.obter_curso_por_id(tupla[2],)
                 ) for tupla in tuplas ]
         return comunidade
     except Exception as e:
@@ -109,10 +112,10 @@ def obter_todas_comunidades() -> list[dict]:
             Comunidade (
                 id = tupla[0],
                 idCurso = tupla[1],
-                nome = tupla[2],
-                quantidadeParticipantes = tupla[3],
-                listaParticipantes = tupla[4],
-                nomeCurso = curso_repo.obter_curso_por_id(tupla[1],)
+                nome = tupla[3],
+                quantidadeParticipantes = tupla[4],
+                listaParticipantes = json.loads(tupla[5]),
+                nomeCurso = curso_repo.obter_curso_por_id(tupla[2],)
                 ) for tupla in tuplas ]
         return comunidade
     except Exception as e:
@@ -123,17 +126,17 @@ def obter_comunidade_por_termo_paginado(termo: str, pg_num: int, pg_size: int) -
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute(OBTER_COMUNIDADE_POR_TERMO_PAGINADO, (termo, pg_size, (pg_num - 1) * pg_size))
+        cursor.execute(OBTER_COMUNIDADE_POR_TERMO_PAGINADO, (f"%{termo}%", f"%{termo}%", pg_size, (pg_num - 1) * pg_size))
         tuplas = cursor.fetchall()
         conn.close()
         comunidade = [
             Comunidade (
                 id = tupla[0],
                 idCurso = tupla[1],
-                nome = tupla[2],
-                quantidadeParticipantes = tupla[3],
-                listaParticipantes = tupla[4],
-                nomeCurso = curso_repo.obter_curso_por_id(tupla[1],)
+                nome = tupla[3],
+                quantidadeParticipantes = tupla[4],
+                listaParticipantes = json.loads(tupla[5]),
+                nomeCurso = curso_repo.obter_curso_por_id(tupla[2],)
                 ) for tupla in tuplas ]
         return comunidade
     except Exception as e:
@@ -164,7 +167,7 @@ def obter_quantidade_comunidades_por_nome_curso(nome_curso: str) -> int:
         print(f"Erro ao obter quantidade de comunidades por nome do curso: {e}")
         return 0
 
-def atualizar_comunidade(comunidade: Comunidade, id: int):
+def atualizar_comunidade(id: int, comunidade: Comunidade):
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -173,6 +176,7 @@ def atualizar_comunidade(comunidade: Comunidade, id: int):
             ATUALIZAR_COMUNIDADE,
             (
                 comunidade.idCurso,
+                comunidade.nome,
                 comunidade.quantidadeParticipantes,
                 listaParticipantes,
                 id
