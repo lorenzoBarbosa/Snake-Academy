@@ -24,7 +24,7 @@ SELECT
 FROM mensagem m
 JOIN usuario r ON m.idRemetente = r.id
 JOIN usuario d ON m.idDestinatario = d.id
-ORDER BY id ASC
+ORDER BY m.id ASC
 """
 
 OBTER_MENSAGEM_PAGINADO = """

@@ -162,13 +162,99 @@ class TestCursoRepo:
         curso_db= cursos3[0]
         assert curso_db.id == 9, "O id da primeira página deveria ser 9"
 
+    def test_obter_quantidade_cursos(self, test_db):
+        criar_tabela_usuario()
+        criar_tabela_cliente()
+        criar_tabela_professor()
+        criar_tabela_curso()
+        usuario = Usuario(0, "claudio", "claudio@g", "123", "1234", "12-06-2025")
+        usuario_id = inserir_usuario(usuario)
+        cliente = Cliente(0, "", "", "", "", "", "12-06-2025", True, [], True)
+        cliente_id = inserir_cliente(cliente, usuario_id)
+        professor = Professor(0, "", "", "", "", "", "", True, [], True, ["python"], 12, "12-06-2025")
+        professor_id = inserir_professor(professor, cliente_id)
 
+        for _ in range(5):
+            curso = Curso(0, "Python", professor_id, 10.0, "Desc", "10h", "Bom", "01-01-2025", True)
+            inserir_curso(curso)
 
-
-
-        
-
+        quantidade = obter_quantidade_cursos()
+        assert quantidade == 5, "A quantidade total de cursos deveria ser 5"
     
+    def test_obter_quantidade_cursos_por_nome_professor(self, test_db):
+        criar_tabela_usuario()
+        criar_tabela_cliente()
+        criar_tabela_professor()
+        criar_tabela_curso()
+        usuario = Usuario(0, "João da Silva", "joao@g", "123", "1234", "12-06-2025")
+        usuario_id = inserir_usuario(usuario)
+        cliente = Cliente(0, "", "", "", "", "", "12-06-2025", True, [], True)
+        cliente_id = inserir_cliente(cliente, usuario_id)
+        professor = Professor(0, "João da Silva", "", "", "", "", "", True, [], True, ["python"], 12, "12-06-2025")
+        professor_id = inserir_professor(professor, cliente_id)
+
+        for _ in range(3):
+            curso = Curso(0, "JavaScript", professor_id, 25.0, "Curso", "5h", "Excelente", "02-02-2025", True)
+            inserir_curso(curso)
+
+        qtd = obter_quantidade_cursos_por_nome_professor("João da Silva")
+        assert qtd == 3, "Deveria haver 3 cursos do professor João da Silva"
+
+    def test_atualizar_curso_por_id(self, test_db):
+        # Arrange
+        criar_tabela_usuario()
+        criar_tabela_cliente()
+        criar_tabela_professor()
+        criar_tabela_curso()
+        usuario = Usuario(0, "Maria", "maria@g", "123", "1234", "12-06-2025")
+        usuario_id = inserir_usuario(usuario)
+        cliente = Cliente(0, "", "", "", "", "", "12-06-2025", True, [], True)
+        cliente_id = inserir_cliente(cliente, usuario_id)
+        professor = Professor(0, "Maria", "", "", "", "", "", True, [], True, ["java"], 10, "12-06-2025")
+        professor_id = inserir_professor(professor, cliente_id)
+        curso = Curso(0, "Curso Antigo", professor_id, 100.0, "Antigo", "10h", "Médio", "01-01-2024", True)
+        curso_id = inserir_curso(curso)
+        curso_db = obter_curso_por_id(curso_id)
+        # Act
+        curso_db.nome = "Curso Atualizado"
+        curso_db.statusCurso = False
+        atualizado = atualizar_curso_por_id(curso_db, curso_id)
+        curso_atualizado = obter_curso_por_id(curso_id)
+        assert atualizado is True, "A atualização do curso deveria retornar True"
+        assert curso_atualizado.nome == "Curso Atualizado", "O nome não foi atualizado corretamente"
+        assert curso_atualizado.statusCurso is 0, "O status não foi atualizado corretamente"
+
+    def test_excluir_curso_por_id(self, test_db):
+        criar_tabela_usuario()
+        criar_tabela_cliente()
+        criar_tabela_professor()
+        criar_tabela_curso()
+        usuario = Usuario(0, "Carlos", "carlos@g", "123", "1234", "12-06-2025")
+        usuario_id = inserir_usuario(usuario)
+        cliente = Cliente(0, "", "", "", "", "", "12-06-2025", True, [], True)
+        cliente_id = inserir_cliente(cliente, usuario_id)
+        professor = Professor(0, "Carlos", "", "", "", "", "", True, [], True, ["sql"], 15, "12-06-2025")
+        professor_id = inserir_professor(professor, cliente_id)
+
+        curso = Curso(0, "Curso para Excluir", professor_id, 150.0, "Será excluído", "8h", "Boa", "01-03-2025", True)
+        curso_id = inserir_curso(curso)
+
+        resultado = excluir_curso_por_id(curso_id)
+        curso_excluido = obter_curso_por_id(curso_id)
+
+        assert resultado is True, "A exclusão deveria retornar True"
+        assert curso_excluido is None, "O curso deveria ter sido excluído do banco"
+
+
+
+
+
+
+
+
+                
+
+            
 
 
 
@@ -180,4 +266,4 @@ class TestCursoRepo:
 
 
 
-    
+            
