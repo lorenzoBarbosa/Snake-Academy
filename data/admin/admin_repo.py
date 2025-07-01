@@ -170,7 +170,7 @@ def atualizar_admin_por_id(admin: Admin, id):
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute(ATUALIZAR_ADMIN_POR_ID, (
-        admin["nivelAcesso"],
+        admin.nivelAcesso,
         id))
         conn.commit()
         conn.close()
