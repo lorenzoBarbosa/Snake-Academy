@@ -90,6 +90,7 @@ def obter_rchamado_paginado(pg_num: int, pg_size: int) -> list[respostaChamado]:
             respostaChamado(
                 id=tupla["id"],
                 idAdmin=tupla["idAdmin"],
+                idChamado=tupla["idChamado"],
                 descricao=tupla["descricao"],
                 dataEnvio=tupla["dataEnvio"],
                 horaEnvio=tupla["horaEnvio"],
@@ -108,14 +109,14 @@ def obter_rchamado_por_termo_paginado(termo, pg_num, pg_size) -> List[respostaCh
         termo = f"%{termo}%"
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute(OBTER_RCHAMADO_POR_TERMO_PAGINADO(termo, termo, termo, limit, offset))
+        cursor.execute(OBTER_RCHAMADO_POR_TERMO_PAGINADO,(termo, termo, termo, limit, offset))
         tuplas = cursor.fetchall()
         conn.close()
         rchamados = [
             respostaChamado(
                 id=tupla["id"],
-                idUsuario=tupla["idAdmin"],
-                idChamado=Chamado(id=tupla["idChamado"]),
+                idAdmin=tupla["idAdmin"],
+                idChamado=tupla["idChamado"],
                 descricao=tupla["descricao"],
                 dataEnvio=tupla["dataEnvio"],
                 horaEnvio=tupla["horaEnvio"],
@@ -143,7 +144,7 @@ def obter_quantidade_rchamados_por_nome_admin(nome: str) -> int:
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute(OBTER_QUANTIDADE_RCHAMADOS_POR_NOME_ADMIN(nome))
+        cursor.execute(OBTER_QUANTIDADE_RCHAMADOS_POR_NOME_ADMIN,(nome,))
         quantidade = cursor.fetchone()[0]
         conn.close()
         return quantidade
@@ -151,17 +152,20 @@ def obter_quantidade_rchamados_por_nome_admin(nome: str) -> int:
         print(f"Erro ao obter quantidade por nome do admin: {e}")
         return None
 
-def obter_rchamado_por_nome_admin(nome: str) -> List[respostaChamado]:
+def obter_rchamado_por_nome_admin(nome: str, pg_num: int, pg_size:int) -> List[respostaChamado]:
     try:
+        limit = pg_size
+        offset = (pg_num - 1) * pg_size
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute(OBTER_RCHAMADO_POR_NOME_ADMIN, (nome,))
+        cursor.execute(OBTER_RCHAMADO_POR_NOME_ADMIN, (nome, limit, offset))
         tuplas = cursor.fetchall()
         conn.close()
         rchamados = [
             respostaChamado(
                 id=tupla["id"],
-                idUsuario=tupla["idAdmin"],
+                idAdmin=tupla["idAdmin"],
+                idChamado= tupla["idChamado"],
                 descricao=tupla["descricao"],
                 dataEnvio=tupla["dataEnvio"],
                 horaEnvio=tupla["horaEnvio"],
@@ -183,7 +187,8 @@ def obter_rchamado_por_id_chamado(id: int) -> List[respostaChamado]:
         rchamados = [
             respostaChamado(
                 id=tupla["id"],
-                idUsuario=tupla["idAdmin"],
+                idAdmin=tupla["idAdmin"],
+                idChamado = tupla["idChamado"],
                 descricao=tupla["descricao"],
                 dataEnvio=tupla["dataEnvio"],
                 horaEnvio=tupla["horaEnvio"],
