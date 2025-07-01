@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Optional
 from data.curso.curso_model import Curso
 
 
@@ -8,8 +9,4 @@ class Comunidade:
     nome: str
     quantidadeParticipantes: int
     listaParticipantes: list
-
-@dataclass
-class ComunidadeCompleto:
-    comunidade: Comunidade
-    nomeCurso: str
+    nomeCurso = Optional[Curso] = None
