@@ -42,19 +42,17 @@ def obter_comentario_curso() -> list[comentarioCurso]:
         conn.close()
         comentarios = [
         comentarioCurso(
-            id=tupla[0],
-            idAdmin=tupla[1],
-            nomeAdmin=tupla[2],
-            idMatricula=tupla[3],
-            nomeMatricula=tupla[4],
-            conteudo=tupla[5],
-            dataEnvio=tupla[6],
-            dataSupervisaoAdmin=tupla[7]
+            id=tupla["id"],
+            idAdmin=tupla["idAdmin"],
+            idMatricula=tupla["idMatricula"],
+            conteudo=tupla["conteudo"],
+            dataEnvio=tupla["dataEnvio"],
+            dataSupervisaoAdmin=tupla["dataSupervisaoAdmin"]
         ) for tupla in tuplas]
         return comentarios
     except Exception as e:
         print(f"Erro ao obter comentário de curso: {e}")
-        return []
+        return None
 
 def obter_comentario_curso_por_id(id: int) -> comentarioCurso:
     try:
@@ -65,14 +63,12 @@ def obter_comentario_curso_por_id(id: int) -> comentarioCurso:
         conn.close()
         if tupla:
             return comentarioCurso(
-            id=tupla[0],
-            idAdmin=tupla[1],
-            nomeAdmin=tupla[2],
-            idMatricula=tupla[3],
-            nomeMatricula=tupla[4],
-            conteudo=tupla[5],
-            dataEnvio=tupla[6],
-            dataSupervisaoAdmin=tupla[7]
+            id=tupla["id"],
+            idAdmin=tupla["idAdmin"],
+            idMatricula=tupla["idMatricula"],
+            conteudo=tupla["conteudo"],
+            dataEnvio=tupla["dataEnvio"],
+            dataSupervisaoAdmin=tupla["dataSupervisaoAdmin"]
         )
     except Exception as e:
         print(f"Erro ao obter comentário de curso por id: {e}")
@@ -86,20 +82,18 @@ def obter_comentario_curso_por_nome_admin(nome: str, limite: int, offset: int) -
         conn.close()
         comentarios = [
             comentarioCurso(
-                id=tupla[0],
-                idAdmin=tupla[1],
-                nomeAdmin=tupla[2],
-                idMatricula=tupla[3],
-                nomeMatricula=tupla[4],
-                conteudo=tupla[5],
-                dataEnvio=tupla[6],
-                dataSupervisaoAdmin=tupla[7]
+                id=tupla["id"],
+                idAdmin=tupla["idAdmin"],
+                idMatricula=tupla["idMatricula"],
+                conteudo=tupla["conteudo"],
+                dataEnvio=tupla["dataEnvio"],
+                dataSupervisaoAdmin=tupla["dataSupervisaoAdmin"]
             ) for tupla in tuplas
         ]
         return comentarios
     except Exception as e:
         print(f"Erro ao obter comentário de curso por nome admin: {e}")
-        return []
+        return None
 
 def excluir_comentario_curso_por_id(id: int):
     try:
@@ -120,13 +114,12 @@ def obter_comentario_curso_por_id_chamado(id_chamado: int, limite: int, offset: 
         conn.close()
         comentarios = [
             comentarioCurso(
-                id=tupla[0],
-                idAdmin=tupla[1],
-                idMatricula=tupla[2],
-                conteudo=tupla[3],
-                dataEnvio=tupla[4],
-                dataSupervisaoAdmin=tupla[5],
-                nomeAdmin=tupla[6]
+                id=tupla["id"],
+                idAdmin=tupla["idAdmin"],
+                idMatricula=tupla["idMatricula"],
+                conteudo=tupla["conteudo"],
+                dataEnvio=tupla["dataEnvio"],
+                dataSupervisaoAdmin=tupla["dataSupervisaoAdmin"]
             ) for tupla in tuplas
             ]
         return comentarios
@@ -142,13 +135,12 @@ def obter_comentario_curso_paginado(limite: int, offset: int) -> list[comentario
         conn.close()
         comentarios = [
             comentarioCurso(
-                id=tupla[0],
-                idAdmin=tupla[1],
-                idMatricula=tupla[2],
-                conteudo=tupla[3],
-                dataEnvio=tupla[4],
-                dataSupervisaoAdmin=tupla[5],
-                nomeAdmin=tupla[6]
+                id=tupla["id"],
+                idAdmin=tupla["idAdmin"],
+                idMatricula=tupla["idMatricula"],
+                conteudo=tupla["idMatricula"],
+                dataEnvio=tupla["dataEnvio"],
+                dataSupervisaoAdmin=tupla["dataSupervisaoAdm"],
             ) for tupla in tuplas
             ]
         return comentarios

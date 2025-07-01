@@ -12,6 +12,7 @@ class TestProfessorRepo:
         criar_tabela_cliente()
         # Act
         resultado = criar_tabela_professor()
+        
         # Assert
         assert resultado is True, "A tabela não foi criada"
 

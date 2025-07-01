@@ -18,19 +18,21 @@ VALUES (?, ?, ?, ?, ?)
 
 OBTER_COMENTARIO_CURSO = """
 SELECT 
-    cc.id, cc.idAdmin, a.nome as nomeAdmin, cc.idMatricula, u.nome as nomeMatricula, cc.conteudo, cc.dataEnvio, cc.dataSupervisaoAdmin 
+    cc.id, cc.idAdmin, uu.nome as nomeAdmin, cc.idMatricula, u.nome as nomeMatricula, cc.conteudo, cc.dataEnvio, cc.dataSupervisaoAdmin 
 FROM comentarioCurso cc
 JOIN admin a ON cc.idAdmin = a.id
+JOIN usuario uu ON a.id = uu.id
 JOIN matricula m ON cc.idMatricula = m.id
 JOIN cliente c ON m.idCliente = c.id
 JOIN usuario u ON c.id = u.id
-ORDER BY id ASC
+ORDER BY cc.id ASC
 """
 OBTER_COMENTARIO_CURSO_POR_ID = """
 SELECT 
-    cc.id, cc.idAdmin, a.nome as nomeAdmin, cc.idMatricula, u.nome as nomeMatricula, cc.conteudo, cc.dataEnvio, cc.dataSupervisaoAdmin  
+    cc.id, cc.idAdmin, uu.nome as nomeAdmin, cc.idMatricula, u.nome as nomeMatricula, cc.conteudo, cc.dataEnvio, cc.dataSupervisaoAdmin  
 FROM comentarioCurso cc
 JOIN admin a ON cc.idAdmin = a.id
+JOIN usuario uu ON a.id = uu.id
 JOIN matricula m ON cc.idMatricula = m.id
 JOIN cliente c ON m.idCliente = c.id
 JOIN usuario u ON c.id = u.id
@@ -40,13 +42,14 @@ ORDER BY cc.id ASC
 
 OBTER_COMENTARIO_CURSO_POR_NOME_ADMIN = """
 SELECT 
-    cc.id, cc.idAdmin, a.nome as nomeAdmin, cc.idMatricula, u.nome as nomeMatricula, cc.conteudo, cc.dataEnvio, cc.dataSupervisaoAdmin  
+    cc.id, cc.idAdmin, uu.nome as nomeAdmin, cc.idMatricula, u.nome as nomeMatricula, cc.conteudo, cc.dataEnvio, cc.dataSupervisaoAdmin  
 FROM comentarioCurso cc
 JOIN admin a ON cc.idAdmin = a.id
+JOIN usuario uu ON a.id = uu.id
 JOIN matricula m ON cc.idMatricula = m.id
 JOIN cliente c ON m.idCliente = c.id
 JOIN usuario u ON c.id = u.id
-WHERE a.nome = ?
+WHERE uu.nome = ?
 ORDER BY cc.id ASC
 LIMIT ? OFFSET ?
 """
@@ -59,43 +62,48 @@ OBTER_QUANTIDADE_COMENTARIO_CURSO_POR_NOME_ADMIN = """
 SELECT COUNT(*)
 FROM comentarioCurso cc
 JOIN admin a ON cc.idAdmin = a.id
-WHERE a.nome LIKE ?
+JOIN usuario uu ON a.id = uu.id
+WHERE uu.nome LIKE ?
 """
 
 OBTER_COMENTARIO_CURSO_PAGINADO = """
 SELECT
-    cc.id, cc.idAdmin, cc.idCMatricula, cc.conteudo, cc.dataEnvio, cc.horaEnvio, a.nome as nomeAdmin
+    cc.id, cc.idAdmin, cc.idCMatricula, cc.conteudo, cc.dataEnvio, cc.horaEnvio, uu.nome as nomeAdmin
 FROM comentarioCurso cc
 JOIN admin a ON cc.idAdmin = a.id
+JOIN usuario uu ON a.id = uu.id
 ORDER BY cc.id_Admin
 LIMIT ? OFFSET ?
 """
 
 OBTER_COMENTARIO_CURSO_POR_TERMO_PAGINADO = """
 SELECT
-   cc.id,cc.idAdmin, cc.idcchamado, cc.desccriccao, cc.dataEnvio, cc.horaEnvio, a.nome as nomeAdmin
+   cc.id,cc.idAdmin, cc.idcchamado, cc.desccriccao, cc.dataEnvio, cc.horaEnvio, uu.nome as nomeAdmin
 FROM comentarioCurso cc
 JOIN admin a ON cc.idAdmin = a.id
-WHERE cc.id LIKE ? OR a.nome LIKE ? or cc.conteudo LIKE ?
+JOIN usuario uu ON a.id = uu.id
+WHERE cc.id LIKE ? OR uu.nome LIKE ? or cc.conteudo LIKE ?
 ORDER BY cc.id_Admin
 LIMIT ? OFFSET ?
 """
 
 OBTER_COMENTARIO_CURSO_POR_ID = """
 SELECT 
-    cc.id, cc.idAdmin, cc.idMatricula, cc.conteudo, cc.dataEnvio, cc.dataSupervisaoAdmin, a.nome as nomeAdmin
+    cc.id, cc.idAdmin, cc.idMatricula, cc.conteudo, cc.dataEnvio, cc.dataSupervisaoAdmin, uu.nome as nomeAdmin
 FROM comentarioCurso as cc
 JOIN admin a ON cc.idAdmin = a.id
-WHERE id = ?
-ORDER BY id ASC
+JOIN usuario uu ON a.id = uu.id
+WHERE cc.id = ?
+ORDER BY cc.id ASC
 """
 
 OBTER_COMENTARIO_CURSO_POR_NOME_ADMIN = """
 SELECT
-    cc.id, cc.idAdmin, cc.idMatricula, cc.coneteudo, cc.dataEnvio, cc.dataSupervisaoAdmin, a.nome as nomeAdmin
+    cc.id, cc.idAdmin, cc.idMatricula, cc.coneteudo, cc.dataEnvio, cc.dataSupervisaoAdmin, uu.nome as nomeAdmin
 FROM comentarioCurso cc
 JOIN admin a ON cc.idAdmin = a.id
-WHERE a.nome = ?
+JOIN usuario uu ON a.id = uu.id
+WHERE uu.nome = ?
 ORDER BY cc.idAdmin
 LIMIT ? OFFSET ?
 """
@@ -113,14 +121,15 @@ OBTER_QUANTIDADE_COMENTARIO_CURSO_POR_NOME_ADMIN= """
 SELECT COUNT(*)
 FROM respostaChamado c
 JOIN admin a ON c.idUsuario = a.id
-WHERE a.nome LIKE ? 
+WHERE uu.nome LIKE ? 
 """
 
 OBTER_COMENTARIO_CURSO_POR_ID_CHAMADO= """
 SELECT 
-    cc.id, cc.idAdmin, cc.idChamado, cc.conteudo, cc.dataEnvio, c.dataSupervisaoAdmin, a.nome as nomeAdmin
+    cc.id, cc.idAdmin, cc.idChamado, cc.conteudo, cc.dataEnvio, c.dataSupervisaoAdmin, uu.nome as nomeAdmin
 FROM comentarioCurso cc
 JOIN admin a ON cc.idAdmin = a.id
+JOIN usuario uu ON a.id = uu.id
 WHERE cc.idChamado = ?
 ORDER BY c.id_admin
 LIMIT ? OFFSET ?
