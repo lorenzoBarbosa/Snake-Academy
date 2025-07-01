@@ -355,7 +355,7 @@ class TestAdminRepo:
             usuario_id = inserir_usuario(usuario)
 
             admin = Admin(
-                id=usuario_id,
+                id=usuario.id,
                 nome=usuario.nome,
                 email=usuario.email,
                 senha=usuario.senha,
@@ -364,7 +364,7 @@ class TestAdminRepo:
                 nivelAcesso=1
             )
 
-            inserir_admin(admin)
+            inserir_admin(admin, usuario_id)
 
         # Act
         quantidade = obter_quantidade_admins()
