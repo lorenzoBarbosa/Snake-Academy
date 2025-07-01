@@ -9,7 +9,7 @@ from data.professor.professor_repo import *
 from data.usuario.usuario_repo import *
 
 class TestAulaRepo:
-    def test_criar_tabela_aula():
+    def test_criar_tabela_aula(self, test_db):
         #Arrange
         criar_tabela_usuario()
         criar_tabela_cliente()
@@ -21,8 +21,8 @@ class TestAulaRepo:
         # Assert
         assert resultado == True, "A criação de tabela deveria retornar True"
     
-    def test_inserir_aula():
-        criar_tabela_usuario()
+    def test_inserir_aula(self, test_db):
+        criar_tabela_usuario() 
         criar_tabela_cliente()
         criar_tabela_professor()
         criar_tabela_curso()
@@ -51,7 +51,7 @@ class TestAulaRepo:
         assert aula_db.ordem == 0, "A ordem da aula não esta certa"
         assert aula_db.dataDisponibilidade == "12-06-2025", "A ordem da aula não esta certa"
 
-    def test_obter_todas_aulas():
+    def test_obter_todas_aulas(self, test_db):
         # Arrange
         criar_tabela_usuario()
         criar_tabela_cliente()
@@ -76,11 +76,8 @@ class TestAulaRepo:
         aulas = obter_todas_aulas()
         #Assert
         assert len(aulas) == 10, "Deveria haver 3 aulas no banco"
-    
-    def test_obter_aula_por_id(self, test_db):
-        pass
 
-    def test_obter_aula_por_titulo():
+    def test_obter_aula_por_titulo(self, test_db):
         criar_tabela_usuario()
         criar_tabela_cliente()
         criar_tabela_professor()
@@ -103,7 +100,7 @@ class TestAulaRepo:
         aulas = obter_aula_por_titulo("Especial", 10, 0)
         assert len(aulas) == 1, "Deveria haver 1 aula com título contendo 'Especial'"
 
-    def test_obter_aula_paginada_por_modulo():
+    def test_obter_aula_paginada_por_modulo(self, test_db):
         criar_tabela_usuario()
         criar_tabela_cliente()
         criar_tabela_professor()
@@ -128,7 +125,7 @@ class TestAulaRepo:
         aulas = obter_aula_paginada_por_modulo(modulo_id, 3, 0)
         assert len(aulas) == 3, "Deveria retornar 3 aulas na primeira página"
 
-    def test_obter_quantidade_aulas():
+    def test_obter_quantidade_aulas(self, test_db):
         criar_tabela_usuario()
         criar_tabela_cliente()
         criar_tabela_professor()
@@ -153,7 +150,7 @@ class TestAulaRepo:
         qtd = obter_quantidade_aulas()
         assert qtd == 4, "Deveria haver 4 aulas no total"
 
-    def test_obter_quantidade_aulas_por_modulo():
+    def test_obter_quantidade_aulas_por_modulo(self, test_db):
         criar_tabela_usuario()
         criar_tabela_cliente()
         criar_tabela_professor()
@@ -178,7 +175,7 @@ class TestAulaRepo:
         qtd = obter_quantidade_aulas_por_modulo(modulo_id)
         assert qtd == 2, "Deveria haver 2 aulas neste módulo"
 
-    def test_atualizar_aula_por_id():
+    def test_atualizar_aula_por_id(self, test_db):
         criar_tabela_usuario()
         criar_tabela_cliente()
         criar_tabela_professor()
@@ -206,7 +203,7 @@ class TestAulaRepo:
         assert aula_db.titulo == "Atualizada", "Título não foi atualizado"
         assert aula_db.duracaoAula == "12:00", "Duração não foi atualizada"
 
-    def test_excluir_aula_por_id():
+    def test_excluir_aula_por_id(self, test_db):
         criar_tabela_usuario()
         criar_tabela_cliente()
         criar_tabela_professor()
