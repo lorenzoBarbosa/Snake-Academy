@@ -239,8 +239,8 @@ class TestAdminRepo:
             telefone="777777777",
             dataCriacao="2023-05-05"
         )
-        usuario_inserido = inserir_usuario(usuario)
-        usuario_db = obter_usuario_por_id(usuario_inserido)
+        usuario_id = inserir_usuario(usuario)
+        usuario_db = obter_usuario_por_id(usuario_id)
 
         admin = Admin(
             id=usuario_db.id,
@@ -260,7 +260,7 @@ class TestAdminRepo:
         # Assert
         assert resultado is True, "O admin não foi excluído"
         admin_excluido = obter_admin_por_email(email)
-        assert admin_excluido is None, "O admin excluído deveria ser None"
+        assert admin_excluido is None, "O admin com esse email excluído deveria ser None ou seja não existir mais"
 
 
     def test_obter_admin_paginado(self, test_db):
@@ -371,3 +371,86 @@ class TestAdminRepo:
 
         # Assert
         assert quantidade == 3, "A quantidade de admins deveria ser 3"
+
+
+    def test_atualizar_admin_por_id(self, test_db):
+        # Arrange
+        criar_tabela_usuario()
+        criar_tabela_admin()
+
+        usuario = Usuario(
+            id=0,
+            nome="Admin Teste",
+            email="admin@example.com",
+            senha="senha123",
+            telefone="11999999999",
+            dataCriacao="2025-07-01"
+        )
+        usuario_id = inserir_usuario(usuario)
+
+        admin = Admin(
+            id=usuario_id,
+            nome=usuario.nome,
+            email=usuario.email,
+            senha=usuario.senha,
+            telefone=usuario.telefone,
+            dataCriacao=usuario.dataCriacao,
+            nivelAcesso=1
+        )
+        inserir_admin(admin, usuario_id)
+
+        # Act
+        admin_atualizado = Admin(
+            id=usuario_id,
+            nome=admin.nome,
+            email=admin.email,
+            senha=admin.senha,
+            telefone=admin.telefone,
+            dataCriacao=admin.dataCriacao,
+            nivelAcesso=3  # novo nível de acesso atualizado
+        )
+
+        atualizar_admin_por_id(admin_atualizado, usuario_id) #atualiza o admin pelo id
+
+        admin_buscado = obter_admin_por_id(usuario_id) #busca na BD esse admin atualizado pelo id
+
+        # Assert
+        assert admin_buscado.nivelAcesso == 3, "O nível de acesso do admin deveria ser atualizado para 5"
+
+
+    def test_excluir_admin_por_id(self, test_db):
+        # Arrange
+        criar_tabela_usuario()
+        criar_tabela_admin()
+
+        usuario = Usuario(
+            id=0,
+            nome="Admin Deletável",
+            email="deletavel@example.com",
+            senha="senha123",
+            telefone="11999999998",
+            dataCriacao="2025-07-01"
+        )
+        usuario_id = inserir_usuario(usuario)
+
+        admin = Admin(
+            id=usuario_id,
+            nome=usuario.nome,
+            email=usuario.email,
+            senha=usuario.senha,
+            telefone=usuario.telefone,
+            dataCriacao=usuario.dataCriacao,
+            nivelAcesso=1
+        )
+        inserir_admin(admin, usuario_id)
+
+        # Garantir que o admin está lá
+        admin_existente = obter_admin_por_id(usuario_id)
+        assert admin_existente is not None, "Admin deveria estar presente antes da exclusão"
+
+        # Act
+        excluir_admin_por_id(usuario_id)
+
+        # Assert
+        admin_excluido = obter_admin_por_id(usuario_id)
+        assert admin_excluido is None, "O admin deveria ter sido removido do banco de dados"
