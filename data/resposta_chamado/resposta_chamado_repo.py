@@ -1,5 +1,6 @@
 from typing import Optional, List
 from data.admin.admin_model import Admin
+from data.admin.admin_repo import obter_admin_por_id
 from data.chamado.chamado_model import Chamado
 from data.resposta_chamado.resposta_chamado_model import respostaChamado
 from data.resposta_chamado.resposta_chamado_sql import *
@@ -71,7 +72,8 @@ def obter_rchamado_por_id(id: int) -> Optional[respostaChamado]:
                 descricao=tupla["descricao"],
                 dataEnvio=tupla["dataEnvio"],
                 horaEnvio=tupla["horaEnvio"],
-                visualizacao=tupla["visualizacao"]
+                visualizacao=tupla["visualizacao"],
+                admin = obter_admin_por_id(tupla["idAdmin"])
             )
     except Exception as e:
         print(f"Erro ao obter rchamado por ID: {e}")
@@ -94,7 +96,8 @@ def obter_rchamado_paginado(pg_num: int, pg_size: int) -> list[respostaChamado]:
                 descricao=tupla["descricao"],
                 dataEnvio=tupla["dataEnvio"],
                 horaEnvio=tupla["horaEnvio"],
-                visualizacao=tupla["visualizacao"]
+                visualizacao=tupla["visualizacao"],
+                admin = obter_admin_por_id(tupla["idAdmin"])
             ) for tupla in tuplas
         ]
         return rchamados
@@ -120,7 +123,8 @@ def obter_rchamado_por_termo_paginado(termo, pg_num, pg_size) -> List[respostaCh
                 descricao=tupla["descricao"],
                 dataEnvio=tupla["dataEnvio"],
                 horaEnvio=tupla["horaEnvio"],
-                visualizacao=tupla["visualizacao"]
+                visualizacao=tupla["visualizacao"],
+                admin = obter_admin_por_id(tupla["idAdmin"])
             ) for tupla in tuplas
         ]
         return rchamados
@@ -169,7 +173,8 @@ def obter_rchamado_por_nome_admin(nome: str, pg_num: int, pg_size:int) -> List[r
                 descricao=tupla["descricao"],
                 dataEnvio=tupla["dataEnvio"],
                 horaEnvio=tupla["horaEnvio"],
-                visualizacao=tupla["visualizacao"]
+                visualizacao=tupla["visualizacao"],
+                admin = obter_admin_por_id(tupla["idAdmin"])
             ) for tupla in tuplas
         ]
         return rchamados
@@ -192,7 +197,8 @@ def obter_rchamado_por_id_chamado(id: int) -> List[respostaChamado]:
                 descricao=tupla["descricao"],
                 dataEnvio=tupla["dataEnvio"],
                 horaEnvio=tupla["horaEnvio"],
-                visualizacao=tupla["visualizacao"]
+                visualizacao=tupla["visualizacao"],
+                admin = obter_admin_por_id(tupla["idAdmin"]),
             ) for tupla in tuplas
         ]
         return rchamados
