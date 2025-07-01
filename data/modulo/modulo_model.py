@@ -1,4 +1,7 @@
 from dataclasses import dataclass
+from typing import Optional
+
+from data.curso.curso_model import Curso
 
 
 @dataclass
@@ -9,3 +12,4 @@ class Modulo():
     descricaoModulo: str
     listaAulas: list
     listaExercicios: list
+    curso: Optional[Curso] = None
