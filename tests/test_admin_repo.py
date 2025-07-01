@@ -352,15 +352,15 @@ class TestAdminRepo:
                 telefone=f"1199999999{i}",
                 dataCriacao="2025-07-01"
             )
-            usuario_inserido = inserir_usuario(usuario)
-            
+            usuario_id = inserir_usuario(usuario)
+
             admin = Admin(
-                id=usuario_inserido.id,
-                nome=usuario_inserido.nome,
-                email=usuario_inserido.email,
-                senha=usuario_inserido.senha,
-                cpf=usuario_inserido.telefone,  # Adaptado conforme necessário
-                ra=f"RA20250{i}",
+                id=usuario_id,
+                nome=usuario.nome,
+                email=usuario.email,
+                senha=usuario.senha,
+                telefone=usuario.telefone,
+                dataCriacao= usuario.dataCriacao,
                 nivelAcesso=1
             )
 
