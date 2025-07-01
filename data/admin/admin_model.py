@@ -4,6 +4,6 @@ from data.usuario.usuario_model import Usuario
 
 
 @dataclass
-class Admin():
+class Admin(Usuario):
     nivelAcesso: int
-    usuario: Optional[Usuario] = None
+    

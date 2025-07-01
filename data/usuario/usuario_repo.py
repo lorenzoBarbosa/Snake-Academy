@@ -149,7 +149,7 @@ def atualizar_usuario_por_email(usuario: Usuario) -> bool:
         print(f"Erro ao atualizar usuário por email: {e}")
         return False
 
-def excluir_usuario_por_email(email: str):
+def excluir_usuario_por_email(email: str) ->bool:
     try:
         conn = get_connection()
         cursor = conn.cursor()

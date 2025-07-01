@@ -97,11 +97,10 @@ SELECT
     m.dataMatricula
 FROM matricula m
 JOIN cliente cl ON m.idCliente = cl.id
-JOIN usuario u ON cl.id = u.id
+JOIN usuario u ON cl.id = u.id  
 JOIN curso c ON m.idCurso = c.id
-WHERE cl.nome LIKE ?
+WHERE u.nome LIKE ?
 ORDER BY m.id
-LIMIT ? OFFSET ?
 """
 
 OBTER_MATRICULA_POR_CURSO = """
@@ -124,7 +123,6 @@ JOIN usuario u ON cl.id = u.id
 JOIN curso c ON m.idCurso = c.id
 WHERE c.nome LIKE ?
 ORDER BY m.id
-LIMIT ? OFFSET ?
 """
 
 OBTER_MATRICULA_POR_CLIENTE = """
@@ -145,18 +143,17 @@ FROM matricula m
 JOIN cliente cl ON m.idCliente = cl.id
 JOIN usuario u ON cl.id = u.id
 JOIN curso c ON m.idCurso = c.id
-WHERE idCliente LIKE ?
+WHERE cl.id = ?
 ORDER BY m.id
-LIMIT ? OFFSET ?
 """
 
 OBTER_QUANTIDADE_MATRICULA_POR_CURSO = """
 SELECT COUNT(*)
 FROM matricula m
 JOIN curso c ON m.idCurso = c.id
-JOIN usuario u ON cl.id = u.id
 WHERE c.nome LIKE ?
 """
+
 
 OBTER_QUANTIDADE_MATRICULA_POR_CLIENTE = """
 SELECT COUNT(*)
