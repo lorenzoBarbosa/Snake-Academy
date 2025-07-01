@@ -9,4 +9,4 @@ class Comunidade:
     nome: str
     quantidadeParticipantes: int
     listaParticipantes: list
-    nomeCurso = Optional[Curso] = None
+    nomeCurso: Optional[Curso] = None
