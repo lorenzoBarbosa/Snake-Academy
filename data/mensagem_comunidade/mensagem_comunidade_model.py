@@ -7,8 +7,8 @@ from data.matricula.matricula_model import Matricula
 @dataclass
 class MensagemComunidade():
     id: int
-    idMatricula: Matricula
-    idComunidade: Comunidade
+    idMatricula: int
+    idComunidade: int
     conteudo: str
     dataEnvio: str
     horaEnvio: str
