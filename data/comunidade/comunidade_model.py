@@ -6,7 +6,7 @@ from data.curso.curso_model import Curso
 @dataclass
 class Comunidade:
     id: int
-    idCurso: Curso
+    idCurso: int
     nome: str
     quantidadeParticipantes: int
     listaParticipantes: list

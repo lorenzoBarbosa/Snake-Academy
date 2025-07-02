@@ -262,3 +262,28 @@ def excluir_matricula(id: int):
     except Exception as e:
         print(f"Erro ao excluir matrícula: {e}")
         return False
+
+    
+#função extra porque eu preciso do id de matrícula que aqui retorna bool:
+
+def inserir_matricula_pegar_id(matricula: Matricula) -> Optional[int]:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            INSERIR_MATRICULA,
+            (
+            matricula.idCliente,
+            matricula.idCurso,
+            matricula.statusMatricula,
+            matricula.desempenho,
+            matricula.frequencia,
+            matricula.dataMatricula
+            )
+        )
+        conn.commit()
+        conn.close()
+        return cursor.lastrowid
+    except Exception as e:
+        print(f"Erro ao inserir matrícula: {e}")
+        return False

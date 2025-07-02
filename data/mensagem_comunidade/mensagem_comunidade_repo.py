@@ -25,7 +25,8 @@ def inserir_mensagem_comunidade(mensagem_comunidade: MensagemComunidade) ->Optio
             mensagem_comunidade.idComunidade,
             mensagem_comunidade.conteudo,
             mensagem_comunidade.dataEnvio,
-            mensagem_comunidade.horaEnvio
+            mensagem_comunidade.horaEnvio,
+            mensagem_comunidade.visualizacao
         ))
         conn.commit()
         conn.close()
@@ -45,14 +46,13 @@ def obter_mensagens_comunidade() -> list[MensagemComunidade]:
             MensagemComunidade(
                 id=tupla[0],
                 idMatricula=tupla[1],
-                nomeMatricula=tupla[2],
-                idComunidade=tupla[3],
-                nomeComunidade=tupla[4],
-                conteudo=tupla[5],
-                dataEnvio=tupla[6],
-                horaEnvio=tupla[7]
-            ) for tupla in tuplas
-        ]
+                idComunidade=tupla[2],
+                conteudo=tupla[3],
+                dataEnvio=tupla[4],
+                horaEnvio=tupla[5],
+                visualizacao= bool(tupla[6])
+            )for tupla in tuplas
+            ]
         return mensagens_comunidade
     except Exception as e:
         print(f"Erro em obter mensagem comunidade")
@@ -70,12 +70,11 @@ def obter_mensagem_comunidade_paginado(pg_num: int, pg_size: int) ->List[Mensage
             MensagemComunidade(
                 id=tupla[0],
                 idMatricula=tupla[1],
-                nomeMatricula=tupla[2],
-                idComunidade=tupla[3],
-                nomeComunidade=tupla[4],
-                conteudo=tupla[5],
-                dataEnvio=tupla[6],
-                horaEnvio=tupla[7]
+                idComunidade=tupla[2],
+                conteudo=tupla[3],
+                dataEnvio=tupla[4],
+                horaEnvio=tupla[5],
+                visualizacao=bool(tupla[6])
             ) for tupla in tuplas
         ]
         conn.close()
@@ -109,7 +108,7 @@ def obter_mensagem_comunidade_por_termo_paginado(termo: str, pg_num: int, pg_siz
     except Exception as e:
         print(f"Erro ao obter mensagem por termo paginado {e}")
 
-def obter_mensagem_comunidade_por_id(id: int) ->MensagemComunidade:
+def obter_mensagem_comunidade_por_id(id: int) ->Optional[MensagemComunidade]:
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -120,12 +119,11 @@ def obter_mensagem_comunidade_por_id(id: int) ->MensagemComunidade:
             mensagem_comunidade = MensagemComunidade(
                 id=tupla[0],
                 idMatricula=tupla[1],
-                nomeMatricula=tupla[2],
-                idComunidade=tupla[3],
-                nomeComunidade=tupla[4],
-                conteudo=tupla[5],
-                dataEnvio=tupla[6],
-                horaEnvio=tupla[7]
+                idComunidade=tupla[2],
+                conteudo=tupla[3],
+                dataEnvio=tupla[4],
+                horaEnvio=tupla[5],
+                visualizacao=tupla[6]
             )
             return mensagem_comunidade
         return None
