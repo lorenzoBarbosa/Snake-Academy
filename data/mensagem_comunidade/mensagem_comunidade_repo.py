@@ -95,12 +95,11 @@ def obter_mensagem_comunidade_por_termo_paginado(termo: str, pg_num: int, pg_siz
             MensagemComunidade(
                 id=tupla[0],
                 idMatricula=tupla[1],
-                nomeMatricula=tupla[2],
-                idComunidade=tupla[3],
-                nomeComunidade=tupla[4],
-                conteudo=tupla[5],
-                dataEnvio=tupla[6],
-                horaEnvio=tupla[7]
+                idComunidade=tupla[2],
+                conteudo=tupla[3],
+                dataEnvio=tupla[4],
+                horaEnvio=tupla[5],
+                visualizacao=bool(tupla[6])
             ) for tupla in tuplas
         ]
         conn.close()
@@ -123,7 +122,7 @@ def obter_mensagem_comunidade_por_id(id: int) ->Optional[MensagemComunidade]:
                 conteudo=tupla[3],
                 dataEnvio=tupla[4],
                 horaEnvio=tupla[5],
-                visualizacao=tupla[6]
+                visualizacao=bool(tupla[6])
             )
             return mensagem_comunidade
         return None
@@ -143,12 +142,11 @@ def obter_mensagem_comunidade_por_matricula(nome_matricula: str, pg_num: int, pg
             MensagemComunidade(
                 id=tupla[0],
                 idMatricula=tupla[1],
-                nomeMatricula=tupla[2],
-                idComunidade=tupla[3],
-                nomeComunidade=tupla[4],
-                conteudo=tupla[5],
-                dataEnvio=tupla[6],
-                horaEnvio=tupla[7]
+                idComunidade=tupla[2],
+                conteudo=tupla[3],
+                dataEnvio=tupla[4],
+                horaEnvio=tupla[5],
+                visualizacao=bool(tupla[6])
             ) for tupla in tuplas
         ]
         return mensagens_comunidade
@@ -169,32 +167,36 @@ def obter_mensagem_comunidade_por_comunidade(nome_comunidade: str, pg_num: int, 
             MensagemComunidade(
                 id=tupla[0],
                 idMatricula=tupla[1],
-                nomeMatricula=tupla[2],
-                idComunidade=tupla[3],
-                nomeComunidade=tupla[4],
-                conteudo=tupla[5],
-                dataEnvio=tupla[6],
-                horaEnvio=tupla[7]
+                idComunidade=tupla[2],
+                conteudo=tupla[3],
+                dataEnvio=tupla[4],
+                horaEnvio=tupla[5],
+                visualizacao=bool(tupla[6])
             ) for tupla in tuplas
         ]
         return mensagens_comunidade
     except Exception as e:
         print(f"Erro ao obter mensagem comunidade por comunidade {e}")
 
-def atualizar_mensagem_comunidade(mensagem_comunidade: MensagemComunidade, id: int):
+def atualizar_mensagem_comunidade(mensagem_comunidade: MensagemComunidade, id: int) ->bool:
     try:
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute(ATUALIZAR_MENSAGEM_COMUNIDADE, (
-            mensagem_comunidade["conteudo"],
-            mensagem_comunidade["dataEnvio"],
-            mensagem_comunidade["horaEnvio"],
+            mensagem_comunidade.idMatricula,
+            mensagem_comunidade.idComunidade,
+            mensagem_comunidade.conteudo,
+            mensagem_comunidade.dataEnvio,
+            mensagem_comunidade.horaEnvio,
+            mensagem_comunidade.visualizacao,
             id
         ))
         conn.commit()
         conn.close()
+        return(cursor.rowcount > 0)
     except Exception as e:
-        print(f"Erro ao atualizar mensagem comunidade {e}")
+        print(f"Erro ao atualizar mensagem comunidade: {e}")
+
 
 def excluir_mensagem_comunidade(id: int):
     try:
