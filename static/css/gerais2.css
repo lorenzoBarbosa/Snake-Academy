@@ -1,0 +1,84 @@
+/*css cadastro*/
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+
+.topo {
+    background-color: #5C22AD;
+    height: 20px;
+    width: 100%;
+}
+
+.illustration img {
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-control {
+    border-radius: 10px;
+}
+
+.botao-login {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-purple {
+    background-color: #6a0dad;
+    color: white;
+    border-radius: 10px;
+}
+
+.btn-purple:hover {
+    background-color: #5902a6;
+}
+
+footer {
+    background-color: #000;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+.social-icons img {
+    width: 40px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.cadastro {
+    background-color: #5C22AD;
+    color: #FFFFFF;
+    border-radius: 20px;
+    border: 1px solid #5C22AD;
+    font-weight: bold;
+    width: 120px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 400px;
+}
