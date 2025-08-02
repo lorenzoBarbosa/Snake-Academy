@@ -168,27 +168,31 @@ html,body
     font-weight: bold;
     border-radius: 0.3em;
 }
-.carousel-container {
+
+.container-curso {
     display: flex;
     justify-content: space-between;
     align-items: right;
-    height: 70vh;
     position: relative;
+    padding: 10px;
+    height: 100vh;
 }
-.carousel-container > div:first-child {
+.container-curso > div:first-child {
     text-align: left;
     color: white;
     max-width: 400px;
     padding-left: 20px;
 }
-.carousel.slide {
-    width: 30vw;
-    height: 30vh;
-}
 .carousel-inner {
     width: 100%;
     height: 100%;
 }
+
+.carrosel-curso{
+     width: 30vw;
+    height: 30vh;
+}
+
 .carousel-inner img {
     object-fit: cover;
     width: 100%;
@@ -203,7 +207,6 @@ html,body
 .carousel-control-next-icon {
     background-size: 100% 100%;
 }
-
 .main-content {
     flex: 1;
     display: flex;
@@ -215,12 +218,12 @@ html,body
     width: 100%;
     max-width: 400px;
 }
-.btn-purple {
+.botao-roxo-lc {
     background-color: #6a0dad;
     color: white;
     border-radius: 10px;
 }
-.btn-purple:hover {
+.botao-roxo-lc:hover {
     background-color: #5902a6;
 }
 .social-icons img {
@@ -234,4 +237,13 @@ html,body
 .search-bar {
     width: 100%;
     max-width: 400px;
+}
+.fundo-curso{
+    background: #1B0B32;
+    width: 100%;
+    height: 80vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
