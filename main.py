@@ -3,31 +3,14 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import uvicorn
+from routes.public_routes import router as public_router
 
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
 
-@app.get("/")
-async def get_root():
-    response = templates.TemplateResponse("home.html", {"request": {}})
-    return response
+app.include_router(public_router)
 
-@app.get("/login")
-async def get_login():
-    response = templates.TemplateResponse("login.html", {"request": {}})
-    return response
-
-@app.get("/cadastro")
-async def get_cadastro():
-    response = templates.TemplateResponse("cadastro.html", {"request": {}})
-    return response
-
-@app.get("/curso")
-async def get_curso():
-    response = templates.TemplateResponse("curso.html", {"request": {}})
-    return response
 
 
 if __name__ == "__main__":

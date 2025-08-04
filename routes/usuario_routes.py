@@ -1,1 +1,0 @@
-print("Rotas de usuário")

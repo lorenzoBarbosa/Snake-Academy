@@ -21,6 +21,7 @@ def inserir_curso(curso: Curso):
         cursor.execute(
             INSERIR_CURSO,
             (
+                curso.idTopico,
                 curso.nome,
                 curso.idProfessor,
                 curso.custo,
@@ -47,6 +48,7 @@ def obter_todos_cursos() -> list[Curso]:
         cursos = [
             Curso(
                 id=tupla[0],
+                idTopico=tupla[1],
                 nome=tupla[1],
                 idProfessor=tupla[2],
                 custo=tupla[4],
@@ -60,6 +62,7 @@ def obter_todos_cursos() -> list[Curso]:
         return cursos
     except Exception as e:
         print(f"Erro os cursos não foram obtidos: {e}")
+
 
 def obter_cursos_paginado(pg_num: int, pg_size: int) -> list[Curso]:
     try:
