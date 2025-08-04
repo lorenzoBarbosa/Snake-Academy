@@ -30,6 +30,6 @@ Grupo: Jhonatan Lima Mota Lourenço, Lorenzo Barbosa Alves, Lucas Oliveira Silva
         
         git config --global     user.email "email@exemplo.com"
 
-        12:32 vídeo ricardo 3
+        pip install -r requirements.txt
 
 6 - Clicar no botão "Publish Branch", escolher um nome para o repositório e confirmar

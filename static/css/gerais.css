@@ -1,19 +1,20 @@
-body {
+/* Todas as telas */
+html,body 
+{
+    overflow-x: hidden;
+    width: 100%;
     font-family: Arial, Helvetica, sans-serif;
-
-}
-
+    background-color: #ffffff;
+}  
 .topo {
     background-color: #522197;
     height: 20px;
     width: 100%;
 }
-
 .bg-navbar-roxo {
     background-color: #2E1254;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
 .barra-pesquisa {
     border: 1px solid #ccc !important;
     border-radius: 20px 0 0 20px !important;
@@ -22,7 +23,6 @@ body {
     font-size: 1rem !important;
     line-height: 1.5 !important;
 }
-
 .btn-lupa {
     border: 1px solid #ccc;
     background-color: #FFFFFF;
@@ -35,18 +35,15 @@ body {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
 .btn-lupa:hover {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
 }
-
 .botao-login {
     background-color: transparent;
     border: none;
     cursor: pointer;
 }
-
 .login {
     background-color: #38BC8E;
     color: #FFFFFF;
@@ -60,12 +57,10 @@ body {
     justify-content: center;
     transition: background-color 0.3s, color 0.3s;
 }
-
 .login:hover {
     background-color: #288363;
     color: #FFFFFF;
 }
-
 .cadastro {
     background-color: #5C22AD;
     color: #FFFFFF;
@@ -79,20 +74,16 @@ body {
     justify-content: center;
     transition: background-color 0.3s;
 }
-
 .cadastro:hover {
     background-color: #3a1572;
 }
-
 .navbar-brand img {
     max-height: 80px;
 }
-
 .linha {
     display: flex;
     margin-left: 90px;
 }
-
 .tipos-cursos {
     display: flex;
     align-items: center;
@@ -100,29 +91,17 @@ body {
     margin-top: 20px;
     text-align: center;
 }
-
 .tipos-cursos.ativo {
     text-decoration: underline;
     font-weight: bold;
 }
-
 .form-control {
     border-radius: 10px;
 }
-
-.rodape {
-    background-color: #19171A;
-    color: #FFFFFF;
-    width: 100%;
-    text-align: center;
-    padding-top: 30px;
-}
-
 #carouselExampleControls {
     margin: 0;
     padding: 0;
 }
-
 .carrossel-agarrador {
     position: relative;
     width: 100%;
@@ -130,7 +109,6 @@ body {
     margin: 40px auto;
     overflow: hidden;
 }
-
 .carrossel-itens {
     display: flex;
     overflow-x: scroll;
@@ -138,9 +116,7 @@ body {
     gap: 30px;
     padding: 10px;
 }
-
 /* gap é a propriedade que define o espaçamento entre os itens do carrossel. */
-
 .carde {
     min-width: 18rem;
     height: 18rem;
@@ -155,7 +131,6 @@ body {
     position: relative;
     display: inline-block;
 }
-
 .botao {
     position: absolute;
     top: 50%;
@@ -168,16 +143,19 @@ body {
     cursor: pointer;
     z-index: 1;
 }
-
 .esquerda {
     left: 0;
 }
-
 .direita {
     right: 0;
 }
-
-
+.rodape {
+    background-color: #19171A;
+    color: #FFFFFF;
+    width: 100%;
+    text-align: center;
+    padding-top: 30px;
+}
 .badge-curso {
     position: absolute;
     top: 8px;
@@ -189,4 +167,83 @@ body {
     padding: 0.3em 0.6em;
     font-weight: bold;
     border-radius: 0.3em;
+}
+
+.container-curso {
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
+    position: relative;
+    padding: 10px;
+    height: 100vh;
+}
+.container-curso > div:first-child {
+    text-align: left;
+    color: white;
+    max-width: 400px;
+    padding-left: 20px;
+}
+.carousel-inner {
+    width: 100%;
+    height: 100%;
+}
+
+.carrosel-curso{
+     width: 30vw;
+    height: 30vh;
+}
+
+.carousel-inner img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    height: 100%;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-size: 100% 100%;
+}
+.main-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+.illustration img {
+    width: 100%;
+    max-width: 400px;
+}
+.botao-roxo-lc {
+    background-color: #6a0dad;
+    color: white;
+    border-radius: 10px;
+}
+.botao-roxo-lc:hover {
+    background-color: #5902a6;
+}
+.social-icons img {
+    width: 40px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+.navbar-brand {
+    font-weight: bold;
+}
+.search-bar {
+    width: 100%;
+    max-width: 400px;
+}
+.fundo-curso{
+    background: #1B0B32;
+    width: 100%;
+    height: 80vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }

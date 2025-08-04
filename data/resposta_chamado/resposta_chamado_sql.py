@@ -26,39 +26,43 @@ ORDER BY id ASC
 
 OBTER_RCHAMADO_PAGINADO = """
 SELECT
-    c.id, c.idAdmin, c.idChamado, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, a.nome as nomeAdmin
+    c.id, c.idAdmin, c.idChamado, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, u.nome as nomeAdmin
 FROM respostaChamado c
 JOIN admin a ON c.idAdmin = a.id
-ORDER BY c.id_admin
+JOIN usuario u ON a.id = u.id
+ORDER BY c.idAdmin
 LIMIT ? OFFSET ?
 """
 
 OBTER_RCHAMADO_POR_TERMO_PAGINADO = """
 SELECT
-    c.id, c.idAdmin, c.idChamado, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, a.nome as nomeAdmin
+    c.id, c.idAdmin, c.idChamado, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, u.nome as nomeAdmin
 FROM respostaChamado c
 JOIN admin a ON c.idAdmin = a.id
-WHERE c.id LIKE ? OR a.nome LIKE ? or c.descricao LIKE ?
-ORDER BY c.id_admin
+JOIN usuario u ON a.id = u.id
+WHERE c.id LIKE ? OR u.nome LIKE ? or c.descricao LIKE ?
+ORDER BY c.idAdmin
 LIMIT ? OFFSET ?
 """
 
 OBTER_RCHAMADO_POR_ID = """
 SELECT 
-    c.id, c.idAdmin, c.idChamado, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, a.nome as nomeAdmin
+    c.id, c.idAdmin, c.idChamado, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, u.nome as nomeAdmin
 FROM respostaChamado as c
 JOIN admin a ON c.idAdmin = a.id
-WHERE id = ?
-ORDER BY id ASC
+JOIN usuario u ON a.id = u.id
+WHERE c.id = ?
+ORDER BY c.id ASC
 """
 
 OBTER_RCHAMADO_POR_NOME_ADMIN = """
 SELECT
-    c.id, c.idAdmin, c.idChamado, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, a.nome as nomeAdmin
+    c.id, c.idAdmin, c.idChamado, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, u.nome as nomeAdmin
 FROM respostaChamado c
 JOIN admin a ON c.idAdmin = a.id
-WHERE a.nome = ?
-ORDER BY c.id_admin
+JOIN usuario u ON a.id = u.id
+WHERE u.nome = ?
+ORDER BY c.idAdmin
 LIMIT ? OFFSET ?
 """
 
@@ -74,18 +78,19 @@ SELECT COUNT(*) FROM respostaChamado
 OBTER_QUANTIDADE_RCHAMADOS_POR_NOME_ADMIN= """
 SELECT COUNT(*)
 FROM respostaChamado c
-JOIN admin a ON c.idUsuario = a.id
-WHERE a.nome LIKE ? 
+JOIN admin a ON c.idAdmin = a.id
+JOIN usuario u ON a.id = u.id
+WHERE u.nome LIKE ? 
 """
 
 OBTER_RCHAMADO_POR_ID_CHAMADO= """
 SELECT 
-    c.id, c.idAdmin, c.idChamado, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, a.nome as nomeAdmin
+    c.id, c.idAdmin, c.idChamado, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, u.nome as nomeAdmin
 FROM respostaChamado c
 JOIN admin a ON c.idAdmin = a.id
+JOIN usuario u ON a.id = u.id
 WHERE c.idChamado = ?
-ORDER BY c.id_admin
-LIMIT ? OFFSET ?
+ORDER BY c.idAdmin
 """
 
 

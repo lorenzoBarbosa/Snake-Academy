@@ -6,8 +6,8 @@ from data.matricula.matricula_model import Matricula
 
 class comentarioCurso:
     id: int
-    idAdmin: Admin
-    idMatricula: Matricula
+    idAdmin: int
+    idMatricula: int
     conteudo: str
     dataEnvio: str
     dataSupervisaoAdmin: str

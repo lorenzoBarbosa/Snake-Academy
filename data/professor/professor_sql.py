@@ -77,7 +77,7 @@ JOIN usuario u ON c.id = u.id
 ORDER BY id 
 """
 
-ATUALIZAR_PROFESSOR_POR_ID= """"
+ATUALIZAR_PROFESSOR_POR_ID= """
 UPDATE professor
 SET 
     cursosPostados= ?,

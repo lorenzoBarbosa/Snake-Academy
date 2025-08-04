@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Optional
 from data.professor.professor_model import Professor
 
 
@@ -6,10 +7,12 @@ from data.professor.professor_model import Professor
 class Curso:
     id: int
     nome: str
-    idProfessor: Professor
+    idProfessor: int
     custo: float
     descricaoCurso: str
     duracaoCurso: str
     avaliacao: str
     dataCriacao: str
     statusCurso: bool
+    professor: Optional[Professor] = None
+    

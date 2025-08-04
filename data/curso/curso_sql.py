@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS curso (
     nome TEXT NOT NULL,
     idProfessor INTEGER NOT NULL,
     custo REAL NOT NULL,
-    descricaoCurso TEXT NOT NULL UNIQUE,
+    descricaoCurso TEXT NOT NULL,
     duracaoCurso TEXT NOT NULL,
     avaliacao TEXT NOT NULL,
     dataCriacao TEXT NOT NULL,
@@ -20,34 +20,43 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 
 OBTER_CURSOS = """
 SELECT 
-    c.id, c.nome, c.idProfessor, p.nome as nomeProfessor c.custo, c.descricaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
-FROM cliente c
-JOIN professor p ON c.idProfessor = p.id
-ORDER BY id 
-"""
-OBTER_CURSOS_PAGINADO = """
-SELECT 
-    c.id, c.nome, c.idProfessor, p.nome as nomeProfessor, c.custo, c.descricaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
+    c.id, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
 FROM curso c
 JOIN professor p ON c.idProfessor = p.id
+JOIN cliente cli ON p.id = cli.id
+JOIN usuario u ON cli.id = u.id
+ORDER BY c.id 
+"""
+
+OBTER_CURSOS_PAGINADO = """
+SELECT 
+    c.id, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
+FROM curso c
+JOIN professor p ON c.idProfessor = p.id
+JOIN cliente cli ON p.id = cli.id
+JOIN usuario u ON cli.id = u.id
 ORDER BY c.id
 LIMIT ? OFFSET ?
 """
 
 OBTER_CURSO_POR_ID = """
 SELECT 
-    c.id, c.nome, c.idProfessor, p.nome as nomeProfessor, c.custo, c.descricaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
+    c.id, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
 FROM curso c
 JOIN professor p ON c.idProfessor = p.id
+JOIN cliente cli ON p.id = cli.id
+JOIN usuario u ON cli.id = u.id
 WHERE c.id = ?
 """
 
 OBTER_CURSO_POR_TERMO_PAGINADO = """
 SELECT 
-    c.id, c.nome, c.idProfessor, p.nome as nomeProfessor, c.custo, c.descricaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
+    c.id, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
 FROM curso c
 JOIN professor p ON c.idProfessor = p.id
-WHERE (c.nome LIKE ? OR c.descricaoCurso LIKE ? OR p.nome LIKE ?)
+JOIN cliente cli ON p.id = cli.id
+JOIN usuario u ON cli.id = u.id
+WHERE (c.nome LIKE ? OR c.descricaoCurso LIKE ? OR u.nome LIKE ?)
 ORDER BY c.id
 LIMIT ? OFFSET ?
 """
@@ -59,7 +68,8 @@ SELECT COUNT(*) FROM curso
 OBTER_QUANTIDADE_CURSOS_POR_NOME_PROFESSOR = """
 SELECT COUNT(*) FROM curso c
 JOIN professor p ON c.idProfessor = p.id
-WHERE p.nome = ?
+JOIN usuario u ON p.id = u.id
+WHERE u.nome = ?
 """
 
 ATUALIZAR_CURSO_POR_ID = """

@@ -19,39 +19,47 @@ VALUES (?, ?, ?, ?, ?, ?)
 
 OBTER_PROGRESSO = """
 SELECT 
-    p.id, p.idAula, a.titulo as tituloAula, p.idMatricula, m.nome as nome, p.dataInicio, p.dataFim, p.statusAula, p.porcentagemConclusao
+    p.id, p.idAula, a.titulo as tituloAula, p.idMatricula, u.nome as nome, p.dataInicio, p.dataFim, p.statusAula, p.porcentagemConclusao
 FROM progresso p
 JOIN aula a ON p.idAula = a.id
 JOIN matricula m ON p.idMatricula = m.id
+JOIN cliente c ON m.idCliente = c.id
+JOIN usuario u ON c.id = u.id
 ORDER BY p.id ASC
 """
 
 OBTER_PROGRESSO_PAGINADO = """
 SELECT 
-    p.id, p.idAula, a.titulo as tituloAula, p.idMatricula, m.nome as nome, p.dataInicio, p.dataFim, p.statusAula, p.porcentagemConclusao
+    p.id, p.idAula, a.titulo as tituloAula, p.idMatricula, u.nome as nome, p.dataInicio, p.dataFim, p.statusAula, p.porcentagemConclusao
 FROM progresso p
 JOIN aula a ON p.idAula = a.id
 JOIN matricula m ON p.idMatricula = m.id
+JOIN cliente c ON m.idCliente = c.id
+JOIN usuario u ON c.id = u.id
 ORDER BY p.id
 LIMIT ? OFFSET ?
 """
 
 OBTER_PROGRESSO_POR_ID = """
 SELECT
-    p.id, p.idAula, a.titulo as tituloAula, p.idMatricula, m.nome as nome, p.dataInicio, p.dataFim, p.statusAula, p.porcentagemConclusao
+    p.id, p.idAula, a.titulo as tituloAula, p.idMatricula, u.nome as nome, p.dataInicio, p.dataFim, p.statusAula, p.porcentagemConclusao
 FROM progresso p
 JOIN aula a ON p.idAula = a.id
 JOIN matricula m ON p.idMatricula = m.id
+JOIN cliente c ON m.idCliente = c.id
+JOIN usuario u ON c.id = u.id
 WHERE p.id = ?
 ORDER BY p.id ASC
 """
 
 OBTER_PROGRESSO_POR_AULA = """
 SELECT
-    p.id, p.idAula, a.titulo as tituloAula, p.idMatricula, m.nome as nome, p.dataInicio, p.dataFim, p.statusAula, p.porcentagemConclusao
+    p.id, p.idAula, a.titulo as tituloAula, p.idMatricula, u.nome as nome, p.dataInicio, p.dataFim, p.statusAula, p.porcentagemConclusao
 FROM progresso p
 JOIN aula a ON p.idAula = a.id
 JOIN matricula m ON p.idMatricula = m.id
+JOIN cliente c ON m.idCliente = c.id
+JOIN usuario u ON c.id = u.id
 WHERE p.idAula = ?
 ORDER BY p.id ASC
 LIMIT ? OFFSET ?
@@ -59,10 +67,12 @@ LIMIT ? OFFSET ?
 
 OBTER_PROGRESSO_POR_MATRICULA = """
 SELECT
-    p.id, p.idAula, a.titulo as tituloAula, p.idMatricula, m.nome as nome, p.dataInicio, p.dataFim, p.statusAula, p.porcentagemConclusao
+    p.id, p.idAula, a.titulo as tituloAula, p.idMatricula, u.nome as nome, p.dataInicio, p.dataFim, p.statusAula, p.porcentagemConclusao
 FROM progresso p
 JOIN aula a ON p.idAula = a.id
 JOIN matricula m ON p.idMatricula = m.id
+JOIN cliente c ON m.idCliente = c.id
+JOIN usuario u ON c.id = u.id
 WHERE p.idMatricula = ?
 ORDER BY p.id ASC
 LIMIT ? OFFSET ?

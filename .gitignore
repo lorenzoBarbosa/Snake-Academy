@@ -4,5 +4,4 @@ __pycache__
 *.pyo
 *.pyd
 dados.db
-.vscode/arduino.json
-
+teste.py

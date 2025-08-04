@@ -24,7 +24,7 @@ SELECT
 FROM mensagem m
 JOIN usuario r ON m.idRemetente = r.id
 JOIN usuario d ON m.idDestinatario = d.id
-ORDER BY id ASC
+ORDER BY m.id ASC
 """
 
 OBTER_MENSAGEM_PAGINADO = """
@@ -54,6 +54,14 @@ SELECT
 FROM mensagem m
 JOIN usuario r ON m.idRemetente = r.id
 JOIN usuario d ON m.idDestinatario = d.id
+WHERE m.id = ?
+ORDER BY m.id ASC
+"""
+
+OBTER_MENSAGEM_POR_ID_TESTE = """
+SELECT 
+    m.id, m.idRemetente, m.idDestinatario, m.conteudo, m.dataEnvio, m.horaEnvio, m.visualizacao
+FROM mensagem m
 WHERE m.id = ?
 ORDER BY m.id ASC
 """

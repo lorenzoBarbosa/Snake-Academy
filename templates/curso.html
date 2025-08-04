@@ -12,64 +12,6 @@
         <link rel="stylesheet" href="/static/css/gerais.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
         <title>Snake Academy</title>
-        <style>
-    html,
-    body {
-      overflow-x: hidden;
-      width: 100%;
-    }
-
-    .carousel-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: right;
-      height: 70vh;
-      position: relative;
-    }
-
-    .carousel-container > div:first-child {
-  text-align: left;
-  color: white;
-  max-width: 400px;
-  padding-left: 20px;
-}
-
-    .carousel.slide {
-      width: 30vw;
-      height: 30vh;
-    }
-
-    .carousel-inner {
-      width: 100%;
-      height: 100%;
-    }
-
-    .carousel-inner img {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
-
-    .carousel-control-prev,
-    .carousel-control-next {
-      width: 5%;
-      height: 100%;
-    }
-
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-      background-size: 100% 100%;
-    }
-
-    footer {
-            background-color: #000;
-            color: rgb(255, 255, 255);
-            text-align: center;
-            padding: 1rem;
-    }
-
-    
-        </style>
     </head>
     <body>
         <header>
@@ -108,27 +50,16 @@
         <article>
             <div style="position: relative; margin-top: 100;">
                 <!-- Fundo embaixo -->
-                <div style="
-      background: #1B0B32;
-      height: 50vh;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
-    "></div>
+                <div class="fundo-curso"></div>
                 <!-- Carrossel sobre o fundo -->
-                <div class="carousel-container" style="padding-top: 100px; padding-right: 100px; position: relative; z-index: 2;">
+                <div class="container-curso" style="padding-top: 100px; padding-right: 100px; position: relative; z-index: 2;">
                     <div style="color: white; max-width: 900px; text-align: left; padding-left: 100px;">
                         <h1 style="font-size: 2.5rem; font-weight: bold;">Desenvolvedor Full Stack: Da Lógica ao Projeto Real</h1>
                         <p style="font-size: 1.1rem; margin-top: 10px;">
-                            Tá pronto pra transformar seu futuro na tecnologia?
-Com o Curso Full Stack da Snake Academy, você vai do zero absoluto até o deploy do seu primeiro sistema completo.
-Aprenda lógica de programação, HTML, CSS, JavaScript, Python, bancos de dados e frameworks modernos em aulas práticas e diretas ao ponto.
-Ideal pra quem quer entrar com tudo no mercado de TI e se destacar.
+                            Tá pronto pra transformar seu futuro na tecnologia?Com o Curso Full Stack da Snake Academy, você vai do zero absoluto até o deploy do seu primeiro sistema completo.Aprenda lógica de programação, HTML, CSS, JavaScript, Python, bancos de dados e frameworks modernos em aulas práticas e diretas ao ponto.Ideal pra quem quer entrar com tudo no mercado de TI e se destacar.
                         </p>
                     </div>
-                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div id="carouselExampleControls" class="carousel slide carrosel-curso" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img src="/static/img/cursosnake.png" class="d-block" alt="Curso Snake">
@@ -162,6 +93,34 @@ Ideal pra quem quer entrar com tudo no mercado de TI e se destacar.
                 </div>
             </div>
         </article>
+        <footer class="rodape">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Sobre nós</h5>
+                        <p>
+                            A mais nova plataforma de cursos online voltados para área de tecnologia de informação já
+                        chegou!
+                        Snake Academy está pronta para você que deseja adentrar nesse novo mundo tecológico!
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Torne-se um contribuinte!</h5>
+                        <p>Cadastre-se como um de nossos ofertantes de cursos e adquira uma renda extra todo mês!</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Contato</h5>
+                        <p>Email: snakeacademy@gmail.com</p>
+                        <p>Telefone: (11) 1234-5678</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <p>&copy; 2023 Snake Academy. Todos os direitos reservados.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
     </body>
 </html>

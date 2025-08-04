@@ -21,10 +21,10 @@ OBTER_MATRICULAS = """
 SELECT 
     m.id,
     m.idCliente, 
-    cl.nome as nome,
-    cl.email as email,
-    cl.senha as senha,
-    cl.telefone as telefone, 
+    u.nome as nome,
+    u.email as email,
+    u.senha as senha,
+    u.telefone as telefone, 
     m.idCurso, 
     c.nome AS nomeCurso, 
     m.statusMatricula, 
@@ -33,6 +33,7 @@ SELECT
     m.dataMatricula
 FROM matricula m
 JOIN cliente cl ON m.idCliente = cl.id
+JOIN usuario u ON cl.id = u.id
 JOIN curso c ON m.idCurso = c.id
 ORDER BY m.id
 """
@@ -41,10 +42,10 @@ OBTER_MATRICULAS_PAGINADO = """
 SELECT 
     m.id,
     m.idCliente, 
-    cl.nome as nome,
-    cl.email as email,
-    cl.senha as senha,
-    cl.telefone as telefone, 
+    u.nome as nome,
+    u.email as email,
+    u.senha as senha,
+    u.telefone as telefone, 
     m.idCurso, 
     c.nome AS nomeCurso, 
     m.statusMatricula, 
@@ -53,6 +54,7 @@ SELECT
     m.dataMatricula
 FROM matricula m
 JOIN cliente cl ON m.idCliente = cl.id 
+JOIN usuario u ON cl.id = u.id
 JOIN curso c ON m.idCurso = c.id
 ORDER BY m.id
 LIMIT ? OFFSET ?
@@ -62,10 +64,10 @@ OBTER_MATRICULA_POR_ID = """
 SELECT 
     m.id,
     m.idCliente, 
-    cl.nome as nome,
-    cl.email as email,
-    cl.senha as senha,
-    cl.telefone as telefone, 
+    u.nome as nome,
+    u.email as email,
+    u.senha as senha,
+    u.telefone as telefone, 
     m.idCurso, 
     c.nome AS nomeCurso, 
     m.statusMatricula, 
@@ -74,6 +76,7 @@ SELECT
     m.dataMatricula
 FROM matricula m
 JOIN cliente cl ON m.idCliente = cl.id
+JOIN usuario u ON cl.id = u.id
 JOIN curso c ON m.idCurso = c.id
 WHERE m.id = ?
 """
@@ -82,10 +85,10 @@ OBTER_MATRICULA_POR_NOME= """
 SELECT 
     m.id,
     m.idCliente, 
-    cl.nome as nome,
-    cl.email as email,
-    cl.senha as senha,
-    cl.telefone as telefone, 
+    u.nome as nome,
+    u.email as email,
+    u.senha as senha,
+    u.telefone as telefone, 
     m.idCurso, 
     c.nome AS nomeCurso, 
     m.statusMatricula, 
@@ -94,20 +97,20 @@ SELECT
     m.dataMatricula
 FROM matricula m
 JOIN cliente cl ON m.idCliente = cl.id
+JOIN usuario u ON cl.id = u.id  
 JOIN curso c ON m.idCurso = c.id
-WHERE cl.nome LIKE ?
+WHERE u.nome LIKE ?
 ORDER BY m.id
-LIMIT ? OFFSET ?
 """
 
 OBTER_MATRICULA_POR_CURSO = """
 SELECT 
     m.id,
     m.idCliente, 
-    cl.nome as nome,
-    cl.email as email,
-    cl.senha as senha,
-    cl.telefone as telefone, 
+    u.nome as nome,
+    u.email as email,
+    u.senha as senha,
+    u.telefone as telefone, 
     m.idCurso, 
     c.nome AS nomeCurso, 
     m.statusMatricula, 
@@ -116,20 +119,20 @@ SELECT
     m.dataMatricula
 FROM matricula m
 JOIN cliente cl ON m.idCliente = cl.id
+JOIN usuario u ON cl.id = u.id
 JOIN curso c ON m.idCurso = c.id
 WHERE c.nome LIKE ?
 ORDER BY m.id
-LIMIT ? OFFSET ?
 """
 
 OBTER_MATRICULA_POR_CLIENTE = """
 SELECT 
     m.id,
     m.idCliente, 
-    cl.nome as nome,
-    cl.email as email,
-    cl.senha as senha,
-    cl.telefone as telefone, 
+    u.nome as nome,
+    u.email as email,
+    u.senha as senha,
+    u.telefone as telefone, 
     m.idCurso, 
     c.nome AS nomeCurso, 
     m.statusMatricula, 
@@ -138,10 +141,10 @@ SELECT
     m.dataMatricula
 FROM matricula m
 JOIN cliente cl ON m.idCliente = cl.id
+JOIN usuario u ON cl.id = u.id
 JOIN curso c ON m.idCurso = c.id
-WHERE idCliente LIKE ?
+WHERE cl.id = ?
 ORDER BY m.id
-LIMIT ? OFFSET ?
 """
 
 OBTER_QUANTIDADE_MATRICULA_POR_CURSO = """
@@ -151,10 +154,12 @@ JOIN curso c ON m.idCurso = c.id
 WHERE c.nome LIKE ?
 """
 
+
 OBTER_QUANTIDADE_MATRICULA_POR_CLIENTE = """
 SELECT COUNT(*)
 FROM matricula m
 JOIN cliente cl ON m.idCliente = cl.id
+JOIN usuario u ON cl.id = u.id
 WHERE cl.id LIKE ?
 """
 

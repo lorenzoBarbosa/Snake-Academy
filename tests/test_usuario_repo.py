@@ -7,10 +7,13 @@ class TestUsuarioRepo:
         # Arrange
         # Act
         resultado = criar_tabela_usuario()
+        # Assert
         assert resultado == True, "A criação da tabela deveria retornar True"
     
     def test_inserir_usuario(self, test_db):
+        #Arrange
         criar_tabela_usuario()
+        #Act
         usuario = Usuario(
                 0,
                 "lorenzo",
@@ -20,6 +23,7 @@ class TestUsuarioRepo:
                 "210109")
         usuario_inserido = inserir_usuario(usuario)
         usuario_db = obter_usuario_por_id(usuario_inserido)
+        #Assert
         assert usuario_db is not None, "A inserção de dados não deveria retornar None"
         assert usuario_db.id == 1, "O id do usuário deveria ser 1"
         assert usuario_db.nome == "lorenzo", "O nome inserido está incorreto"
@@ -212,7 +216,7 @@ class TestUsuarioRepo:
         email = usuario_db.email
         resultado = excluir_usuario_por_email(email)
         #Assert
-        assert resultado == True, "O usuário não foi excluído"
+        assert resultado is True, "O usuário não foi excluído"
         usuario_excluido = obter_usuario_por_email(email)
         assert usuario_excluido is None, "O usuário excluído deveria ser None"
 

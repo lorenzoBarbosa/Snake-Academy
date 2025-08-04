@@ -1,10 +1,13 @@
 from dataclasses import dataclass
+from typing import Optional
 from data.curso.curso_model import Curso
 
 
 @dataclass
 class Comunidade:
-    idCurso: Curso
+    id: int
+    idCurso: int
     nome: str
     quantidadeParticipantes: int
     listaParticipantes: list
+    nomeCurso: Optional[Curso] = None

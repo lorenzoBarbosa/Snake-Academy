@@ -37,7 +37,7 @@ SELECT
 FROM chamado c
 JOIN usuario u ON c.idUsuario = u.id
 WHERE c.id LIKE ? OR u.nome LIKE ? or c.descricao LIKE ?
-ORDER BY c.id_usuario
+ORDER BY c.idUsuario
 LIMIT ? OFFSET ?
 """
 
@@ -46,8 +46,8 @@ SELECT
     c.id, c.idUsuario, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, u.nome as nomeUsuario
 FROM chamado as c
 JOIN usuario as u ON c.idUsuario = u.id
-WHERE id = ?
-ORDER BY id ASC
+WHERE c.id = ?
+ORDER BY c.id ASC
 """
 
 OBTER_CHAMADO_POR_NOME_USUARIO = """
