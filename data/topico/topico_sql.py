@@ -64,4 +64,3 @@ FROM topico t
 JOIN categoria c ON t.idCategoria = c.id
 WHERE t.nome = ?
 """
-
