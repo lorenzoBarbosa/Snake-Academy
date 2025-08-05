@@ -49,15 +49,15 @@ def obter_todos_cursos() -> list[Curso]:
             Curso(
                 id=tupla[0],
                 idTopico=tupla[1],
-                nome=tupla[1],
-                idProfessor=tupla[2],
-                custo=tupla[4],
-                descricaoCurso=tupla[5],
-                duracaoCurso=tupla[6],
-                avaliacao=tupla[7],
-                dataCriacao=tupla[8],
-                statusCurso=tupla[9],
-                professor = professor_repo.obter_professor_por_id(tupla[2])
+                nome=tupla[2],
+                idProfessor=tupla[3],
+                custo=tupla[5],
+                descricaoCurso=tupla[6],
+                duracaoCurso=tupla[7],
+                avaliacao=tupla[8],
+                dataCriacao=tupla[9],
+                statusCurso=tupla[10],
+                professor = professor_repo.obter_professor_por_id(tupla[3])
             ) for tupla in tuplas ]
         return cursos
     except Exception as e:
@@ -76,15 +76,16 @@ def obter_cursos_paginado(pg_num: int, pg_size: int) -> list[Curso]:
         cursos = [
             Curso(
                 id=tupla[0],
-                nome=tupla[1],
-                idProfessor=tupla[2],
-                custo=tupla[4],
-                descricaoCurso=tupla[5],
-                duracaoCurso=tupla[6],
-                avaliacao=tupla[7],
-                dataCriacao=tupla[8],
-                statusCurso=tupla[9],
-                professor = professor_repo.obter_professor_por_id(tupla[2])
+                idTopico=tupla[1],
+                nome=tupla[2],
+                idProfessor=tupla[3],
+                custo=tupla[5],
+                descricaoCurso=tupla[6],
+                duracaoCurso=tupla[7],
+                avaliacao=tupla[8],
+                dataCriacao=tupla[9],
+                statusCurso=tupla[10],
+                professor = professor_repo.obter_professor_por_id(tupla[3])
             ) for tupla in tuplas ]
         return cursos
     except Exception as e:
@@ -98,16 +99,17 @@ def obter_curso_por_id(id: int):
         tupla = cursor.fetchone()
         conn.close()
         return Curso(
-                id=tupla["id"],
-                nome=tupla[1],
-                idProfessor=tupla[2],
-                custo=tupla[4],
-                descricaoCurso=tupla[5],
-                duracaoCurso=tupla[6],
-                avaliacao=tupla[7],
-                dataCriacao=tupla[8],
-                statusCurso=tupla[9],
-                professor= professor_repo.obter_professor_por_id(tupla[2])
+                id=tupla[0],
+                idTopico=tupla[1],
+                nome=tupla[2],
+                idProfessor=tupla[3],
+                custo=tupla[5],
+                descricaoCurso=tupla[6],
+                duracaoCurso=tupla[7],
+                avaliacao=tupla[8],
+                dataCriacao=tupla[9],
+                statusCurso=tupla[10],
+                professor = professor_repo.obter_professor_por_id(tupla[3])
             )
         
     except Exception as e:
@@ -125,15 +127,16 @@ def obter_curso_por_termo_paginado(termo: str, pg_num: int, pg_size: int) -> lis
         cursos = [
             Curso(
                 id=tupla[0],
-                nome=tupla[1],
-                idProfessor=tupla[2],
-                custo=tupla[4],
-                descricaoCurso=tupla[5],
-                duracaoCurso=tupla[6],
-                avaliacao=tupla[7],
-                dataCriacao=tupla[8],
-                statusCurso=tupla[9],
-                professor= professor_repo.obter_professor_por_id(tupla[2])
+                idTopico=tupla[1],
+                nome=tupla[2],
+                idProfessor=tupla[3],
+                custo=tupla[5],
+                descricaoCurso=tupla[6],
+                duracaoCurso=tupla[7],
+                avaliacao=tupla[8],
+                dataCriacao=tupla[9],
+                statusCurso=tupla[10],
+                professor = professor_repo.obter_professor_por_id(tupla[3])
             ) for tupla in tuplas ]
         return cursos
     except Exception as e:
@@ -168,6 +171,7 @@ def atualizar_curso_por_id(curso: Curso, id:int):
         cursor.execute(
             ATUALIZAR_CURSO_POR_ID,
             (
+            curso.idTopico,
             curso.nome,
             curso.idProfessor,
             curso.custo,
