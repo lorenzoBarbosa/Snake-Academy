@@ -33,7 +33,7 @@ class TestComunidadeRepo:
         cliente_inserido = inserir_cliente(cliente, usuario_inserido)
         professor= Professor(0, "", "", "", "", "", "", True, [], True, ["python"], 12, "12-06-2025")
         professor_inserido = inserir_professor(professor, cliente_inserido)
-        curso = Curso(0, "Python", 1, 12.99, "não sei", "12:56", "Bom", "12-06-2025", True)
+        curso = Curso(0, "Python", 1, 12.99, "não sei", "12:56", "Bom", "12-06-2025", True, "Roberto")
         curso_inserido = inserir_curso(curso)
         curso_db = obter_curso_por_id(curso_inserido)
         # Act
