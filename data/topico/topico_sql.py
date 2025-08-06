@@ -47,6 +47,14 @@ ORDER BY t.id
 LIMIT ? OFFSET ?
 """
 
+OBTER_TOPICO_POR_NOME = """
+SELECT 
+    t.id, t.nome, t.idCategoria, c.nome as nomeCategoria
+FROM topico t
+JOIN categoria c ON t.idCategoria = c.id
+WHERE t.nome = ?
+"""
+
 OBTER_QUANTIDADE_TOPICOS = """
 SELECT COUNT(*) FROM topico
 """
@@ -57,10 +65,28 @@ JOIN categoria c ON t.idCategoria = c.id
 WHERE t.idCategoria = ?
 """
 
-OBTER_TOPICO_POR_NOME = """
-SELECT 
-    t.id, t.nome, t.idCategoria, c.nome as nomeCategoria
-FROM topico t
+OBTER_QUANTIDADE_TOPICOS_POR_NOME = """
+SELECT COUNT(*) FROM topico t
 JOIN categoria c ON t.idCategoria = c.id
 WHERE t.nome = ?
 """
+
+OBTER_QUANTIDADE_TOPICOS_POR_ID = """
+SELECT COUNT(*) FROM topico t
+JOIN categoria c ON t.idCategoria = c.id
+WHERE t.id = ?
+"""
+
+ATUALIZAR_TOPICO_POR_ID = """
+UPDATE topico 
+SET nome = ?, 
+idCategoria = ?
+WHERE id = ?
+"""
+
+EXCLUIR_TOPICO_POR_ID = """
+DELETE FROM topico 
+WHERE id = ?
+"""
+
+
