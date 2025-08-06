@@ -110,7 +110,7 @@ def excluir_categoria_por_id(id: int) -> bool:
         cursor.execute(EXCLUIR_CATEGORIA_POR_ID, (id,))
         conn.commit()
         conn.close()
-        return True
+        return cursor.rowcount > 0
     except Exception as e:
         print(f"Erro ao excluir categoria por id: {e}")
         return False
