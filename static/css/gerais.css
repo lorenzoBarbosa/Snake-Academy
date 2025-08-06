@@ -195,6 +195,18 @@ html,body
     background-color: #5c22ad7e;
 }
 
+.bg-cursos-1{
+    background-color: #ffd90076;
+}
+
+.bg-cursos-2{
+    background-color: #c0c0c075
+}
+
+.bg-cursos-3{
+    background-color: #cd80328f;
+}
+
 .container-curso {
     display: flex;
     justify-content: space-between;
