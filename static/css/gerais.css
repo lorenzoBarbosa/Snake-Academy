@@ -182,9 +182,17 @@ html,body
     /* distância da esquerda do container */
     z-index: 10;
     /* pra garantir que fique acima da imagem */
-    padding: 0.3em 0.6em;
-    font-weight: bold;
+    padding: 0.1em 0.3em;
     border-radius: 0.3em;
+    font-size: 20px;
+}
+
+.bg-cursos-favoritos-verde{
+    background-color: #38bc8e7e;
+}
+
+.bg-cursos-favoritos-roxo{
+    background-color: #5c22ad7e;
 }
 
 .container-curso {
