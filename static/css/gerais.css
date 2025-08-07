@@ -137,12 +137,26 @@ html,body
     gap: 30px;
     padding: 10px;
 }
-/* gap é a propriedade que define o espaçamento entre os itens do carrossel. */
-.carde {
+
+.carde-cursos {
     min-width: 18rem;
     height: 18rem;
-    background-color: #202020;
-    color: white;
+    background-color: #ffffff;
+    color: rgb(53, 52, 52);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    flex-shrink: 0;
+    position: relative;
+    display: inline-block;
+}
+/* gap é a propriedade que define o espaçamento entre os itens do carrossel. */
+.carde-favoritos {
+    min-width: 18rem;
+    height: 18rem;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
     font-size: 32px;
     display: flex;
     justify-content: center;
