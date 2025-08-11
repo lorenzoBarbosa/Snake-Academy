@@ -139,18 +139,64 @@ html,body
 }
 
 .carde-cursos {
-    min-width: 18rem;
-    height: 18rem;
+    width: 18rem;
+    min-height: 18rem;
     background-color: #ffffff;
     color: rgb(53, 52, 52);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    flex-shrink: 0;
-    position: relative;
+    border-radius: 5px;
+    border: 1px solid #cac9ca;
     display: inline-block;
+    padding: 0;
 }
+
+.imagem-curso {
+    border-radius: 5px 5px 0px 0px;
+    width: 18rem;
+    height: 12rem;
+    object-fit: cover;
+}
+
+.carde-descricao {
+    text-align: left;
+    padding: 10px;
+    margin-left: 8px ;
+    margin-bottom: 0;
+}
+.carde-texto-titulo{
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+.carde-autor {
+    font-size: 14px;
+    color: #555555;
+    margin: 0;
+}
+.carde-avaliacao{
+    font-size: 18px;
+    color: #000000;
+    margin-top: 8px;
+    margin-bottom: 0;
+    display: inline;
+}
+.carde-quantidade-avaliacoes {
+    font-size: 14px;
+    color: #555555;
+    margin-bottom: 0;
+    display: inline;
+}
+.carde-preco {
+    font-size: 18px;
+    color: #ffffff;
+    margin: 0;
+    background-color: #5c22add3;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+
+
 /* gap é a propriedade que define o espaçamento entre os itens do carrossel. */
 .carde-favoritos {
     min-width: 18rem;
