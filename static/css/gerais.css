@@ -332,10 +332,11 @@ html,body
     width: 20%;
 }
 .mercado-trabalho {
+    display: flex;
     font-size: 20px;
     color: #333333;
     font-weight: bold;
-    float: right;
+    background-color: #1B0B32;
 }
 
 
