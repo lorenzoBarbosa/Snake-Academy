@@ -316,9 +316,22 @@ html,body
     color: #333333;
     font-weight: bold;
 }
+.div-aprendizado-direcionado-container{
+    width: 100%;
+}
 .objetivos-aprendizado {
     display: flex;
     margin-top: 20px;
+    font-size: 25px;
+    margin-bottom: 60px;
+    width: 20%;
+}
+.mercado-trabalho {
+    display: flex;
+    font-size: 20px;
+    color: #333333;
+    font-weight: bold;
+    background-color: #1B0B32;
 }
 
 
