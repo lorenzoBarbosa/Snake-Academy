@@ -315,6 +315,10 @@ html,body
     color: #333333;
     font-weight: bold;
 }
+.objetivos-aprendizado {
+    display: flex;
+    margin-top: 20px;
+}
 
 
 .rodape {
