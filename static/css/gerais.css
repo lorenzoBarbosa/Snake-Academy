@@ -4,6 +4,7 @@ html,body
     overflow-x: hidden;
     width: 100%;
     background-color: #ffffff;
+    font-family: 'Times New Roman', 'Arial Narrow', Arial, sans-serif;
 }  
 .topo {
     background-color: #522197;
@@ -21,6 +22,7 @@ html,body
     padding: 8px 15px !important;
     height: auto !important;
     font-size: 1rem !important;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     line-height: 1.5 !important;
 }
 .btn-lupa {
@@ -38,11 +40,13 @@ html,body
 .btn-lupa:hover {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
+    font-family: 'Times New Roman', 'Arial Narrow', Arial, sans-serif;
 }
 .botao-login {
     background-color: transparent;
     border: none;
     cursor: pointer;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 .login {
     background-color: #38BC8E;
@@ -99,6 +103,7 @@ html,body
     color: #555555;
     max-width: 1500px;
     text-align: justify;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
 }
 
 .linha {
