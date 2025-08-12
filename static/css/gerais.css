@@ -22,7 +22,7 @@ html,body
     padding: 8px 15px !important;
     height: auto !important;
     font-size: 1rem !important;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Times New Roman', Times, serif;
     line-height: 1.5 !important;
 }
 .btn-lupa {
@@ -46,7 +46,7 @@ html,body
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
 }
 .login {
     background-color: #38BC8E;
@@ -54,7 +54,6 @@ html,body
     border-radius: 5px;
     border: 1px solid #38BC8E;
     font-weight: bold;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     width: 100px;
     height: 40px;
     display: flex;
@@ -93,17 +92,13 @@ html,body
     color: #333333;
 }
 
-.Montserrat h2, .Montserrat p { font-family: 'Montserrat', sans-serif; }
-
-.Oswald h2, .Oswald p { font-family: 'Oswald', sans-serif; }
-
 .texto-home {
     margin-top: 20px;
     font-size: 20px;
     color: #555555;
     max-width: 1500px;
     text-align: justify;
-    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-family: 'Open Sans', 'Arial', sans-serif;
 }
 
 .linha {
