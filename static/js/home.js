@@ -1,5 +1,4 @@
-const botoes = document.querySelectorAll('.tipos-cursos');
-
+const botoes = document.querySelectorAll('.tipos-cursos', ".objetivos-aprendizado" );
 botoes.forEach(botao => {
     botao.addEventListener('click', () => {
         // Remove a classe 'ativo' de todos os botões

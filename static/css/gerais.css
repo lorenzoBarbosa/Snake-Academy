@@ -319,39 +319,40 @@ html,body
 .div-aprendizado-direcionado-container{
     width: 100%;
 }
-/* .objetivos-aprendizado {
+
+.objetivos-container {
     display: flex;
-    margin-top: 20px;
-    font-size: 25px;
-    margin-bottom: 60px;
-    width: 20%;
+    gap: 20px;
 }
-.mercado-trabalho {
+
+.objetivos-lista {
+    flex: 0 0 300px; /* largura fixa da lista de objetivos */
     display: flex;
-    font-size: 20px;
-    color: #333333;
-    font-weight: bold;
-    background-color: #1B0B32;
-    width: 50px;
-} */
- 
-.objetivo-com-box {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px; /* espaço entre botão e box */
+    flex-direction: column;
+    gap: 15px;
 }
 
 .objetivos-aprendizado {
-    flex: 0 0 250px; /* largura fixa do botão */
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 22px;
+    cursor: pointer;
+}
+.painel-lateral {
+    flex: 1; /* ocupa todo o resto da linha */
+    position: relative;
+    min-height: 200px; /* altura mínima do painel */
 }
 
-.mercado-trabalho {
-    flex: 1; /* ocupa o resto do espaço */
-    padding: 15px;
-    background-color: #1B0B32;
+.conteudo-painel {
+    background-color: #ffffff;
     color: white;
+    padding: 20px;
     border-radius: 5px;
+    min-height: 350px;
 }
+
 
 
 .rodape {
