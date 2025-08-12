@@ -285,6 +285,24 @@ html,body
     right: 0;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .div-aprendizado-direcionado {
     background-color: #f3f3f3;
     width: 100%;
@@ -292,12 +310,12 @@ html,body
     padding-top: 20px;
     margin-top: 50px;
 }
-
 .titulo-aprendizado-direcionado{
     font-size: 30px;
     color: #333333;
     font-weight: bold;
 }
+
 
 .rodape {
     background-color: #19171A;
