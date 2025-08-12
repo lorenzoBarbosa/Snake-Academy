@@ -127,13 +127,12 @@ html,body
     position: relative;
     width: 100%;
     max-width: 1300px;
-    margin: 40px auto;
     overflow: hidden;
 }
 .carrossel-itens {
     display: flex;
     overflow-x: scroll;
-    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
     gap: 30px;
     padding: 10px;
 }
@@ -210,7 +209,7 @@ html,body
 .imagem-curso-favoritos {
     border-radius: 5px 5px 0px 0px;
     width: 15.9rem;
-    height: 7rem;
+    height: 9rem;
     object-fit: cover;
 }
 
@@ -221,15 +220,15 @@ html,body
     margin-bottom: 0;
 }
 .carde-texto-titulo-favoritos{
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     margin: 0;
 }
 .carde-autor-favoritos {
-    font-size: 14px;
+    font-size: 12px;
     color: #555555;
     margin-top: 0;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 .carde-avaliacao-favoritos{
     font-size: 15px;
@@ -253,17 +252,31 @@ html,body
     padding: 5px;
 }
 
-.botao {
+.botao-esquerda {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
+    transform: translateY(-50%);;
     border: none;
-    color: white;
+    color: rgb(0, 0, 0);
+    background-color: #38bc8e67;
     font-size: 30px;
-    padding: 10px;
+    padding: 5px;
     cursor: pointer;
     z-index: 1;
+    border-radius: 0 50%  50% 0;  
+}
+.botao-direita {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);;
+    border: none;
+    color: rgb(0, 0, 0);
+    background-color: #38bc8e67;
+    font-size: 30px;
+    padding: 5px;
+    cursor: pointer;
+    z-index: 1;
+    border-radius: 50% 0 0 50%;  
 }
 .esquerda {
     left: 0;
@@ -271,6 +284,14 @@ html,body
 .direita {
     right: 0;
 }
+
+.div-aprendizado-direcionado {
+    background-color: #e0e0e0;
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+}
+
 .rodape {
     background-color: #19171A;
     color: #FFFFFF;
@@ -278,39 +299,6 @@ html,body
     text-align: center;
     padding-top: 30px;
 }
-.badge-curso {
-    position: absolute;
-    top: 8px;
-    /* distância do topo do container */
-    left: 8px;
-    /* distância da esquerda do container */
-    z-index: 10;
-    /* pra garantir que fique acima da imagem */
-    padding: 0.1em 0.3em;
-    border-radius: 0.3em;
-    font-size: 20px;
-}
-
-.bg-cursos-favoritos-verde{
-    background-color: #38bc8e7e;
-}
-
-.bg-cursos-favoritos-roxo{
-    background-color: #5c22ad7e;
-}
-
-.bg-cursos-1{
-    background-color: #ffd90076;
-}
-
-.bg-cursos-2{
-    background-color: #c0c0c075
-}
-
-.bg-cursos-3{
-    background-color: #cd80328f;
-}
-
 .container-curso {
     display: flex;
     justify-content: space-between;
