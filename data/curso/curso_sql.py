@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS curso (
     dataCriacao TEXT NOT NULL,
     statusCurso BOOLEAN NOT NULL,
     FOREIGN KEY (idProfessor) REFERENCES professor(id),
-    FOREING KEY (idTopico) REFERENCES topico(id)
+    FOREIGN KEY (idTopico) REFERENCES topico(id)
 )
 """
 
