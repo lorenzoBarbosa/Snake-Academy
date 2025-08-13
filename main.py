@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import uvicorn
-from routes.public_routes import router as public_router
+from routes.public.public_routes import router as public_router
 
 
 app = FastAPI()

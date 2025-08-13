@@ -2,15 +2,14 @@ CRIAR_TABELA_BANNER = """
 CREATE TABLE IF NOT EXISTS banner (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     idAdmin INTEGER NOT NULL,
-    imagem TEXT NOT NULL,
     status BOOLEAN NOT NULL,
     FOREIGN KEY (idAdmin) REFERENCES admin(id)
 );
 """
 
 INSERIR_BANNER = """
-INSERT INTO banner (idAdmin, imagem, status)
-VALUES (?, ?, ?);
+INSERT INTO banner (idAdmin, status)
+VALUES (?, ?);
 """
 
 OBTER_TODOS_BANNERS = """
@@ -29,7 +28,7 @@ LIMIT ? OFFSET ?;
 
 ATUALIZAR_BANNER = """
 UPDATE banner
-SET idAdmin = ?, imagem = ?, status = ?
+SET idAdmin = ?, status = ?
 WHERE id = ?;
 """
 
