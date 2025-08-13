@@ -22,7 +22,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 
 OBTER_CURSOS = """
 SELECT 
-    c.id, i.idTopico, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
+    c.id, i.id, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
 FROM curso c
 JOIN topico i ON c.idTopico = i.id
 JOIN professor p ON c.idProfessor = p.id
@@ -30,6 +30,7 @@ JOIN cliente cli ON p.id = cli.id
 JOIN usuario u ON cli.id = u.id
 ORDER BY c.id 
 """
+
 OBTER_CURSOS_POR_PROFESSOR = """
 SELECT 
     c.id, i.idTopico, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
@@ -44,7 +45,9 @@ ORDER BY c.id
 
 OBTER_CURSOS_PAGINADO = """
 SELECT 
-    c.id, i.idTopico, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
+    c.id, c.idTopico, c.nome, c.idProfessor, u.nome AS nomeProfessor,
+    c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao,
+    c.dataCriacao, c.statusCurso
 FROM curso c
 JOIN topico i ON c.idTopico = i.id
 JOIN professor p ON c.idProfessor = p.id
@@ -54,9 +57,10 @@ ORDER BY c.id
 LIMIT ? OFFSET ?
 """
 
+
 OBTER_CURSO_POR_ID = """
 SELECT 
-    c.idTopico, i.id, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
+    c.idTopico, i.id, c.nome, c.idProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
 FROM curso c
 JOIN topico i ON c.idTopico = i.id
 JOIN professor p ON c.idProfessor = p.id

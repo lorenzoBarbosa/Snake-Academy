@@ -14,6 +14,9 @@ class TestCursoRepo:
         criar_tabela_usuario()
         criar_tabela_cliente()
         criar_tabela_professor()
+        criar_tabela_categoria()
+        criar_tabela_topico()
+        criar_tabela_curso()
         # Act
         resultado = criar_tabela_curso()
         # Assert 
@@ -61,7 +64,7 @@ class TestCursoRepo:
         criar_tabela_usuario()
         criar_tabela_cliente()
         criar_tabela_professor()
-        criar_tabela_categoria
+        criar_tabela_categoria()
         criar_tabela_topico()
         criar_tabela_curso()
         usuario= Usuario(0, "claudio", "claudio@g", "123", "1234", "12-06-2025")
@@ -95,6 +98,8 @@ class TestCursoRepo:
         criar_tabela_usuario()
         criar_tabela_cliente()
         criar_tabela_professor()
+        criar_tabela_categoria()
+        criar_tabela_topico()
         criar_tabela_curso()
         usuario= Usuario(0, "claudio", "claudio@g", "123", "1234", "12-06-2025")
         usuario_inserido = inserir_usuario(usuario)
@@ -102,8 +107,15 @@ class TestCursoRepo:
         cliente_inserido = inserir_cliente(cliente, usuario_inserido)
         professor= Professor(0, "", "", "", "", "", "", True, [], True, ["python"], 12, "12-06-2025")
         professor_inserido = inserir_professor(professor, cliente_inserido)
+        professor_db = obter_professor_por_id(professor_inserido)
+        categoria = Categoria(0, "Categoria de cursos de programação")
+        categoria_inserida = inserir_categoria(categoria)
+        categoria_db = obter_categoria_por_id(categoria_inserida)
+        topico = Topico(0, "Python", categoria_db.id)
+        topico_inserido = inserir_topico(topico)
+        topico_db = obter_topico_por_id(topico_inserido)
         for c in range(10):
-            curso_obj = Curso(0, f"Python{c+1}", 1, 12.99 + c, "não sei", "12:56", "Bom", "12-06-2025", True)
+            curso_obj = Curso(0, topico_db.id,f"Python{c+1}", professor_db.id, 12.99 + c, "não sei", "12:56", "Bom", "12-06-2025", True)
             curso_inserido = inserir_curso(curso_obj)
         # Act
         cursos1 = obter_cursos_paginado(1, 4)
