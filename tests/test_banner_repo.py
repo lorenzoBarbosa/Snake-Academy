@@ -27,14 +27,13 @@ class TestBannerRepo:
         admin = Admin(usuario.id, usuario.nome, usuario.email, usuario.senha, usuario.telefone, usuario.dataCriacao, "1")
         # Act
         admin_inserido = inserir_admin(admin, id_usuario)
-        banner = Banner(id=0, idAdmin=admin_inserido, imagem="imagem.jpg", status="ativo")
+        banner = Banner(id=0, idAdmin=admin_inserido, status=False)
         idBanner = inserir_banner(banner)
         banner_inserido = obter_banner_por_id(idBanner)
         # Assert
         assert idBanner is not None, "O banner não foi inserido corretamente."
         assert banner_inserido is not None, "O banner inserido não foi encontrado."
         assert banner_inserido.idAdmin == banner.idAdmin, "O idAdmin do banner inserido não corresponde ao esperado."
-        assert banner_inserido.imagem == banner.imagem, "A imagem do banner inserido não corresponde ao esperado."
         assert banner_inserido.status == banner.status, "O status do banner inserido não corresponde ao esperado."
 
     def test_obter_todos_banners(self, test_db):
@@ -55,7 +54,7 @@ class TestBannerRepo:
         admin = Admin(usuario.id, usuario.nome, usuario.email, usuario.senha, usuario.telefone, usuario.dataCriacao, "1")
         admin_inserido = inserir_admin(admin, id_usuario)
         for i in range(10):
-            banner = Banner(id=0, idAdmin=admin_inserido, imagem=f"imagem_{i}.jpg", status=True)
+            banner = Banner(id=0, idAdmin=admin_inserido, status=True)
             inserir_banner(banner)
         #act
         banners = obter_todos_banners()
@@ -80,7 +79,7 @@ class TestBannerRepo:
         usuario.id = id_usuario
         admin = Admin(usuario.id, usuario.nome, usuario.email, usuario.senha, usuario.telefone, usuario.dataCriacao, "1")
         admin_inserido = inserir_admin(admin, id_usuario)
-        banner = Banner(id=0, idAdmin=admin_inserido, imagem="imagem.jpg", status=True)
+        banner = Banner(id=0, idAdmin=admin_inserido, status=True)
         idBanner = inserir_banner(banner)
         # Act
         banner_obtido = obter_banner_por_id(idBanner)
@@ -88,7 +87,6 @@ class TestBannerRepo:
         assert banner_obtido is not None, "Não foi possível obter o banner pelo ID."
         assert banner_obtido.id == idBanner, "O ID do banner obtido não corresponde ao esperado."
         assert banner_obtido.idAdmin == banner.idAdmin, "O idAdmin do banner obtido não corresponde ao esperado."
-        assert banner_obtido.imagem == banner.imagem, "A imagem do banner obtido não corresponde ao esperado."
         assert banner_obtido.status == banner.status, "O status do banner obtido não corresponde ao esperado."
     
     def test_obter_banner_paginado(self, test_db):
@@ -109,7 +107,7 @@ class TestBannerRepo:
         admin = Admin(usuario.id, usuario.nome, usuario.email, usuario.senha, usuario.telefone, usuario.dataCriacao, "1")
         admin_inserido = inserir_admin(admin, id_usuario)
         for i in range(10):
-            banner = Banner(id=0, idAdmin=admin_inserido, imagem=f"imagem_{i}.jpg", status=True)
+            banner = Banner(id=0, idAdmin=admin_inserido, status=True)
             inserir_banner(banner)
         # Act
         banners_paginados = obter_banner_paginado(0, 5)
@@ -134,12 +132,11 @@ class TestBannerRepo:
         usuario.id = id_usuario
         admin = Admin(usuario.id, usuario.nome, usuario.email, usuario.senha, usuario.telefone, usuario.dataCriacao, "1")
         admin_inserido = inserir_admin(admin, id_usuario)
-        banner = Banner(id=0, idAdmin=admin_inserido, imagem="imagem.jpg", status=True)
+        banner = Banner(id=0, idAdmin=admin_inserido, status=True)
         idBanner = inserir_banner(banner)
 
         # Act
         banner.status = False
-        banner.imagem = "nova_imagem.jpg"
         banner.id = idBanner
         resultado_atualizacao = atualizar_banner(banner)
 
@@ -147,7 +144,6 @@ class TestBannerRepo:
         assert resultado_atualizacao is not None, "Não foi possível atualizar o banner."
         banner_atualizado = obter_banner_por_id(idBanner)
         assert banner_atualizado.status == False, "O status do banner atualizado não corresponde ao esperado."
-        assert banner_atualizado.imagem == "nova_imagem.jpg", "A imagem do banner atualizado não corresponde ao esperado."
 
     def test_deletar_banner(self, test_db):
         criar_tabela_usuario()
@@ -166,7 +162,7 @@ class TestBannerRepo:
         usuario.id = id_usuario
         admin = Admin(usuario.id, usuario.nome, usuario.email, usuario.senha, usuario.telefone, usuario.dataCriacao, "1")
         admin_inserido = inserir_admin(admin, id_usuario)
-        banner = Banner(id=0, idAdmin=admin_inserido, imagem="imagem.jpg", status=True)
+        banner = Banner(id=0, idAdmin=admin_inserido, status=True)
         idBanner = inserir_banner(banner)
 
         # Act

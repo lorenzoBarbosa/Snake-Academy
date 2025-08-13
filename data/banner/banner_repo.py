@@ -18,7 +18,7 @@ def inserir_banner(banner: Banner):
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute(INSERIR_BANNER, (banner.idAdmin, banner.imagem, banner.status))
+        cursor.execute(INSERIR_BANNER, (banner.idAdmin, banner.status))
         conn.commit()
         conn.close()
         return cursor.lastrowid
@@ -69,7 +69,7 @@ def atualizar_banner(banner: Banner):
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute(ATUALIZAR_BANNER, (banner.idAdmin, banner.imagem, banner.status, banner.id))
+        cursor.execute(ATUALIZAR_BANNER, (banner.idAdmin, banner.status, banner.id))
         conn.commit()
         conn.close()
         return obter_banner_por_id(banner.id)
