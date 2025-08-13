@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS curso (
 
 INSERIR_CURSO = """
 INSERT INTO curso (idTopico, nome, idProfessor, custo, descricaoCurso, duracaoCurso, avaliacao, dataCriacao, statusCurso)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 """
 
 OBTER_CURSOS = """
@@ -56,7 +56,7 @@ LIMIT ? OFFSET ?
 
 OBTER_CURSO_POR_ID = """
 SELECT 
-    c.id, i.idTopico, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
+    c.idTopico, i.id, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
 FROM curso c
 JOIN topico i ON c.idTopico = i.id
 JOIN professor p ON c.idProfessor = p.id

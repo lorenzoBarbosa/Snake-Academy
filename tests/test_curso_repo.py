@@ -5,6 +5,8 @@ from data.cliente.cliente_repo import *
 from data.curso.curso_repo import *
 from data.professor.professor_repo import *
 from data.usuario.usuario_repo import *
+from data.categoria.categoria_repo import *
+from data.topico.topico_repo import *
 
 class TestCursoRepo:
     def test_criar_tabela_curso(self, test_db):
@@ -22,6 +24,8 @@ class TestCursoRepo:
         criar_tabela_usuario()
         criar_tabela_cliente()
         criar_tabela_professor()
+        criar_tabela_categoria()
+        criar_tabela_topico()
         criar_tabela_curso()
         usuario= Usuario(0, "claudio", "claudio@g", "123", "1234", "12-06-2025")
         usuario_inserido = inserir_usuario(usuario)
@@ -29,8 +33,15 @@ class TestCursoRepo:
         cliente_inserido = inserir_cliente(cliente, usuario_inserido)
         professor= Professor(0, "", "", "", "", "", "", True, [], True, ["python"], 12, "12-06-2025")
         professor_inserido = inserir_professor(professor, cliente_inserido)
+        professor_db = obter_professor_por_id(professor_inserido)
+        categoria = Categoria(0, "Categoria de cursos de programação")
+        categoria_inserida = inserir_categoria(categoria)
+        categoria_db = obter_categoria_por_id(categoria_inserida)
+        topico = Topico(0, "Python", categoria_db.id)
+        topico_inserido = inserir_topico(topico)
+        topico_db = obter_topico_por_id(topico_inserido)
         # Act
-        curso_obj = Curso(0, "Python", 1, 12.99, "não sei", "12:56", "Bom", "12-06-2025", True)
+        curso_obj = Curso(0, topico_db.id, "Python", professor_db.id, 12.99, "não sei", "12:56", "Bom", "12-06-2025", True, )
         curso_inserido = inserir_curso(curso_obj)
         curso_db = obter_curso_por_id(curso_inserido)
         # Asserts
@@ -50,6 +61,8 @@ class TestCursoRepo:
         criar_tabela_usuario()
         criar_tabela_cliente()
         criar_tabela_professor()
+        criar_tabela_categoria
+        criar_tabela_topico()
         criar_tabela_curso()
         usuario= Usuario(0, "claudio", "claudio@g", "123", "1234", "12-06-2025")
         usuario_inserido = inserir_usuario(usuario)
@@ -57,10 +70,21 @@ class TestCursoRepo:
         cliente_inserido = inserir_cliente(cliente, usuario_inserido)
         professor= Professor(0, "", "", "", "", "", "", True, [], True, ["python"], 12, "12-06-2025")
         professor_inserido = inserir_professor(professor, cliente_inserido)
-        curso_obj = Curso(0, "Python", 1, 12.99, "não sei", "12:56", "Bom", "12-06-2025", True)
-        curso_obj1 = Curso(0, "Python", 1, 12.99, "não sei", "12:56", "Bom", "12-06-2025", True)
-        curso_inserido = inserir_curso(curso_obj)
-        curso_inserido1 = inserir_curso(curso_obj1)
+        professor_db = obter_professor_por_id(professor_inserido)
+        categoria = Categoria(0, "Categoria de cursos de programação")
+        categoria_inserida = inserir_categoria(categoria)
+        categoria_db = obter_categoria_por_id(categoria_inserida)
+        topico1 = Topico(0, "Python", categoria_db.id)
+        topico_inserido1 = inserir_topico(topico1)
+        topico_db1 = obter_topico_por_id(topico_inserido1)
+        topico2 = Topico(0, "Python", categoria_db.id)
+        topico_inserido2 = inserir_topico(topico2)
+        topico_db2 = obter_topico_por_id(topico_inserido2)
+        # Act
+        curso_obj1 = Curso(0, topico_db1.id, "Python", professor_db.id, 12.99, "não sei", "12:56", "Bom", "12-06-2025", True, )
+        curso_obj2 = Curso(1, topico_db2.id, "Python", professor_db.id, 15.99, "saberemos", "13:56", "Muito Bom", "12-07-2025", True, )
+        curso_inserido = inserir_curso(curso_obj1)
+        curso_inserido2 = inserir_curso(curso_obj2)
         # Act
         cursos = obter_todos_cursos()
         # Asserts
