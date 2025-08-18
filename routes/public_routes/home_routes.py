@@ -24,8 +24,6 @@ id_admin = inserir_admin(id=usuario.id, admin= Admin(id=usuario.id, nome= usuari
 for i in range(3):
     inserir_banner(Banner(id=0, idAdmin=id_admin, status="ativo"))
 
-for c in range(3):
-    inserir_cliente()
 
 
 @router.get("/")
