@@ -3,6 +3,7 @@ from fastapi.templating import Jinja2Templates
 
 from data.admin.admin_repo import *
 from data.banner.banner_repo import *
+from data.cliente.cliente_repo import *
 from data.usuario.usuario_repo import *
 
 router = APIRouter()
@@ -11,6 +12,8 @@ templates = Jinja2Templates(directory="templates")
 criar_tabela_usuario()
 criar_tabela_admin()
 criar_tabela_banner()
+criar_tabela_cliente()
+
 
 for u in range(3):
     usuario = Usuario(id=0, nome=f"Usuário {u}", email=f"usuario{u}@exemplo.com", senha="senha123", telefone="123456789", dataCriacao='2023-01-01')
@@ -21,6 +24,8 @@ id_admin = inserir_admin(id=usuario.id, admin= Admin(id=usuario.id, nome= usuari
 for i in range(3):
     inserir_banner(Banner(id=0, idAdmin=id_admin, status="ativo"))
 
+for c in range(3):
+    inserir_cliente()
 
 
 @router.get("/")

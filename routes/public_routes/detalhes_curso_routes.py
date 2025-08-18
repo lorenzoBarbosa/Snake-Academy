@@ -6,9 +6,9 @@ from data.usuario import usuario_repo
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
-@router.get("/curso")
+@router.get("/detalhes_curso")
 async def get_curso():
-    response = templates.TemplateResponse("publico/curso.html", {"request": {}})
+    response = templates.TemplateResponse("publico/detalhes_curso.html", {"request": {}})
     return response
 
 
