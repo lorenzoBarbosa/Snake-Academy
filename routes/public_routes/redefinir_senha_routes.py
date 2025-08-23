@@ -4,8 +4,8 @@ from fastapi.templating import Jinja2Templates
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
-@router.get("/restaurar_senha")
+@router.get("/redefinir_senha")
 async def get_restaurar_senha():
-    response = templates.TemplateResponse("publico/restaurar_senha.html", {"request": {}})
+    response = templates.TemplateResponse("publico/redefinir_senha.html", {"request": {}})
     return response
 
