@@ -3,6 +3,27 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import uvicorn
+
+from routes.admin_routes.administrador_routes import router as administrador_router
+from routes.admin_routes.alterar_categoria_routes import router as alterar_categoria_router
+from routes.admin_routes.alterar_routes import router as alterar_router
+from routes.admin_routes.banners_routes import router as banners_router
+from routes.admin_routes.cadastrar_routes import router as cadastrar_router
+from routes.admin_routes.categorias_routes import router as categorias_router
+from routes.admin_routes.comentarios_routes import router as comentarios_router
+from routes.admin_routes.confirmar_alteracao_status_admin_routes import router as confirmar_alteracao_status_admin_router
+from routes.admin_routes.confirmar_alteracao_status_curso_routes import router as confirmar_alteracao_status_curso_router
+from routes.admin_routes.curso_admin_routes import router as curso_admin_router
+from routes.admin_routes.denuncias_routes import router as denuncias_router
+from routes.admin_routes.detalhes_usuario_routes import router as detalhes_usuario_router
+from routes.admin_routes.excluir_categoria_routes import router as excluir_categoria_router
+from routes.admin_routes.excluir_routes import router as excluir_router
+from routes.admin_routes.inserir_categoria_routes import router as inserir_categoria_router
+from routes.admin_routes.moderar_comentario_routes import router as moderar_comentario_router
+from routes.admin_routes.moderar_denuncia_routes import router as moderar_denuncia_router
+from routes.admin_routes.notificar_usuario_routes import router as notificar_usuario_router
+from routes.admin_routes.usuarios_routes import router as usuarios_router
+
 from routes.public_routes.cadastro_routes import router as cadastro_router
 from routes.public_routes.home_routes import router as home_router
 from routes.public_routes.login_routes import router as login_router
@@ -78,6 +99,25 @@ app.include_router(modificar_modulo_router)
 app.include_router(excluir_curso_router)
 app.include_router(criar_curso_router)
 app.include_router(criar_modulo_router)
+app.include_router(administrador_router)
+app.include_router(alterar_categoria_router)
+app.include_router(alterar_router)
+app.include_router(banners_router)
+app.include_router(cadastrar_router)
+app.include_router(categorias_router)
+app.include_router(comentarios_router)
+app.include_router(confirmar_alteracao_status_admin_router)
+app.include_router(confirmar_alteracao_status_curso_router)
+app.include_router(curso_admin_router)
+app.include_router(denuncias_router)
+app.include_router(detalhes_usuario_router)
+app.include_router(excluir_categoria_router)
+app.include_router(excluir_router)
+app.include_router(inserir_categoria_router)
+app.include_router(moderar_comentario_router)
+app.include_router(moderar_denuncia_router)
+app.include_router(notificar_usuario_router)
+app.include_router(usuarios_router)
 
 
 if __name__ == "__main__":

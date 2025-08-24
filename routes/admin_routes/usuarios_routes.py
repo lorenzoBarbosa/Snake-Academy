@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
-@router.get("/usuarios")
+@router.get("/admin/usuarios")
 async def get_usuarios():
-    response = templates.TemplateResponse("admin/usuarios.html", {"request": {}})
+    response = templates.TemplateResponse("admin/usuarios/usuarios.html", {"request": {}})
     return response
