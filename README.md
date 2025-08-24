@@ -28,7 +28,7 @@ Grupo: Jhonatan Lima Mota Lourenço, Lorenzo Barbosa Alves, Lucas Oliveira Silva
 
         git config --global user.name "Seu nome"
         
-        git config --global     user.email "email@exemplo.com"
+        git config --global user.email "email@exemplo.com"
 
         pip install -r requirements.txt
 
