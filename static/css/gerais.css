@@ -380,9 +380,14 @@ html,body
     height: 100%;
 }
 
-.carrosel-curso{
-    width: 40vw;
-    height: 40vh;
+.carde-curso-preco{
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    color: #000000;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-height: 1000px;
+    min-width: 200px;
+
 }
 
 .carousel-inner img {
