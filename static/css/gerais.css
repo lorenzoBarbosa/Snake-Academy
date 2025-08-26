@@ -329,28 +329,28 @@ html,body
     flex: 0 0 300px; /* largura fixa da lista de objetivos */
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
+    margin-bottom: 100px ;
 }
 
 .objetivos-aprendizado {
     background-color: #ffffff;
     padding: 15px;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 22px;
     cursor: pointer;
+    min-height: 100px;
 }
 .painel-lateral {
+    margin-left: 100px ;
     flex: 1; /* ocupa todo o resto da linha */
     position: relative;
-    min-height: 200px; /* altura mínima do painel */
+    margin-bottom: 100px;
 }
 
 .conteudo-painel {
-    background-color: #ffffff;
-    color: white;
-    padding: 20px;
-    border-radius: 5px;
-    min-height: 350px;
+    width: 100%;
+    height: 100%;
 }
 
 
