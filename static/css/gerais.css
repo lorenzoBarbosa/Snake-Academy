@@ -353,6 +353,35 @@ html,body
     padding-top: 30px;
 }
 
+.fundo-curso{
+    background-color: #220031;
+    min-height: 30vh;
+    min-width: 100vw;
+    position: absolute;
+}
+
+.detalhes-curso {
+    padding: 20px;
+    min-height: 30vh;
+    background-color: none;
+    position: relative;
+    align-items: right;
+}
+
+.titulo-curso {
+    display: inline-block;
+    font-size: 32px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: none;
+    margin-left: 120px;
+}
+
+.descricao-curso {
+    font-size: 16px;
+    color: #ffffff;
+    margin-left: 120px;
+}
 
 .carousel-control-prev,
 .carousel-control-next {
