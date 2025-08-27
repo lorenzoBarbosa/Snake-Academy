@@ -123,7 +123,7 @@ article{
     color: #555555;
     max-width: 1500px;
     text-align: justify;
-    font-family: 'Open Sans', 'Arial', sans-serif;
+    font-family: 'Times New Roman', 'Times', serif;
 }
 
 .linha {
@@ -172,6 +172,7 @@ article{
     border: 1px solid #cac9ca;
     display: inline-block;
     padding: 0;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .imagem-curso {
@@ -186,6 +187,7 @@ article{
     padding: 10px;
     margin-left: 8px ;
     margin-bottom: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .carde-texto-titulo{
     font-size: 18px;
@@ -244,23 +246,27 @@ article{
     padding: 10px;
     margin-left: 8px ;
     margin-bottom: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .carde-texto-titulo-favoritos{
     font-size: 16px;
     font-weight: bold;
     margin: 0;
+    font-family: 'Times New Roman', Times, serif;
 }
 .carde-autor-favoritos {
     font-size: 12px;
     color: #555555;
     margin-top: 0;
     margin-bottom: 8px;
+    font-family: 'Times New Roman', Times, serif;
 }
 .carde-avaliacao-favoritos{
     font-size: 15px;
     color: #000000;
     margin-bottom: 0;
     display: inline;
+    font-family: 'Times New Roman', Times, serif;
 }
 .carde-quantidade-avaliacoes-favoritos {
     font-size: 12px;
@@ -322,6 +328,7 @@ article{
     font-size: 30px;
     color: #333333;
     font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
 }
 .div-aprendizado-direcionado-container{
     width: 100%;
@@ -394,6 +401,7 @@ article{
     color: #ffffff;
     background-color: none;
     margin-left: 120px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .descricao-curso {
@@ -495,6 +503,8 @@ article{
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: medium;
 }
 
 .testimonial-card p {
