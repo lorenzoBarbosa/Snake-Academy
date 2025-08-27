@@ -69,6 +69,14 @@ article{
     background-color: #288363;
     color: #FFFFFF;
 }
+
+.login-page {
+    background: url("/static/img/cobras\ de\ fundo.png") no-repeat center center fixed;
+    background-size: cover;
+    width: 100%;
+    min-height: 100vh;
+}
+
 .cadastro {
     background-color: #5C22AD;
     color: #FFFFFF;
