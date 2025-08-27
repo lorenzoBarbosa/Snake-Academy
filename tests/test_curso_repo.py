@@ -114,9 +114,13 @@ class TestCursoRepo:
         topico = Topico(0, "Python", categoria_db.id)
         topico_inserido = inserir_topico(topico)
         topico_db = obter_topico_por_id(topico_inserido)
+        
+        curso_ids = []
         for c in range(10):
-            curso_obj = Curso(0, topico_db.id,f"Python{c+1}", professor_db.id, 12.99 + c, "não sei", "12:56", "Bom", "12-06-2025", True)
-            curso_inserido = inserir_curso(curso_obj)
+            curso_obj = Curso(0, topico_db.id, f"Python{c+1}", professor_db.id, 12.99 + c, "não sei", "12:56", "Bom", "12-06-2025", True)
+            curso_id = inserir_curso(curso_obj)
+            curso_ids.append(curso_id)
+
         # Act
         cursos1 = obter_cursos_paginado(1, 4)
         cursos2 = obter_cursos_paginado(2, 4)
@@ -124,8 +128,8 @@ class TestCursoRepo:
         # Assert
         assert len(cursos1) == 4, "A primeira página deveria conter 4 cursos"
         assert len(cursos2) == 4, "A segunda página deveria conter 4 cursos"
-        curso = obter_curso_por_id(9)
-        assert curso.id == 9, "O id do curso obtido está incorreto"
+        curso = obter_curso_por_id(curso_ids[8])
+        assert curso.id == curso_ids[8], "O id do curso obtido está incorreto"
     
     def test_obter_curso_por_id(self, test_db):
         # Arrange

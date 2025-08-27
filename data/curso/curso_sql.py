@@ -60,7 +60,7 @@ LIMIT ? OFFSET ?
 
 OBTER_CURSO_POR_ID = """
 SELECT 
-    c.idTopico, i.id, c.nome, c.idProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
+    c.id, c.idTopico, c.nome, c.idProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
 FROM curso c
 JOIN topico i ON c.idTopico = i.id
 JOIN professor p ON c.idProfessor = p.id

@@ -37,6 +37,7 @@ def inserir_curso(curso: Curso):
         return cursor.lastrowid
     except Exception as e:
         print(f"Erro os dados não foram inseridos: {e}")
+        raise
 
 def obter_todos_cursos() -> list[Curso]:
     try:
@@ -91,27 +92,27 @@ def obter_cursos_paginado(pg_num: int, pg_size: int) -> list[Curso]:
     except Exception as e:
         print(f"Erro os cursos não foram obtidos: {e}")
 
-def obter_curso_por_id(id: int):
+def obter_curso_por_id(id: int) -> Optional[Curso]:
     try:
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute(OBTER_CURSO_POR_ID, (id,))
         tupla = cursor.fetchone()
         conn.close()
-        return Curso(
+        curso = Curso(
                 id=tupla[0],
                 idTopico=tupla[1],
                 nome=tupla[2],
                 idProfessor=tupla[3],
-                custo=tupla[5],
-                descricaoCurso=tupla[6],
-                duracaoCurso=tupla[7],
-                avaliacao=tupla[8],
-                dataCriacao=tupla[9],
-                statusCurso=tupla[10],
+                custo=tupla[4],
+                descricaoCurso=tupla[5],
+                duracaoCurso=tupla[6],
+                avaliacao=tupla[7],
+                dataCriacao=tupla[8],
+                statusCurso= bool(tupla[9]),
                 professor = professor_repo.obter_professor_por_id(tupla[3])
             )
-        
+        return curso
     except Exception as e:
         print(f"Erro os cursos não foram obtidos: {e}")
 
@@ -130,12 +131,12 @@ def obter_curso_por_termo_paginado(termo: str, pg_num: int, pg_size: int) -> lis
                 idTopico=tupla[1],
                 nome=tupla[2],
                 idProfessor=tupla[3],
-                custo=tupla[5],
-                descricaoCurso=tupla[6],
-                duracaoCurso=tupla[7],
-                avaliacao=tupla[8],
-                dataCriacao=tupla[9],
-                statusCurso=tupla[10],
+                custo=tupla[4],
+                descricaoCurso=tupla[5],
+                duracaoCurso=tupla[6],
+                avaliacao=tupla[7],
+                dataCriacao=tupla[8],
+                statusCurso=tupla[9],
                 professor = professor_repo.obter_professor_por_id(tupla[3])
             ) for tupla in tuplas ]
         return cursos
