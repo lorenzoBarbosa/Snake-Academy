@@ -373,13 +373,13 @@ article{
     align-items: right;
 }
 
-.descricao-curso{
+.detalhes-curso{
     display: inline-block;
-    max-width: 40vw;
+    max-width: 50vw;
 }
 
 .titulo-curso {
-    font-size: 32px;
+    font-size: 38px;
     font-weight: bold;
     color: #ffffff;
     background-color: none;
@@ -387,9 +387,32 @@ article{
 }
 
 .descricao-curso {
-    font-size: 16px;
+    font-size: 18px;
     color: #ffffff;
     margin-left: 120px;
+}
+
+.carde-curso-detalhes{
+    display: inline-block;
+    min-width: 25vw;
+    max-width: 25vw;
+    min-height: 50vh;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    border-radius: 20px;
+    margin-left: 300px;
+    margin-top: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.detalhes-imagem-curso-container{
+    border-radius: 20px 20px 0 0;
+    min-width: 100%;
+}
+
+.detalhes-imagem-curso{
+    max-width: 100%;
 }
 
 
