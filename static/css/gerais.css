@@ -195,7 +195,7 @@ article{
 }
 .carde-texto-titulo{
     font-size: 18px;
-    font-weight: bold;
+    font-weight: lighter;
     margin: 0;
     font-family: 'Times New Roman', Times, serif;
 }
@@ -608,7 +608,7 @@ article{
   justify-content: space-between;
   text-align: center;
   font-family: 'Times New Roman', Times, serif;
-  font-size: medium;
+  font-size: 22px;
 }
 
 .testimonial-card p {
