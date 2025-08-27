@@ -527,6 +527,23 @@ article{
     transition: 2ms;
 }
 
+.carrosel-detalhes-curso{
+    position: relative;
+    max-width: 50% ;
+    overflow: hidden;
+    margin-left: 10vw;
+    margin-top: 5vh;
+    max-height: 50vh;
+}
+
+.titulo-modulo{
+    font-size: 38px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: none;
+    margin-left: 120px;
+}
+
 .carousel-control-prev,
 .carousel-control-next {
     width: 5%;
