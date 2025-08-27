@@ -71,11 +71,26 @@ article{
     color: #FFFFFF;
 }
 
-.login-page {
-    background: url("/static/img/cobras\ de\ fundo.png") no-repeat center center fixed;
-    background-size: cover;
+.login-container {
+    display: flex;
+    height: 100vh;
     width: 100%;
-    min-height: 100vh;
+}
+
+.login-esquerda {
+    flex: 1;
+    background: url("/static/img/Snake\ login.png") no-repeat center center;
+    background-size: cover;
+}
+
+.login-direita {
+    flex: 1;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    box-shadow: -4px 0 8px rgba(0,0,0,0.1);
 }
 
 .cadastro {
@@ -195,7 +210,7 @@ article{
 }
 .carde-texto-titulo{
     font-size: 18px;
-    font-weight: bold;
+    font-weight: lighter;
     margin: 0;
     font-family: 'Times New Roman', Times, serif;
 }
@@ -625,7 +640,7 @@ article{
   justify-content: space-between;
   text-align: center;
   font-family: 'Times New Roman', Times, serif;
-  font-size: medium;
+  font-size: 22px;
 }
 
 .testimonial-card p {
