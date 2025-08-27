@@ -414,7 +414,6 @@ article{
     color: #ffffff;
     background-color: none;
     margin-left: 120px;
-    font-family: 'Times New Roman', Times, serif;
 }
 
 .descricao-curso {
@@ -435,6 +434,7 @@ article{
     margin-top: 50px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);   
     padding-bottom: 20px ;
+    position: fixed;
 }
 
 .detalhes-imagem-curso-container{
@@ -554,10 +554,10 @@ article{
 
 .titulo-modulo{
     font-size: 38px;
-    font-weight: bold;
-    color: #ffffff;
+    margin-top: 5vh;
+    color: #000000;
     background-color: none;
-    margin-left: 120px;
+    margin-left: 8%;
 }
 
 .carousel-control-prev,
