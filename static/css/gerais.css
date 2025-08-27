@@ -410,7 +410,7 @@ article{
     background-color: rgb(255, 255, 255);
     position: absolute;
     border-radius: 20px;
-    margin-left: 300px;
+    margin-left: 20%;
     margin-top: 50px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);   
 }
@@ -425,12 +425,57 @@ article{
     border-radius: 20px 20px 0 0;
 }
 
-.linha-detalhes-imagem-curso{
+.linha-detalhes-imagem-curso-roxo1{
     height: 5px;
-    width: 100%;
-    background-color: #ff0000;
+    width: 20%;
+    background-color: #220031;
+    position: absolute;
+    margin-left: 0%;
 }
 
+.linha-detalhes-imagem-curso-verde1{
+    height: 5px;
+    width: 20%;
+    background-color: #38bc8e;
+    position: absolute;
+    margin-left: 20%;
+    
+}
+
+.linha-detalhes-imagem-curso-roxo2{
+    height: 5px;
+    width: 20%;
+    background-color: #220031;
+    position: absolute;
+    margin-left: 40%;
+    
+}
+
+.linha-detalhes-imagem-curso-verde2{
+    height: 5px;
+    width: 20%;
+    background-color: #38bc8e;
+    position: absolute;
+    margin-left: 60%;
+    
+}
+
+.linha-detalhes-imagem-curso-roxo3{
+    height: 5px;
+    width: 20%;
+    background-color: #220031;
+    position: absolute;
+    margin-left: 80%;
+    
+}
+
+.detalhes-curso-carde{
+    padding: 20px;
+}
+
+.detalhes-curso-carde-titulo{
+    font-size: 2em;
+}
 
 
 .carousel-control-prev,
