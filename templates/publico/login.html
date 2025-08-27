@@ -1,12 +1,10 @@
 {% extends "index.html" %}
 {% block conteudo %}
 
-<div class="main-content container">
+<article class="main-content container">
     <div class="row justify-content-end align-items-center">
-        <!-- Formulário à direita -->
         <div class="col-md-6 d-flex justify-content-end order-1 order-md-2">
             <div style="width: 100%; max-width: 400px;">
-                <!-- Título alinhado ao início da barra -->
                 <h3 class="mb-4 text-start">Login</h3>
 
                 <form>
@@ -19,7 +17,6 @@
                     <button type="submit" class="btn botao-roxo-lc w-100">Entrar</button>
                 </form>
 
-                <!-- Redes sociais centralizadas abaixo dos inputs -->
                 <div class="mt-4 text-center">
                     <p>Ou entre com:</p>
                     <div class="social-icons d-flex justify-content-center gap-3">
@@ -31,11 +28,10 @@
             </div>
         </div>
 
-        <!-- Imagem à direita -->
         <div class="col-md-6 text-end order-2 order-md-1">
-            <img src="/static/img/ilustracao_snake.png" alt="Ilustração Snake" class="img-fluid">
+            <img src="/static/img/cursosnake.png" alt="Ilustração Snake" class="img-fluid">
         </div>
     </div>
-</div>
+</article>
 
 {% endblock %}
