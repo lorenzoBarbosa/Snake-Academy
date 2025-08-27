@@ -485,6 +485,46 @@ article{
     font-size: 2em;
 }
 
+.detalhes-curso-carde-informacoes{
+    font-size: 1.1em;
+    color: #666666;
+}
+
+.detalhes-curso-carde-preco{
+    font-size: 1.5em;
+    color: #000000;
+}
+
+.container-compra {
+    background-color: #ffffff;
+}
+
+.botao-comprar{
+    background-color: #3a1572;
+    border: none;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5%;
+}
+.botao-comprar:hover{
+    background-color: #230d46;
+    transition: 2ms;
+}
+
+.botao-carrinho{
+    background-color: #ffffff;
+    border: 1px solid #3a1572;
+    color: #3a1572;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10%;
+}
+.botao-carrinho:hover{
+    background-color: #f0f0f0;
+    transition: 2ms;
+}
 
 .carousel-control-prev,
 .carousel-control-next {
