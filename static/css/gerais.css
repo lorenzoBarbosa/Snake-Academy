@@ -6,6 +6,11 @@ html,body
     background-color: #ffffff;
     font-family: 'Times New Roman', 'Arial Narrow', Arial, sans-serif;
 }  
+
+article{
+    min-height: 100vh;
+
+}
 .topo {
     background-color: #522197;
     height: 20px;
@@ -368,8 +373,12 @@ html,body
     align-items: right;
 }
 
-.titulo-curso {
+.descricao-curso{
     display: inline-block;
+    max-width: 40vw;
+}
+
+.titulo-curso {
     font-size: 32px;
     font-weight: bold;
     color: #ffffff;
@@ -382,6 +391,8 @@ html,body
     color: #ffffff;
     margin-left: 120px;
 }
+
+
 
 .carousel-control-prev,
 .carousel-control-next {
