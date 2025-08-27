@@ -233,7 +233,7 @@ class TestCursoRepo:
         curso_atualizado = obter_curso_por_id(curso_id)
         assert atualizado is True, "A atualização do curso deveria retornar True"
         assert curso_atualizado.nome == "Curso Atualizado", "O nome não foi atualizado corretamente"
-        assert curso_atualizado.statusCurso is 0, "O status não foi atualizado corretamente"
+        assert curso_atualizado.statusCurso == 0, "O status não foi atualizado corretamente"
 
     def test_excluir_curso_por_id(self, test_db):
         criar_tabela_usuario()
