@@ -93,6 +93,14 @@ article{
     box-shadow: -4px 0 8px rgba(0,0,0,0.1);
 }
 
+#acessar-recuperar-senha-login a{
+    color: black;
+}
+
+#acessar-recuperar-senha-login a:hover {
+    color: rgb(212, 0, 255);
+}
+
 .cadastro {
     background-color: #5C22AD;
     color: #FFFFFF;
@@ -695,6 +703,3 @@ article{
     margin-top: 50px;
 }
 
-#acessar-recuperar-senha-login a {
-    color: black;
-}
