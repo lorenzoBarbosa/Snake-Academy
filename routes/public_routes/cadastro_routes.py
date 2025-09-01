@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from fastapi.params import Form
 from fastapi.templating import Jinja2Templates
 
 from data.usuario import usuario_repo
@@ -14,7 +15,7 @@ async def get_cadastro():
     return response
 
 @router.post("/cadastro")
-async def post_cadastro(nome: str, email: str, senha: str,  confirmar_senha: str, telefone: str):
+async def post_cadastro(nome: str = Form(...), email: str = Form(...), senha: str = Form(...),  confirmar_senha: str = Form(...), telefone: str = Form(...)):
     if senha != confirmar_senha:
         data_criacao = datetime.now()
         usuario = Usuario(id=0,nome=nome,email=email,senha=senha,telefone=telefone,dataCriacao=data_criacao.strftime("%Y-%m-%d %H:%M:%S"))
