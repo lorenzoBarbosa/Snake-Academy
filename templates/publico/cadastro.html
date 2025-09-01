@@ -7,18 +7,34 @@
         <div class="login-direita">
             <div style="width: 100%; max-width: 400px;">
                 <h3 class="mb-4 text-start">Cadastre-se</h3>
-                <form>
+                <form action="/cadastro" method="post">
                     <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Email ou nome de usuário">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email">
                     </div>
                     <div class="mb-3">
-                        <input type="tel" class="form-control" placeholder="Telefone">
+                        <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome completo">
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="Senha">
+                        <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="Telefone">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha">
                     </div>
                     <div class="mb-4">
-                        <input type="password" class="form-control" placeholder="Confirme sua senha">
+                        <input type="password" class="form-control" name="confirmar_senha" id="confirmar_senha" placeholder="Confirme sua senha">
+                        {% if mensagem %}
+                        <div>
+                            <div class="offcanvas offcanvas-start show" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+                                <div class="offcanvas-header">
+                                    <h5 class="offcanvas-title" id="offcanvasLabel">Erro ao realizar cadastro</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                </div>
+                                <div class="offcanvas-body">
+                                    {{ mensagem }}
+                                </div>        
+                        </div>
+                        </div>
+                        {% endif %}
                     </div>
                     <button type="submit" class="btn botao-roxo-lc w-100">Cadastrar-se</button>
                 </form>
