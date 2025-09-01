@@ -694,3 +694,7 @@ article{
     padding-top: 20px;
     margin-top: 50px;
 }
+
+#acessar-recuperar-senha-login a {
+    color: black;
+}
