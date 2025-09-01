@@ -11,5 +11,7 @@ async def get_cadastro():
     response = templates.TemplateResponse("publico/cadastro.html", {"request": {}})
     return response
 
-
+@router.post("/cadastro")
+async def post_cadastro(nome: str, email: str, senha: str):
+    pass
     
