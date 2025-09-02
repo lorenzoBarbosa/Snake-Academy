@@ -24,15 +24,7 @@
                         <input type="password" class="form-control" name="confirmar_senha" id="confirmar_senha" placeholder="Confirme sua senha">
                         {% if mensagem %}
                         <div>
-                            <div class="offcanvas show" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
-                                <div class="offcanvas-header">
-                                    <h5 class="offcanvas-title" id="offcanvasLabel">Erro ao realizar cadastro</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                </div>
-                                <div class="offcanvas-body">
-                                    {{ mensagem }}
-                                </div>        
-                            </div>
+                            <p class="text-danger mt-2">{{ mensagem }}</p>
                         </div>
                         {% endif %}
                     </div>
