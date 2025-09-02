@@ -703,3 +703,159 @@ article{
     margin-top: 50px;
 }
 
+.redefinir-alinhamento {
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.redefinir-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  padding: 32px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.redefinir-card h2 {
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.redefinir-card .descricao {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.campo {
+  margin-bottom: 20px;
+}
+
+.campo label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.campo input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo input:focus {
+  border-color: #7c5cff;
+  box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.2);
+}
+
+.btn-recuperar {
+  width: 100%;
+  background: linear-gradient(180deg, #7c5cff, #6949ff);
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.08s ease, filter 0.2s ease;
+}
+
+.btn-recuperar:hover {
+  filter: brightness(1.05);
+}
+
+.btn-recuperar:active {
+  transform: translateY(1px) scale(0.98);
+}
+.redefinir-alinhamento {
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.redefinir-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  padding: 32px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.redefinir-card h2 {
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.redefinir-card .descricao {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.campo {
+  margin-bottom: 20px;
+}
+
+.campo label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.campo input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo input:focus {
+  border-color: #7c5cff;
+  box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.2);
+}
+
+.btn-redefinir {
+  width: 100%;
+  background: linear-gradient(180deg, #7c5cff, #6949ff);
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.08s ease, filter 0.2s ease;
+}
+
+.btn-redefinir:hover {
+  filter: brightness(1.05);
+}
+
+.btn-redefinir:active {
+  transform: translateY(1px) scale(0.98);
+}
