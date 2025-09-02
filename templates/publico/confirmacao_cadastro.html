@@ -1,5 +1,18 @@
-{% extends "index.html" %}
+{%extends "index.html" %}
 {% block conteudo %}
-<h1>Confirmação de Cadastro</h1>
-<p>Seu cadastro foi realizado com sucesso!</p>
-{% endblock %}
+
+<article>
+    <div class="login-container">
+        <div class="login-esquerda"></div>
+        <div class="login-direita">
+            <div style="width: 100%; max-width: 400px;">
+                <h3 class="mb-4 text-start">Seu cadastro foi efetuado com sucesso!</h3>
+                <p>Bem-vindo à nossa plataforma!</p>
+                <p>Efetue seu login para continuar.</p>
+                <a href="/login" class="btn botao-roxo-lc">Login</a>
+            </div>
+        </div>
+    </div>
+</article>
+
+{%endblock%}
