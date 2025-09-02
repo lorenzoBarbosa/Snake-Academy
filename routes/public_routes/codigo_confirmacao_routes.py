@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
-@router.get("/codigo_de_confirmacao")
+@router.get("/codigo_confirmacao")
 async def get_codigo_de_confirmacao():
-    response = templates.TemplateResponse("publico/codigo_de_confirmacao.html", {"request": {}})
+    response = templates.TemplateResponse("publico/codigo_confirmacao.html", {"request": {}})
     return response
