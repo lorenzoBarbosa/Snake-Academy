@@ -33,6 +33,7 @@ from routes.public_routes.cursos_routes import router as cursos_router
 from routes.public_routes.recuperar_senha_routes import router as recuperar_senha_router
 from routes.public_routes.redefinir_senha_routes import router as restaurar_senha_router
 from routes.public_routes.validacao_email_routes import router as validacao_email_router
+from routes.public_routes.codigo_de_confirmacao_routes import router as codigo_de_confirmacao_router
 
 from routes.cliente_routes.cliente_routes import router as cliente_router
 from routes.cliente_routes.editar_perfil_routes import router as editar_perfil_router
@@ -118,6 +119,7 @@ app.include_router(moderar_comentario_router)
 app.include_router(moderar_denuncia_router)
 app.include_router(notificar_usuario_router)
 app.include_router(usuarios_router)
+app.include_router(codigo_de_confirmacao_router)
 
 
 if __name__ == "__main__":
