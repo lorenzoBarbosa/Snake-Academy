@@ -16,12 +16,12 @@ async def get_cadastro():
 
 @router.post("/cadastro")
 async def post_cadastro(nome: str = Form(...), email: str = Form(...), senha: str = Form(...),  confirmar_senha: str = Form(...), telefone: str = Form(...)):
-    if senha != confirmar_senha:
+    if senha == confirmar_senha:
         data_criacao = datetime.now()
         usuario = Usuario(id=0,nome=nome,email=email,senha=senha,telefone=telefone,dataCriacao=data_criacao.strftime("%Y-%m-%d %H:%M:%S"))
         resultado = usuario_repo.inserir_usuario(usuario)
         if resultado is not None:
-            response = templates.TemplateResponse("publico/cadastro.html", {"request": {}, "menssagem": "Usuário cadastrado com sucesso!"})
+            response = templates.TemplateResponse("publico/confirmacao_cadastro.html", {"request": {}, "resultado": resultado})
         else:
             response = templates.TemplateResponse("publico/cadastro.html", {"request": {}, "mensagem": "Erro ao cadastrar usuário."})
         return response
