@@ -13,13 +13,14 @@
 }
 
 .container-imagem-professor {
-    width: 30%;
-    height: auto;
+    width: 200px;
+    height: 200px;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     overflow: hidden;
     display: block;
     flex-direction: row;
+    position: absolute;
 }
 
 .imagem-professor{
@@ -37,4 +38,8 @@
 }
 .nome-professor{
     font-size: 2em;
+}
+.descricao-professor{
+    font-size: 1.2em;
+    text-align: justify;
 }

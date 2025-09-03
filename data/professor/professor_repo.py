@@ -26,6 +26,7 @@ def inserir_professor(professor: Professor, id: int) -> Optional[int]:
         cursosPostados,
         professor.quantidadeAlunos,
         professor.dataCriacaoProfessor,
+        professor.descricaoProfessor,
         id))
         conn.commit()
         conn.close()
@@ -55,8 +56,9 @@ def obter_todos_professors() -> list[Professor]:
                 indentificacaoProfessor=tupla[9], 
                 cursosPostados=tupla[10],
                 quantidadeAlunos=tupla[11],
-                dataCriacaoProfessor=tupla[12]   
-            ) for tupla in tuplas 
+                dataCriacaoProfessor=tupla[12],
+                descricaoProfessor=tupla[13]
+            ) for tupla in tuplas
         ]
         conn.close()
         return professores
@@ -90,7 +92,8 @@ def obter_professor_por_email(email: str) -> Optional[Professor]:
                 indentificacaoProfessor=tupla[9],
                 cursosPostados=cursosPostados,
                 quantidadeAlunos=tupla[11],
-                dataCriacaoProfessor=tupla[12]
+                dataCriacaoProfessor=tupla[12],
+                descricaoProfessor=tupla[13]
             )
     except Exception as e:
         print(f"Erro ao obter professor por email: {e}")
@@ -123,7 +126,8 @@ def obter_professor_por_id(id: int) -> Optional[Professor]:
             indentificacaoProfessor=tupla[9],
             cursosPostados=cursosPostados,
             quantidadeAlunos=tupla[11],
-            dataCriacaoProfessor=tupla[12]
+            dataCriacaoProfessor=tupla[12],
+            descricaoProfessor=tupla[13]
         )
     except Exception as e:
         print(f"Erro ao obter professor por id: {e}")
@@ -145,6 +149,7 @@ def atualizar_professor_por_id(professor: Professor, id: int):
             professor.email,
             professor.senha,
             professor.telefone,
+            professor.dataCriacao,
             id
         ))
 
@@ -158,6 +163,7 @@ def atualizar_professor_por_id(professor: Professor, id: int):
             professor.statusConta,
             professor.historicoCursos,
             professor.indentificacaoProfessor,
+            professor.dataCriacao,
             id
         ))
 
@@ -170,6 +176,7 @@ def atualizar_professor_por_id(professor: Professor, id: int):
             professor.cursosPostados,
             professor.quantidadeAlunos,
             professor.dataCriacaoProfessor,
+            professor.descricaoProfessor,
             id
         ))
 
@@ -199,6 +206,7 @@ def atualizar_professor_por_email(professor: Professor, email: str) -> bool:
             professor.email,
             professor.senha,
             professor.telefone,
+            professor.dataCriacao,
             id_usuario
         ))
 
@@ -222,6 +230,7 @@ def atualizar_professor_por_email(professor: Professor, email: str) -> bool:
             professor.cursosPostados,
             professor.quantidadeAlunos,
             professor.dataCriacaoProfessor,
+            professor.descricaoProfessor,
             id_usuario
         ))
 
