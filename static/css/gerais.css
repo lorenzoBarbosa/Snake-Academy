@@ -624,6 +624,7 @@ article{
 }
 .botao-roxo-lc:hover {
     background-color: #5902a6;
+    color:rgb(226, 153, 255)
 }
 .social-icons img {
     width: 40px;
