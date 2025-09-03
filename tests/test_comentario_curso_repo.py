@@ -7,13 +7,16 @@ from data.curso.curso_repo import *
 from data.usuario.usuario_repo import *
 from data.cliente.cliente_repo import *
 from data.professor.professor_repo import *
-
+from data.categoria.categoria_repo import *
+from data.topico.topico_repo import *
 class TestComentarioCursoRepo:
     def test_criar_tabela_comentario_curso(self, test_db):
         # Arrange
         criar_tabela_admin()
         criar_tabela_usuario()
         criar_tabela_professor()
+        criar_tabela_categoria()
+        criar_tabela_topico()
         criar_tabela_curso()
         criar_tabela_cliente()
         criar_tabela_matricula()
