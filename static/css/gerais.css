@@ -781,3 +781,10 @@ article{
 .btn-recuperar:active {
   transform: translateY(1px) scale(0.98);
 }
+
+.fundo-codigo-confirmacao {
+  background: url("/static/img/cobras\ de\ fundo.png") no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
+  width: 100%;
+}

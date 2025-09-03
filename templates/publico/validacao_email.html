@@ -1,5 +1,16 @@
 {% extends "index.html" %}
 {% block conteudo %}
-<h1>Validação de Email</h1>
-<p>Por favor, valide seu email clicando no link que enviamos para sua caixa de entrada.</p>
+<div class="redefinir-alinhamento fundo-codigo-confirmacao">
+  <div class="redefinir-card">
+    <h2>Redefinir Senha</h2>
+    <p class="descricao">Digite seu e-mail para receber o link de redefinição.</p>
+    <form action="/codigo_enviado" method="post">
+      <div class="campo">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+      </div>
+      <button type="submit" class="btn-recuperar">Enviar</button>
+    </form>
+  </div>
+</div>
 {% endblock %}
