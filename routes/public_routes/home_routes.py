@@ -10,6 +10,8 @@ from data.professor.professor_repo import *
 from data.topico.topico_repo import *
 from data.usuario.usuario_repo import *
 
+import os
+
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
@@ -49,7 +51,7 @@ if quantidade_usuario == 0:
     id_cliente = inserir_cliente(Cliente(id=0, nome="João Souza", email="joao.souza@exemplo.com", senha="senha123", telefone="123456789", dataCriacao='2023-01-01', dataUltimoAcesso='2023-01-01', statusConta="ativo", historicoCursos="", indentificacaoProfessor="sim"), 1)
 
     cliente = obter_cliente_por_id(id_cliente)
-    inserir_professor(Professor(id=cliente.id, nome=cliente.nome, email=cliente.email, senha=cliente.senha, telefone=cliente.telefone, dataCriacao=cliente.dataCriacao, dataUltimoAcesso=cliente.dataUltimoAcesso, statusConta=cliente.statusConta, historicoCursos=cliente.historicoCursos, indentificacaoProfessor=cliente.indentificacaoProfessor, cursosPostados="", quantidadeAlunos=0, dataCriacaoProfessor='2023-01-01'), id_cliente)
+    inserir_professor(Professor(id=cliente.id, nome=cliente.nome, email=cliente.email, senha=cliente.senha, telefone=cliente.telefone, dataCriacao=cliente.dataCriacao, dataUltimoAcesso=cliente.dataUltimoAcesso, statusConta=cliente.statusConta, historicoCursos=cliente.historicoCursos, indentificacaoProfessor=cliente.indentificacaoProfessor, cursosPostados="", quantidadeAlunos=0, dataCriacaoProfessor='2023-01-01', descricaoProfessor="Professor de python que sabe demais, muito muito muito muito muito muito muito muito muio mesmo!"), id_cliente)
 
     for c in range(8):
         inserir_curso(Curso(id=0,
@@ -107,7 +109,7 @@ cursos4 = obter_curso_por_topico(4)
 cursos = obter_todos_cursos()
 banners = obter_todos_banners()
 
-import os
+
 
 def encontrar_imagem_curso(curso_id):
     base_path = 'static/img/nossos_cursos'

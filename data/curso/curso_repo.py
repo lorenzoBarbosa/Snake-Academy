@@ -170,6 +170,34 @@ def obter_quantidade_cursos_por_id_professor(idProfessor: str) -> int:
     except Exception as e:
         print(f"Erro a quantidade de cursos não foi obtida: {e}")
 
+def obter_curso_por_topico(idTopico: int) -> list[Curso]:
+    try:
+        conn= get_connection()
+        cursor= conn.cursor()
+        cursor.execute(OBTER_CURSOS_POR_ID_TOPICO, (idTopico,))
+        tuplas = cursor.fetchall()
+        conn.close()
+        cursos = [
+            Curso(
+                id=tupla[0],
+                idTopico=tupla[1],
+                nome=tupla[2],
+                idProfessor=tupla[3],
+                custo=tupla[4],
+                descricaoCurso=tupla[5],
+                duracaoCurso=tupla[6],
+                avaliacao=tupla[7],
+                dataCriacao=tupla[8],
+                statusCurso=bool(tupla[9]),
+                professor=professor_repo.obter_professor_por_id(tupla[3]),
+                topico=topico_repo.obter_topico_por_id(tupla[1])
+            ) for tupla in tuplas
+        ]
+        return cursos
+    except Exception as e:
+        print(f"Erro ao obter cursos por tópico: {e}")
+        return []
+
 def atualizar_curso_por_id(curso: Curso, id:int):
     try:
         conn = get_connection()

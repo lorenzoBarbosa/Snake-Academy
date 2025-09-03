@@ -4,13 +4,14 @@ CREATE TABLE IF NOT EXISTS professor (
     cursosPostados TEXT NOT NULL DEFAULT '[]',
     quantidadeAlunos INTEGER NOT NULL,
     dataCriacaoProfessor TEXT NOT NULL,
+    descricaoProfessor TEXT,
     FOREIGN KEY (id) REFERENCES cliente(id)
 )
 """
 
 INSERIR_PROFESSOR = """
-INSERT INTO professor (id, cursosPostados, quantidadeAlunos, dataCriacaoProfessor)
-SELECT c.id, ?, ?, ?
+INSERT INTO professor (id, cursosPostados, quantidadeAlunos, dataCriacaoProfessor, descricaoProfessor)
+SELECT c.id, ?, ?, ?, ?
 FROM cliente c
 WHERE c.id = ?
 """
@@ -28,7 +29,8 @@ SELECT
     c.indentificacaoProfessor as indentificacaoProfessor,
     p.cursosPostados,
     p.quantidadeAlunos,
-    p.dataCriacaoProfessor
+    p.dataCriacaoProfessor,
+    p.descricaoProfessor
 FROM professor p
 JOIN cliente c ON p.id = c.id
 JOIN usuario u ON c.id = u.id
@@ -49,7 +51,8 @@ SELECT
     c.indentificacaoProfessor as indentificacaoProfessor,
     p.cursosPostados,
     p.quantidadeAlunos,
-    p.dataCriacaoProfessor
+    p.dataCriacaoProfessor,
+    p.descricaoProfessor
 FROM professor p
 JOIN cliente c ON p.id = c.id
 JOIN usuario u ON c.id = u.id
@@ -70,7 +73,8 @@ SELECT
     c.indentificacaoProfessor as indentificacaoProfessor,
     p.cursosPostados,
     p.quantidadeAlunos,
-    p.dataCriacaoProfessor
+    p.dataCriacaoProfessor,
+    p.descricaoProfessor
 FROM professor p
 JOIN cliente c ON p.id = c.id
 JOIN usuario u ON c.id = u.id
@@ -82,7 +86,8 @@ UPDATE professor
 SET 
     cursosPostados= ?,
     quantidadeAlunos= ?,
-    dataCriacaoProfessor = ?
+    dataCriacaoProfessor = ?,
+    descricaoProfessor = ?
 WHERE id = ?
 """
 
@@ -91,7 +96,8 @@ UPDATE professor
 SET 
     cursosPostados= ?,
     quantidadeAlunos= ?,
-    dataCriacaoProfessor = ?
+    dataCriacaoProfessor = ?,
+    descricaoProfessor = ?
 WHERE id = (SELECT id FROM usuario WHERE email = ?)
 """
 
