@@ -9,6 +9,7 @@ from data.cliente.cliente_repo import *
 from data.professor.professor_repo import *
 from data.categoria.categoria_repo import *
 from data.topico.topico_repo import *
+
 class TestComentarioCursoRepo:
     def test_criar_tabela_comentario_curso(self, test_db):
         # Arrange
