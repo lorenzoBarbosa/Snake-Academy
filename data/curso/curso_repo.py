@@ -159,7 +159,7 @@ def obter_quantidade_cursos() -> int:
     except Exception as e:
         print(f"Erro a quantidade de cursos não foi obtida: {e}")
 
-def obter_quantidade_cursos_por_nome_professor(nome_professor: str) -> int:
+def obter_quantidade_cursos_por_id_professor(idProfessor: str) -> int:
     try:
         conn = get_connection()
         cursor = conn.cursor()
