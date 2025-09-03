@@ -21,7 +21,7 @@ async def post_validacao_email(request: Request, codigo: str = Form(...)):
         return RedirectResponse(url="/redefinir_senha", status_code=303)
     else:
         return templates.TemplateResponse(
-            "publico/validacao_email.html",
+            "publico/codigo_enviado.html",
             {"request": request, "erro": True}
         )
 
