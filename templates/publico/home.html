@@ -71,9 +71,10 @@
                 <div class="collapse {% if loop.index == 1 %} show {% endif %}" id="collapse{{categoria.id}}" data-bs-parent="#group1">
                     <div class="row">
                         {% for curso in cursos %}
+                        {% if curso.topico.idCategoria == categoria.id %}
                         <div class="carde-cursos col-3 m-3">
                             <a href="/detalhes_curso">
-                                <img src="/static/img/nossos_cursos/{{ curso.id }}.jpeg" class="imagem-curso" alt="Ciência dos Dados" >
+                                <img src="{{ imagem_cursos[curso.id] }}" class="imagem-curso" alt="Ciência dos Dados" >
                             </a>
                             <div class="carde-descricao">
                                 <p class="carde-texto-titulo">{{ curso.nome }}</p>
@@ -82,6 +83,7 @@
                                 <p class="carde-preco">{{ curso.custo }}</p>
                             </div>
                         </div>
+                        {% endif %}
                         {% endfor %}
                     </div>
                 </div>
