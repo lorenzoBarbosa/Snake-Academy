@@ -1,11 +1,14 @@
 import sys
 import os
 
-from data.cliente.cliente_repo import *
-from data.curso.curso_repo import *
-from data.modulo.modulo_repo import *
 from data.professor.professor_repo import *
 from data.usuario.usuario_repo import *
+from data.cliente.cliente_repo import *
+from data.categoria.categoria_repo import *
+from data.topico.topico_repo import *
+from data.curso.curso_repo import *
+from data.modulo.modulo_repo import *
+
 
 class TestModuloRepo:
     def test_criar_tabela_modulo(self, test_db):
@@ -13,6 +16,8 @@ class TestModuloRepo:
         criar_tabela_usuario()
         criar_tabela_cliente()
         criar_tabela_professor()
+        criar_tabela_categoria()
+        criar_tabela_topico()
         criar_tabela_curso()
         # Act
         resultado = criar_tabela_modulo()
@@ -24,8 +29,9 @@ class TestModuloRepo:
         criar_tabela_usuario()
         criar_tabela_cliente()
         criar_tabela_professor()
+        criar_tabela_categoria()
+        criar_tabela_topico()
         criar_tabela_curso()
-        criar_tabela_modulo()
         usuario= Usuario(0, "claudio", "claudio@g", "123", "1234", "12-06-2025")
         usuario_inserido = inserir_usuario(usuario)
         cliente= Cliente(0, "", "", "", "" ,"", "12-06-2025", True, [], True)
