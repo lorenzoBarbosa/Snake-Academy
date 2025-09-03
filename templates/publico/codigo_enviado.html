@@ -1,0 +1,8 @@
+{% extends "index.html" %}
+{%block conteudo%}
+<article>
+<p class="descricao">
+  Enviamos um e-mail para <strong>{{ email or 'seu endereço' }}</strong> com o código de redefinição.
+</p>
+</article>
+{%endblock%}

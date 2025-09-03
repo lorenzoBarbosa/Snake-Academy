@@ -1,49 +1,48 @@
 {%extends "index.html" %}
 {% block conteudo %}
 
-<div class="main-content container">
-    <div class="row justify-content-end align-items-center">
-        <!-- Formulário à direita -->
-        <div class="col-md-6 d-flex justify-content-end order-1 order-md-2">
+<article>
+    <div class="login-container">
+        <div class="login-esquerda"></div>
+        <div class="login-direita">
             <div style="width: 100%; max-width: 400px;">
                 <h3 class="mb-4 text-start">Cadastre-se</h3>
-
-                <form>
+                <form action="/cadastro" method="post">
                     <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Nome completo">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email">
                     </div>
                     <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome completo">
                     </div>
                     <div class="mb-3">
-                        <input type="tel" class="form-control" placeholder="Telefone">
+                        <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="Telefone">
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="Senha">
+                        <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha">
                     </div>
                     <div class="mb-4">
-                        <input type="password" class="form-control" placeholder="Confirme sua senha">
+                        <input type="password" class="form-control" name="confirmar_senha" id="confirmar_senha" placeholder="Confirme sua senha">
+                        {% if mensagem %}
+                        <div>
+                            <p class="text-danger mt-2">{{ mensagem }}</p>
+                        </div>
+                        {% endif %}
                     </div>
                     <button type="submit" class="btn botao-roxo-lc w-100">Cadastrar-se</button>
                 </form>
 
-                <!-- Redes sociais centralizadas -->
-                <div class="text-center mt-4">
-                    <p>Ou cadastre-se com:</p>
-                    <div class="social-icons d-flex justify-content-center gap-3">
-                        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="32">
-                        <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google" width="32">
-                        <img src="https://cdn-icons-png.flaticon.com/512/732/732221.png" alt="Microsoft" width="32">
+                    <div class="text-center mt-4">
+                        <p>Ou cadastre-se com:</p>
+                        <div class="social-icons d-flex justify-content-center gap-3">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="32">
+                            <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google" width="32">
+                            <img src="https://cdn-icons-png.flaticon.com/512/732/732221.png" alt="Microsoft" width="32">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Imagem à esquerda -->
-        <div class="col-md-6 text-end order-2 order-md-1">
-            <img src="/static/img/ilustracao_snake.png" alt="Ilustração Snake" class="img-fluid">
-        </div>
     </div>
-</div>
+</article>
 
 {%endblock%}

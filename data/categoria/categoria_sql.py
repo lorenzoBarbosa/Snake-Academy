@@ -1,13 +1,13 @@
 CRIAR_TABELA_CATEGORIA = """
 CREATE TABLE IF NOT EXISTS categoria (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL
 );
 """
 
 INSERIR_CATEGORIA = """
-INSERT INTO categoria (id, nome)
-VALUES (?, ?);
+INSERT INTO categoria (nome)
+VALUES (?);
 """
 
 OBTER_CATEGORIA = """

@@ -20,7 +20,7 @@ def inserir_categoria(categoria: Categoria) -> Optional[int]:
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute(INSERIR_CATEGORIA, (categoria.id, categoria.nome))
+        cursor.execute(INSERIR_CATEGORIA, (categoria.nome,))
         conn.commit()
         conn.close()
         return cursor.lastrowid

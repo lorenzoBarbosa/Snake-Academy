@@ -1,7 +1,10 @@
 from fastapi import APIRouter
+from fastapi.params import Form
 from fastapi.templating import Jinja2Templates
 
 from data.usuario import usuario_repo
+from data.usuario.usuario_model import Usuario
+from datetime import datetime
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
@@ -11,5 +14,17 @@ async def get_cadastro():
     response = templates.TemplateResponse("publico/cadastro.html", {"request": {}})
     return response
 
-
-    
+@router.post("/cadastro")
+async def post_cadastro(nome: str = Form(...), email: str = Form(...), senha: str = Form(...),  confirmar_senha: str = Form(...), telefone: str = Form(...)):
+    if senha == confirmar_senha:
+        data_criacao = datetime.now()
+        usuario = Usuario(id=0,nome=nome,email=email,senha=senha,telefone=telefone,dataCriacao=data_criacao.strftime("%Y-%m-%d %H:%M:%S"))
+        resultado = usuario_repo.inserir_usuario(usuario)
+        if resultado is not None:
+            response = templates.TemplateResponse("publico/confirmacao_cadastro.html", {"request": {}, "resultado": resultado})
+        else:
+            response = templates.TemplateResponse("publico/cadastro.html", {"request": {}, "mensagem": "Erro ao cadastrar usuário."})
+        return response
+    else:
+        response = templates.TemplateResponse("publico/cadastro.html", {"request": {}, "mensagem": "As senhas não coincidem."})
+        return response

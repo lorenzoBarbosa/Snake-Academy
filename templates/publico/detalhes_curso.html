@@ -1,21 +1,101 @@
 {% extends "index.html" %}
 {% block conteudo %}
-        <article>
-            <div style="position: relative; margin-top: 100;">
-                <!-- Fundo embaixo -->
-                <div class="fundo-curso"></div>
-                <!-- Carrossel sobre o fundo -->
-                <div class="container-curso" style="padding-top: 100px; padding-right: 100px; position: relative; z-index: 2;">
-                    <div style="color: white; max-width: 900px; text-align: left; padding-left: 100px;">
-                        <h1 style="font-size: 2.5rem; font-weight: bold;">Desenvolvedor Full Stack: Da Lógica ao Projeto Real</h1>
-                        <p style="font-size: 1.1rem; margin-top: 10px;">
-                            Tá pronto pra transformar seu futuro na tecnologia?Com o Curso Full Stack da Snake Academy, você vai do zero absoluto até o deploy do seu primeiro sistema completo.Aprenda lógica de programação, HTML, CSS, JavaScript, Python, bancos de dados e frameworks modernos em aulas práticas e diretas ao ponto.Ideal pra quem quer entrar com tudo no mercado de TI e se destacar.
-                        </p>
-                    </div>
-                    <div class="carde-curso-preco">
-                    oi
+<article>
+    <div class="fundo-curso">
+    </div>
+    <div>
+        <div class="detalhes-curso">
+            <div class="titulo-curso">
+                Titulo do curso
+            </div>
+            <div class="descricao-curso">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, blanditiis quis? Magnam numquam a necessitatibus eveniet dicta molestias porro quasi. Vel illo maxime doloribus quis iste? Omnis iure qui quasi. Odio assumenda blanditiis repellat. Repellat autem fugiat consequatur dicta dolor, ex explicabo cupiditate vero enim quos, corrupti delectus ipsam libero.
+            </div>
+        </div>
+        <div class="carde-curso-detalhes">
+            <div class="detalhes-imagem-curso-container">
+                <img class="detalhes-imagem-curso" src="/static/img/Nossos Cursos/ciencia de dados/Arte C Dados 2.1.jpg" alt="quatro">
+                <div class="linha-detalhes-imagem-curso-roxo1"></div>
+                <div class="linha-detalhes-imagem-curso-verde1"></div>
+                <div class="linha-detalhes-imagem-curso-roxo2"></div>
+                <div class="linha-detalhes-imagem-curso-verde2"></div>
+                <div class="linha-detalhes-imagem-curso-roxo3"></div>
+            </div>
+            <div class="detalhes-curso-carde">
+                <div class="detalhes-curso-carde-titulo">
+                    Título do curso
                 </div>
+                <div class="detalhes-curso-carde-preco">
+                    R$600,00
+                </div>
+                <div class="detalhes-curso-carde-informacoes">
+                    Duração: 40 horas
+                </div>
+                <div class="detalhes-curso-carde-informacoes">
+                    Data de postagem: 01/01/2023
+                </div>
+                <div class="detalhes-curso-carde-informacoes">
+                    Avaliação: 4.9/5.0
                 </div>
             </div>
-        </article>
+            <div class="container-compra container d-flex">
+                <button class="botao-comprar">Comprar Agora</button>
+                <button class="botao-carrinho">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+    </div>
+    <div class="carrosel-detalhes-curso">
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="static/img/nossos_cursos/1.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="static/img/nossos_cursos/2.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="static/img/nossos_cursos/3.jpg" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <div class="titulo-modulo">
+        Módulos do Curso
+    </div>
+    <div class="modulo-curso">
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Introdução à modelagem de dados
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        Aula 1: O que é modelagem de dados?<br>
+                    </div>  
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Modelagem Conceitual
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <strong>Aula 2: O que é modelagem conceitual?</strong> Esta aula aborda os principais conceitos e práticas da modelagem conceitual, incluindo diagramas e notações.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
 {%endblock%}

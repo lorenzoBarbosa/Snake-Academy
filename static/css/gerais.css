@@ -4,8 +4,13 @@ html,body
     overflow-x: hidden;
     width: 100%;
     background-color: #ffffff;
-    font-family: 'Times New Roman', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
 }  
+
+article{
+    min-height: 100vh;
+
+}
 .topo {
     background-color: #522197;
     height: 20px;
@@ -52,30 +57,63 @@ html,body
     color: #ffffff;
     border-radius: 5px;
     border: 1px solid #38BC8E;
-    font-weight: bold;
+    font-weight: lighter;
     width: 100px;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s, color 0.3s;
+    font-family: 'Times New Roman', Times, serif;
 }
 .login:hover {
     background-color: #288363;
     color: #FFFFFF;
 }
+
+.login-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.login-esquerda {
+    flex: 1;
+    background: url("/static/img/Snake\ login.png") no-repeat center center;
+    background-size: cover;
+}
+
+.login-direita {
+    flex: 1;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    box-shadow: -4px 0 8px rgba(0,0,0,0.1);
+}
+
+#acessar-recuperar-senha-login a{
+    color: black;
+}
+
+#acessar-recuperar-senha-login a:hover {
+    color: rgb(212, 0, 255);
+}
+
 .cadastro {
     background-color: #5C22AD;
     color: #FFFFFF;
     border-radius: 5px;
     border: 1px solid #5C22AD;
-    font-weight: bold;
+    font-weight: lighter;
     width: 120px;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s;
+    font-family: 'Times New Roman', Times, serif;
 }
 .cadastro:hover {
     background-color: #3a1572;
@@ -84,11 +122,25 @@ html,body
     max-height: 80px;
 }
 
+.carousel-inner {
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-inner img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
 .titulo-home {
     text-align: left;
     margin-top: 20px;
     font-size: 40px;
     color: #333333;
+    font-weight: lighter;
+    font-family:'Inter', sans-serif;
+    font-size: 35px;
 }
 
 .texto-home {
@@ -97,7 +149,8 @@ html,body
     color: #555555;
     max-width: 1500px;
     text-align: justify;
-    font-family: 'Open Sans', 'Arial', sans-serif;
+    font-family: 'Inter', sans-serif;
+    font-size: 25px;
 }
 
 .linha {
@@ -111,10 +164,12 @@ html,body
     margin-top: 20px;
     text-align: center;
     font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
 }
 .tipos-cursos.ativo {
     text-decoration: underline;
-    font-weight: bold;
+    font-weight: lighter;
+    font-family: 'Times New Roman', Times, serif;
 }
 .form-control {
     border-radius: 10px;
@@ -146,6 +201,7 @@ html,body
     border: 1px solid #cac9ca;
     display: inline-block;
     padding: 0;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .imagem-curso {
@@ -160,11 +216,13 @@ html,body
     padding: 10px;
     margin-left: 8px ;
     margin-bottom: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .carde-texto-titulo{
     font-size: 18px;
-    font-weight: bold;
+    font-weight: lighter;
     margin: 0;
+    font-family: 'Times New Roman', Times, serif;
 }
 .carde-autor {
     font-size: 14px;
@@ -177,21 +235,24 @@ html,body
     color: #000000;
     margin-bottom: 0;
     display: inline;
+    font-family: 'Times New Roman', Times, serif;
 }
 .carde-quantidade-avaliacoes {
     font-size: 12px;
     color: #555555;
     margin-bottom: 0;
     display: inline;
+    font-family: 'Times New Roman', Times, serif;
 }
 .carde-preco {
     font-size: 15px;
     color: #ffffff;
     margin: 0;
     background-color: #5c22add3;
-    display: inline-block;
+    display: inline;
     border-radius: 5px;
     padding: 5px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 
@@ -218,29 +279,34 @@ html,body
     padding: 10px;
     margin-left: 8px ;
     margin-bottom: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .carde-texto-titulo-favoritos{
     font-size: 16px;
-    font-weight: bold;
+    font-weight: lighter;
     margin: 0;
+    font-family: 'Times New Roman', Times, serif;
 }
 .carde-autor-favoritos {
     font-size: 12px;
     color: #555555;
     margin-top: 0;
     margin-bottom: 8px;
+    font-family: 'Times New Roman', Times, serif;
 }
 .carde-avaliacao-favoritos{
     font-size: 15px;
     color: #000000;
     margin-bottom: 0;
     display: inline;
+    font-family: 'Times New Roman', Times, serif;
 }
 .carde-quantidade-avaliacoes-favoritos {
     font-size: 12px;
     color: #555555;
     margin-bottom: 0;
     display: inline;
+    font-family: 'Times New Roman', Times, serif;
 }
 .carde-preco-favoritos {
     font-size: 15px;
@@ -250,6 +316,7 @@ html,body
     display: inline-block;
     border-radius: 5px;
     padding: 5px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .botao-esquerda {
@@ -263,7 +330,8 @@ html,body
     padding: 5px;
     cursor: pointer;
     z-index: 1;
-    border-radius: 0 50%  50% 0;  
+    border-radius: 0 50%  50% 0; 
+    font-family: 'Times New Roman', Times, serif;
 }
 .botao-direita {
     position: absolute;
@@ -276,7 +344,8 @@ html,body
     padding: 5px;
     cursor: pointer;
     z-index: 1;
-    border-radius: 50% 0 0 50%;  
+    border-radius: 50% 0 0 50%;
+    font-family: 'Times New Roman', Times, serif;
 }
 .esquerda {
     left: 0;
@@ -284,24 +353,6 @@ html,body
 .direita {
     right: 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .div-aprendizado-direcionado {
     background-color: #f3f3f3;
@@ -313,7 +364,8 @@ html,body
 .titulo-aprendizado-direcionado{
     font-size: 30px;
     color: #333333;
-    font-weight: bold;
+    font-weight: lighter;
+    font-family: 'Times New Roman', Times, serif;
 }
 .div-aprendizado-direcionado-container{
     width: 100%;
@@ -339,6 +391,7 @@ html,body
     font-size: 22px;
     cursor: pointer;
     min-height: 100px;
+    font-family: 'Times New Roman', Times, serif;
 }
 .painel-lateral {
     margin-left: 100px ;
@@ -352,8 +405,6 @@ html,body
     height: 100%;
 }
 
-
-
 .rodape {
     background-color: #19171A;
     color: #FFFFFF;
@@ -361,40 +412,189 @@ html,body
     text-align: center;
     padding-top: 30px;
 }
-.container-curso {
-    display: flex;
-    justify-content: space-between;
-    align-items: right;
+
+.fundo-curso{
+    background-color: #220031;
+    min-height: 30vh;
+    min-width: 100vw;
+    position: absolute;
+}
+
+.detalhes-curso {
+    padding: 20px;
+    min-height: 30vh;
+    background-color: none;
     position: relative;
-    padding: 10px;
-    height: 100vh;
-}
-.container-curso > div:first-child {
-    text-align: left;
-    color: white;
-    max-width: 400px;
-    padding-left: 20px;
-}
-.carousel-inner {
-    width: 100%;
-    height: 100%;
+    align-items: right;
 }
 
-.carde-curso-preco{
-    background-color: #FFFFFF;
-    border-radius: 5px;
+.detalhes-curso{
+    display: inline-block;
+    max-width: 50vw;
+}
+
+.titulo-curso {
+    font-size: 38px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: none;
+    margin-left: 120px;
+}
+
+.descricao-curso {
+    font-size: 18px;
+    color: #ffffff;
+    margin-left: 120px;
+}
+
+.carde-curso-detalhes{
+    display: inline-block;
+    min-width: 25vw;
+    max-width: 25vw;
+    min-height: 50vh;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    border-radius: 20px;
+    margin-left: 20%;
+    margin-top: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);   
+    padding-bottom: 20px ;
+    position: fixed;
+}
+
+.detalhes-imagem-curso-container{
+    border-radius: 20px 20px 0 0;
+    min-width: 100%;
+}
+
+.detalhes-imagem-curso{
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+}
+
+.linha-detalhes-imagem-curso-roxo1{
+    height: 5px;
+    width: 20%;
+    background-color: #220031;
+    position: absolute;
+    margin-left: 0%;
+}
+
+.linha-detalhes-imagem-curso-verde1{
+    height: 5px;
+    width: 20%;
+    background-color: #38bc8e;
+    position: absolute;
+    margin-left: 20%;
+    
+}
+
+.linha-detalhes-imagem-curso-roxo2{
+    height: 5px;
+    width: 20%;
+    background-color: #220031;
+    position: absolute;
+    margin-left: 40%;
+    
+}
+
+.linha-detalhes-imagem-curso-verde2{
+    height: 5px;
+    width: 20%;
+    background-color: #38bc8e;
+    position: absolute;
+    margin-left: 60%;
+    
+}
+
+.linha-detalhes-imagem-curso-roxo3{
+    height: 5px;
+    width: 20%;
+    background-color: #220031;
+    position: absolute;
+    margin-left: 80%;
+    
+}
+
+.detalhes-curso-carde{
+    padding: 20px;
+}
+
+.detalhes-curso-carde-titulo{
+    font-size: 2em;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.detalhes-curso-carde-informacoes{
+    font-size: 1.1em;
+    color: #666666;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.detalhes-curso-carde-preco{
+    font-size: 1.5em;
     color: #000000;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
-    min-height: 1000px;
-    min-width: 200px;
-
+    font-family: 'Times New Roman', Times, serif;
 }
 
-.carousel-inner img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+.container-compra {
+    background-color: #ffffff;
 }
+
+.botao-comprar{
+    background-color: #3a1572;
+    border: none;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5%;
+}
+.botao-comprar:hover{
+    background-color: #230d46;
+    transition: 2ms;
+}
+
+.botao-carrinho{
+    background-color: #ffffff;
+    border: 1px solid #3a1572;
+    color: #3a1572;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10%;
+}
+.botao-carrinho:hover{
+    background-color: #f0f0f0;
+    transition: 2ms;
+}
+
+.carrosel-detalhes-curso{
+    position: relative;
+    max-width: 50% ;
+    overflow: hidden;
+    margin-left: 10vw;
+    margin-top: 5vh;
+    max-height: 50vh;
+}
+
+.titulo-modulo{
+    font-size: 38px;
+    margin-top: 5vh;
+    color: #000000;
+    background-color: none;
+    margin-left: 8%;
+}
+
+.modulo-curso{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-left: 8%;
+    margin-top: 2vh;
+    margin-bottom: 5vh;
+    max-width: 50vw;
+}
+    
 .carousel-control-prev,
 .carousel-control-next {
     width: 5%;
@@ -410,6 +610,7 @@ html,body
     align-items: center;
     justify-content: center;
     padding: 2rem;
+    font-family: 'Times New Roman', Times, serif;
 }
 .illustration img {
     width: 100%;
@@ -435,16 +636,6 @@ html,body
     width: 100%;
     max-width: 400px;
 }
-.fundo-curso{
-    background: #1B0B32;
-    width: 100%;
-    height: 40vh;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
-
 
 /*aba comentários*/
 .testimonials {
@@ -453,6 +644,7 @@ html,body
   gap: 20px;
   justify-content: center;
   padding: 30px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .testimonial-card {
@@ -467,6 +659,8 @@ html,body
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 30px;
 }
 
 .testimonial-card p {
@@ -486,16 +680,111 @@ html,body
   text-decoration: underline;
 }
 
-.testimonial-profile {
+.testimonial-perfil {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
+  font-size: 20px;
 }
 
-.testimonial-profile img {
+.testimonial-perfil img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin-bottom: 5px;
+}
+
+.div-fundo-cinza {
+    background-color: #f3f3f3;
+    width: 100%;
+    min-height: 50vh;
+    padding-top: 20px;
+    margin-top: 50px;
+}
+
+.redefinir-alinhamento {
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.redefinir-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  padding: 32px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.redefinir-card h2 {
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.redefinir-card .descricao {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.campo {
+  margin-bottom: 20px;
+}
+
+.campo label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.campo input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo input:focus {
+  border-color: #7c5cff;
+  box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.2);
+}
+
+.btn-recuperar {
+  width: 100%;
+  background: linear-gradient(180deg, #7c5cff, #6949ff);
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.08s ease, filter 0.2s ease;
+}
+
+.btn-recuperar:hover {
+  filter: brightness(1.05);
+}
+
+.btn-recuperar:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.fundo-codigo-confirmacao {
+  background: url("/static/img/cobras\ de\ fundo.png") no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
+  width: 100%;
 }

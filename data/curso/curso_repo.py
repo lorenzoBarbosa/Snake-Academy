@@ -1,5 +1,6 @@
 from data.curso.curso_sql import *
 from data.professor import professor_repo
+from data.topico import topico_repo
 from data.util import get_connection
 from data.curso.curso_model import *
 
@@ -37,6 +38,7 @@ def inserir_curso(curso: Curso):
         return cursor.lastrowid
     except Exception as e:
         print(f"Erro os dados não foram inseridos: {e}")
+        raise
 
 def obter_todos_cursos() -> list[Curso]:
     try:
@@ -57,7 +59,8 @@ def obter_todos_cursos() -> list[Curso]:
                 avaliacao=tupla[8],
                 dataCriacao=tupla[9],
                 statusCurso=tupla[10],
-                professor = professor_repo.obter_professor_por_id(tupla[3])
+                professor = professor_repo.obter_professor_por_id(tupla[3]),
+                topico = topico_repo.obter_topico_por_id(tupla[1])
             ) for tupla in tuplas ]
         return cursos
     except Exception as e:
@@ -85,33 +88,35 @@ def obter_cursos_paginado(pg_num: int, pg_size: int) -> list[Curso]:
                 avaliacao=tupla[8],
                 dataCriacao=tupla[9],
                 statusCurso=tupla[10],
-                professor = professor_repo.obter_professor_por_id(tupla[3])
+                professor = professor_repo.obter_professor_por_id(tupla[3]),
+                topico = topico_repo.obter_topico_por_id(tupla[1])
             ) for tupla in tuplas ]
         return cursos
     except Exception as e:
         print(f"Erro os cursos não foram obtidos: {e}")
 
-def obter_curso_por_id(id: int):
+def obter_curso_por_id(id: int) -> Optional[Curso]:
     try:
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute(OBTER_CURSO_POR_ID, (id,))
         tupla = cursor.fetchone()
         conn.close()
-        return Curso(
+        curso = Curso(
                 id=tupla[0],
                 idTopico=tupla[1],
                 nome=tupla[2],
                 idProfessor=tupla[3],
-                custo=tupla[5],
-                descricaoCurso=tupla[6],
-                duracaoCurso=tupla[7],
-                avaliacao=tupla[8],
-                dataCriacao=tupla[9],
-                statusCurso=tupla[10],
-                professor = professor_repo.obter_professor_por_id(tupla[3])
+                custo=tupla[4],
+                descricaoCurso=tupla[5],
+                duracaoCurso=tupla[6],
+                avaliacao=tupla[7],
+                dataCriacao=tupla[8],
+                statusCurso= bool(tupla[9]),
+                professor = professor_repo.obter_professor_por_id(tupla[3]),
+                topico = topico_repo.obter_topico_por_id(tupla[1])
             )
-        
+        return curso
     except Exception as e:
         print(f"Erro os cursos não foram obtidos: {e}")
 
@@ -130,13 +135,14 @@ def obter_curso_por_termo_paginado(termo: str, pg_num: int, pg_size: int) -> lis
                 idTopico=tupla[1],
                 nome=tupla[2],
                 idProfessor=tupla[3],
-                custo=tupla[5],
-                descricaoCurso=tupla[6],
-                duracaoCurso=tupla[7],
-                avaliacao=tupla[8],
-                dataCriacao=tupla[9],
-                statusCurso=tupla[10],
-                professor = professor_repo.obter_professor_por_id(tupla[3])
+                custo=tupla[4],
+                descricaoCurso=tupla[5],
+                duracaoCurso=tupla[6],
+                avaliacao=tupla[7],
+                dataCriacao=tupla[8],
+                statusCurso=tupla[9],
+                professor = professor_repo.obter_professor_por_id(tupla[3]),
+                topico = topico_repo.obter_topico_por_id(tupla[1])
             ) for tupla in tuplas ]
         return cursos
     except Exception as e:
@@ -153,11 +159,11 @@ def obter_quantidade_cursos() -> int:
     except Exception as e:
         print(f"Erro a quantidade de cursos não foi obtida: {e}")
 
-def obter_quantidade_cursos_por_nome_professor(nome_professor: str) -> int:
+def obter_quantidade_cursos_por_id_professor(idProfessor: str) -> int:
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute(OBTER_QUANTIDADE_CURSOS_POR_NOME_PROFESSOR, (nome_professor,))
+        cursor.execute(OBTER_QUANTIDADE_CURSOS_POR_ID_PROFESSOR, (idProfessor,))
         quantidade = cursor.fetchone()[0]
         conn.close()
         return quantidade
