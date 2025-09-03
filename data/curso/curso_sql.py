@@ -71,7 +71,7 @@ WHERE c.id = ?
 
 OBTER_CURSO_POR_TERMO_PAGINADO = """
 SELECT 
-    c.id, i.idTopico, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
+    c.id, c.idTopico, c.nome, c.idProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
 FROM curso c
 JOIN topico i ON c.idTopico = i.id
 JOIN professor p ON c.idProfessor = p.id
@@ -85,11 +85,11 @@ OBTER_QUANTIDADE_CURSOS = """
 SELECT COUNT(*) FROM curso
 """
 
-OBTER_QUANTIDADE_CURSOS_POR_NOME_PROFESSOR = """
+OBTER_QUANTIDADE_CURSOS_POR_ID_PROFESSOR = """
 SELECT COUNT(*) FROM curso c
 JOIN professor p ON c.idProfessor = p.id
 JOIN usuario u ON p.id = u.id
-WHERE u.nome = ?
+WHERE c.idProfessor = ?
 """
 
 OBTER_CURSOS_POR_TOPICO = """
