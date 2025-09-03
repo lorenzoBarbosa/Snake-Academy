@@ -33,7 +33,7 @@ ORDER BY c.id
 
 OBTER_CURSOS_POR_PROFESSOR = """
 SELECT 
-    c.id, i.idTopico, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
+    c.id, c.idTopico, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
 FROM curso c
 JOIN topico i ON c.idTopico = i.id
 JOIN professor p ON c.idProfessor = p.id
@@ -71,7 +71,7 @@ WHERE c.id = ?
 
 OBTER_CURSO_POR_TERMO_PAGINADO = """
 SELECT 
-    c.id, i.idTopico, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
+    c.id, c.idTopico, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
 FROM curso c
 JOIN topico i ON c.idTopico = i.id
 JOIN professor p ON c.idProfessor = p.id
@@ -94,7 +94,7 @@ WHERE u.nome = ?
 
 OBTER_CURSOS_POR_TOPICO = """
 SELECT
-    c.id, i.idTopico, i.nome as nomeTopico, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
+    c.id, c.idTopico, i.nome as nomeTopico, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
 FROM curso c
 JOIN topico i ON c.idTopico = i.id
 JOIN professor p ON c.idProfessor = p.id
@@ -106,7 +106,7 @@ ORDER BY c.id
 
 OBTER_CURSOS_POR_ID_TOPICO = """
 SELECT
-    c.id, i.idTopico, i.nome as nomeTopico, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
+    c.id, c.idTopico, i.nome as nomeTopico, c.nome, c.idProfessor, u.nome as nomeProfessor, c.custo, c.descricaoCurso, c.duracaoCurso, c.avaliacao, c.dataCriacao, c.statusCurso
 FROM curso c
 JOIN topico i ON c.idTopico = i.id
 JOIN professor p ON c.idProfessor = p.id
