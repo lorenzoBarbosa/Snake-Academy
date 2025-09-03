@@ -51,7 +51,7 @@ if quantidade_usuario == 0:
     cliente = obter_cliente_por_id(id_cliente)
     inserir_professor(Professor(id=cliente.id, nome=cliente.nome, email=cliente.email, senha=cliente.senha, telefone=cliente.telefone, dataCriacao=cliente.dataCriacao, dataUltimoAcesso=cliente.dataUltimoAcesso, statusConta=cliente.statusConta, historicoCursos=cliente.historicoCursos, indentificacaoProfessor=cliente.indentificacaoProfessor, cursosPostados="", quantidadeAlunos=0, dataCriacaoProfessor='2023-01-01'), id_cliente)
 
-    for c in range(23):
+    for c in range(8):
         inserir_curso(Curso(id=0,
                         idTopico=1,
                         nome="Introdução ao Python",
@@ -62,14 +62,81 @@ if quantidade_usuario == 0:
                         avaliacao=4.5, 
                         dataCriacao='2023-01-01', 
                         statusCurso="ativo"))
+    
+    for c2 in range(8):
+        inserir_curso(Curso(id=0,
+                        idTopico=3,
+                        nome="Gestão maluca de Projetos",
+                        idProfessor=1, 
+                        custo=199.99,
+                        descricaoCurso="Aprenda os fundamentos da gestão sem sentido.",
+                        duracaoCurso="4 semanas",
+                        avaliacao=4.5, 
+                        dataCriacao='2023-01-01', 
+                        statusCurso="ativo"))
+    
+    for c3 in range(8):
+        inserir_curso(Curso(id=0,
+                        idTopico=5,
+                        nome="HTML e CSS para Iniciantes",
+                        idProfessor=1, 
+                        custo=199.99,
+                        descricaoCurso="Aprenda os fundamentos do HTML e CSS.",
+                        duracaoCurso="4 semanas",
+                        avaliacao=4.5, 
+                        dataCriacao='2023-01-01', 
+                        statusCurso="ativo"))
+        
+    for c4 in range(8):
+        inserir_curso(Curso(id=0,
+                        idTopico=6,
+                        nome="Machine Learning para Iniciantes",
+                        idProfessor=1, 
+                        custo=199.99,
+                        descricaoCurso="Aprenda os fundamentos do Machine Learning.",
+                        duracaoCurso="4 semanas",
+                        avaliacao=4.5, 
+                        dataCriacao='2023-01-01', 
+                        statusCurso="ativo"))
 
 categorias = obter_categorias()
+cursos1 = obter_curso_por_topico(1)
+cursos2 = obter_curso_por_topico(2)
+cursos3 = obter_curso_por_topico(3)
+cursos4 = obter_curso_por_topico(4)
 cursos = obter_todos_cursos()
 banners = obter_todos_banners()
 
+import os
+
+def encontrar_imagem_curso(curso_id):
+    base_path = 'static/img/nossos_cursos'
+    for ext in ['.jpg', '.jpeg', '.png', '.webp']:
+        filename = f"{curso_id}{ext}"
+        file_path = os.path.join(base_path, filename)
+        if os.path.exists(file_path):
+            return f"/static/img/nossos_cursos/{filename}"
+    return "/static/img/default.jpg"
+
+
+imagem_cursos = {
+    curso.id: encontrar_imagem_curso(curso.id)
+    for curso in cursos
+}
+
+
+
 @router.get("/")
 async def get_root():
-    response = templates.TemplateResponse("publico/home.html", {"request": {}, "banners": banners, "categorias": categorias, "cursos": cursos})
+    response = templates.TemplateResponse("publico/home.html", {"request": {},
+                                                                "banners": banners, 
+                                                                "categorias": categorias, 
+                                                                "cursos1": cursos1, 
+                                                                "cursos2": cursos2, 
+                                                                "cursos3": cursos3, 
+                                                                "cursos4": cursos4, 
+                                                                "cursos": cursos,
+                                                                "imagem_cursos": imagem_cursos})
     return response
 
 
