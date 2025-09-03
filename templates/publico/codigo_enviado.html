@@ -1,8 +1,30 @@
 {% extends "index.html" %}
-{%block conteudo%}
-<article>
-<p class="descricao">
-  Enviamos um e-mail para <strong>{{ email or 'seu endereço' }}</strong> com o código de redefinição.
-</p>
-</article>
-{%endblock%}
+{% block conteudo %}
+<div class="redefinir-alinhamento fundo-codigo-confirmacao">
+  <div class="redefinir-card">
+    <h2>Confirmação de Código</h2>
+    <p class="descricao">Digite o código que enviamos para o seu e-mail.</p>
+
+    <form method="post" action="/validacao_email" novalidate>
+      <div class="mb-3">
+        <label for="codigoConfirmacao" class="form-label">Código de Confirmação</label>
+        <input 
+          type="text" 
+          class="form-control {% if erro %}is-invalid{% endif %}" 
+          id="codigoConfirmacao" 
+          name="codigo" 
+          placeholder="Ex: 123456" 
+          required
+        >
+        {% if erro %}
+        <div class="invalid-feedback">
+          Código inválido. Tente novamente.
+        </div>
+        {% endif %}
+      </div>
+      <button class="btn btn-recuperar" type="submit">Confirmar</button>
+    </form>
+
+  </div>
+</div>
+{% endblock %}
