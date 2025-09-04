@@ -26,7 +26,8 @@ def inserir_usuario(usuario: Usuario) -> Optional[int]:
                 usuario.email,
                 usuario.senha,
                 usuario.telefone,
-                usuario.dataCriacao
+                usuario.dataNascimento,
+                usuario.perfil
             )
         )
         conn.commit()
@@ -48,13 +49,37 @@ def obter_todos_usuarios() -> list[Usuario]:
                 email=tupla[2],
                 senha=tupla[3],
                 telefone=tupla[4],
-                dataCriacao=tupla[5]
+                dataNascimento=tupla[5],
+                perfil=tupla[6]
             ) for tupla in tuplas
         ]
         conn.close()
         return usuarios
     except Exception as e:
         print(f"Erro ao obter todos os usuários: {e}")
+
+def obter_usuario_por_perfil(perfil: str) -> list[Usuario]:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_USUARIO_POR_PERFIL, (perfil,))
+        tuplas = cursor.fetchall()
+        usuarios = [
+            Usuario(
+                id=tupla[0],
+                nome=tupla[1],
+                email=tupla[2],
+                senha=tupla[3],
+                telefone=tupla[4],
+                dataNascimento=tupla[5],
+                perfil=tupla[6]
+            ) for tupla in tuplas
+        ]
+        conn.close()
+        return usuarios
+    except Exception as e:
+        print(f"Erro ao obter usuários por perfil: {e}")
+        return []
 
 def obter_usuario_por_email(email: str) -> Usuario:
     try:
@@ -93,7 +118,8 @@ def obter_usuario_paginado(pg_num: int, pg_size: int) -> list[Usuario]:
                 email=tupla[2],
                 senha=tupla[3],
                 telefone=tupla[4],
-                dataCriacao=tupla[5]
+                dataNascimento=tupla[5],
+                perfil=tupla[6]
             ) for tupla in tuplas
         ]
         conn.close()
@@ -122,7 +148,8 @@ def atualizar_usuario_por_id(usuario:Usuario) -> bool:
                 usuario.email,
                 usuario.senha,
                 usuario.telefone,
-                usuario.dataCriacao,
+                usuario.dataNascimento,
+                usuario.perfil,
                 usuario.id))
             conn.commit()
             conn.close()
@@ -140,13 +167,26 @@ def atualizar_usuario_por_email(usuario: Usuario) -> bool:
             usuario.email,
             usuario.senha,
             usuario.telefone,
-            usuario.dataCriacao,
+            usuario.dataNascimento,
+            usuario.perfil,
             usuario.email))
         conn.commit()
         conn.close()
         return (cursor.rowcount > 0)
     except Exception as e:
         print(f"Erro ao atualizar usuário por email: {e}")
+        return False
+
+def atualizar_senha(id: int, senha: str) -> bool:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(ATUALIZAR_SENHA, (senha, id))
+        conn.commit()
+        conn.close()
+        return (cursor.rowcount > 0)
+    except Exception as e:
+        print(f"Erro ao atualizar senha: {e}")
         return False
 
 def excluir_usuario_por_email(email: str) ->bool:
