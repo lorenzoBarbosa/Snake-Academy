@@ -111,7 +111,20 @@ def obter_cliente_por_id(id: int) -> Optional[Cliente]:
         conn.close()
         
         if tupla:
-            return Cliente(*tupla)
+            return Cliente(id=tupla["id"],
+                           nome=tupla["nome"],
+                           email=tupla["email"],
+                           senha=tupla["senha"],
+                           telefone=tupla["telefone"],
+                           dataNascimento=tupla["dataNascimento"],
+                           perfil=tupla["perfil"],
+                           token_redefinicao=tupla["token_redefinicao"],
+                           data_token=tupla["data_token"],
+                           data_cadastro=tupla["data_cadastro"],
+                           dataUltimoAcesso=tupla["dataUltimoAcesso"],
+                           statusConta=tupla["statusConta"],
+                           historicoCursos=tupla["historicoCursos"],
+                           indentificacaoProfessor=tupla["indentificacaoProfessor"])
         return None
     except Exception as e:
         print(f"Erro ao obter cliente por id: {e}")

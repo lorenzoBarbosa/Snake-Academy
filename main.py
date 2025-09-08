@@ -63,6 +63,7 @@ from routes.professor_routes.cursos.detalhes_curso.modificar_modulo_routes impor
 from routes.professor_routes.cursos.excluir_curso_routes import router as excluir_curso_router
 from routes.professor_routes.cursos.criar_curso_routes import router as criar_curso_router
 from routes.professor_routes.cursos.criar_modulo_routes import router as criar_modulo_router
+from util.criar_admin import criar_admin_padrao
 
 app = FastAPI()
 
@@ -78,6 +79,7 @@ app.add_middleware(
     https_only=False  # Em produção, mude para True com HTTPS
 )
 
+criar_admin_padrao()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 

@@ -8,4 +8,4 @@ class Professor(Cliente):
     cursosPostados: list
     quantidadeAlunos: int
     dataCriacaoProfessor: str
-    descricaoProfessor: Optional[str] = None
+    descricaoProfessor: Optional[str]

@@ -26,7 +26,7 @@ ORDER BY id
 
 OBTER_USUARIO_POR_PERFIL= """
 SELECT 
-    id, nome, email, senha, telefone, dataNascimento, perfil
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro
 FROM usuario
 WHERE perfil LIKE ?
 """

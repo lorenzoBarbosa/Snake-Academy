@@ -16,7 +16,12 @@ def criar_admin_padrao():
             nome="Administrador",
             email="admin@admin.com",
             senha=senha_hash,
-            perfil="admin"
+            telefone="123456789",
+            dataNascimento="2000-01-01",
+            perfil="admin",
+            token_redefinicao=None,
+            data_token=None,
+            data_cadastro=None,
         )
         
         usuario_repo.inserir_usuario(admin)
