@@ -28,9 +28,9 @@
                     </div>
                     <div class="mb-4">
                         <input type="password" class="form-control" name="confirmar_senha" id="confirmar_senha" placeholder="Confirme sua senha">
-                        {% if mensagem %}
+                        {% if erro %}
                         <div>
-                            <p class="text-danger mt-2">{{ mensagem }}</p>
+                            <p class="text-danger mt-2">{{ erro }}</p>
                         </div>
                         {% endif %}
                     </div>

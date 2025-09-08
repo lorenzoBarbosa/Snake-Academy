@@ -86,7 +86,10 @@ async def post_cadastro(
             senha=criar_hash_senha(senha),
             telefone=telefone,
             dataNascimento=dataNascimento,
-            perfil='cliente'
+            perfil='cliente',
+            token_redefinicao=None,
+            data_token=None,
+            data_cadastro=datetime.now().isoformat()
         )
         
         usuario_id = usuario_repo.inserir_usuario(usuario)
@@ -96,14 +99,19 @@ async def post_cadastro(
             id=usuario_id,
             nome=nome,
             email=email,
+            senha=senha,
             telefone=telefone,
             dataNascimento=dataNascimento,
             perfil='cliente',
+            token_redefinicao=None,
+            data_token=None,
+            data_cadastro=datetime.now().isoformat(),
+            dataUltimoAcesso=None,
             statusConta='ativo',
             historicoCursos= [],
             indentificacaoProfessor= False,
         )
-        cliente_repo.inserir_cliente(cliente)
+        cliente_repo.inserir_cliente(cliente, usuario_id)
 
         # Fazer login automático após cadastro
         usuario_dict = {
