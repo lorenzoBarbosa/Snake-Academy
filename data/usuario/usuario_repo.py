@@ -44,13 +44,16 @@ def obter_todos_usuarios() -> list[Usuario]:
         tuplas = cursor.fetchall()
         usuarios = [
             Usuario(
-                id=tupla[0],
-                nome=tupla[1],
-                email=tupla[2],
-                senha=tupla[3],
-                telefone=tupla[4],
-                dataNascimento=tupla[5],
-                perfil=tupla[6]
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+                data_token=None if tupla["data_token"] is None else tupla["data_token"],
+                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"]
             ) for tupla in tuplas
         ]
         conn.close()
@@ -66,13 +69,16 @@ def obter_usuario_por_perfil(perfil: str) -> list[Usuario]:
         tuplas = cursor.fetchall()
         usuarios = [
             Usuario(
-                id=tupla[0],
-                nome=tupla[1],
-                email=tupla[2],
-                senha=tupla[3],
-                telefone=tupla[4],
-                dataNascimento=tupla[5],
-                perfil=tupla[6]
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=None,
+                data_token=None,
+                data_cadastro=None
             ) for tupla in tuplas
         ]
         conn.close()
@@ -88,7 +94,18 @@ def obter_usuario_por_email(email: str) -> Usuario:
         cursor.execute(OBTER_USUARIO_POR_EMAIL, (email,))
         tupla = cursor.fetchone()
         conn.close()
-        return Usuario(*tupla)
+        return Usuario(
+            id=tupla["id"],
+            nome=tupla["nome"],
+            email=tupla["email"],
+            senha=tupla["senha"],
+            telefone=tupla["telefone"],
+            dataNascimento=tupla["dataNascimento"],
+            perfil=tupla["perfil"],
+            token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+            data_token=None if tupla["data_token"] is None else tupla["data_token"],
+            data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"]
+        )
     except Exception as e:
         print(f"Erro ao obter usuário por email: {e}")
 
@@ -99,7 +116,18 @@ def obter_usuario_por_id(id: int) -> Usuario:
         cursor.execute(OBTER_USUARIO_POR_ID, (id,))
         tupla = cursor.fetchone()
         conn.close()
-        return Usuario(*tupla)
+        return Usuario(
+            id=tupla["id"],
+            nome=tupla["nome"],
+            email=tupla["email"],
+            senha=tupla["senha"],
+            telefone=tupla["telefone"],
+            dataNascimento=tupla["dataNascimento"],
+            perfil=tupla["perfil"],
+            token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+            data_token=None if tupla["data_token"] is None else tupla["data_token"],
+            data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"]
+        )
     except Exception as e:
         print(f"Erro ao obter usuário por id: {e}")
 
@@ -113,13 +141,16 @@ def obter_usuario_paginado(pg_num: int, pg_size: int) -> list[Usuario]:
         tuplas = cursor.fetchall()
         usuarios = [
             Usuario(
-                id=tupla[0],
-                nome=tupla[1],
-                email=tupla[2],
-                senha=tupla[3],
-                telefone=tupla[4],
-                dataNascimento=tupla[5],
-                perfil=tupla[6]
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+                data_token=None if tupla["data_token"] is None else tupla["data_token"],
+                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"]
             ) for tupla in tuplas
         ]
         conn.close()

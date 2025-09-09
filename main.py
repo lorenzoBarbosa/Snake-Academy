@@ -79,8 +79,6 @@ app.add_middleware(
     https_only=False  # Em produção, mude para True com HTTPS
 )
 
-criar_admin_padrao()
-
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.include_router(cadastro_router)

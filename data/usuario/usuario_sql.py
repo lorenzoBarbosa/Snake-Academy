@@ -19,7 +19,7 @@ VALUES (?, ?, ?, ?, ?, ?)
 
 OBTER_USUARIOS = """
 SELECT 
-    id, nome, email, senha, telefone, dataNascimento, perfil
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro
 FROM usuario
 ORDER BY id 
 """
@@ -47,7 +47,7 @@ WHERE id = ?
 
 OBTER_USUARIO_PAGINADO = """
 SELECT 
-    id, nome, email, senha, telefone, dataNascimento, perfil
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro
     FROM usuario
     ORDER BY id
     LIMIT ? OFFSET ?"""
