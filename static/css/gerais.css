@@ -98,7 +98,6 @@ article{
 
 .login-esquerda {
     flex: 1;
-    background: url("/static/img/Snake\ login.png") no-repeat center center;
     background-size: cover;
 }
 
@@ -823,3 +822,15 @@ article{
   width: 100%;
 }
 
+.container-login {
+  width: 100%;
+  max-width: 400px;
+}
+
+.imagem-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 20px;
+}
