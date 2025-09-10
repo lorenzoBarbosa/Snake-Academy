@@ -823,3 +823,18 @@ article{
   width: 100%;
 }
 
+/* Estilos para a barra de força da senha */
+#barra-forca {
+  width: 100%;
+  height: 10px;
+  background-color: #ddd;
+  margin-top: 5px;
+}
+
+#nivel-forca {
+  height: 100%;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* Estilos para o texto de força da senha */

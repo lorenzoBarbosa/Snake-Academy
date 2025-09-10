@@ -1,5 +1,6 @@
-{% extends "index.html" %}
+{% extends "index_publico.html" %}
 {% block conteudo %}
+<script src="{{ url_for('static', path='js/forca_senha.js') }}"></script>
 <div class="redefinir-alinhamento fundo-codigo-confirmacao">
   <div class="redefinir-card">
         <h2>Restaurar Senha</h2>
@@ -7,19 +8,24 @@
 
         <form method="post" action="/redefinir_senha" novalidate>
         <div class="mb-3">
-            <label for="senha_nova" class="form-label">Nova Senha</label>
-            <input 
-            type="password" 
-            class="form-control {% if erro_senha %}is-invalid{% endif %}" 
-            id="senha_nova" 
-            name="senha_nova" 
-            placeholder="Digite uma Nova Senha:" 
-            required
-            >
+            <label for="senha_nova" class="form-label">Nova Senha: </label>
+            <input type="password" class="form-control {% if erro_senha %}is-invalid{% endif %}" id="senha_nova" name="senha_nova" placeholder="Digite uma Nova Senha:" required>
+        
+            {% if erro_senha %}
+                <div class="invalid-feedback">
+                    As senhas não coincidem. Tente novamente.
+                </div>
+            {% endif %}
+            <div id="barra-forca">
+                <div id="nivel-forca"></div>
+            </div>
+            <p id="texto-forca"></p>
+                
+            
         </div>
 
         <div class="mb-3">
-            <label for="senha_confirmacao" class="form-label">Confirme a Nova Senha</label>
+            <label for="senha_confirmacao" class="form-label">Confirme a Nova Senha: </label>
             <input 
             type="password" 
             class="form-control {% if erro_senha %}is-invalid{% endif %}" 
@@ -27,12 +33,12 @@
             name="senha_confirmacao" 
             placeholder="Confirme sua Nova Senha:" 
             required
-            >
-                {% if erro_senha %}
+            >       
+            {% if erro_forca %}
                 <div class="invalid-feedback">
-                    As senhas não coincidem. Tente novamente.
+                    {{ mensagem_erro }}
                 </div>
-                {% endif %}
+            {% endif %}
             </div>
             <button class="btn btn-recuperar" type="submit">Enviar</button>
         </form>
