@@ -196,7 +196,7 @@ def obter_quantidade_clientes() -> int:
     except Exception as e:
         print(f"Erro ao obter quantidade de clientes: {e}")
 
-def atualizar_cliente_por_id(cliente: Cliente):
+def atualizar_cliente_por_id(cliente: Cliente, id: int):
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -206,7 +206,7 @@ def atualizar_cliente_por_id(cliente: Cliente):
             cliente.statusConta,
             historicoCursos,
             cliente.indentificacaoProfessor,
-            cliente.id))
+            id))
         conn.commit()
         conn.close()
         return cursor.rowcount > 0

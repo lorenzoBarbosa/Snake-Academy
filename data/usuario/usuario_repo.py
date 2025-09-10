@@ -177,7 +177,6 @@ def atualizar_usuario_por_id(usuario:Usuario) -> bool:
             cursor.execute(ATUALIZAR_USUARIO_POR_ID, (
                 usuario.nome,
                 usuario.email,
-                usuario.senha,
                 usuario.telefone,
                 usuario.dataNascimento,
                 usuario.perfil,
@@ -189,18 +188,17 @@ def atualizar_usuario_por_id(usuario:Usuario) -> bool:
             print(f"Erro ao atualizar usuário por email: {e}")
             return False
 
-def atualizar_usuario_por_email(usuario: Usuario) -> bool:
+def atualizar_usuario_por_email(usuario: Usuario, email: str) -> bool:
     try:
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute(ATUALIZAR_USUARIO_POR_EMAIL, (
             usuario.nome,
             usuario.email,
-            usuario.senha,
             usuario.telefone,
             usuario.dataNascimento,
             usuario.perfil,
-            usuario.email))
+            email))
         conn.commit()
         conn.close()
         return (cursor.rowcount > 0)
