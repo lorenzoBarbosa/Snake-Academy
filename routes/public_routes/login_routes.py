@@ -40,8 +40,8 @@ async def post_login(
     }
     criar_sessao(request, usuario_dict)
 
-    url_redirectd = redirect if redirect else "/"
-    return RedirectResponse(url_redirectd, status.HTTP_303_SEE_OTHER)
+    url_redirect = redirect if redirect else "/cliente"
+    return RedirectResponse(url_redirect, status.HTTP_303_SEE_OTHER)
 
 @router.get("/logout")
 async def logout(request: Request):

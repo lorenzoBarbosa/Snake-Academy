@@ -16,6 +16,7 @@
         <title>Snake Academy</title>
     </head>
     <body>
+        {% if usuario.perfil != "cliente" %}
         <header>
             <div class="topo"></div>
             <nav class="navbar navbar-expand-lg bg-navbar-roxo">
@@ -51,6 +52,44 @@
                 </div>
             </nav>
         </header> 
+        {% endif %}
+        {% if usuario.perfil == "cliente" %}
+        <header>
+            <div class="topo"></div>
+            <nav class="navbar navbar-expand-lg bg-navbar-roxo">
+                <div class="container-fluid d-flex align-items-center justify-content-between">
+                    <a class="navbar-brand" href="/">
+                        <img src="/static/img/nossas_Logos/SNAKE ACADEMY LOGO.png" alt="snake" style="height: 80px;">
+                    </a>
+                    <form class="d-flex flex-grow-1 justify-content-center mx-3" role="search">
+                        <div class="input-group w-75">
+                            <input
+                                class="form-control barra-pesquisa"
+                                type="search"
+                                placeholder="Procure pelos melhores cursos!"
+                                aria-label="Search"
+                            >
+                            <button class="btn-lupa" type="submit">
+                                🔍︎
+                            </button>
+                        </div>
+                    </form>
+                    <div class="d-flex align-items-center">
+                        <a href="/login" class="me-2">
+                            <button class="botao-login">
+                                <div class="login">Fazer login</div>
+                            </button>
+                        </a>
+                        <a href="/cadastro">
+                            <button class="botao-login">
+                                <div class="cadastro">Logout</div>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </header> 
+        {% endif %}
         {% block conteudo %}
         {% endblock %}
         <footer class="rodape">
