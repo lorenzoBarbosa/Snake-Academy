@@ -42,24 +42,31 @@ def obter_todos_professors() -> list[Professor]:
         cursor.execute(OBTER_PROFESSOR)
         tuplas = cursor.fetchall()
         conn.close()
-        professores = [
-                Professor(
-                id=tupla[0],
-                nome=tupla[1],
-                email=tupla[2],
-                senha=tupla[3],
-                telefone=tupla[4],
-                dataCriacao=tupla[5],
-                dataUltimoAcesso=tupla[6],
-                statusConta=tupla[7],
-                historicoCursos=tupla[8],
-                indentificacaoProfessor=tupla[9], 
-                cursosPostados=tupla[10],
-                quantidadeAlunos=tupla[11],
-                dataCriacaoProfessor=tupla[12],
-                descricaoProfessor=tupla[13]
-            ) for tupla in tuplas
-        ]
+        professores = []
+        for tupla in tuplas:
+            historicoCursos = json.loads(tupla["historicoCursos"])
+            cursosPostados = json.loads(tupla["cursosPostados"])
+            professor = Professor(
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=tupla["token_redefinicao"],
+                data_token=tupla["data_token"],
+                data_cadastro=tupla["data_cadastro"],
+                dataUltimoAcesso=tupla["dataUltimoAcesso"],
+                statusConta=tupla["statusConta"],
+                historicoCursos=historicoCursos,
+                indentificacaoProfessor=tupla["indentificacaoProfessor"],
+                cursosPostados=cursosPostados,
+                quantidadeAlunos=tupla["quantidadeAlunos"],
+                dataCriacaoProfessor=tupla["dataCriacaoProfessor"],
+                descricaoProfessor=tupla["descricaoProfessor"]
+            )
+            professores.append(professor)
         conn.close()
         return professores
     except Exception as e:
@@ -76,24 +83,28 @@ def obter_professor_por_email(email: str) -> Optional[Professor]:
         conn.close()
 
         if tupla:
-            historicoCursos = json.loads(tupla[8])
-            cursosPostados = json.loads(tupla[10])
+            historicoCursos = json.loads(tupla["historicoCursos"])
+            cursosPostados = json.loads(tupla["cursosPostados"])
 
             return Professor(
-                id=tupla[0],
-                nome=tupla[1],
-                email=tupla[2],
-                senha=tupla[3],
-                telefone=tupla[4],
-                dataCriacao=tupla[5],
-                dataUltimoAcesso=tupla[6],
-                statusConta=tupla[7],
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=tupla["token_redefinicao"],
+                data_token=tupla["data_token"],
+                data_cadastro=tupla["data_cadastro"],
+                dataUltimoAcesso=tupla["dataUltimoAcesso"],
+                statusConta=tupla["statusConta"],
                 historicoCursos=historicoCursos,
-                indentificacaoProfessor=tupla[9],
+                indentificacaoProfessor=tupla["indentificacaoProfessor"],
                 cursosPostados=cursosPostados,
-                quantidadeAlunos=tupla[11],
-                dataCriacaoProfessor=tupla[12],
-                descricaoProfessor=tupla[13]
+                quantidadeAlunos=tupla["quantidadeAlunos"],
+                dataCriacaoProfessor=tupla["dataCriacaoProfessor"],
+                descricaoProfessor=tupla["descricaoProfessor"]
             )
     except Exception as e:
         print(f"Erro ao obter professor por email: {e}")
@@ -107,30 +118,32 @@ def obter_professor_por_id(id: int) -> Optional[Professor]:
         cursor.execute(OBTER_PROFESSOR_POR_ID, (id,))
         tupla = cursor.fetchone()
         conn.close()
-        if tupla is None:
-            return None
+        if tupla:
+            historicoCursos = json.loads(tupla["historicoCursos"])
+            cursosPostados = json.loads(tupla["cursosPostados"])
 
-        historicoCursos = json.loads(tupla[8])
-        cursosPostados = json.loads(tupla[10])
-
-        return Professor(
-            id=tupla[0],
-            nome=tupla[1],
-            email=tupla[2],
-            senha=tupla[3],
-            telefone=tupla[4],
-            dataCriacao=tupla[5],
-            dataUltimoAcesso=tupla[6],
-            statusConta=tupla[7],
-            historicoCursos=historicoCursos,
-            indentificacaoProfessor=tupla[9],
-            cursosPostados=cursosPostados,
-            quantidadeAlunos=tupla[11],
-            dataCriacaoProfessor=tupla[12],
-            descricaoProfessor=tupla[13]
-        )
+            return Professor(
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=tupla["token_redefinicao"],
+                data_token=tupla["data_token"],
+                data_cadastro=tupla["data_cadastro"],
+                dataUltimoAcesso=tupla["dataUltimoAcesso"],
+                statusConta=tupla["statusConta"],
+                historicoCursos=historicoCursos,
+                indentificacaoProfessor=tupla["indentificacaoProfessor"],
+                cursosPostados=cursosPostados,
+                quantidadeAlunos=tupla["quantidadeAlunos"],
+                dataCriacaoProfessor=tupla["dataCriacaoProfessor"],
+                descricaoProfessor=tupla["descricaoProfessor"]
+            )
     except Exception as e:
-        print(f"Erro ao obter professor por id: {e}")
+        print(f"Erro ao obter professor por email: {e}")
         return None
 
 

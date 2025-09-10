@@ -18,13 +18,19 @@
                         <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="Telefone">
                     </div>
                     <div class="mb-3">
+                        <input type="date" class="form-control" name="dataNascimento" id="dataNascimento" placeholder="Data de Nascimento">
+                    </div>
+                    <div class="mb-3">
+                        <input type="hidden" class="form-control" name="perfil" id="perfil" value="cliente">
+                    </div>
+                    <div class="mb-3">
                         <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha">
                     </div>
                     <div class="mb-4">
                         <input type="password" class="form-control" name="confirmar_senha" id="confirmar_senha" placeholder="Confirme sua senha">
-                        {% if mensagem %}
+                        {% if erro %}
                         <div>
-                            <p class="text-danger mt-2">{{ mensagem }}</p>
+                            <p class="text-danger mt-2">{{ erro }}</p>
                         </div>
                         {% endif %}
                     </div>

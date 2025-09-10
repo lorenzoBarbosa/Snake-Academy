@@ -5,38 +5,49 @@ CREATE TABLE IF NOT EXISTS usuario (
     email TEXT NOT NULL UNIQUE,
     senha TEXT NOT NULL,
     telefone TEXT NOT NULL,
-    dataCriacao TEXT NOT NULL
+    dataNascimento TEXT NOT NULL,
+    perfil TEXT NOT NULL DEFAULT 'usuario',
+    token_redefinicao TEXT,
+    data_token TIMESTAMP,
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 """
 INSERIR_USUARIO = """
-INSERT INTO usuario (nome, email, senha, telefone, dataCriacao)
-VALUES (?, ?, ?, ?, ?)
+INSERT INTO usuario (nome, email, senha, telefone, dataNascimento, perfil)
+VALUES (?, ?, ?, ?, ?, ?)
 """
 
 OBTER_USUARIOS = """
 SELECT 
-    id, nome, email, senha, telefone, dataCriacao
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro
 FROM usuario
 ORDER BY id 
 """
 
+OBTER_USUARIO_POR_PERFIL= """
+SELECT 
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro
+FROM usuario
+WHERE perfil LIKE ?
+"""
+
 OBTER_USUARIO_POR_EMAIL = """
 SELECT 
-    id, nome, email, senha, telefone, dataCriacao
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro
 FROM usuario
 WHERE email = ?
 """
 
 OBTER_USUARIO_POR_ID = """
 SELECT 
-    id, nome, email, senha, telefone, dataCriacao
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro
 FROM usuario
 WHERE id = ?
 """
 
 OBTER_USUARIO_PAGINADO = """
 SELECT 
-    id, nome, email, senha, telefone, dataCriacao
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro
     FROM usuario
     ORDER BY id
     LIMIT ? OFFSET ?"""
@@ -49,10 +60,10 @@ ATUALIZAR_USUARIO_POR_ID ="""
 UPDATE usuario
 SET 
     nome = ?, 
-    email = ?, 
-    senha = ?, 
+    email = ?,  
     telefone = ?, 
-    dataCriacao = ?
+    dataNascimento = ?, 
+    perfil = ?
 WHERE id = ?
 """
 
@@ -60,11 +71,18 @@ ATUALIZAR_USUARIO_POR_EMAIL= """
 UPDATE usuario
 SET 
     nome = ?, 
-    email = ?, 
-    senha = ?, 
+    email = ?,  
     telefone = ?, 
-    dataCriacao = ?
+    dataNascimento = ?, 
+    perfil = ?
 WHERE email = ?
+"""
+
+ATUALIZAR_SENHA= """ 
+UPDATE usuario
+SET 
+    senha = ?
+WHERE id = ?
 """
 
 EXCLUIR_USUARIO_POR_EMAIL = """

@@ -12,6 +12,8 @@ from data.usuario.usuario_repo import *
 
 import os
 
+from util.criar_admin import criar_admin_padrao
+
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
@@ -26,14 +28,14 @@ criar_tabela_curso()
 
 quantidade_usuario = obter_quantidade_usuario()
 if quantidade_usuario == 0:
-    for u in range(3):
-        usuario = Usuario(id=0, nome=f"Usuário {u}", email=f"usuario{u}@exemplo.com", senha="senha123", telefone="123456789", dataCriacao='2023-01-01')
-        id = inserir_usuario(usuario)
-
-    id_admin = inserir_admin(id=usuario.id, admin= Admin(id=usuario.id, nome= usuario.nome, email=usuario.email, senha=usuario.senha, telefone=usuario.telefone, dataCriacao=usuario.dataCriacao, nivelAcesso=1))
-
+    criar_admin_padrao()
+    usuarios = obter_todos_usuarios()
+    for usuario in usuarios:
+        if usuario.perfil == "admin":
+            admin = inserir_admin(Admin(id=0, nome=usuario.nome, email=usuario.email, senha=usuario.senha, telefone=usuario.telefone, dataNascimento=usuario.dataNascimento, perfil="admin", token_redefinicao=None, data_token=None, data_cadastro=None, nivelAcesso=3), 1)
+    
     for i in range(3):
-        inserir_banner(Banner(id=0, idAdmin=id_admin, status="ativo"))
+        inserir_banner(Banner(id=0, idAdmin=admin, status="ativo"))
 
     inserir_categoria(Categoria(id=0, nome="Ciência de Dados"))
     inserir_categoria(Categoria(id=0, nome="Gestão de Redes"))
@@ -48,10 +50,10 @@ if quantidade_usuario == 0:
     inserir_topico(Topico(id=0, idCategoria=4, nome="Machine Learning"))
     inserir_topico(Topico(id=0, idCategoria=4, nome="Deep Learning"))
 
-    id_cliente = inserir_cliente(Cliente(id=0, nome="João Souza", email="joao.souza@exemplo.com", senha="senha123", telefone="123456789", dataCriacao='2023-01-01', dataUltimoAcesso='2023-01-01', statusConta="ativo", historicoCursos="", indentificacaoProfessor="sim"), 1)
-
+    id_cliente = inserir_cliente(Cliente(id=0, nome="João Souza", email="joao.souza@exemplo.com", senha="senha123", telefone="123456789", dataNascimento='2023-01-01', perfil="cliente", token_redefinicao=None, data_token=None, data_cadastro=None, dataUltimoAcesso=None, statusConta="ativo", historicoCursos=[], indentificacaoProfessor="sim"), usuario.id)
     cliente = obter_cliente_por_id(id_cliente)
-    inserir_professor(Professor(id=cliente.id, nome=cliente.nome, email=cliente.email, senha=cliente.senha, telefone=cliente.telefone, dataCriacao=cliente.dataCriacao, dataUltimoAcesso=cliente.dataUltimoAcesso, statusConta=cliente.statusConta, historicoCursos=cliente.historicoCursos, indentificacaoProfessor=cliente.indentificacaoProfessor, cursosPostados="", quantidadeAlunos=0, dataCriacaoProfessor='2023-01-01', descricaoProfessor="Professor de python que sabe demais, muito muito muito muito muito muito muito muito muio mesmo!"), id_cliente)
+
+    inserir_professor(Professor(id=cliente.id, nome=cliente.nome, email=cliente.email, senha=cliente.senha, telefone=cliente.telefone, dataNascimento=cliente.dataNascimento, perfil=cliente.perfil, token_redefinicao=cliente.token_redefinicao, data_token=cliente.data_token, data_cadastro=cliente.data_cadastro, statusConta=cliente.statusConta, historicoCursos=cliente.historicoCursos, indentificacaoProfessor=cliente.indentificacaoProfessor, dataUltimoAcesso=None, cursosPostados=[], quantidadeAlunos=0, dataCriacaoProfessor='2023-01-01', descricaoProfessor="Professor de python que sabe demais, muito muito muito muito muito muito muito muito muio mesmo!"), id_cliente)
 
     for c in range(8):
         inserir_curso(Curso(id=0,

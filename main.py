@@ -1,8 +1,10 @@
+import secrets
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import uvicorn
+from starlette.middleware.sessions import SessionMiddleware
 
 from routes.admin_routes.administrador_routes import router as administrador_router
 from routes.admin_routes.alterar_categoria_routes import router as alterar_categoria_router
@@ -61,9 +63,22 @@ from routes.professor_routes.cursos.detalhes_curso.modificar_modulo_routes impor
 from routes.professor_routes.cursos.excluir_curso_routes import router as excluir_curso_router
 from routes.professor_routes.cursos.criar_curso_routes import router as criar_curso_router
 from routes.professor_routes.cursos.criar_modulo_routes import router as criar_modulo_router
-
+from util.criar_admin import criar_admin_padrao
 
 app = FastAPI()
+
+# Gerar chave secreta (em produção, use variável de ambiente!)
+SECRET_KEY = secrets.token_urlsafe(32)
+
+# Adicionar middleware de sessão
+app.add_middleware(
+    SessionMiddleware, 
+    secret_key=SECRET_KEY,
+    max_age=3600,  # Sessão expira em 1 hora
+    same_site="lax",
+    https_only=False  # Em produção, mude para True com HTTPS
+)
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.include_router(cadastro_router)
