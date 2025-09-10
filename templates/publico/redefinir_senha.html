@@ -1,6 +1,41 @@
-{% extends "index_publico.html" %}
-{%block conteudo%}
-<article>
-    <h1>Restaurar Senha</h1>
-</article>
-{%endblock%}
+{% extends "index.html" %}
+{% block conteudo %}
+<div class="redefinir-alinhamento fundo-codigo-confirmacao">
+  <div class="redefinir-card">
+        <h2>Restaurar Senha</h2>
+        <p class="descricao">Digite e confirme sua nova senha.</p>
+
+        <form method="post" action="/redefinir_senha" novalidate>
+        <div class="mb-3">
+            <label for="senha_nova" class="form-label">Nova Senha</label>
+            <input 
+            type="password" 
+            class="form-control {% if erro_senha %}is-invalid{% endif %}" 
+            id="senha_nova" 
+            name="senha_nova" 
+            placeholder="Digite uma Nova Senha:" 
+            required
+            >
+        </div>
+
+        <div class="mb-3">
+            <label for="senha_confirmacao" class="form-label">Confirme a Nova Senha</label>
+            <input 
+            type="password" 
+            class="form-control {% if erro_senha %}is-invalid{% endif %}" 
+            id="senha_confirmacao" 
+            name="senha_confirmacao" 
+            placeholder="Confirme sua Nova Senha:" 
+            required
+            >
+                {% if erro_senha %}
+                <div class="invalid-feedback">
+                    As senhas não coincidem. Tente novamente.
+                </div>
+                {% endif %}
+            </div>
+            <button class="btn btn-recuperar" type="submit">Enviar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
