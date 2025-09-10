@@ -16,7 +16,7 @@
         <title>Snake Academy</title>
     </head>
     <body>
-        {% if usuario.perfil == "cliente" %}
+        {% if usuario and usuario.perfil == "cliente" %}
         <header>
             <div class="topo"></div>
             <nav class="navbar navbar-expand-lg bg-navbar-roxo">

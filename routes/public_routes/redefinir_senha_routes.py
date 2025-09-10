@@ -7,8 +7,8 @@ router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
 @router.get("/redefinir_senha")
-async def get_restaurar_senha():
-    response = templates.TemplateResponse("publico/redefinir_senha.html", {"request": {}})
+async def get_restaurar_senha(request: Request):
+    response = templates.TemplateResponse("publico/redefinir_senha.html", {"request": request, "usuario": None})
     return response
 
 @router.post("/redefinir_senha", response_class=HTMLResponse)
