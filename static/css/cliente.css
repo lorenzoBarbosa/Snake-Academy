@@ -1,3 +1,22 @@
+.perfil {
+    background-color: #5C22AD;
+    color: #FFFFFF;
+    border-radius: 5px;
+    border: 1px solid #5C22AD;
+    font-weight: middle;
+    width: 120px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+    font-family: var(--fonte-principal);
+}
+
+
+
+
+
 .container-professor {
   max-width: 50vw;
 }
