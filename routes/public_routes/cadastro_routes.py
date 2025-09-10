@@ -124,7 +124,7 @@ async def post_cadastro(
         }
         criar_sessao(request, usuario_dict)
 
-        return RedirectResponse(f"/cliente", status.HTTP_303_SEE_OTHER)
+        return RedirectResponse(f"/cliente/editar_perfil", status.HTTP_303_SEE_OTHER)
 
     except Exception as e:
         return templates.TemplateResponse(

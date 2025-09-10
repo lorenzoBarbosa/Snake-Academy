@@ -38,3 +38,12 @@
     color: #2e2e2e;
     margin-top: 5px;
 }
+
+.container-editar-perfil{
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
