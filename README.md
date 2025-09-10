@@ -32,4 +32,8 @@ Grupo: Jhonatan Lima Mota Lourenço, Lorenzo Barbosa Alves, Lucas Oliveira Silva
 
         pip install -r requirements.txt
 
+        pip uninstall -y bcrypt
+
+        pip install bcrypt==4.0.1
+
 6 - Clicar no botão "Publish Branch", escolher um nome para o repositório e confirmar

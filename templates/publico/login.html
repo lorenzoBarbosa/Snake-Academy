@@ -1,4 +1,4 @@
-{% extends "index.html" %}
+{% extends "index_publico.html" %}
 {% block conteudo %}
 <article>
     <div class="login-container">
@@ -11,6 +11,9 @@
             <div class="container-login">
                 <h3 class="mb-4 text-start">Login</h3>
                 <form action="/login" method="post">
+                    {% if redirect %}
+                        <input type="hidden" name="redirect" value="{{ redirect }}">
+                    {% endif %}
                     <div class="mb-3">
                         <input type="email" class="form-control" placeholder="Email ou nome de usuário" name="email" id="email">
                     </div>

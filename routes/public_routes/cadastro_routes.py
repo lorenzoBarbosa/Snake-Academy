@@ -123,12 +123,12 @@ async def post_cadastro(
             "perfil": 'cliente',
         }
         criar_sessao(request, usuario_dict)
-        
-        return RedirectResponse(f"/cliente", status.HTTP_303_SEE_OTHER)
-        
+
+        return RedirectResponse(f"/cliente/editar_perfil", status.HTTP_303_SEE_OTHER)
+
     except Exception as e:
         return templates.TemplateResponse(
-            "cadastro.html",
+            "publico/cadastro.html",
             {
                 "request": request,
                 "erro": f"Erro ao criar cadastro. Tente novamente. {e}",
