@@ -22,7 +22,7 @@
             <nav class="navbar navbar-expand-lg bg-navbar-roxo">
                 <div class="container-fluid d-flex align-items-center justify-content-between">
                     <a class="navbar-brand" href="/cliente">
-                        <img src="/static/img/nossas_Logos/SNAKE ACADEMY LOGO.png" alt="snake" style="height: 80px;">
+                        <img src="/static/img/nossas_Logos/SNAKE ACADEMY LOGO.png" alt="snake" style="height:80px;">
                     </a>
                     <form class="d-flex flex-grow-1 justify-content-center mx-3" role="search">
                         <div class="input-group w-75">
@@ -32,94 +32,88 @@
                                 placeholder="Procure pelos melhores cursos!"
                                 aria-label="Search"
                             >
-                            <button class="btn-lupa" type="submit">
-                                🔍︎
-                            </button>
+                            <button class="btn-lupa" type="submit">🔍︎</button>
                         </div>
                     </form>
-                    <a class="botao-login foto-perfil" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                        Perfil
-                    </a>
-                    <div
-                        class="offcanvas offcanvas-start"
-                        tabindex="-1"
-                        id="offcanvasExample"
-                        aria-labelledby="offcanvasExampleLabel"
+
+                    <button
+                        class="botao-login foto-perfil "
+                        type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasExample"
+                        aria-controls="offcanvasExample"
                     >
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-                            <button
-                                type="button"
-                                class="btn-close"
-                                data-bs-dismiss="offcanvas"
-                                aria-label="Close"
-                            ></button>
-                        </div>
-                        <div class="offcanvas-body">
-                            <div>
-                                Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-                            </div>
-                            <div class="dropdown mt-3">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                    Dropdown button
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="d-flex align-items-center">
+                        <img
+                            class="imagem-foto-perfil"
+                            src="/static/img/comentarios/Ana Souza.webp"
+                            alt="Foto de perfil"
+                        >
+                    </button>
+                </div>
+            </nav>
+        </header>
+        <div
+            class="offcanvas offcanvas-end acesso-perfil"
+            tabindex="-1"
+            id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel"
+        >
+            <div class="offcanvas-header">
+                <div class="foto-perfil">
+                    <img class="imagem-foto-perfil" src="/static/img/comentarios/Ana Souza.webp" alt="Foto de perfil">
+                </div>
+                <h5 class="offcanvas-title ms-3" id="offcanvasExampleLabel">{{ usuario.nome  }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body p-5 corpo">
+                <div class="linha-triangulo">
+                    <div class="triangulo-roxo"></div>
+                    <div class="texto-triangulo"><a href="/cliente/editar-perfil">Editar Perfil</a></div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="d-flex align-items-center">
                         <a href="/logout">
                             <button class="botao-login">
                                 <div class="perfil">Logout</div>
                             </button>
                         </a>
                     </div> -->
-                </div>
-            </nav>
+
         </header>
         {% endif %}
         {% block conteudo %}
         {% endblock %}
-        <footer class="rodape">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h5>Sobre nós</h5>
-                        <p>
-                            A mais nova plataforma de cursos online voltados para área de tecnologia de informação já
+<footer class="rodape">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>Sobre nós</h5>
+                <p>
+                    A mais nova plataforma de cursos online voltados para área de tecnologia de informação já
                         chegou!
                         Snake Academy está pronta para você que deseja adentrar nesse novo mundo tecológico!
-                        </p>
-                    </div>
-                    <div class="col-md-4">
-                        <h5>Torne-se um contribuinte!</h5>
-                        <p>Cadastre-se como um de nossos ofertantes de cursos e adquira uma renda extra todo mês!</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h5>Contato</h5>
-                        <p>Email: snakeacademy@gmail.com</p>
-                        <p>Telefone: (11) 1234-5678</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col d-flex align-items-center justify-content-center">
-                        <img src="/static/img/nossas_Logos/logo branca sem nome.png" alt="Snake Academy logo" style="height: 30px; margin-right: 10px;">
-                        <p class="mb-0">&copy; 2023 Snake Academy. Todos os direitos reservados.</p>
-                    </div>
-                </div>
+                </p>
             </div>
-        </footer>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-    </body>
-    <script src="/static/js/home.js"></script>
+            <div class="col-md-4">
+                <h5>Torne-se um contribuinte!</h5>
+                <p>Cadastre-se como um de nossos ofertantes de cursos e adquira uma renda extra todo mês!</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Contato</h5>
+                <p>Email: snakeacademy@gmail.com</p>
+                <p>Telefone: (11) 1234-5678</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex align-items-center justify-content-center">
+                <img src="/static/img/nossas_Logos/logo branca sem nome.png" alt="Snake Academy logo" style="height: 30px; margin-right: 10px;">
+                <p class="mb-0">&copy; 2023 Snake Academy. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</body>
+<script src="/static/js/home.js"></script>
 </html>
