@@ -1,6 +1,6 @@
 {% extends "index_publico.html" %}
 {% block conteudo %}
-<script src="{{ url_for('static', path='js/forca_senha.js') }}"></script>
+<script src="{{ url_for('static', path='js/scripts.js') }}"></script>
 <div class="redefinir-alinhamento fundo-codigo-confirmacao">
   <div class="redefinir-card">
         <h2>Restaurar Senha</h2>
@@ -26,18 +26,17 @@
 
         <div class="mb-3">
             <label for="senha_confirmacao" class="form-label">Confirme a Nova Senha: </label>
-            <input 
-            type="password" 
+            <input  
             class="form-control {% if erro_senha %}is-invalid{% endif %}" 
+            type="password"
             id="senha_confirmacao" 
             name="senha_confirmacao" 
             placeholder="Confirme sua Nova Senha:" 
             required
             >       
+            
             {% if erro_forca %}
-                <div class="invalid-feedback">
-                    {{ mensagem_erro }}
-                </div>
+                {{mensagem_erro}}
             {% endif %}
             </div>
             <button class="btn btn-recuperar" type="submit">Enviar</button>
