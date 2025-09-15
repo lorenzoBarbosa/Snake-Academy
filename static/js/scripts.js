@@ -1,6 +1,6 @@
-function algumaFuncao(){
-    console.log("Alguma função");
-}
+//function algumaFuncao(){
+//    console.log("Alguma função");
+//}
 // código
 
 document.addEventListener("DOMContentLoaded", function () {

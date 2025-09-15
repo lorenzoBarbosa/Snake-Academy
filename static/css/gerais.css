@@ -758,7 +758,7 @@ article{
   margin-bottom: 12px;
   font-size: 1.6rem;
   font-weight: 600;
-  color: #333;
+  color: #6c0000;
 }
 
 .redefinir-card .descricao {
@@ -808,7 +808,7 @@ article{
 }
 
 .btn-recuperar:hover {
-  filter: brightness(1.05);
+  color: #cecece;
 }
 
 .btn-recuperar:active {
@@ -833,4 +833,36 @@ article{
   align-items: center;
   height: 100%;
   padding: 20px;
+}
+
+/* Card ocupando a tela toda */
+.card-tela-toda {
+  width: 100%;
+  padding: 0;
+  margin: 30px; /* margem opcional */
+  
+}
+
+/* Faz o card colar de um lado ao outro da viewport */
+.card-tela-toda .card {
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw); /* centraliza o elemento full-bleed */
+  margin-right: calc(50% - 50vw);
+  border-radius: 0;    /* opcional: remove cantos arredondados */
+  box-shadow: none;    /* opcional: remove sombra */
+}
+
+/* Remove qualquer espaçamento interno do Bootstrap (gutter) */
+.card-tela-toda .row.g-0,
+.card-tela-toda .row.g-0 > [class^="col-"] {
+  margin: 0;
+  padding: 0;
+}
+
+/* Imagem ocupa corretamente a largura */
+.card-tela-toda .img-fluid {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }

@@ -8,3 +8,8 @@ templates = Jinja2Templates(directory="templates")
 async def get_cursos():
     response = templates.TemplateResponse("publico/cursos.html", {"request": {}})
     return response
+
+@router.post("/cursos")
+async def post_cursos():
+    response = templates.TemplateResponse("publico/cursos.html", {"request": {}})
+    return response

@@ -58,7 +58,7 @@ async def post_restaurar_senha(
         return templates.TemplateResponse("publico/redefinir_senha.html", {
             "request": request,
             "erro_forca": True,
-            "mensagem_erro": "A senha é muito fraca. Por favor, escolha uma senha mais forte."
+            "mensagem_erro": "Sua senha está fraca. Tente novamente"
         })
     else:
         return RedirectResponse(url="/", status_code=303)
