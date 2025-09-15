@@ -124,3 +124,85 @@
 .botao-salvar:hover {
   background-color: #32a876;
 }
+
+.foto-perfil {
+  width: 80px;             
+  height: 80px;             
+  aspect-ratio: 1 / 1;      
+  display: inline-flex;     
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;       
+  overflow: hidden;         
+  padding: 0;               
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  box-sizing: border-box;   
+}
+
+
+.imagem-foto-perfil {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        
+  object-position: center;  
+  border-radius: 0;
+}
+
+.acesso-perfil {
+    height: 60vh;
+    width: auto;
+}
+
+.corpo-acesso-perfil{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.linha-triangulo {
+  display: flex;
+  align-items: center; 
+  gap: 10px;           
+}
+
+
+.triangulo-roxo {
+  width: 0;
+  height: 0;
+  border-top: 10px solid #6c5ce7;
+  border-bottom: 10px solid #6c5ce7;
+  border-left: 10px solid #6c5ce7;
+  border-right: 10px solid #6c5ce7;
+  flex-direction: row;
+}
+
+.triangulo-roxo:hover {
+  transition: 0.2s;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 20px solid #6c5ce7;
+  border-right: 0px solid transparent;
+}
+
+.linha-triangulo:hover .triangulo-roxo {
+  transition: 0.2s;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 20px solid #6c5ce7;
+  border-right: 0px solid transparent;
+}
+
+.texto-triangulo {
+  margin-left: 10px;
+  font-size: 18px;
+  color: #2e2e2e;
+  flex-direction: row;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
