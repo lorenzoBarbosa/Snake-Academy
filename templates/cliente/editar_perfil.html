@@ -9,7 +9,7 @@
                 <p class="titulo-editar-perfil">
                     Editar Perfil
                 </p>
-                <form action="/cliente/editar_perfil" method="post">
+                <form action="/cliente/editar-perfil" method="post">
                     <label for="nome">Nome</label>
                     <input class="input-editar-perfil" type="text" id="nome" name="nome" value="{{ usuario.nome }}" placeholder="Nome" require>
                     <label for="email">Email</label>
@@ -17,11 +17,11 @@
                     <label for="telefone">Telefone</label>
                     <input class="input-editar-perfil" type="tel" id="telefone" name="telefone" value="{{ usuario.telefone }}" placeholder="Telefone" required>
                     <label for="data_nascimento">Data de Nascimento</label>
-                    <input class="input-editar-perfil" type="date" id="data_nascimento" name="data_nascimento" value="{{ usuario.data_nascimento }}" required>
+                    <input class="input-editar-perfil" type="date" id="data_nascimento" name="data_nascimento" value="{{ usuario.dataNascimento }}" required>
                     <button class="botao-login botao-salvar" type="submit">Salvar</button>
                 </form>
             </div>
         </div>
     </div>
-</article>
+</article>  
 {%endblock%}

@@ -10,3 +10,10 @@ templates = Jinja2Templates(directory="templates")
 @requer_autenticacao(["cliente"])
 async def get_cliente(request: Request, usuario_logado: dict = None):
     return templates.TemplateResponse("cliente/cliente.html", {"request": request, "usuario": usuario_logado})
+
+@router.get("/cliente/logout")
+@requer_autenticacao(["cliente"])
+async def get_logout(request: Request, usuario_logado: dict = None):
+    destruir_sessao(request)
+    response = templates.TemplateResponse("publico/home.html", {"request": request,})
+    return response

@@ -11,13 +11,13 @@ from util.auth_decorator import *
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
-@router.get("/cliente/editar_perfil")
+@router.get("/cliente/editar-perfil")
 @requer_autenticacao(["cliente"])
 async def get_editar_perfil(request: Request, usuario_logado: dict = None):
     response = templates.TemplateResponse("cliente/editar_perfil.html", {"request": request, "usuario": usuario_logado})
     return response
 
-@router.post("/cliente/editar_perfil")
+@router.post("/cliente/editar-perfil")
 @requer_autenticacao(["cliente"])
 async def post_editar_perfil(request: Request,
                             usuario_logado: dict = None,
@@ -25,20 +25,7 @@ async def post_editar_perfil(request: Request,
                             email: str = Form(...),
                             telefone: str = Form(...),
                             data_nascimento: str = Form(...)):
-    
-    if obter_usuario_por_email(email):
-        return templates.TemplateResponse(
-            "publico/cadastro.html",
-            {
-                "request": request,
-                "erro": "Este email já está cadastrado",
-                "nome": nome,
-                "telefone": telefone,
-                "dataNascimento": data_nascimento,
-                "perfil": usuario_logado.get("perfil")
-            }
-        )
-    
+
     try:
         usuario = Usuario(
             id=0,
@@ -89,7 +76,7 @@ async def post_editar_perfil(request: Request,
 
     except Exception as e:
         return templates.TemplateResponse(
-            "publico/cadastro.html",
+            "cliente/editar-perfil.html",
             {
                 "request": request,
                 "erro": f"Erro ao criar cadastro. Tente novamente. {e}",
