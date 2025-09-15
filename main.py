@@ -32,7 +32,6 @@ from routes.public_routes.login_routes import router as login_router
 from routes.public_routes.detalhes_curso_routes import router as detalhes_curso_router
 from routes.public_routes.confirmacao_cadastro_routes import router as confirmacao_cadastro_router
 from routes.public_routes.cursos_routes import router as cursos_router
-from routes.public_routes.recuperar_senha_routes import router as recuperar_senha_router
 from routes.public_routes.redefinir_senha_routes import router as restaurar_senha_router
 from routes.public_routes.validacao_email_routes import router as validacao_email_router
 from routes.public_routes.codigo_enviado_routes import router as codigo_enviado_router
@@ -87,7 +86,6 @@ app.include_router(login_router)
 app.include_router(detalhes_curso_router)
 app.include_router(confirmacao_cadastro_router)
 app.include_router(cursos_router)
-app.include_router(recuperar_senha_router)
 app.include_router(restaurar_senha_router)
 app.include_router(validacao_email_router)
 app.include_router(cliente_router)
