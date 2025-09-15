@@ -1,9 +1,10 @@
-//function algumaFuncao(){
-//    console.log("Alguma função");
-//}
 // código
 
 document.addEventListener("DOMContentLoaded", function () {
+  function algumaFuncao(){
+    console.log("Alguma função");
+  }
+  
   const senhaInput = document.getElementById("senha_nova");
   const barra = document.getElementById("nivel-forca");
   const texto = document.getElementById("texto-forca");
