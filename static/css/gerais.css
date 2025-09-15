@@ -758,7 +758,7 @@ article{
   margin-bottom: 12px;
   font-size: 1.6rem;
   font-weight: 600;
-  color: #333;
+  color: #6c0000;
 }
 
 .redefinir-card .descricao {
@@ -808,7 +808,7 @@ article{
 }
 
 .btn-recuperar:hover {
-  filter: brightness(1.05);
+  color: #cecece;
 }
 
 .btn-recuperar:active {
