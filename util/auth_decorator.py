@@ -5,6 +5,7 @@ from functools import wraps
 from typing import List, Optional
 from fastapi import Request, HTTPException, status
 from fastapi.responses import RedirectResponse
+import os
 
 
 def obter_usuario_logado(request: Request) -> Optional[dict]:
@@ -134,3 +135,14 @@ def requer_autenticacao(perfis_autorizados: List[str] = None):
 
 # Importação necessária para funções assíncronas
 import asyncio
+
+
+IMG_PATH = "static/img/carrossel"
+
+def get_image_filename(caminho: str, id: int) -> str | None:
+    rota = IMG_PATH + caminho
+    for ext in [".jpg", ".jpeg", ".png", ".svg", ".webp"]:
+        file_path = os.path.join(rota, f"{id}{ext}")
+        if os.path.exists(file_path):
+            return f"/{file_path}"
+    return None
