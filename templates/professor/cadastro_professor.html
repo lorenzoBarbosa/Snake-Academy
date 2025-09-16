@@ -1,4 +1,27 @@
 {% extends "index.html" %}
 {%block conteudo%}
-<h1>Área do professor</h1>
+<article>
+    <div class="container-editar-perfil">
+        <div class="editar-perfil">
+            <div class="container-editar-imagem bg-white">
+                <div>
+                <img class="imagem-cadastro-professor" src="/static/img/telas_de_fundo/ilustracao_snake.png" alt="ilustração">
+                </div>
+            </div>
+            <div class="container-editar-dados">
+                <p class="titulo-editar-perfil">
+                    Bem vindo {{ usuario.nome }}, venha fazer parte da nossa equipe!
+                </p>
+                <p class="subtitulo-perfil">
+                    Estamos muito felizes que você se tornará mais um para nossa equipe! Pedimos apenas que faça uma breve descrição dos seus trabalhos e de quem você é no ramo da tecnologia.
+                </p>
+                <form action="/professor/cadastro-professor" method="post">
+                   <label for="descricao"><b>Descrição:</b></label>
+                    <textarea class="input-descricao" id="descricao" name="descricao" rows="6" placeholder="Escreva um pouco sobre você e sobre suas experiências no ramo da tecnologia..." required></textarea>
+                    <button class="botao-login botao-salvar" type="submit">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</article>  
 {%endblock%}

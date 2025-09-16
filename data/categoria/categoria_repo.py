@@ -54,6 +54,21 @@ def obter_categoria_por_id(id: int) -> Optional[Categoria]:
         print(f"Erro ao obter categoria por id: {e}")
         return None
 
+def obter_categorias_paginado(pg_num: int, pg_size: int) -> List[Categoria]:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        offset = (pg_num - 1) * pg_size
+        limit = pg_size
+        cursor.execute(OBTER_CATEGORIAS_PAGINADO, (limit, offset))
+        tuplas = cursor.fetchall()
+        conn.close()
+        categorias = [Categoria(id=tupla[0], nome=tupla[1]) for tupla in tuplas]
+        return categorias
+    except Exception as e:
+        print(f"Erro ao obter categorias paginado: {e}")
+        return None
+
 def obter_categoria_por_nome(nome: str) -> Optional[Categoria]:
     try:
         conn = get_connection()

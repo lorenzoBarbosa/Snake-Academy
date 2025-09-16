@@ -137,7 +137,7 @@ def requer_autenticacao(perfis_autorizados: List[str] = None):
 import asyncio
 
 
-IMG_PATH = "static/img/carrossel"
+IMG_PATH = "static/img/"
 
 def get_image_filename(caminho: str, id: int) -> str | None:
     rota = IMG_PATH + caminho

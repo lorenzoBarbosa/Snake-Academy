@@ -206,6 +206,18 @@ def atualizar_usuario_por_email(usuario: Usuario, email: str) -> bool:
         print(f"Erro ao atualizar usuário por email: {e}")
         return False
 
+def atualizar_perfil(id: int, perfil: str) -> bool:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(ATUALIZAR_PERFIL, (perfil, id))
+        conn.commit()
+        conn.close()
+        return (cursor.rowcount > 0)
+    except Exception as e:
+        print(f"Erro ao atualizar perfil: {e}")
+        return False
+
 def atualizar_senha(id: int, senha: str) -> bool:
     try:
         conn = get_connection()

@@ -12,6 +12,7 @@ from data.usuario.usuario_repo import *
 
 import os
 
+from util.auth_decorator import get_image_filename
 from util.criar_admin import criar_admin_padrao
 
 router = APIRouter()
@@ -111,24 +112,10 @@ cursos4 = obter_curso_por_topico(4)
 cursos = obter_todos_cursos()
 banners = obter_todos_banners()
 
-
-
-def encontrar_imagem_curso(curso_id):
-    base_path = 'static/img/nossos_cursos'
-    for ext in ['.jpg', '.jpeg', '.png', '.webp']:
-        filename = f"{curso_id}{ext}"
-        file_path = os.path.join(base_path, filename)
-        if os.path.exists(file_path):
-            return f"/static/img/nossos_cursos/{filename}"
-    return "/static/img/default.jpg"
-
-
-imagem_cursos = {
-    curso.id: encontrar_imagem_curso(curso.id)
-    for curso in cursos
-}
-
-
+rotas_cursos = []
+for curso in cursos:
+    rota = get_image_filename("nossos_cursos", curso.id)
+    rotas_cursos.append(rota)
 
 @router.get("/")
 async def get_root():
@@ -140,7 +127,7 @@ async def get_root():
                                                                 "cursos3": cursos3, 
                                                                 "cursos4": cursos4, 
                                                                 "cursos": cursos,
-                                                                "imagem_cursos": imagem_cursos})
+                                                                "imagem_cursos": rotas_cursos})
     return response
 
 

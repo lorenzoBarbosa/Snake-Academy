@@ -85,6 +85,13 @@ SET
 WHERE id = ?
 """
 
+ATUALIZAR_PERFIL= """
+UPDATE usuario
+SET 
+    perfil = ?
+WHERE id = ?
+"""
+
 EXCLUIR_USUARIO_POR_EMAIL = """
 DELETE FROM usuario
 WHERE email = ?

@@ -34,6 +34,12 @@ FROM categoria c
 WHERE c.id = ?;
 """
 
+OBTER_CATEGORIAS_PAGINADO = """
+SELECT c.id, c.nome
+FROM categoria c
+LIMIT ? OFFSET ?;
+"""
+
 OBTER_QUANTIDADE_CATEGORIA_POR_NOME = """
 SELECT COUNT(*)
 FROM categoria c
