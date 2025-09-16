@@ -13,10 +13,6 @@
     font-family: var(--fonte-principal);
 }
 
-
-
-
-
 .container-professor {
   max-width: 50vw;
 }
@@ -29,7 +25,6 @@
 .nome-professor{
     font-size: 24px;
 }
-
 
 .container-imagem-professor {
   float: left;              /* faz a imagem flutuar */
@@ -211,7 +206,7 @@ a {
 
 .tornar-se-ofertante a {
     font-size: 16px;
-    color: #5C22AD;
+    color: #522197;
     text-decoration: none;
     font-family: var(--fonte-principal);
     margin-right: 30px;
