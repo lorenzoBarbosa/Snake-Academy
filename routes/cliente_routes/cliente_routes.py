@@ -7,12 +7,12 @@ router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
 @router.get("/cliente")
-@requer_autenticacao(["cliente"])
+@requer_autenticacao(["cliente", "professor", "admin"])
 async def get_cliente(request: Request, usuario_logado: dict = None):
     return templates.TemplateResponse("cliente/cliente.html", {"request": request, "usuario": usuario_logado})
 
 @router.get("/cliente/logout")
-@requer_autenticacao(["cliente"])
+@requer_autenticacao(["cliente", "professor", "admin"])
 async def get_logout(request: Request, usuario_logado: dict = None):
     destruir_sessao(request)
     response = templates.TemplateResponse("publico/home.html", {"request": request,})

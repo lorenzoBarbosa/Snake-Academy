@@ -12,13 +12,13 @@ router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
 @router.get("/cliente/editar-perfil")
-@requer_autenticacao(["cliente"])
+@requer_autenticacao(["cliente", 'professor', 'admin'])
 async def get_editar_perfil(request: Request, usuario_logado: dict = None):
     response = templates.TemplateResponse("cliente/editar_perfil.html", {"request": request, "usuario": usuario_logado})
     return response
 
 @router.post("/cliente/editar-perfil")
-@requer_autenticacao(["cliente"])
+@requer_autenticacao(["cliente", 'professor', 'admin'])
 async def post_editar_perfil(request: Request,
                             usuario_logado: dict = None,
                             nome: str = Form(...),
