@@ -1,7 +1,141 @@
 {%extends "index_publico.html" %}
 {% block conteudo %}
+
+<div class="filtros-container">
+  <button class="btn-filtros" type="button" data-bs-toggle="offcanvas"
+    data-bs-target="#offcanvasFiltros" aria-controls="offcanvasFiltros">
+    Filtros
+  </button>
+
+  <div class="btn-group">
+    <button class="btn-atalhos dropdown-toggle" type="button" data-bs-toggle="dropdown">
+      Avaliação
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item filtro-atalho" data-filtro="avaliacao" data-valor="5">5 Estrelas</a></li>
+      <li><a class="dropdown-item filtro-atalho" data-filtro="avaliacao" data-valor="4">4+ Estrelas</a></li>
+      <li><a class="dropdown-item filtro-atalho" data-filtro="avaliacao" data-valor="3">3+ Estrelas</a></li>
+      <li><a class="dropdown-item filtro-atalho" data-filtro="avaliacao" data-valor="">Todos</a></li>
+    </ul>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn-atalhos dropdown-toggle" type="button" data-bs-toggle="dropdown">
+      Idioma
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item filtro-atalho" data-filtro="idioma" data-valor="pt">Português</a></li>
+      <li><a class="dropdown-item filtro-atalho" data-filtro="idioma" data-valor="en">Inglês</a></li>
+      <li><a class="dropdown-item filtro-atalho" data-filtro="idioma" data-valor="">Todos</a></li>
+    </ul>
+  </div>
+  
+  <div class="btn-group">
+    <button class="btn-atalhos dropdown-toggle" type="button" data-bs-toggle="dropdown">
+      Níveis
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item filtro-atalho" data-filtro="classificacao" data-valor="in">Iniciante</a></li>
+      <li><a class="dropdown-item filtro-atalho" data-filtro="classificacao" data-valor="it">Intermediario</a></li>
+      <li><a class="dropdown-item filtro-atalho" data-filtro="classificacao" data-valor="av">Avançado</a></li>
+      <li><a class="dropdown-item filtro-atalho" data-filtro="classificacao" data-valor="tn">Todos os Níveis</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1"
+  id="offcanvasFiltros" aria-labelledby="offcanvasFiltrosLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasFiltrosLabel">Filtros de Cursos</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    
+    <h6>Avaliação</h6>
+    <div>
+      <input type="radio" name="avaliacao" value="5" id="av5">
+      <label for="av5">5 Estrelas</label><br>
+      <input type="radio" name="avaliacao" value="4" id="av4">
+      <label for="av4">4 Estrelas ou mais</label><br>
+      <input type="radio" name="avaliacao" value="3" id="av3">
+      <label for="av3">3 Estrelas ou mais</label><br>
+      <input type="radio" name="avaliacao" value="" id="avTodos" checked>
+      <label for="avTodos">Todas</label>
+    </div>
+    
+    <hr>
+    
+    <h6>Idioma</h6>
+    <div>
+      <input type="checkbox" name="idioma" value="pt" id="pt">
+      <label for="pt">Português</label><br>
+      <input type="checkbox" name="idioma" value="en" id="en">
+      <label for="en">Inglês</label>
+    </div>
+    
+    <h6>Níveis</h6>
+    <div>
+      <input type="checkbox" name="classificacao" value="in" id="in">
+      <label for="in">Iniciante</label><br>
+      <input type="checkbox" name="classificacao" value="it" id="it">
+      <label for="it">Intermediario</label><br>
+      <input type="checkbox" name="classificacao" value="av" id="av">
+      <label for="av">Avançado</label><br>
+      <input type="checkbox" name="classificacao" value="" id="tn" checked>
+      <label for="tn">Todos</label>
+    </div>
+
+    <hr>
+
+    <h6>Duração das aulas</h6>
+    <div>
+      <input type="checkbox" name="duracao" value="c" id="dur-curta">
+      <label for="dur-curta">Até 2h (Curta)</label><br>
+      <input type="checkbox" name="duracao" value="m" id="dur-media">
+      <label for="dur-media">2h a 10h (Média)</label><br>
+      <input type="checkbox" name="duracao" value="l" id="dur-longa">
+      <label for="dur-longa">Mais de 10h (Longa)</label><br>
+      <input type="checkbox" name="duracao" value="" id="dur-todas" checked>
+      <label for="dur-todas">Todas</label>
+    </div>
+
+    <hr>
+
+    <h6>Tópicos</h6>
+    <div>
+      <input type="checkbox" name="topico" value="ds" id="top-ds">
+      <label for="top-ds">Data Science</label><br>
+      <input type="checkbox" name="topico" value="wd" id="top-wd">
+      <label for="top-wd">Web Development</label><br>
+      <input type="checkbox" name="topico" value="ml" id="top-ml">
+      <label for="top-ml">Machine Learning</label><br>
+      <input type="checkbox" name="topico" value="" id="top-todos" checked>
+      <label for="top-todos">Todos</label>
+    </div>
+
+    <hr>
+
+    <h6>Preços</h6>
+    <div>
+      <input type="checkbox" name="preco" value="gratis" id="pre-gratis">
+      <label for="pre-gratis">Gratuitos</label><br>
+      <input type="checkbox" name="preco" value="ate50" id="pre-ate50">
+      <label for="pre-ate50">Até R$50</label><br>
+      <input type="checkbox" name="preco" value="50a100" id="pre-50a100">
+      <label for="pre-50a100">R$50 a R$100</label><br>
+      <input type="checkbox" name="preco" value="100plus" id="pre-100plus">
+      <label for="pre-100plus">Acima de R$100</label><br>
+      <input type="checkbox" name="preco" value="" id="pre-todos" checked>
+      <label for="pre-todos">Todos</label>
+    </div>
+  </div>
+</div>
+
+
+
 <article class="card-tela-toda">
-  <div class="card mb-3">
+
+  <div class="card mb-3 curso" data-avaliacao="5" data-idioma="pt">
     <div class="row g-0">
       <div class="col-md-4">
         <img src="/static/img/nossos_cursos/1.jpeg" class="img-fluid rounded-start" alt="...">
@@ -9,27 +143,44 @@
       <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title">Curso de Ciência de Dados</h5>
-          <p class="card-text">
-            Aprenda os principais fundamentos de Ciência de Dados e desenvolva as
-            habilidades mais procuradas do mercado. Explore estatística, programação em
-            Python, análise de grandes volumes de dados, machine learning e técnicas de
-            visualização para transformar informações em insights estratégicos. Ideal
-            para quem deseja iniciar na área ou se especializar em projetos de análise
-            e inteligência artificial aplicada.
-          </p>
-          <p class="card-text">
-            <small class="text-body-secondary">Última atualização há 3 minutos</small>
-          </p>
-          <p class="card-text">
-            Instrutor: Marcos Andrade
-          </p>
-          <p class="card-text">
-            ★★★★☆ 4,7 <small class="text-muted">(765 avaliações)</small>
-          </p>
-          <p class="carde-preco-favoritos">R$39.90</p>
-          <p class="card-text">
-            <small class="text-body-secondary">Última atualização há 3 minutos</small>
-          </p>
+          <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos est veritatis sunt alias doloremque sint? Labore facilis qui officiis harum nostrum excepturi aut tempora rerum hic, aspernatur, animi veritatis eaque sapiente inventore iusto repellendus minima veniam aliquid laboriosam iste. Dolorum corporis accusamus, cumque vero deserunt perferendis veritatis nobis iste ducimus adipisci velit dolore odit minima, placeat architecto sed iusto perspiciatis. Tempore repellat ratione illum adipisci esse sunt non iusto hic?</p>
+          <p class="card-text"><small class="text-body-secondary">Instrutor: Marcos Andrade</small></p>
+          <p class="card-text">★★★★★ 5,0 <small class="text-muted">(765 avaliações)</small></p>
+          <p class="carde-preco-favoritos">R$39,90</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-3 curso" data-avaliacao="4" data-idioma="en">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="/static/img/nossos_cursos/2.jpeg" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">Node.js Backend</h5>
+          <p class="card-text">Curso prático de back-end moderno...</p>
+          <p class="card-text"><small class="text-body-secondary">Instrutor: Ana Silva</small></p>
+          <p class="card-text">★★★★☆ 4,3 <small class="text-muted">(320 avaliações)</small></p>
+          <p class="carde-preco-favoritos">R$59,90</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-3 curso" data-avaliacao="3" data-idioma="pt">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="/static/img/nossos_cursos/3.jpeg" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">Excel Avançado</h5>
+          <p class="card-text">Curso completo de planilhas...</p>
+          <p class="card-text"><small class="text-body-secondary">Instrutor: João Pereira</small></p>
+          <p class="card-text">★★★☆☆ 3,7 <small class="text-muted">(150 avaliações)</small></p>
+          <p class="carde-preco-favoritos">R$29,90</p>
         </div>
       </div>
     </div>
