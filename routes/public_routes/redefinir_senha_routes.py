@@ -61,5 +61,5 @@ async def post_restaurar_senha(
             "mensagem_erro": "Sua senha está fraca. Tente novamente"
         })
     else:
-        return RedirectResponse(url="/", status_code=303)
+        return RedirectResponse(url="/login", status_code=303)
 
