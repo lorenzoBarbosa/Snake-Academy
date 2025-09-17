@@ -3,6 +3,8 @@ from fastapi.templating import Jinja2Templates
 
 from data.banner import banner_repo
 from data.categoria.categoria_repo import *
+from data.cliente import cliente_repo
+from data.cliente.cliente_model import Cliente
 from data.curso.curso_repo import *
 from data.topico.topico_repo import *
 from util.auth_decorator import *
@@ -31,9 +33,19 @@ for curso in cursos:
     rota = get_image_filename("nossos_cursos", curso.id)
     rotas_cursos.append(rota)
 
+
+
 @router.get("/cliente")
 @requer_autenticacao(["cliente", "professor", "admin"])
 async def get_cliente(request: Request, usuario_logado: dict = None):
+
+    # cliente = cliente_repo.obter_cliente_por_id(usuario_logado.get("id"))
+    # lista_historico = []
+    # if cliente.historicoCursos:
+    #     for curso_id in cliente.historicoCursos:
+    #         curso = obter_curso_por_id(curso_id)
+    #         if curso:
+    #             lista_historico.append(curso)
 
     return templates.TemplateResponse("cliente/cliente.html", {"request": request,                                      
                                                                 "usuario":usuario_logado,
