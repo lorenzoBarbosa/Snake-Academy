@@ -478,30 +478,41 @@ article{
     margin-left: 120px;
 }
 
-.carde-curso-detalhes{
-    display: inline-block;
-    min-width: 25vw;
-    max-width: 25vw;
-    min-height: 50vh;
-    background-color: rgb(255, 255, 255);
-    position: absolute;
+.carde-curso-detalhes {
+    position: fixed;       
+    top: 150px;
+    margin-bottom: 400px;             
+    right: 20px;           
+    width: 25vw;           
+    height: 65vh;          
+    background-color: #fff;
     border-radius: 20px;
-    margin-left: 20%;
-    margin-top: 50px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);   
-    padding-bottom: 20px ;
-    position: fixed;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; 
+    overflow: hidden;       
+    z-index: 1000;
 }
 
-.detalhes-imagem-curso-container{
-    border-radius: 20px 20px 0 0;
-    min-width: 100%;
-}
-
-.detalhes-imagem-curso{
+.detalhes-imagem-curso-container {
     width: 100%;
+    height: 40%;           
     border-radius: 20px 20px 0 0;
-    object-fit: cover;
+    overflow: hidden;      
+    position: relative;    
+}
+
+.detalhes-imagem-curso {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;     
+    border-radius: 20px 20px 0 0;
+}
+
+.detalhes-curso-carde {
+    flex: 1;               
+    padding: 20px;
+    overflow-y: auto;      
 }
 
 .linha-detalhes-imagem-curso-roxo1{
@@ -546,10 +557,6 @@ article{
     position: absolute;
     margin-left: 80%;
     
-}
-
-.detalhes-curso-carde{
-    padding: 20px;
 }
 
 .detalhes-curso-carde-titulo{

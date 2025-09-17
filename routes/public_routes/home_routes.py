@@ -98,7 +98,7 @@ if quantidade_usuario == 0:
                         nome="Machine Learning para Iniciantes",
                         idProfessor=1, 
                         custo=199.99,
-                        descricaoCurso="Aprenda os fundamentos do Machine Learning. NS DG sdhfg HID FGu wgf S G SDGH sdS D  S Gsdg SD FGsid gS DGsd fgis gdk gsduiS D s d",
+                        descricaoCurso="Aprenda os fundamentos do Machine Learning.",
                         duracaoCurso="4 semanas", 
                         avaliacao=4.5, 
                         dataCriacao='2023-01-01', 
