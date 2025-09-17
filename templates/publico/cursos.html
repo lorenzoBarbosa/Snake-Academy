@@ -2,13 +2,11 @@
 {% block conteudo %}
 
 <div class="filtros-container">
-  <!-- Botão abre offcanvas -->
   <button class="btn-filtros" type="button" data-bs-toggle="offcanvas"
     data-bs-target="#offcanvasFiltros" aria-controls="offcanvasFiltros">
     Filtros
   </button>
 
-  <!-- Dropdown rápido: Avaliação -->
   <div class="btn-group">
     <button class="btn-atalhos dropdown-toggle" type="button" data-bs-toggle="dropdown">
       Avaliação
@@ -21,7 +19,6 @@
     </ul>
   </div>
 
-  <!-- Dropdown rápido: Idioma -->
   <div class="btn-group">
     <button class="btn-atalhos dropdown-toggle" type="button" data-bs-toggle="dropdown">
       Idioma
@@ -53,7 +50,7 @@
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-
+    
     <h6>Avaliação</h6>
     <div>
       <input type="radio" name="avaliacao" value="5" id="av5">
@@ -63,11 +60,11 @@
       <input type="radio" name="avaliacao" value="3" id="av3">
       <label for="av3">3 Estrelas ou mais</label><br>
       <input type="radio" name="avaliacao" value="" id="avTodos" checked>
-      <label for="avTodos">Todos</label>
+      <label for="avTodos">Todas</label>
     </div>
-
+    
     <hr>
-
+    
     <h6>Idioma</h6>
     <div>
       <input type="checkbox" name="idioma" value="pt" id="pt">
@@ -75,7 +72,7 @@
       <input type="checkbox" name="idioma" value="en" id="en">
       <label for="en">Inglês</label>
     </div>
-
+    
     <h6>Níveis</h6>
     <div>
       <input type="checkbox" name="classificacao" value="in" id="in">
@@ -86,6 +83,50 @@
       <label for="av">Avançado</label><br>
       <input type="checkbox" name="classificacao" value="" id="tn" checked>
       <label for="tn">Todos</label>
+    </div>
+
+    <hr>
+
+    <h6>Duração das aulas</h6>
+    <div>
+      <input type="checkbox" name="duracao" value="c" id="dur-curta">
+      <label for="dur-curta">Até 2h (Curta)</label><br>
+      <input type="checkbox" name="duracao" value="m" id="dur-media">
+      <label for="dur-media">2h a 10h (Média)</label><br>
+      <input type="checkbox" name="duracao" value="l" id="dur-longa">
+      <label for="dur-longa">Mais de 10h (Longa)</label><br>
+      <input type="checkbox" name="duracao" value="" id="dur-todas" checked>
+      <label for="dur-todas">Todas</label>
+    </div>
+
+    <hr>
+
+    <h6>Tópicos</h6>
+    <div>
+      <input type="checkbox" name="topico" value="ds" id="top-ds">
+      <label for="top-ds">Data Science</label><br>
+      <input type="checkbox" name="topico" value="wd" id="top-wd">
+      <label for="top-wd">Web Development</label><br>
+      <input type="checkbox" name="topico" value="ml" id="top-ml">
+      <label for="top-ml">Machine Learning</label><br>
+      <input type="checkbox" name="topico" value="" id="top-todos" checked>
+      <label for="top-todos">Todos</label>
+    </div>
+
+    <hr>
+
+    <h6>Preços</h6>
+    <div>
+      <input type="checkbox" name="preco" value="gratis" id="pre-gratis">
+      <label for="pre-gratis">Gratuitos</label><br>
+      <input type="checkbox" name="preco" value="ate50" id="pre-ate50">
+      <label for="pre-ate50">Até R$50</label><br>
+      <input type="checkbox" name="preco" value="50a100" id="pre-50a100">
+      <label for="pre-50a100">R$50 a R$100</label><br>
+      <input type="checkbox" name="preco" value="100plus" id="pre-100plus">
+      <label for="pre-100plus">Acima de R$100</label><br>
+      <input type="checkbox" name="preco" value="" id="pre-todos" checked>
+      <label for="pre-todos">Todos</label>
     </div>
   </div>
 </div>
@@ -102,7 +143,7 @@
       <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title">Curso de Ciência de Dados</h5>
-          <p class="card-text">Aprenda fundamentos de Data Science com Python...</p>
+          <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos est veritatis sunt alias doloremque sint? Labore facilis qui officiis harum nostrum excepturi aut tempora rerum hic, aspernatur, animi veritatis eaque sapiente inventore iusto repellendus minima veniam aliquid laboriosam iste. Dolorum corporis accusamus, cumque vero deserunt perferendis veritatis nobis iste ducimus adipisci velit dolore odit minima, placeat architecto sed iusto perspiciatis. Tempore repellat ratione illum adipisci esse sunt non iusto hic?</p>
           <p class="card-text"><small class="text-body-secondary">Instrutor: Marcos Andrade</small></p>
           <p class="card-text">★★★★★ 5,0 <small class="text-muted">(765 avaliações)</small></p>
           <p class="carde-preco-favoritos">R$39,90</p>
