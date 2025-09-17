@@ -22,6 +22,7 @@ def criar_admin_padrao():
             token_redefinicao=None,
             data_token=None,
             data_cadastro=None,
+            foto=None
         )
         
         usuario_repo.inserir_usuario(admin)

@@ -14,4 +14,5 @@ class Usuario:
     token_redefinicao: Optional[str]
     data_token: Optional[str]
     data_cadastro: Optional[str]
+    foto: Optional[str] 
 

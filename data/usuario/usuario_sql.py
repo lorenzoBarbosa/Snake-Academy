@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS usuario (
     perfil TEXT NOT NULL DEFAULT 'usuario',
     token_redefinicao TEXT,
     data_token TIMESTAMP,
-    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    foto TEXT
 )
 """
 INSERIR_USUARIO = """
@@ -19,35 +20,35 @@ VALUES (?, ?, ?, ?, ?, ?)
 
 OBTER_USUARIOS = """
 SELECT 
-    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
 FROM usuario
 ORDER BY id 
 """
 
 OBTER_USUARIO_POR_PERFIL= """
 SELECT 
-    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
 FROM usuario
 WHERE perfil LIKE ?
 """
 
 OBTER_USUARIO_POR_EMAIL = """
 SELECT 
-    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
 FROM usuario
 WHERE email = ?
 """
 
 OBTER_USUARIO_POR_ID = """
 SELECT 
-    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
 FROM usuario
 WHERE id = ?
 """
 
 OBTER_USUARIO_PAGINADO = """
 SELECT 
-    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
     FROM usuario
     ORDER BY id
     LIMIT ? OFFSET ?"""
@@ -102,4 +103,12 @@ DELETE FROM usuario
 WHERE id = ?
 """
 
+ADICIONAR_COLUNA_FOTO = """
+ALTER TABLE usuario
+ADD COLUMN foto TEXT
+"""
 
+
+ATUALIZAR_FOTO = """
+UPDATE usuario SET foto = ? WHERE id = ?
+"""

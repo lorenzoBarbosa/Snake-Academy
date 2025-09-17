@@ -53,9 +53,9 @@ def obter_todos_usuarios() -> list[Usuario]:
                 perfil=tupla["perfil"],
                 token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
                 data_token=None if tupla["data_token"] is None else tupla["data_token"],
-                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"]
-            ) for tupla in tuplas
-        ]
+                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+                foto=None if tupla["foto"] is None else tupla["foto"]
+            ) for tupla in tuplas]
         conn.close()
         return usuarios
     except Exception as e:
@@ -76,9 +76,10 @@ def obter_usuario_por_perfil(perfil: str) -> list[Usuario]:
                 telefone=tupla["telefone"],
                 dataNascimento=tupla["dataNascimento"],
                 perfil=tupla["perfil"],
-                token_redefinicao=None,
-                data_token=None,
-                data_cadastro=None
+                token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+                data_token=None if tupla["data_token"] is None else tupla["data_token"],
+                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+                foto=None if tupla["foto"] is None else tupla["foto"]
             ) for tupla in tuplas
         ]
         conn.close()
@@ -104,7 +105,8 @@ def obter_usuario_por_email(email: str) -> Usuario:
             perfil=tupla["perfil"],
             token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
             data_token=None if tupla["data_token"] is None else tupla["data_token"],
-            data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"]
+            data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+            foto=None if tupla["foto"] is None else tupla["foto"]
         )
     except Exception as e:
         print(f"Erro ao obter usuário por email: {e}")
@@ -126,7 +128,8 @@ def obter_usuario_por_id(id: int) -> Usuario:
             perfil=tupla["perfil"],
             token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
             data_token=None if tupla["data_token"] is None else tupla["data_token"],
-            data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"]
+            data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+            foto=None if tupla["foto"] is None else tupla["foto"]        
         )
     except Exception as e:
         print(f"Erro ao obter usuário por id: {e}")
@@ -150,7 +153,8 @@ def obter_usuario_paginado(pg_num: int, pg_size: int) -> list[Usuario]:
                 perfil=tupla["perfil"],
                 token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
                 data_token=None if tupla["data_token"] is None else tupla["data_token"],
-                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"]
+                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+                foto=None if tupla["foto"] is None else tupla["foto"]
             ) for tupla in tuplas
         ]
         conn.close()
@@ -251,4 +255,16 @@ def excluir_usuario_por_id(id: int):
         return True
     except Exception as e:
         print(f"Erro ao excluir usuário por id: {e}")
+
+def atualizar_foto(id: int, caminho_foto: str) -> bool:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(ATUALIZAR_FOTO, (caminho_foto, id))
+        conn.commit()
+        conn.close()
+        return (cursor.rowcount > 0)
+    except Exception as e:
+        print(f"Erro ao atualizar foto: {e}")
+        return False
 

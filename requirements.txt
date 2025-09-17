@@ -10,3 +10,4 @@ pytest-asyncio
 pytest-cov
 passlib[bcrypt]
 python-jose[cryptography]
+Pillow
