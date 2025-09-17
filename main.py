@@ -6,6 +6,24 @@ from fastapi.templating import Jinja2Templates
 import uvicorn
 from starlette.middleware.sessions import SessionMiddleware
 
+from data.admin import admin_repo
+from data.aula import aula_repo
+from data.banner import banner_repo
+from data.categoria import categoria_repo
+from data.chamado import chamado_repo
+from data.cliente import cliente_repo
+from data.comentario_curso import comentario_curso_repo
+from data.comunidade import comunidade_repo
+from data.curso import curso_repo
+from data.matricula import matricula_repo
+from data.mensagem import mensagem_repo
+from data.mensagem_comunidade import mensagem_comunidade_repo
+from data.modulo import modulo_repo
+from data.professor import professor_repo
+from data.progresso import progresso_repo
+from data.resposta_chamado import resposta_chamado_repo
+from data.topico import topico_repo
+from data.usuario import usuario_repo
 from routes.admin_routes.administrador_routes import router as administrador_router
 from routes.admin_routes.alterar_categoria_routes import router as alterar_categoria_router
 from routes.admin_routes.alterar_routes import router as alterar_router
@@ -136,6 +154,24 @@ app.include_router(usuarios_router)
 app.include_router(codigo_enviado_router)
 app.include_router(cadastro_professor_router)
 
+admin_repo.criar_tabela_admin()
+aula_repo.criar_tabela_aula()
+banner_repo.criar_tabela_banner()
+categoria_repo.criar_tabela_categoria()
+chamado_repo.criar_tabela_chamado()
+cliente_repo.criar_tabela_cliente()
+comentario_curso_repo.criar_tabela_comentario_curso()
+comunidade_repo.criar_tabela_comunidade()
+curso_repo.criar_tabela_curso()
+matricula_repo.criar_tabela_matricula()
+mensagem_repo.criar_tabela_mensagem()
+mensagem_comunidade_repo.criar_tabela_mensagem_comunidade()
+modulo_repo.criar_tabela_modulo()
+professor_repo.criar_tabela_professor()
+progresso_repo.criar_tabela_progresso()
+resposta_chamado_repo.criar_tabela_rchamado()
+topico_repo.criar_tabela_topico()
+usuario_repo.criar_tabela_usuario()
 
 if __name__ == "__main__":
     uvicorn.run(app="main:app", host="127.0.0.1", port=8000, reload=True)

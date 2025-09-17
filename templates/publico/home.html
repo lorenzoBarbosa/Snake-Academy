@@ -73,7 +73,7 @@
                         {% for curso in cursos %}
                         {% if curso.topico.idCategoria == categoria.id %}
                         <div class="carde-cursos col-3 m-3">
-                            <a href="/detalhes_curso">
+                            <a href="/detalhes_curso/ {{ curso.id }}">
                                 <img src="{{ imagem_cursos[curso.id] }}" class="imagem-curso" alt="Ciência dos Dados" >
                             </a>
                             <div class="carde-descricao">

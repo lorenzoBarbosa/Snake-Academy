@@ -5,7 +5,7 @@
                 <div id="carouselExampleControls" class="mb-5 carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         {%for rota in rotas%}
-                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                        <div class="carousel-item {% if loop.index == 4 %}active{% endif %}">
                             <img src="{{ rota }}" class="d-block w-100" alt="carrosel">
                         </div>
                     {% endfor %}
@@ -36,6 +36,27 @@
                 </h2>
             </div>
             <br>
+            <div class="container">
+                <p class="texto-home">Aproveite os melhores cursos de tecnologia com a Snake Academy!</p>
+            </div>
+            <div class="div-fundo-cinza">
+                <div class="container">
+                    <p class="titulo-home"><b>Acessados Recentemente </b></p>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        {% for curso in cursos %}
+                        <div class="carde-cursos col-3 m-3">
+                            <a href="/detalhes_curso">
+                                <img src="{{ imagem_cursos[curso.id] }}" class="imagem-curso" alt="Ciência dos Dados" >
+                            </a>
+                            <div class="carde-descricao">
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
             <div class="div-fundo-cinza">
             <div class="container">
                 <h2 class="titulo-home">

@@ -228,3 +228,22 @@ a {
   height: 100%;
   width: 100%;
 }
+
+.carde-cursos-cliente {
+    width: 18rem;
+    min-height: 16rem;
+    background-color: #ffffff;
+    color: rgb(53, 52, 52);
+    border-radius: 5px;
+    border: 1px solid #cac9ca;
+    display: inline-block;
+    padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.sem-modulos {
+    font-size: 18px;
+    color: #2e2e2e;
+    margin-top: 20px;
+    font-family: var(--fonte-principal);
+}

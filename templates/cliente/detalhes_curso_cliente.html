@@ -6,15 +6,15 @@
     <div>
         <div class="detalhes-curso">
             <div class="titulo-curso">
-                {{ curso.nome }}
+                Titulo do curso
             </div>
             <div class="descricao-curso">
-                {{ curso.descricaoCurso }}
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, blanditiis quis? Magnam numquam a necessitatibus eveniet dicta molestias porro quasi. Vel illo maxime doloribus quis iste? Omnis iure qui quasi. Odio assumenda blanditiis repellat. Repellat autem fugiat consequatur dicta dolor, ex explicabo cupiditate vero enim quos, corrupti delectus ipsam libero.
             </div>
         </div>
         <div class="carde-curso-detalhes">
             <div class="detalhes-imagem-curso-container">
-                <img class="detalhes-imagem-curso" src="{{ rota }}" alt="quatro">
+                <img class="detalhes-imagem-curso" src="/static/img/nossos_cursos/1.jpeg" alt="quatro">
                 <div class="linha-detalhes-imagem-curso-roxo1"></div>
                 <div class="linha-detalhes-imagem-curso-verde1"></div>
                 <div class="linha-detalhes-imagem-curso-roxo2"></div>
@@ -23,19 +23,19 @@
             </div>
             <div class="detalhes-curso-carde">
                 <div class="detalhes-curso-carde-titulo">
-                    {{ curso.nome }}
+                    Título do curso
                 </div>
                 <div class="detalhes-curso-carde-preco">
-                    {{ curso.custo }}
+                    R$600,00
                 </div>
                 <div class="detalhes-curso-carde-informacoes">
-                    {{ curso.duracaoCurso }}
+                    Duração: 40 horas
                 </div>
                 <div class="detalhes-curso-carde-informacoes">
-                    Data de postagem: {{ curso.dataCriacao }}
+                    Data de postagem: 01/01/2023
                 </div>
                 <div class="detalhes-curso-carde-informacoes">
-                    Avaliação: {{ curso.avaliacao }}/5.0
+                    Avaliação: 4.9/5.0
                 </div>
             </div>
             <div class="container-compra container d-flex">
@@ -48,13 +48,13 @@
         <div id="carouselExample" class="carousel slide">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ rota }}" class="d-block w-100" alt="...">
+                    <img src="static/img/nossos_cursos/1.jpeg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ rota }}" class="d-block w-100" alt="...">
+                    <img src="static/img/nossos_cursos/2.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{ rota }}" class="d-block w-100" alt="...">
+                    <img src="static/img/nossos_cursos/3.jpg" class="d-block w-100" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -70,7 +70,6 @@
     <div class="titulo-modulo">
         Módulos do Curso
     </div>
-    {% if modulos %}
     <div class="modulo-curso">
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
@@ -86,9 +85,6 @@
             </div>
         </div>
     </div>
-    {% else %}
-        <p class="sem-modulos">Nenhum módulo disponível para este curso no momento.</p>
-    {% endif %}
     <p class="titulo-container-professor">Sobre o professor</p>
     <div class="container-professor">
         
