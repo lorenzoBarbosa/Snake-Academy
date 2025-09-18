@@ -33,7 +33,7 @@ if quantidade_usuario == 0:
     usuarios = obter_todos_usuarios()
     for usuario in usuarios:
         if usuario.perfil == "admin":
-            admin = inserir_admin(Admin(id=0, nome=usuario.nome, email=usuario.email, senha=usuario.senha, telefone=usuario.telefone, dataNascimento=usuario.dataNascimento, perfil="admin", token_redefinicao=None, data_token=None, data_cadastro=None, nivelAcesso=3), 1)
+            admin = inserir_admin(Admin(id=0, nome=usuario.nome, email=usuario.email, senha=usuario.senha, telefone=usuario.telefone, dataNascimento=usuario.dataNascimento, perfil="admin", token_redefinicao=None, data_token=None, data_cadastro=None, foto=None, nivelAcesso=3), 1)
     
     for i in range(3):
         inserir_banner(Banner(id=0, idAdmin=admin, status="ativo"))
@@ -51,10 +51,10 @@ if quantidade_usuario == 0:
     inserir_topico(Topico(id=0, idCategoria=4, nome="Machine Learning"))
     inserir_topico(Topico(id=0, idCategoria=4, nome="Deep Learning"))
 
-    id_cliente = inserir_cliente(Cliente(id=0, nome="João Souza", email="joao.souza@exemplo.com", senha="senha123", telefone="123456789", dataNascimento='2023-01-01', perfil="cliente", token_redefinicao=None, data_token=None, data_cadastro=None, dataUltimoAcesso=None, statusConta="ativo", historicoCursos=[], indentificacaoProfessor="sim"), usuario.id)
+    id_cliente = inserir_cliente(Cliente(id=0, nome="João Souza", email="joao.souza@exemplo.com", senha="senha123", telefone="123456789", dataNascimento='2023-01-01', perfil="cliente", token_redefinicao=None, data_token=None, data_cadastro=None, foto=None, dataUltimoAcesso=None, statusConta="ativo", historicoCursos=[], indentificacaoProfessor="sim"), usuario.id)
     cliente = obter_cliente_por_id(id_cliente)
 
-    inserir_professor(Professor(id=cliente.id, nome=cliente.nome, email=cliente.email, senha=cliente.senha, telefone=cliente.telefone, dataNascimento=cliente.dataNascimento, perfil=cliente.perfil, token_redefinicao=cliente.token_redefinicao, data_token=cliente.data_token, data_cadastro=cliente.data_cadastro, statusConta=cliente.statusConta, historicoCursos=cliente.historicoCursos, indentificacaoProfessor=cliente.indentificacaoProfessor, dataUltimoAcesso=None, cursosPostados=[], quantidadeAlunos=0, dataCriacaoProfessor='2023-01-01', descricaoProfessor="Professor de python que sabe demais, muito muito muito muito muito muito muito muito muio mesmo!"), id_cliente)
+    inserir_professor(Professor(id=cliente.id, nome=cliente.nome, email=cliente.email, senha=cliente.senha, telefone=cliente.telefone, dataNascimento=cliente.dataNascimento, perfil=cliente.perfil, token_redefinicao=cliente.token_redefinicao, data_token=cliente.data_token, data_cadastro=cliente.data_cadastro, foto=None, statusConta=cliente.statusConta, historicoCursos=cliente.historicoCursos, indentificacaoProfessor=cliente.indentificacaoProfessor, dataUltimoAcesso=None, cursosPostados=[], quantidadeAlunos=0, dataCriacaoProfessor='2023-01-01', descricaoProfessor="Professor de python que sabe demais, muito muito muito muito muito muito muito muito muio mesmo!"), id_cliente)
 
     for c in range(8):
         inserir_curso(Curso(id=0,

@@ -4,6 +4,8 @@
     <div class="container-editar-perfil">
         <div class="editar-perfil">
             <div class="container-editar-imagem">
+                <!-- templates/perfil/dados.html -->
+                <!-- Container centralizado para foto atual -->
                 <div class="d-flex justify-content-center">
                     <img id="foto-atual"
                         src="{{ usuario.foto or '/static/img/user-default.png' }}"
@@ -25,6 +27,25 @@
                         <i class="bi-check-circle"></i> Nova foto selecionada
                     </div>
                 </div>
+
+                <!-- Formulário de upload -->
+                <form action="editar-perfil/alterar-foto" method="post" enctype="multipart/form-data">
+                    <div class="mb-2">
+                        <label for="foto" class="form-label small">Selecionar Nova Foto</label>
+                        <input type="file"
+                            class="form-control form-control-sm"
+                            id="foto"
+                            name="foto"
+                            accept="image/*">  <!-- ← Aceita apenas imagens -->
+                        <div class="form-text small">JPG, JPEG ou PNG</div>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-outline-primary" id="btn-alterar">
+                        <i class="bi-camera"></i> Alterar Foto
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" id="btn-cancelar" onclick="cancelarSelecao()" style="display: none;">
+                        <i class="bi-x"></i> Cancelar
+                    </button>
+                </form>
             </div>
             <div class="container-editar-dados">
                 <p class="titulo-editar-perfil">

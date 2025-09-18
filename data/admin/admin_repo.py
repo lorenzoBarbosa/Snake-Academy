@@ -39,13 +39,18 @@ def obter_todos_admins() -> list[Admin]:
         conn.close()
         usuarios = [
             Admin(
-                id=tupla[0],
-                nome=tupla[1],
-                email=tupla[2],
-                senha=tupla[3],
-                telefone=tupla[4],
-                dataCriacao=tupla[5],
-                nivelAcesso=tupla[6]
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+                data_token=None if tupla["data_token"] is None else tupla["data_token"],
+                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+                foto=None if tupla["foto"] is None else tupla["foto"],
+                nivelAcesso=tupla["nivelAcesso"]
             ) for tupla in tuplas
         ]
         conn.close()
@@ -62,11 +67,24 @@ def obter_admin_por_email(email: str) -> Admin:
         conn.close()
     
         if tupla:
-            return Admin(*tupla)
+            return Admin(
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+                data_token=None if tupla["data_token"] is None else tupla["data_token"],
+                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+                foto=None if tupla["foto"] is None else tupla["foto"],
+                nivelAcesso=tupla["nivelAcesso"]
+            ) 
         return None
     except Exception as e:
-        print(f"Erro ao obter admim por email: {e}")
-    
+        print(f"Erro ao obter admin por email: {e}")
+
 def obter_admin_por_id(id: int) -> Admin:
     try:
         conn = get_connection()
@@ -76,7 +94,20 @@ def obter_admin_por_id(id: int) -> Admin:
         conn.close()
 
         if tupla:
-            return Admin(*tupla)
+            return Admin(
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+                data_token=None if tupla["data_token"] is None else tupla["data_token"],
+                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+                foto=None if tupla["foto"] is None else tupla["foto"],
+                nivelAcesso=tupla["nivelAcesso"]
+                )
         return None
     except Exception as e:
         print(f"Erro ao obter admin por id: {e}")
@@ -114,13 +145,18 @@ def obter_admin_paginado(pg_num: int, pg_size: int) -> List[Admin]:
         tuplas = cursor.fetchall()
         admins = [
             Admin(
-                id=tupla[0],
-                nome=tupla[1],
-                email=tupla[2],
-                senha=tupla[3],
-                telefone=tupla[4],
-                dataCriacao=tupla[5],
-                nivelAcesso=tupla[6]
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+                data_token=None if tupla["data_token"] is None else tupla["data_token"],
+                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+                foto=None if tupla["foto"] is None else tupla["foto"],
+                nivelAcesso=tupla["nivelAcesso"]
         ) for tupla in tuplas
         ]
         conn.close()
@@ -140,13 +176,18 @@ def obter_admin_por_termo_paginado(termo: str, pg_num: int, pg_size: int) -> Lis
         tuplas = cursor.fetchall()
         admins = [
             Admin(
-                id=tupla[0],
-                nome=tupla[1],
-                email=tupla[2],
-                senha=tupla[3],
-                telefone=tupla[4],
-                dataCriacao=tupla[5],
-                nivelAcesso=tupla[6]
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+                data_token=None if tupla["data_token"] is None else tupla["data_token"],
+                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+                foto=None if tupla["foto"] is None else tupla["foto"],
+                nivelAcesso=tupla["nivelAcesso"]
             ) for tupla in tuplas
             ]
         conn.close()

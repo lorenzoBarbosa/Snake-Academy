@@ -44,16 +44,21 @@ def obter_todos_clientes() -> list[Cliente]:
         conn.close()
         clientes = [
             Cliente(
-                id=tupla[0],
-                nome=tupla[1],
-                email=tupla[2],
-                senha=tupla[3],
-                telefone=tupla[4],
-                dataCriacao=tupla[5],
-                dataUltimoAcesso=tupla[6],
-                statusConta=tupla[7],
-                historicoCursos=tupla[8],
-                indentificacaoProfessor=tupla[9]    
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+                data_token=None if tupla["data_token"] is None else tupla["data_token"],
+                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+                foto=None if tupla["foto"] is None else tupla["foto"],
+                dataUltimoAcesso=tupla["dataUltimoAcesso"],
+                statusConta=tupla["statusConta"],
+                historicoCursos=tupla["historicoCursos"],
+                indentificacaoProfessor=tupla["indentificacaoProfessor"]
                 ) for tupla in tuplas ]
         conn.close()
         return clientes
@@ -70,7 +75,23 @@ def obter_cliente_por_email(email: str) -> Cliente:
         conn.close()
         
         if tupla:
-            return Cliente(*tupla)
+            return Cliente(
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+                data_token=None if tupla["data_token"] is None else tupla["data_token"],
+                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+                foto=None if tupla["foto"] is None else tupla["foto"],
+                dataUltimoAcesso=tupla["dataUltimoAcesso"],
+                statusConta=tupla["statusConta"],
+                historicoCursos=tupla["historicoCursos"],
+                indentificacaoProfessor=tupla["indentificacaoProfessor"]
+                )
         return None
     except Exception as e:
         print(f"Erro ao obter cliente: {e}")
@@ -85,16 +106,21 @@ def obter_cliente_paginado(pg_num: int, pg_size: int) -> List[Cliente]:
         tuplas = cursor.fetchall()
         clientes= [
             Cliente(
-                id=tupla[0],
-                nome=tupla[1],
-                email=tupla[2],
-                senha=tupla[3],
-                telefone=tupla[4],
-                dataCriacao=tupla[5],
-                dataUltimoAcesso=tupla[6],
-                statusConta=tupla[7],
-                historicoCursos=tupla[8],
-                indentificacaoProfessor=tupla[9]
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+                data_token=None if tupla["data_token"] is None else tupla["data_token"],
+                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+                foto=None if tupla["foto"] is None else tupla["foto"],
+                dataUltimoAcesso=tupla["dataUltimoAcesso"],
+                statusConta=tupla["statusConta"],
+                historicoCursos=tupla["historicoCursos"],
+                indentificacaoProfessor=tupla["indentificacaoProfessor"]
             ) for tupla in tuplas
         ]  
         conn.close()
@@ -111,20 +137,22 @@ def obter_cliente_por_id(id: int) -> Optional[Cliente]:
         conn.close()
         
         if tupla:
-            return Cliente(id=tupla["id"],
-                           nome=tupla["nome"],
-                           email=tupla["email"],
-                           senha=tupla["senha"],
-                           telefone=tupla["telefone"],
-                           dataNascimento=tupla["dataNascimento"],
-                           perfil=tupla["perfil"],
-                           token_redefinicao=tupla["token_redefinicao"],
-                           data_token=tupla["data_token"],
-                           data_cadastro=tupla["data_cadastro"],
-                           dataUltimoAcesso=tupla["dataUltimoAcesso"],
-                           statusConta=tupla["statusConta"],
-                           historicoCursos=tupla["historicoCursos"],
-                           indentificacaoProfessor=tupla["indentificacaoProfessor"])
+            return Cliente(
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+                data_token=None if tupla["data_token"] is None else tupla["data_token"],
+                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+                foto=None if tupla["foto"] is None else tupla["foto"],
+                dataUltimoAcesso=tupla["dataUltimoAcesso"],
+                statusConta=tupla["statusConta"],
+                historicoCursos=tupla["historicoCursos"],
+                indentificacaoProfessor=tupla["indentificacaoProfessor"])
         return None
     except Exception as e:
         print(f"Erro ao obter cliente por id: {e}")
@@ -140,16 +168,21 @@ def obter_cliente_por_termo_paginado(termo: str, pg_num: int, pg_size: int) -> L
         tuplas = cursor.fetchall()
         clientes= [
             Cliente(
-                id=tupla[0],
-                nome=tupla[1],
-                email=tupla[2],
-                senha=tupla[3],
-                telefone=tupla[4],
-                dataCriacao=tupla[5],
-                dataUltimoAcesso=tupla[6],
-                statusConta=tupla[7],
-                historicoCursos=tupla[8],
-                indentificacaoProfessor=tupla[9]
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+                data_token=None if tupla["data_token"] is None else tupla["data_token"],
+                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+                foto=None if tupla["foto"] is None else tupla["foto"],
+                dataUltimoAcesso=tupla["dataUltimoAcesso"],
+                statusConta=tupla["statusConta"],
+                historicoCursos=tupla["historicoCursos"],
+                indentificacaoProfessor=tupla["indentificacaoProfessor"]
             ) for tupla in tuplas
         ]  
         conn.close()

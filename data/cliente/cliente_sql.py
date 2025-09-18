@@ -17,7 +17,7 @@ WHERE u.id = ?
 
 OBTER_CLIENTES = """
 SELECT 
-    u.id as id, u.nome as nome, u.email as email, u.senha as senha, u.telefone as telefone, u.perfil as perfil, c.dataUltimoAcesso, c.statusConta, c.historicoCursos, c.indentificacaoProfessor
+    u.id as id, u.nome as nome, u.email as email, u.senha as senha, u.telefone as telefone, u.perfil as perfil, u.foto as foto, c.dataUltimoAcesso, c.statusConta, c.historicoCursos, c.indentificacaoProfessor
 FROM cliente c
 JOIN usuario u ON c.id = u.id
 ORDER BY id 
@@ -25,7 +25,7 @@ ORDER BY id
  
 OBTER_CLIENTE_POR_EMAIL = """
 SELECT 
-    c.id, u.nome as nome, u.email as email, u.senha as senha, u.telefone as telefone, u.perfil as perfil, c.dataUltimoAcesso, c.statusConta, c.historicoCursos, c.indentificacaoProfessor
+    c.id, u.nome as nome, u.email as email, u.senha as senha, u.telefone as telefone, u.perfil as perfil, u.foto as foto, c.dataUltimoAcesso, c.statusConta, c.historicoCursos, c.indentificacaoProfessor
 FROM cliente c
 JOIN usuario u ON c.id = u.id
 WHERE u.email = ?
@@ -33,7 +33,7 @@ WHERE u.email = ?
 
 OBTER_CLIENTE_PAGINADO = """
 SELECT 
-    c.id, u.nome as nome, u.email as email, u.senha as senha, u.telefone as telefone, u.perfil as perfil, c.dataUltimoAcesso, c.statusConta, c.historicoCursos, c.indentificacaoProfessor
+    c.id, u.nome as nome, u.email as email, u.senha as senha, u.telefone as telefone, u.perfil as perfil, u.foto as foto, c.dataUltimoAcesso, c.statusConta, c.historicoCursos, c.indentificacaoProfessor
 FROM cliente c
 JOIN usuario u ON c.id = u.id
 ORDER BY c.id
@@ -45,7 +45,7 @@ LIMIT ? OFFSET ?
 
 OBTER_CLIENTE_POR_ID = """
 SELECT 
-    c.id, u.nome as nome, u.email as email, u.senha as senha, u.telefone as telefone, u.dataNascimento as dataNascimento, u.perfil as perfil, u.token_redefinicao as token_redefinicao, u.data_token as data_token, u.data_cadastro as data_cadastro, c.dataUltimoAcesso, c.statusConta, c.historicoCursos, c.indentificacaoProfessor
+    c.id, u.nome as nome, u.email as email, u.senha as senha, u.telefone as telefone, u.dataNascimento as dataNascimento, u.perfil as perfil, u.foto as foto, u.token_redefinicao as token_redefinicao, u.data_token as data_token, u.data_cadastro as data_cadastro, c.dataUltimoAcesso, c.statusConta, c.historicoCursos, c.indentificacaoProfessor
 FROM cliente c
 JOIN usuario u ON c.id = u.id
 WHERE c.id = ?
@@ -53,7 +53,7 @@ WHERE c.id = ?
 
 OBTER_CLIENTE_POR_TERMO_PAGINADO = """
 SELECT 
-    c.id, u.nome as nome, u.email as email, u.senha as senha, u.telefone as telefone, u.dataNascimento as dataNascimento, u.perfil as perfil, c.dataUltimoAcesso, c.statusConta, c.historicoCursos, c.indentificacaoProfessor
+    c.id, u.nome as nome, u.email as email, u.senha as senha, u.telefone as telefone, u.dataNascimento as dataNascimento, u.perfil as perfil, u.foto as foto, c.dataUltimoAcesso, c.statusConta, c.historicoCursos, c.indentificacaoProfessor
 FROM cliente c
 JOIN usuario u ON c.id = u.id
 WHERE (u.nome LIKE ? OR u.email LIKE ? OR c.statusConta LIKE ?)

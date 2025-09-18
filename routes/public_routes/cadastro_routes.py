@@ -89,7 +89,8 @@ async def post_cadastro(
             perfil='cliente',
             token_redefinicao=None,
             data_token=None,
-            data_cadastro=datetime.now().isoformat()
+            data_cadastro=datetime.now().isoformat(),
+            foto=None
         )
         
         usuario_id = usuario_repo.inserir_usuario(usuario)
@@ -106,6 +107,7 @@ async def post_cadastro(
             token_redefinicao=None,
             data_token=None,
             data_cadastro=datetime.now().isoformat(),
+            foto = None,
             dataUltimoAcesso=None,
             statusConta='ativo',
             historicoCursos= [],

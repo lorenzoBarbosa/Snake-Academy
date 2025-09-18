@@ -49,6 +49,7 @@ SELECT
     u.token_redefinicao as token_redefinicao,
     u.data_token as data_token,
     u.data_cadastro as data_cadastro,
+    u.foto as foto,
     c.dataUltimoAcesso as dataUltimoAcesso,
     c.statusConta as statusConta,
     c.historicoCursos as historicoCursos,
