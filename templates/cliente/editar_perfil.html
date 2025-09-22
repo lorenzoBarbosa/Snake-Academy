@@ -18,7 +18,7 @@
                 <div id="preview-foto-container" style="display: none;">
                     <div class="d-flex justify-content-center">
                         <img id="preview-foto"
-                            src=""
+                            src="{{ usuario.foto }}"
                             class="rounded-circle mb-2"
                             style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #28a745;"
                             alt="Preview da nova foto">
@@ -29,7 +29,7 @@
                 </div>
 
                 <!-- Formulário de upload -->
-                <form action="editar-perfil/alterar-foto" method="post" enctype="multipart/form-data">
+                <form action="/cliente/editar-perfil/alterar-foto" method="post" enctype="multipart/form-data">
                     <div class="mb-2">
                         <label for="foto" class="form-label small">Selecionar Nova Foto</label>
                         <input type="file"

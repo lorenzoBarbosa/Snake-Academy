@@ -127,5 +127,5 @@ async def alterar_foto(request: Request,
     except Exception as e:
         return RedirectResponse("/perfil?erro=upload_falhou", status.HTTP_303_SEE_OTHER)
 
-    return RedirectResponse("/perfil?foto_sucesso=1", status.HTTP_303_SEE_OTHER)
+    return RedirectResponse("/cliente", status.HTTP_303_SEE_OTHER)
     
