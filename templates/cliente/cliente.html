@@ -5,10 +5,10 @@
                 <div id="carouselExampleControls" class="mb-5 carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         {%for rota in rotas%}
-                        <div class="carousel-item {% if loop.index == 4 %}active{% endif %}">
+                        <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
                             <img src="{{ rota }}" class="d-block w-100" alt="carrosel">
                         </div>
-                    {% endfor %}
+                        {% endfor %}
                     </div>
                     <button
                         class="carousel-control-prev"
@@ -45,15 +45,24 @@
                 </div>
                 <div class="container">
                     <div class="row">
-                        {% for curso in cursos %}
+                        {% if lista_historico %}
+                        {% for curso in lista_historico %}
                         <div class="carde-cursos col-3 m-3">
                             <a href="/detalhes_curso">
                                 <img src="{{ imagem_cursos[curso.id] }}" class="imagem-curso" alt="Ciência dos Dados" >
                             </a>
                             <div class="carde-descricao">
+                                <p class="carde-texto-titulo">{{ curso.nome }}</p>
+                                <p class="carde-autor">{{ curso.professor.nome }}</p>
+                                <p class="carde-avaliacao">★★★★☆{{ curso.avaliacao }}</p><br>
+                                <p class="carde-preco">{{ curso.custo }}</p>
                             </div>
                         </div>
                         {% endfor %}
+                        {% else %}
+                        <p class="texto-home">Você ainda não acessou nenhum curso. Explore nossos cursos e comece sua jornada de aprendizado!</p>
+                        <div class="tamanho-icone-livro text-center"><i class="bi bi-journal-x"></i></div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
