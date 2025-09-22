@@ -900,3 +900,196 @@ article{
   margin-right: 30px;
 }
 
+/* --- Offcanvas estilo tipo "filtros" (semelhante à imagem) --- */
+.offcanvas {
+  width: 320px; /* largura do painel */
+  max-width: 85vw;
+  background-color: #ffffff;
+  border-right: 1px solid rgba(0,0,0,0.06);
+  padding-top: 18px;
+  font-family: var(--fonte-principal);
+  color: #222;
+}
+
+/* Header */
+.offcanvas .offcanvas-header {
+  padding: 18px 18px 6px 18px;
+  border-bottom: none;
+}
+.offcanvas .offcanvas-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2233;
+  margin: 0;
+}
+
+/* Body padding */
+.offcanvas .offcanvas-body {
+  padding: 12px 18px 24px 18px;
+}
+
+/* Section headings like "Ratings", "Language" */
+.offcanvas h6 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 14px 0 8px 0;
+  color: #222;
+}
+
+/* List container */
+.offcanvas .filtro-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+/* custom radio row (ratings) */
+.filtro-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+.filtro-item input {
+  display: none;
+}
+
+/* fake radio circle */
+.filtro-item .fake-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #bfc3cc;
+  display: inline-block;
+  flex: 0 0 18px;
+  position: relative;
+}
+.filtro-item input:checked + .fake-radio {
+  border-color: #6a0dad;
+  background: linear-gradient(180deg,#6a0dad,#3a1572);
+}
+.filtro-item .fake-radio::after{
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: transparent;
+}
+.filtro-item input:checked + .fake-radio::after{
+  background: #fff;
+}
+
+/* label text area */
+.filtro-item .label-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: #222;
+}
+
+/* stars and count */
+.filtro-item .stars {
+  display:flex;
+  gap: 2px;
+  align-items: center;
+  margin-right: 8px;
+}
+.filtro-item .stars span.star {
+  font-size: 14px;
+  color: #d9902d; /* dourado */
+  line-height: 1;
+}
+
+/* count to the right */
+.filtro-item .count {
+  margin-left: auto;
+  font-size: 13px;
+  color: #8b8b95;
+}
+
+/* checkboxes style for other sections */
+.filtro-checkbox {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+}
+.filtro-checkbox input { display: none; }
+.filtro-checkbox .fake-check {
+  width:16px;
+  height:16px;
+  border:2px solid #bfc3cc;
+  border-radius:4px;
+  flex:0 0 16px;
+  display:inline-block;
+  position:relative;
+}
+.filtro-checkbox input:checked + .fake-check {
+  background: linear-gradient(180deg,#6a0dad,#3a1572);
+  border-color: #6a0dad;
+}
+.filtro-checkbox .fake-check::after{
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 6px;
+  height: 10px;
+  transform: rotate(45deg);
+  border-right: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+}
+.filtro-checkbox input:checked + .fake-check::after{
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+}
+
+/* "Show more" link */
+.offcanvas .show-more {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:#6a0dad;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:8px;
+}
+.offcanvas .show-more .caret {
+  transform: rotate(0deg);
+  transition: transform .2s;
+}
+.offcanvas .show-more.collapsed .caret { transform: rotate(-180deg); }
+
+/* small hr style */
+.offcanvas hr {
+  border: none;
+  height: 1px;
+  background: #efeff2;
+  margin: 12px 0;
+}
+
+/* small helper text */
+.offcanvas .sub {
+  font-size: 13px;
+  color: #8b8b95;
+}
+
+/* make sections scrollable if long */
+.offcanvas .offcanvas-body {
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding-bottom: 30px;
+}
+
+/* responsive: narrower on small screens */
+@media (max-width: 576px) {
+  .offcanvas { width: 85vw; }
+  .offcanvas .offcanvas-title { font-size: 22px; }
+}
+
