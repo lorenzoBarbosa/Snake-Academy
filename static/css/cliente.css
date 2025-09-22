@@ -401,3 +401,24 @@ article.carrinho-article { width: 100%; }
   .carrinho-acoes { order: 3; margin-top: 8px; flex-direction:row; gap:8px; }
   .carrinho-preco { grid-column: 2 / 3; text-align: left; margin-top: 6px; }
 }
+
+.icone-carrinho {
+  position: relative;
+  display: inline-block;
+  color: #333;
+  font-size: 22px;
+}
+
+.carrinho-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: var(--cor-roxo-claro);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 50%;
+  min-width: 20px;
+  text-align: center;
+}
