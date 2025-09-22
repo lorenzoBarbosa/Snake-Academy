@@ -1,4 +1,81 @@
 {% extends "index.html" %}
-{%block conteudo%}
-<h1>Carrinho</h1>
-{%endblock%}
+{% block conteudo %}
+<article class="carrinho-article">
+
+  <div class="carrinho-container">
+    <div class="carrinho-header">
+      <h1>Shopping Cart</h1>
+      <p class="subtitulo">3 Courses in Cart</p>
+    </div>
+
+    <div class="carrinho-conteudo">
+      <!-- Lista de cursos -->
+      <div class="carrinho-cursos">
+
+        <div class="carrinho-item">
+          <img src="/static/img/curso1.jpg" alt="Curso 1" class="curso-thumb">
+          <div class="carrinho-info">
+            <h3>The Web Developer Bootcamp 2025</h3>
+            <p class="autor">By Colt Steele</p>
+            <p class="avaliacao"><span class="nota">4.6</span> <span class="estrelas">★★★★★</span> <span class="quant">(283,054 ratings)</span></p>
+            <p class="detalhes">74 total hours • 701 lectures • All Levels</p>
+            <div class="tags"><span class="tag-roxa">Premium</span></div>
+          </div>
+          <div class="carrinho-acoes">
+            <a href="#">Remove</a>
+            <a href="#">Save for Later</a>
+            <a href="#">Move to Wishlist</a>
+          </div>
+          <div class="carrinho-preco">R$204.90</div>
+        </div>
+
+        <div class="carrinho-item">
+          <img src="/static/img/curso2.jpg" alt="Curso 2" class="curso-thumb">
+          <div class="carrinho-info">
+            <h3>The Complete JavaScript Course 2025: From Zero to Expert!</h3>
+            <p class="autor">By Jonas Schmedtmann</p>
+            <p class="avaliacao"><span class="nota">4.7</span> <span class="estrelas">★★★★★</span> <span class="quant">(227,432 ratings)</span></p>
+            <p class="detalhes">71 total hours • 332 lectures • All Levels</p>
+            <div class="tags"><span class="tag-verde">Bestseller</span> <span class="tag-roxa">Premium</span></div>
+          </div>
+          <div class="carrinho-acoes">
+            <a href="#">Remove</a>
+            <a href="#">Save for Later</a>
+            <a href="#">Move to Wishlist</a>
+          </div>
+          <div class="carrinho-preco">R$184.90</div>
+        </div>
+
+        <div class="carrinho-item">
+          <img src="/static/img/curso3.jpg" alt="Curso 3" class="curso-thumb">
+          <div class="carrinho-info">
+            <h3>The Complete Full-Stack Web Development Bootcamp</h3>
+            <p class="autor">By Dr. Angela Yu</p>
+            <p class="avaliacao"><span class="nota">4.7</span> <span class="estrelas">★★★★★</span> <span class="quant">(452,870 ratings)</span></p>
+            <p class="detalhes">61.5 total hours • 374 lectures • All Levels</p>
+            <div class="tags"><span class="tag-verde">Bestseller</span> <span class="tag-roxa">Premium</span></div>
+          </div>
+          <div class="carrinho-acoes">
+            <a href="#">Remove</a>
+            <a href="#">Save for Later</a>
+            <a href="#">Move to Wishlist</a>
+          </div>
+          <div class="carrinho-preco">R$168.90</div>
+        </div>
+
+      </div>
+
+      <!-- Resumo -->
+      <aside class="carrinho-resumo" aria-label="Resumo do pedido">
+        <p class="total-label">Total:</p>
+        <p class="total-valor">R$558.70</p>
+        <button class="btn-checkout">Proceed to Checkout →</button>
+        <p class="nota">You won't be charged yet</p>
+        <hr>
+        <button class="btn-cupom">Apply Coupon</button>
+      </aside>
+    </div>
+  </div>
+
+</article>
+{% endblock %}
