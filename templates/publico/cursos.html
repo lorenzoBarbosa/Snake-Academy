@@ -52,27 +52,76 @@
   <div class="offcanvas-body">
     
     <h6>Avaliação</h6>
-    <div>
-      <input type="radio" name="avaliacao" value="5" id="av5">
-      <label for="av5">5 Estrelas</label><br>
-      <input type="radio" name="avaliacao" value="4" id="av4">
-      <label for="av4">4 Estrelas ou mais</label><br>
-      <input type="radio" name="avaliacao" value="3" id="av3">
-      <label for="av3">3 Estrelas ou mais</label><br>
-      <input type="radio" name="avaliacao" value="" id="avTodos" checked>
-      <label for="avTodos">Todas</label>
+<div class="filtro-list">
+  <label class="filtro-item">
+    <input type="radio" name="avaliacao" value="5" id="av5">
+    <span class="fake-radio"></span>
+    <div class="label-text">
+      <div class="stars" aria-hidden>
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <div>4.5 &amp; up</div>
     </div>
+  </label>
+
+  <label class="filtro-item">
+    <input type="radio" name="avaliacao" value="4" id="av4">
+    <span class="fake-radio"></span>
+    <div class="label-text">
+      <div class="stars" aria-hidden>
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">☆</span>
+      </div>
+      <div>4.0 &amp; up</div>
+    </div>
+  </label>
+
+  <label class="filtro-item">
+    <input type="radio" name="avaliacao" value="3" id="av3">
+    <span class="fake-radio"></span>
+    <div class="label-text">
+      <div class="stars" aria-hidden>
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">☆</span><span class="star">☆</span>
+      </div>
+      <div>3.5 &amp; up</div>
+    </div>
+  </label>
+
+  <label class="filtro-item">
+    <input type="radio" name="avaliacao" value="" id="avTodos" checked>
+    <span class="fake-radio"></span>
+    <div class="label-text">
+      <div class="stars" aria-hidden>
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">☆</span>
+      </div>
+      <div>3.0 &amp; up</div>
+    </div>
+  </label>
+
+  <div class="show-more" role="button" tabindex="0">
+    Show more <span class="caret">▾</span>
+  </div>
+</div>
+
     
     <hr>
     
     <h6>Idioma</h6>
     <div>
+      <label class="filtro-checkbox">
       <input type="checkbox" name="idioma" value="pt" id="pt">
-      <label for="pt">Português</label><br>
-      <input type="checkbox" name="idioma" value="en" id="en">
-      <label for="en">Inglês</label>
+      <span class="fake-check" aria-hidden></span>
+      <span style="font-size:15px;color:#222;"> Português <span class="sub">(2,473)</span></span>
+      </label>
+      <label class="filtro-checkbox">
+      <input type="checkbox" name="idioma" value="pt" id="pt">
+      <span class="fake-check" aria-hidden></span>
+      <span style="font-size:15px;color:#222;"> Inglês <span class="sub">(2,473)</span></span>
+      </label>
+      
     </div>
     
+    <hr>
+
     <h6>Níveis</h6>
     <div>
       <input type="checkbox" name="classificacao" value="in" id="in">
@@ -98,6 +147,20 @@
       <input type="checkbox" name="duracao" value="" id="dur-todas" checked>
       <label for="dur-todas">Todas</label>
     </div>
+
+    <hr>
+
+    <h6>Exercícios</h6>
+        <div>
+          <input type="checkbox" name="exer" value="c" id="dur-curta">
+          <label for="dur-curta">Questionários</label><br>
+          <input type="checkbox" name="exer" value="m" id="dur-media">
+          <label for="dur-media">Exercícios de codificação</label><br>
+          <input type="checkbox" name="exer" value="l" id="dur-longa">
+          <label for="dur-longa">Testes Práticos</label><br>
+          <input type="checkbox" name="exer" value="" id="dur-todas" checked>
+          <label for="dur-todas">Todos</label>
+        </div>
 
     <hr>
 
@@ -155,7 +218,7 @@
   <div class="card mb-3 curso" data-avaliacao="4" data-idioma="en">
     <div class="row g-0">
       <div class="col-md-4">
-        <img src="/static/img/nossos_cursos/2.jpeg" class="img-fluid rounded-start" alt="...">
+        <img src="/static/img/nossos_cursos/33.png" class="img-fluid rounded-start" alt="...">
       </div>
       <div class="col-md-8">
         <div class="card-body">
@@ -172,7 +235,7 @@
   <div class="card mb-3 curso" data-avaliacao="3" data-idioma="pt">
     <div class="row g-0">
       <div class="col-md-4">
-        <img src="/static/img/nossos_cursos/3.jpeg" class="img-fluid rounded-start" alt="...">
+        <img src="/static/img/nossos_cursos/34.jpeg" class="img-fluid rounded-start" alt="...">
       </div>
       <div class="col-md-8">
         <div class="card-body">
