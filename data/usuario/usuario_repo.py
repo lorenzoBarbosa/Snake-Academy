@@ -79,7 +79,7 @@ def obter_usuario_por_perfil(perfil: str) -> list[Usuario]:
                 token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
                 data_token=None if tupla["data_token"] is None else tupla["data_token"],
                 data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
-                foto=None if tupla["foto"] is None else tupla["foto"]
+                foto=tupla["foto"]
             ) for tupla in tuplas
         ]
         conn.close()

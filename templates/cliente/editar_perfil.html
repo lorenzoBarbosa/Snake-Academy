@@ -6,32 +6,28 @@
             <div class="container-editar-imagem">
                 <!-- templates/perfil/dados.html -->
                 <!-- Container centralizado para foto atual -->
+                 {% if not usuario.foto %}
                 <div class="d-flex justify-content-center">
                     <img id="foto-atual"
-                        src="{{ usuario.foto or '/static/img/user-default.png' }}"
+                        src="{{ '/static/img/user-default.png' }}"
                         class="rounded-circle mb-3"
-                        style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #dee2e6;"
                         alt="Foto do perfil">
                 </div>
-
+                {% else %}
                 <!-- Preview da nova foto (inicialmente oculto) -->
-                <div id="preview-foto-container" style="display: none;">
+                <div id="preview-foto-container">
                     <div class="d-flex justify-content-center">
                         <img id="preview-foto"
                             src="{{ usuario.foto }}"
                             class="rounded-circle mb-2"
-                            style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #28a745;"
                             alt="Preview da nova foto">
                     </div>
-                    <div class="small text-success mb-2">
-                        <i class="bi-check-circle"></i> Nova foto selecionada
-                    </div>
                 </div>
-
+                {% endif %}
                 <!-- Formulário de upload -->
                 <form action="/cliente/editar-perfil/alterar-foto" method="post" enctype="multipart/form-data">
                     <div class="mb-2">
-                        <label for="foto" class="form-label small">Selecionar Nova Foto</label>
+                        <label for="foto" class="form-label big">Selecionar Nova Foto</label>
                         <input type="file"
                             class="form-control form-control-sm"
                             id="foto"
@@ -46,6 +42,11 @@
                         <i class="bi-x"></i> Cancelar
                     </button>
                 </form>
+                {% if erro %}
+                <div class="alert alert-danger mt-3" role="alert">
+                    {{ erro }}
+                </div>
+                {% endif %}
             </div>
             <div class="container-editar-dados">
                 <p class="titulo-editar-perfil">

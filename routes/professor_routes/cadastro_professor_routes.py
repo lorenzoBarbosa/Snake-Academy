@@ -45,7 +45,8 @@ async def post_cadastro_professor(request: Request,
             cursosPostados=[],
             quantidadeAlunos=0,
             dataCriacaoProfessor=dataCriacaoProfessor,
-            descricaoProfessor=descricao
+            descricaoProfessor=descricao,
+            foto=cliente.foto
         )
 
         professor_repo.inserir_professor(professor, usuario_logado.get("id"))
@@ -54,7 +55,7 @@ async def post_cadastro_professor(request: Request,
 
     except Exception as e:
         return templates.TemplateResponse(
-            "professor/cadastro-professor.html",
+            "professor/cadastro_professor.html",
             {
                 "request": request,
                 "erro": f"Algo deu errado... Tente novamente. {e}",

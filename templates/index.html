@@ -36,11 +36,11 @@
                         </div>
                     </form>
                     <div class="tornar-se-ofertante">
-                        <a href="/professor/cadastro-professor">Tornar-se Ofertante de Cursos</a>
+                        <a href="/professor/cadastro-professor">Tornar-se Ofertante de Cursos <i class="bi bi-pencil"></i></a>
                     </div>
                     <div>
                         <a href="/cliente/carrinho" class="d-flex align-items-center">
-                            <img src="/static/img/icones/carrinho.png" alt="carrinho" class="me-5" style="width: 40px;">
+                            <div class="carrinho"><i class="bi bi-cart3"></i> </div>
                         </a>
                     </div>
                     <button
@@ -50,11 +50,19 @@
                         data-bs-target="#offcanvasExample"
                         aria-controls="offcanvasExample"
                     >
+                    {% if usuario.foto %}
                         <img
                             class="imagem-foto-perfil"
-                            src="{{ usuario.foto or '/static/img/user-default.png' }}"
+                            src="{{ usuario.foto }}"
                             alt="Foto de perfil"
                         >
+                    {% else %}
+                        <img
+                            class="imagem-foto-perfil"
+                            src="{{ '/static/img/user-default.png' }}"
+                            alt="Foto de perfil"
+                        >
+                    {% endif %}
                     </button>
                 </div>
             </nav>
@@ -67,7 +75,11 @@
         >
             <div class="offcanvas-header">
                 <div class="foto-perfil">
+                    {% if not usuario %}
+                    <img class="imagem-foto-perfil" src="{{ '/static/img/user-default.png' }}" alt="Foto de perfil">
+                    {% else %}
                     <img class="imagem-foto-perfil" src="{{ usuario.foto }}" alt="Foto de perfil">
+                    {% endif %}
                 </div>
                 <h5 class="offcanvas-title ms-3" id="offcanvasExampleLabel">{{ usuario.nome  }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>

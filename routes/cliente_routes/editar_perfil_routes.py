@@ -80,7 +80,7 @@ async def post_editar_perfil(request: Request,
             "cliente/editar-perfil.html",
             {
                 "request": request,
-                "erro": f"Erro ao criar cadastro. Tente novamente. {e}",
+                "erro": f"Erro ao editar perfil. Tente novamente. {e}",
                 "nome": nome,
                 "email": email,
                 "telefone": telefone,
@@ -97,7 +97,7 @@ async def alterar_foto(request: Request,
     # 1. Validar tipo de arquivo
     tipos_permitidos = ["image/jpeg", "image/png", "image/jpg"]
     if foto.content_type not in tipos_permitidos:
-        return RedirectResponse("/perfil?erro=tipo_invalido", status.HTTP_303_SEE_OTHER)
+        return templates.TemplateResponse("cliente/editar_perfil.html",{"request": request, "usuario": usuario_logado, "erro": f"Erro ao salvar a foto. Tente novamente."})
 
     # 2. Criar diretório se não existir
     upload_dir = "static/uploads/usuarios"
@@ -125,7 +125,6 @@ async def alterar_foto(request: Request,
         criar_sessao(request, usuario_logado)
 
     except Exception as e:
-        return RedirectResponse("/perfil?erro=upload_falhou", status.HTTP_303_SEE_OTHER)
+        return templates.TemplateResponse("cliente/editar_perfil.html",{"request": request, "usuario": usuario_logado, "erro": f"Erro ao salvar a foto. Tente novamente. {e}"})
 
-    return RedirectResponse("/cliente", status.HTTP_303_SEE_OTHER)
-    
+    return templates.TemplateResponse("cliente/editar_perfil.html",{"request": request, "usuario": usuario_logado})

@@ -20,6 +20,9 @@
                     <textarea class="input-descricao" id="descricao" name="descricao" rows="6" placeholder="Escreva um pouco sobre você e sobre suas experiências no ramo da tecnologia..." required></textarea>
                     <button class="botao-login botao-salvar" type="submit">Salvar</button>
                 </form>
+                {% if erro %}
+                    <p class="mensagem-erro">{{ erro }}</p>
+                {% endif %}
             </div>
         </div>
     </div>

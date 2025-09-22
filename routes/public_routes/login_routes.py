@@ -36,7 +36,8 @@ async def post_login(
         "id": usuario.id,
         "nome": usuario.nome,
         "email": usuario.email,
-        "perfil": usuario.perfil
+        "perfil": usuario.perfil,
+        "foto": usuario.foto
     }
     criar_sessao(request, usuario_dict)
 
