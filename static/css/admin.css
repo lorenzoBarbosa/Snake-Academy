@@ -1,0 +1,15 @@
+.icone-admin{
+    color: rgb(0, 0, 0);
+    margin-right: 50px;
+    text-align: center;
+    font-size: 40px;   
+}
+.icone-admin:hover{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+}
+.texto-icone{
+    font-size: 14px;
+}

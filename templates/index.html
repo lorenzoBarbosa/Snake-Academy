@@ -12,12 +12,13 @@
         <link rel="stylesheet" href="/static/css/gerais.css">
         <link rel="stylesheet" href="/static/css/cliente.css">
         <link rel="stylesheet" href="/static/css/cliente1.css">
+        <link rel="stylesheet" href="/static/css/admin.css">
         <link rel="shortcut icon" href="/static/img/nossas_Logos/logo-branca-sem-nome-removebg-preview.png" type="image/x-icon">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
         <title>Snake Academy</title>
     </head>
     <body>
-        {% if usuario and usuario.perfil == "cliente", "professor" %}
+        {% if usuario.perfil == "cliente" or usuario.perfil == "professor" %}
         <header>
             <div class="topo"></div>
             <nav class="navbar navbar-expand-lg bg-navbar-roxo">
@@ -37,11 +38,16 @@
                         </div>
                     </form>
                     <div class="tornar-se-ofertante">
-                        <a href="/professor/cadastro-professor">Tornar-se Ofertante de Cursos <i class="bi bi-pencil"></i></a>
+                        <a href="/professor/cadastro-professor">Tornar-se Ofertante de Cursos
+                            <i class="bi bi-pencil"></i>
+                        </a>
                     </div>
                     <div>
                         <a href="/cliente/carrinho" class="icone-carrinho">
-                            <div class="carrinho"><i class="bi bi-cart3"></i> <span class="carrinho-badge">3</span> </div>
+                            <div class="carrinho">
+                                <i class="bi bi-cart3"></i>
+                                <span class="carrinho-badge">3</span>
+                            </div>
                         </a>
                     </div>
                     <button
@@ -51,19 +57,11 @@
                         data-bs-target="#offcanvasExample"
                         aria-controls="offcanvasExample"
                     >
-                    {% if usuario.foto %}
-                        <img
-                            class="imagem-foto-perfil"
-                            src="{{ usuario.foto }}"
-                            alt="Foto de perfil"
-                        >
-                    {% else %}
-                        <img
-                            class="imagem-foto-perfil"
-                            src="{{ '/static/img/user-default.png' }}"
-                            alt="Foto de perfil"
-                        >
-                    {% endif %}
+                        {% if usuario.foto %}
+                        <img class="imagem-foto-perfil" src="{{ usuario.foto }}" alt="Foto de perfil">
+                        {% else %}
+                        <img class="imagem-foto-perfil" src="{{ '/static/img/user-default.png' }}" alt="Foto de perfil">
+                        {% endif %}
                     </button>
                 </div>
             </nav>
@@ -83,25 +81,128 @@
                     {% endif %}
                 </div>
                 <h5 class="offcanvas-title ms-3" id="offcanvasExampleLabel">{{ usuario.nome  }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                ></button>
             </div>
             <div class="offcanvas-body p-5 corpo">
                 <div class="linha-triangulo">
                     <div class="triangulo-roxo"></div>
-                    <div class="texto-triangulo"><a href="/cliente/editar-perfil">Editar Perfil</a></div>
+                    <div class="texto-triangulo">
+                        <a href="/cliente/editar-perfil">Editar Perfil</a>
+                    </div>
                 </div>
                 <div class="linha-triangulo">
                     <div class="triangulo-roxo"></div>
-                    <div class="texto-triangulo"><a href="/cliente/alterar_senha.html">Alterar Senha</a></div>
+                    <div class="texto-triangulo">
+                        <a href="/cliente/alterar_senha.html">Alterar Senha</a>
+                    </div>
                 </div>
                 <div class="linha-triangulo">
                     <div class="triangulo-roxo"></div>
-                    <div class="texto-triangulo"><a href="/cliente/logout">Logout</a></div>
+                    <div class="texto-triangulo">
+                        <a href="/cliente/logout">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-        </header>
-        {% endif %}
+    {% endif %}
+        {% if usuario.perfil == "admin" %}
+    <header>
+        <div class="topo"></div>
+        <nav class="navbar navbar-expand-lg bg-navbar-roxo">
+            <div class="container-fluid d-flex align-items-center justify-content-between">
+                <a class="navbar-brand" href="/cliente">
+                    <img src="/static/img/nossas_Logos/SNAKE ACADEMY LOGO.png" alt="snake" style="height:80px;">
+                </a>
+                <form class="d-flex flex-grow-1 justify-content-center mx-3" role="search">
+                    <div class="input-group w-75">
+                        <input
+                            class="form-control barra-pesquisa"
+                            type="search"
+                            placeholder="Procure pelos cursos, usuários ou professores..."
+                            aria-label="Search"
+                        >
+                        <button class="btn-lupa" type="submit">🔍︎</button>
+                    </div>
+                </form>
+                <div class="icone-admin">
+                    <a href="/usuarios">
+                        <i class="bi bi-people-fill"></i>
+                        <div class="texto-icone">Usuários</div>
+                    </a>
+                </div>
+                <div class="icone-admin">
+                    <a href="/denuncias">
+                        <i class="bi bi-exclamation-octagon"></i>
+                        <div class="texto-icone">Reportes</div>
+                    </a>
+                </div>
+                <button
+                    class="botao-login foto-perfil "
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasExample"
+                    aria-controls="offcanvasExample"
+                >
+                    {% if usuario.foto %}
+                    <img class="imagem-foto-perfil" src="{{ usuario.foto }}" alt="Foto de perfil">
+                    {% else %}
+                    <img class="imagem-foto-perfil" src="{{ '/static/img/user-default.png' }}" alt="Foto de perfil">
+                    {% endif %}
+                </button>
+            </div>
+        </nav>
+    </header>
+    <div
+        class="offcanvas offcanvas-end acesso-perfil"
+        tabindex="-1"
+        id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel"
+    >
+        <div class="offcanvas-header">
+            <div class="foto-perfil">
+                {% if not usuario %}
+                <img class="imagem-foto-perfil" src="{{ '/static/img/user-default.png' }}" alt="Foto de perfil">
+                {% else %}
+                <img class="imagem-foto-perfil" src="{{ usuario.foto }}" alt="Foto de perfil">
+                {% endif %}
+            </div>
+            <h5 class="offcanvas-title ms-3" id="offcanvasExampleLabel">{{ usuario.nome  }}</h5>
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+            ></button>
+        </div>
+        <div class="offcanvas-body p-5 corpo">
+            <div class="linha-triangulo">
+                <div class="triangulo-roxo"></div>
+                <div class="texto-triangulo">
+                    <a href="/cliente/editar-perfil">Editar Perfil</a>
+                </div>
+            </div>
+            <div class="linha-triangulo">
+                <div class="triangulo-roxo"></div>
+                <div class="texto-triangulo">
+                    <a href="/cliente/alterar_senha.html">Alterar Senha</a>
+                </div>
+            </div>
+            <div class="linha-triangulo">
+                <div class="triangulo-roxo"></div>
+                <div class="texto-triangulo">
+                    <a href="/cliente/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endif %}
+
         {% block conteudo %}
         {% endblock %}
 <footer class="rodape">

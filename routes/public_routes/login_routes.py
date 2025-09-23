@@ -40,7 +40,10 @@ async def post_login(
         "foto": usuario.foto
     }
     criar_sessao(request, usuario_dict)
-    url_redirect = redirect if redirect else "/cliente"
+    if usuario.perfil == "admin":
+        url_redirect = redirect if redirect else "/administrador"
+    else:
+        url_redirect = redirect if redirect else "/cliente"
     return RedirectResponse(url_redirect, status.HTTP_303_SEE_OTHER)
 
 @router.get("/logout")
