@@ -1,4 +1,14 @@
 {% extends "index.html" %}
 {%block conteudo%}
-<h1>Excluir perfil</h1>
+<article>
+    <div class="excluir-perfil-container">
+        <div class="excluir-perfil-card">
+            <h2 class="excluir-perfil-titulo">Excluir Perfil</h2>
+            <p class="excluir-perfil-texto">Tem certeza que deseja excluir seu perfil? Esta ação é irreversível.</p>
+            <form method="post" action="/cliente/excluir_perfil">
+                <button type="submit" class="botao-excluir-perfil">Excluir Perfil</button>
+                <button type="button" class="botao-cancelar" onclick="window.location.href='/cliente/perfil'">Cancelar</button>
+            </form>
+        </div>
+</article>
 {%endblock%}
