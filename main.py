@@ -62,7 +62,6 @@ from routes.cliente_routes.pagamento_curso_routes import router as pagamento_cur
 from routes.cliente_routes.tela_pagamento_routes import router as tela_pagamento_router
 from routes.cliente_routes.carrinho_routes import router as carrinho_router
 from routes.cliente_routes.alterar_senha_routes import router as alterar_senha_router
-from routes.cliente_routes.detalhes_curso_cliente_routes import router as detalhes_curso_cliente_public_router
 from routes.cliente_routes.cursos_matriculados.aulas_routes import router as aulas_router
 from routes.cliente_routes.cursos_matriculados.detalhes_aula_routes import router as detalhes_aula_router
 from routes.cliente_routes.cursos_matriculados.detalhes_curso_routes import router as detalhes_curso_cliente_router
