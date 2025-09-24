@@ -36,6 +36,8 @@ Grupo: Jhonatan Lima Mota Lourenço, Lorenzo Barbosa Alves, Lucas Oliveira Silva
 
         pip install bcrypt==4.0.1
 
+        pip install passlib[bcrypt]
+
 6 - Clicar no botão "Publish Branch", escolher um nome para o repositório e confirmar
 
 7 - IMPORTANTE: ALT + Z -> QUEBRA LINHA

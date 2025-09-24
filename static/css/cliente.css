@@ -427,3 +427,17 @@ article.carrinho-article { width: 100%; }
   min-width: 20px;
   text-align: center;
 }
+
+/*Estilo do card para excluir perfil*/
+.excluir-perfil-card {
+    margin: 20px auto;          
+    max-width: 400px;           
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 6px;
+}
