@@ -38,7 +38,8 @@ async def post_editar_perfil(request: Request,
             perfil='cliente',
             token_redefinicao=None,
             data_token=None,
-            data_cadastro=None
+            data_cadastro=None,
+            foto=None
         )
         
         atualizar_usuario_por_email(usuario, usuario_logado.get("email"))
@@ -56,6 +57,7 @@ async def post_editar_perfil(request: Request,
             data_token=cliente.data_token,
             data_cadastro=cliente.data_cadastro,
             dataUltimoAcesso=cliente.dataUltimoAcesso,
+            foto=usuario.foto,
             statusConta=cliente.statusConta,
             historicoCursos= cliente.historicoCursos,
             indentificacaoProfessor= cliente.indentificacaoProfessor,
@@ -70,6 +72,7 @@ async def post_editar_perfil(request: Request,
             "telefone": cliente.telefone,
             "dataNascimento": cliente.dataNascimento,
             "perfil": 'cliente',
+            "foto": cliente.foto
         }
         criar_sessao(request, usuario_dict)
 
@@ -77,9 +80,10 @@ async def post_editar_perfil(request: Request,
 
     except Exception as e:
         return templates.TemplateResponse(
-            "cliente/editar-perfil.html",
+            "cliente/editar_perfil.html",
             {
                 "request": request,
+                "usuario": usuario_logado,
                 "erro": f"Erro ao editar perfil. Tente novamente. {e}",
                 "nome": nome,
                 "email": email,

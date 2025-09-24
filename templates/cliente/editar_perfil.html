@@ -42,11 +42,6 @@
                         <i class="bi-x"></i> Cancelar
                     </button>
                 </form>
-                {% if erro %}
-                <div class="alert alert-danger mt-3" role="alert">
-                    {{ erro }}
-                </div>
-                {% endif %}
             </div>
             <div class="container-editar-dados">
                 <p class="titulo-editar-perfil">
@@ -58,11 +53,16 @@
                     <label for="email">Email</label>
                     <input class="input-editar-perfil" type="email" id="email" name="email" value="{{ usuario.email }}" placeholder="Email" required>
                     <label for="telefone">Telefone</label>
-                    <input class="input-editar-perfil" type="tel" id="telefone" name="telefone" value="{{ usuario.telefone }}" placeholder="Telefone" required>
+                    <input class="input-editar-perfil" type="tel" id="telefone" name="telefone" value="{{ usuario.telefone }}" placeholder="(00)99999-9999" required>
                     <label for="data_nascimento">Data de Nascimento</label>
                     <input class="input-editar-perfil" type="date" id="data_nascimento" name="data_nascimento" value="{{ usuario.dataNascimento }}" required>
                     <button class="botao-login botao-salvar" type="submit">Salvar</button>
                 </form>
+                {% if erro %}
+                <div class="alert alert-danger mt-3" role="alert">
+                    {{ erro }}
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -35,7 +35,7 @@ def inserir_professor(professor: Professor, id: int) -> Optional[int]:
         print(f"Erro ao inserir professor: {e}")
         return None
 
-def obter_todos_professors() -> list[Professor]:
+def obter_todos_professores() -> list[Professor]:
     try:
         conn = get_connection()
         cursor = conn.cursor()

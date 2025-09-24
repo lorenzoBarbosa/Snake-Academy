@@ -108,3 +108,4 @@ function cancelarSelecao() {
     btnAlterar.innerHTML = '<i class="bi-camera"></i> Alterar Foto';
     btnCancelar.style.display = 'none';
 }
+

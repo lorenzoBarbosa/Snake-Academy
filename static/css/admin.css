@@ -28,18 +28,19 @@
     align-self: center;
     padding: 10px;
     border-radius: 5px;
-    background-color: #522197;
-    width: 280px;;
+    background-color: #ffffff;
+    width: 280px;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .modificar-categorias-btn i{
     font-size: 80px;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 .modificar-categorias-btn p{
     font-size: 17px;
     margin-top: 10px;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 
 .modificar-categorias-btn:hover{
@@ -48,4 +49,68 @@
     transition: all 0.3s ease-in-out;
     text-decoration: none;
     color: white;
+}
+
+.botao-filtro{
+    background-color: #580dc2;
+    color: white;
+    border: none;
+    width: 80px;
+    height: 35px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.botao-filtro:hover{
+    background-color: #450a99;
+    color: white;
+    text-decoration: none;
+}
+
+.botao-filtro a{
+    color: rgb(182, 182, 182);
+    text-decoration: none;
+    padding: 20px 30px;
+}
+
+.linha-usuario {
+    background-color: #f5f5f5;  /* cinza claro */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.foto-usuario {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.foto-usuario img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tag-usuario {
+    margin-left: 10px;
+    padding: 2px 8px;
+    font-size: 0.8em;
+    border-radius: 6px;
+    color: #fff;
+}
+
+/* Cliente = roxo */
+.tag-cliente {
+    background-color: #6c5ce7;
+}
+
+/* Professor = verde */
+.tag-professor {
+    background-color: #38bc8e;
+}
+
+/* Admin = cinza */
+.tag-admin {
+    background-color: #636e72;
 }
