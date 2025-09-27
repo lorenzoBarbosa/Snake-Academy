@@ -1,0 +1,82 @@
+{% extends "index.html" %}
+{%block conteudo%}
+<article>
+    <div class="container mt-4">
+        <form method="get" action="/admin/cursos">
+            <div class="row g-3">
+
+                <!-- Filtro: Categoria de Cursos -->
+                <div class="col-md-3">
+                    <label for="categoria" class="form-label">Categoria</label>
+                    <select id="categoria" name="categoria" class="form-select">
+                        <option value="">Todas</option>
+                        {% for categoria in categorias %}
+                            <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Filtro: Tópicos de Cursos -->
+                <div class="col-md-3">
+                    <label for="topico" class="form-label">Tópico</label>
+                    <select id="topico" name="topico" class="form-select">
+                        <option value="">Todos</option>
+                        {% for topico in topicos %}
+                            <option value="{{ topico.id }}">{{ topico.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Filtro: Quantidade de Alunos -->
+                <div class="col-md-3">
+                    <label for="alunos" class="form-label">Qtd. de Alunos</label>
+                    <select id="alunos" name="alunos" class="form-select">
+                        <option value="">Todos</option>
+                        <option value="0-50">0 - 50</option>
+                        <option value="51-200">51 - 200</option>
+                        <option value="201-500">201 - 500</option>
+                        <option value="500+">Mais de 500</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- Botão de pesquisa -->
+            <div class="row">
+                <div class="col text-end">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                    <a href="/admin/cursos" class="btn btn-secondary">Limpar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="container mt-3">
+        {% for curso_filtro in cursos_qtdAlunos %}
+        <div class="linha-usuario d-flex align-items-center justify-content-between px-3 py-2 mb-2">
+            <div class="d-flex align-items-center">
+                <div class="foto-usuario me-3">
+                    <img src="{{ curso_filtro.curso.foto }}" alt="{{ curso_filtro.curso.nome }}">
+                </div>
+                <!-- Nome + Perfil + Cursos -->
+                <div>
+                    <h5 class="mb-1 d-flex align-items-center">
+                        {{ curso_filtro.curso.nome }}
+                        <span class="tag-usuario">
+                            {{ curso_filtro.curso.avaliacao }}
+                        </span>
+                    </h5>
+                    <small>Qtd de assinantes: {{ curso_filtro.qtdAlunos }}</small>
+                </div>
+            </div>
+
+            <!-- Ações -->
+            <div class="acoes-usuario">
+                <button class="btn btn-sm btn-outline-primary me-2"><a href="/admin/cursos/curso-admin/{{ curso_filtro.id }}">Detalhes do Curso</a></button>
+                <button class="btn btn-sm btn-outline-success me-2"><a href="/admin/usuarios/detalhes-usuario/{{ curso_filtro.idProfessor }}">Ver Professor</a></button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</article>
+
+{%endblock%}

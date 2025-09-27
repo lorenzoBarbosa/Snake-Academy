@@ -114,3 +114,19 @@
 .tag-admin {
     background-color: #636e72;
 }
+
+.tag-5-estrelas {
+    background-color: #00ff6a;
+}
+.tag-4-estrelas {
+    background-color: #a0ff4d;
+}
+.tag-3-estrelas {
+    background-color: #ffec3d;
+}
+.tag-2-estrelas {
+    background-color: #ff9c3d;
+}
+.tag-1-estrela {
+    background-color: #ff3d3d;
+}
