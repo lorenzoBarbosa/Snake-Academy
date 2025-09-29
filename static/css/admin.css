@@ -133,3 +133,36 @@
 .sombra-baixo {
     box-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.15);
 }
+.linha-cinza {
+    background-color: #b9b9b9;
+    min-width: 100% ;
+    height: 4px;
+}
+
+.card-banners{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 20px;
+    height: 20%;
+    display: flex;
+    align-items: right;
+    justify-content: right;
+}
+
+.card-banners img{
+    width: 70%;
+    height: 40%;
+    height: auto;
+    display: block;;
+}
+
+.atributos-banner{
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+}
