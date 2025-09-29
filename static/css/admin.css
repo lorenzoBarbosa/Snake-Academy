@@ -44,7 +44,7 @@
 }
 
 .modificar-categorias-btn:hover{
-    background-color: #580dc2;
+    background-color: #7a2de6;
     transform: scale(1.1);
     transition: all 0.3s ease-in-out;
     text-decoration: none;
