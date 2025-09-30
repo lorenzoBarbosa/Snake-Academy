@@ -14,7 +14,11 @@
                     {% for banner in banners %}
                     <div class="carousel-item {% if loop.first %}active{% endif %}">
                         <a href="/admin/banners">
-                            <img src="/static/img/carrossel/{{ banner.id }}.svg" class="d-block w-100" alt="banner {{ banner.nome }}">
+                            {% if banner.imagem and banner.status == true %}
+                            <img src="{{ banner.imagem }}" class="d-block w-100" alt="banner {{ banner.id }}">
+                            {% else %}
+                            <img src="/static/img/banner_exemplo.png" class="d-block w-100" alt="banner {{ banner.id }}">
+                            {% endif %}
                         </a>
                     </div>
                     {% endfor %}

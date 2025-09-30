@@ -12,7 +12,11 @@
                     {% for banner in banners %}
                     <div class="carousel-item {% if loop.first %}active{% endif %}">
                         <a href="/admin/banners/alterar/{{ banner.id }}">
-                            <img src="/static/img/carrossel/{{ banner.id }}.svg" class="d-block w-100" alt="banner {{ banner.nome }}">
+                            {% if banner.imagem and banner.status == true %}
+                            <img src="{{ banner.imagem }}" class="d-block w-100" alt="banner {{ banner.nome }}">
+                            {% else %}
+                            <img src="/static/img/banner_exemplo.png" class="d-block w-100" alt="banner {{ banner.nome }}">
+                            {% endif %}
                         </a>
                     </div>
                     {% endfor %}
@@ -67,7 +71,11 @@
                                 <span>Alterar visualização</span>
                             </div>
                         </div>
-                        <img src="/static/img/carrossel/{{banner.id}}.svg" class="img-fluid" alt="banner">
+                        {% if banner.imagem %}
+                        <img src="{{ banner.imagem }}" class="img-fluid" alt="banner">
+                        {% else %}
+                        <img src="/static/img/banner_exemplo.png" class="img-fluid" alt="banner">
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}
