@@ -191,6 +191,16 @@
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 }
+
+.btn-reset {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
 .titulo-caixa-atributos{
     font-size: 20px;
     margin-bottom: 10px;

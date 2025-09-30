@@ -14,10 +14,11 @@ async def get_banners(request:Request, usuario_logado: dict = None):
     response = templates.TemplateResponse("admin/banners/banners.html", {"request": request, "usuario": usuario_logado, "banners": banners})
     return response
 
-@router.post("/admin/banners/alterar-vizualizacao/{id_banner}")
+@router.post("/admin/banners/alterar-visualizacao/{id_banner}")
 @requer_autenticacao(["admin"])
-async def alterar_vizualizacao_banner(request:Request, id_banner: int, usuario_logado: dict = None):
+async def alterar_visualizacao_banner(request:Request, id_banner: int, usuario_logado: dict = None):
     banner = obter_banner_por_id(id_banner)
-    if banner:
-        novo_status = not banner.is_visible
-    return templates.TemplateResponse("admin/banners/banners.html", {"request": request, "usuario": usuario_logado, "banners": obter_todos_banners()})
+    alterar_status_banner(banner.id, not banner.status)
+    banners = obter_todos_banners()
+    response = templates.TemplateResponse("admin/banners/banners.html", {"request": request, "usuario": usuario_logado, "banners": banners})
+    return response

@@ -36,3 +36,9 @@ DELETAR_BANNER = """
 DELETE FROM banner
 WHERE id = ?;
 """
+
+ALTERAR_STATUS_BANNER = """
+UPDATE banner
+SET status = ?
+WHERE id = ?;
+"""

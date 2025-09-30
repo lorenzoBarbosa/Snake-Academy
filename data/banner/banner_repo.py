@@ -89,3 +89,14 @@ def deletar_banner(id: int):
         print(f"Erro ao deletar banner: {e}")
         return None
 
+def alterar_status_banner(id: int, status: bool):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(ALTERAR_STATUS_BANNER, (status, id))
+        conn.commit()
+        conn.close()
+        return cursor.rowcount > 0
+    except Exception as e:
+        print(f"Erro ao alterar status do banner: {e}")
+        return None

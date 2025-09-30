@@ -52,9 +52,15 @@
                                 <div class="caixa-atributos-banners">
                                     <i class="bi bi-pencil"></i>
                                 </div>
-                                <div class="caixa-atributos-banners">
-                                    <i class="bi bi-eye"></i>
-                                </div>
+                                <form action="/admin/banners/alterar-visualizacao/{{ banner.id }}" method="post" style="display:inline; width: 100%;">
+                                    <button type="submit" class="caixa-atributos-banners btn-reset">
+                                        {% if banner.status == true %}
+                                        <i class="bi bi-eye"></i>
+                                        {% else %}
+                                        <i class="bi bi-eye-slash"></i>
+                                        {% endif %}
+                                    </button>
+                                </form>
                             </div>
                             <div class="legendas-caixas">
                                 <span class="me-5 ms-4">Alterar</span>
@@ -66,7 +72,6 @@
                 </div>
                 {% endfor %}
             </div>
-
         </div>
     </article>
     {%endblock%}
