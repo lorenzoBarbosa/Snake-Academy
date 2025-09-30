@@ -232,3 +232,25 @@
     color: #333;
     margin-top: 5px;
 }
+
+.botao-cadastrar-banner{
+    background-color: #ffffff;
+    color: black;
+    border: none;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.botao-cadastrar-banner:hover{
+    background-color: #7a2de6;
+    color: white;
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+}
