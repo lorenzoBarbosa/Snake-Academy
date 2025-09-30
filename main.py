@@ -26,7 +26,7 @@ from data.topico import topico_repo
 from data.usuario import usuario_repo
 from routes.admin_routes.administrador_routes import router as administrador_router
 from routes.admin_routes.alterar_categoria_routes import router as alterar_categoria_router
-from routes.admin_routes.alterar_routes import router as alterar_router
+from routes.admin_routes.alterar_banners_routes import router as alterar_banner_router
 from routes.admin_routes.banners_routes import router as banners_router
 from routes.admin_routes.cadastrar_routes import router as cadastrar_router
 from routes.admin_routes.categorias_routes import router as categorias_router
@@ -154,7 +154,7 @@ app.include_router(criar_curso_router)
 app.include_router(criar_modulo_router)
 app.include_router(administrador_router)
 app.include_router(alterar_categoria_router)
-app.include_router(alterar_router)
+app.include_router(alterar_banner_router)
 app.include_router(banners_router)
 app.include_router(cadastrar_router)
 app.include_router(categorias_router)

@@ -2,18 +2,20 @@
 {%block conteudo%}
 <article>
     <div class="container">
-        <p class="titulo-home"><b>Banners</b></p>
+        <p class="titulo-home">
+            <b>Banners</b>
+        </p>
         <div class="linha-cinza"></div>
         <div class="mt-3 mb-5">
-            <div id="carouselEExampleControls" class="mb-5 carousel slide" data-bs-ride="carousel">
+            <div id="carouselExampleControls" class="mb-5 carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    {%for banner in banners%}
-                    <a href="/admin/banners">
-                        <div class="carousel-item {% if loop.first %}active{% endif %}">
-                            <img src="/static/img/carrossel/{{banner.id}}.svg" class="d-block w-100" alt="carrosel">
-                        </div>
-                    </a>
-                {% endfor %}
+                    {% for banner in banners %}
+                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                        <a href="/admin/banners/alterar/{{ banner.id }}">
+                            <img src="/static/img/carrossel/{{ banner.id }}.svg" class="d-block w-100" alt="banner {{ banner.nome }}">
+                        </a>
+                    </div>
+                    {% endfor %}
                 </div>
                 <button
                     class="carousel-control-prev"
@@ -34,20 +36,37 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-        </div>
-        <div class="linha-cinza"></div>
-        <p class="titulo-home"><b>Alterar Banners</b></p>
-        <div class="row row-cols-1">
-            {% for banner in banners %}
-            <div class="col card-banners">
-                <div class="atributos-banner">
-                    <p class="nome-banner"><b>{{banner.nome}}</b></p>
-                    <a href="/admin/banners/editar/{{banner.id}}" class="btn modificar-categorias-btn sombra-baixo">Modificar</a>
+            <div class="linha-cinza"></div>
+            <p class="titulo-home">
+                <b>Alterar Banners</b>
+            </p>
+            <div class="row row-cols-1">
+                {% for banner in banners %}
+                <div class="col card-banners">
+                    <div class="atributos-banner">
+                        <div class="atributos-esquerda">
+                            <div class="titulo-caixa-atributos">
+                                Id do publicador: {{ banner.idAdmin }}
+                            </div>
+                            <div class="container-caixas">
+                                <div class="caixa-atributos-banners">
+                                    <i class="bi bi-pencil"></i>
+                                </div>
+                                <div class="caixa-atributos-banners">
+                                    <i class="bi bi-eye"></i>
+                                </div>
+                            </div>
+                            <div class="legendas-caixas">
+                                <span class="me-5 ms-4">Alterar</span>
+                                <span>Alterar visualização</span>
+                            </div>
+                        </div>
+                        <img src="/static/img/carrossel/{{banner.id}}.svg" class="img-fluid" alt="banner">
+                    </div>
                 </div>
-                <img src="/static/img/carrossel/{{banner.id}}.svg" class="img-fluid" alt="banner">
+                {% endfor %}
             </div>
-            {% endfor %}
+
         </div>
-    </div>
-</article>
-{%endblock%}
+    </article>
+    {%endblock%}
