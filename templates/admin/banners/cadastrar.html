@@ -1,4 +1,42 @@
 {% extends "index.html" %}
 {%block conteudo%}
-<h1>Cadastrar</h1>
+<article>
+    <div class="container">
+        <div class="container-cadastrar-banner mt-5">
+            <div>
+                <img src="/static/img/banner_exemplo.png" alt="banner exemplo">
+                <p class = "texto-home">Atenção: os Banners devem ter 983px de largura por 270px de altura!</p>
+            </div>
+            <form action="/admin/banners/cadastrar" method="post" enctype="multipart/form-data">
+                <div>
+                    <label for="imagem">Adcione um nome ao banner:</label>
+                    <input type="text" name="imagem" id="imagem" required class="input-editar-perfil" placeholder="Nome do banner">
+                    {% if erro %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ erro }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="mb-2">
+                    <label for="foto" class="form-label big">Cadastrar Novo Banner</label>
+                    <input type="file" class="form-control form-control-sm" id="foto" name="foto" accept="image/*">
+                    <div class="form-text small">JPG, JPEG, PNG ou SVG</div>
+                </div>
+                <button type="submit" class="botao-login botao-salvar-banner">
+                    Salvar Banner
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-sm btn-outline-secondary"
+                    id="btn-cancelar"
+                    onclick="cancelarSelecao()"
+                    style="display: none;"
+                >
+                    <i class="bi-x"></i>
+                    Cancelar
+                </button>
+            </form>
+        </div>
+    </div>
+</article>
 {%endblock%}

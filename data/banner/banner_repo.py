@@ -100,3 +100,17 @@ def alterar_status_banner(id: int, status: bool):
     except Exception as e:
         print(f"Erro ao alterar status do banner: {e}")
         return None
+
+def obter_banner_por_imagem(imagem: str) -> Banner:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_BANNER_POR_IMAGEM, (imagem,))
+        row = cursor.fetchone()
+        conn.close()
+        if row:
+            return Banner(*row)
+        return None
+    except Exception as e:
+        print(f"Erro ao obter banner por imagem: {e}")
+        return None

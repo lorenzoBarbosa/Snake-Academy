@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS banner (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     idAdmin INTEGER NOT NULL,
     status BOOLEAN NOT NULL,
-    imagem TEXT NOT NULL,
+    imagem TEXT NOT NULL UNIQUE,
     FOREIGN KEY (idAdmin) REFERENCES admin(id)
 );
 """
@@ -42,4 +42,9 @@ ALTERAR_STATUS_BANNER = """
 UPDATE banner
 SET status = ?
 WHERE id = ?;
+"""
+
+OBTER_BANNER_POR_IMAGEM = """
+SELECT * FROM banner
+WHERE imagem = ?;
 """
