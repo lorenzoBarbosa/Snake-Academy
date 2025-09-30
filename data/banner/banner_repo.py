@@ -18,7 +18,7 @@ def inserir_banner(banner: Banner):
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute(INSERIR_BANNER, (banner.idAdmin, banner.status))
+        cursor.execute(INSERIR_BANNER, (banner.idAdmin, banner.status, banner.imagem))
         conn.commit()
         conn.close()
         return cursor.lastrowid
@@ -57,7 +57,7 @@ def obter_banner_paginado(pg_num: int, pg_size: int):
         offset = (pg_num - 1) * pg_size
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute(OOBTER_BANNER_PAGINADO, (limit, offset))
+        cursor.execute(OBTER_BANNER_PAGINADO, (limit, offset))
         banners = cursor.fetchall()
         conn.close()
         return [Banner(*row) for row in banners]
@@ -69,7 +69,7 @@ def atualizar_banner(banner: Banner):
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute(ATUALIZAR_BANNER, (banner.idAdmin, banner.status, banner.id))
+        cursor.execute(ATUALIZAR_BANNER, (banner.idAdmin, banner.status, banner.imagem, banner.id))
         conn.commit()
         conn.close()
         return obter_banner_por_id(banner.id)

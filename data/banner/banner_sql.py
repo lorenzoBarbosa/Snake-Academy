@@ -3,13 +3,14 @@ CREATE TABLE IF NOT EXISTS banner (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     idAdmin INTEGER NOT NULL,
     status BOOLEAN NOT NULL,
+    imagem TEXT NOT NULL,
     FOREIGN KEY (idAdmin) REFERENCES admin(id)
 );
 """
 
 INSERIR_BANNER = """
-INSERT INTO banner (idAdmin, status)
-VALUES (?, ?);
+INSERT INTO banner (idAdmin, status, imagem)
+VALUES (?, ?, ?);
 """
 
 OBTER_TODOS_BANNERS = """
@@ -21,14 +22,14 @@ SELECT * FROM banner
 WHERE id = ?;
 """
 
-OOBTER_BANNER_PAGINADO = """
+OBTER_BANNER_PAGINADO = """
 SELECT * FROM banner
 LIMIT ? OFFSET ?;
 """
 
 ATUALIZAR_BANNER = """
 UPDATE banner
-SET idAdmin = ?, status = ?
+SET idAdmin = ?, status = ?, imagem = ?
 WHERE id = ?;
 """
 

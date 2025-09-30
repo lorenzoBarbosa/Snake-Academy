@@ -36,7 +36,7 @@ if quantidade_usuario == 0:
             admin = inserir_admin(Admin(id=0, nome=usuario.nome, email=usuario.email, senha=usuario.senha, telefone=usuario.telefone, dataNascimento=usuario.dataNascimento, perfil="admin", token_redefinicao=None, data_token=None, data_cadastro=None, foto=None, nivelAcesso=3), 1)
     
     for i in range(3):
-        inserir_banner(Banner(id=0, idAdmin=admin, status=True))
+        inserir_banner(Banner(id=0, idAdmin=admin, status=True, imagem=""))
 
     inserir_categoria(Categoria(id=0, nome="Ciência de Dados"))
     inserir_categoria(Categoria(id=0, nome="Gestão de Redes"))
