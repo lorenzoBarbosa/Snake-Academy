@@ -26,7 +26,8 @@ def gerar_chamado(chamado: Chamado) -> Optional[int]:
             chamado.descricao,
             chamado.dataEnvio,
             chamado.horaEnvio,
-            chamado.visualizacao))
+            chamado.visualizacao,
+            chamado.tipo))
         conn.commit()
         conn.close()
         return cursor.lastrowid
@@ -48,7 +49,8 @@ def obter_todos_chamados() -> list[Chamado]:
                 descricao=tupla[2],
                 dataEnvio=tupla[3],
                 horaEnvio=tupla[4],
-                visualizacao=tupla[5]
+                visualizacao=tupla[5],
+                tipo=tupla[6]
             ) for tupla in tuplas
         ]
         conn.close()
@@ -71,7 +73,8 @@ def obter_chamado_por_id(id: int) -> Chamado:
                 descricao=tupla["descricao"],
                 dataEnvio=tupla["dataEnvio"],
                 horaEnvio=tupla["horaEnvio"],
-                visualizacao=bool(tupla["visualizacao"])
+                visualizacao=bool(tupla["visualizacao"]),
+                tipo=tupla["tipo"]
             )
     except Exception as e:
         print(f"Erro ao obter chamado por id: {e}")
@@ -91,7 +94,8 @@ def obter_chamado_por_nome_usuario(nome: str) -> Optional[Chamado]:
                 descricao=tupla["descricao"],
                 dataEnvio=tupla["dataEnvio"],
                 horaEnvio=tupla["horaEnvio"],
-                visualizacao=tupla["visualizacao"]
+                visualizacao=tupla["visualizacao"],
+                tipo=tupla["tipo"]
             ) for tupla in tuplas
         ]
         return chamados
@@ -114,7 +118,8 @@ def obter_chamado_paginado(pg_num: int, pg_size: int) -> list[Chamado]:
                 descricao=tupla["descricao"],
                 dataEnvio=tupla["dataEnvio"],
                 horaEnvio=tupla["horaEnvio"],
-                visualizacao=tupla["visualizacao"]
+                visualizacao=tupla["visualizacao"],
+                tipo=tupla["tipo"]
             ) for tupla in tuplas
     ]
         conn.close()
@@ -139,8 +144,9 @@ def obter_chamado_por_termo_paginado(termo, pg_num, pg_size):
             descricao=tupla["descricao"],
             dataEnvio=tupla["dataEnvio"],
             horaEnvio=tupla["horaEnvio"],
-            visualizacao=tupla["visualizacao"]
-        )for tupla in tuplas
+            visualizacao=tupla["visualizacao"],
+            tipo=tupla["tipo"]
+        ) for tupla in tuplas
     ]
         conn.close()
         return chamados

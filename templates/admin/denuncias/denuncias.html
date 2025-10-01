@@ -1,4 +1,74 @@
 {% extends "index.html" %}
-{%block conteudo%}
-<h1>Denuncias</h1>
-{%endblock%}
+{% block conteudo %}
+<article>
+    <div class="container mt-5">
+        <h1 class="titulo-home"><b>Reportes - Snake Academy</b></h1>
+    </div>
+
+    <div class="container mt-4">
+        <form method="post" action="/admin/denuncias/filtro">
+            <div class="row g-3 align-items-end">
+                <!-- Filtro por tipo -->
+                <div class="col-md-4">
+                    <label for="tipo_denuncia" class="form-label">Tipo de denúncia</label>
+                    <select id="tipo_denuncia" name="tipo_denuncia" class="form-select">
+                        <option value="todas">Todas</option>
+                        <option value="usuario">Usuário</option>
+                        <option value="curso">Curso</option>
+                        <option value="comentario">Comentário</option>
+                        <option value="sistema">Sistema</option>
+                    </select>
+                </div>
+
+                <!-- Filtro por ordenação -->
+                <div class="col-md-4 ms-auto">
+                    <label for="ordenar_por" class="form-label">Ordenar</label>
+                    <select id="ordenar_por" name="ordenar_por" class="form-select">
+                        <option value="">-- Selecione --</option>
+                        <option value="recentes">Mais recentes</option>
+                    </select>
+                </div>
+
+                <!-- Botões -->
+                <div class="col text-end mb-3">
+                    <button type="submit" class="botao-login botao-filtro">Filtrar</button>
+                    <a href="/admin/denuncias" class="btn btn-secondary">Limpar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="container mt-3">
+        {% for denuncia in denuncias %}
+        <div class="linha-usuario d-flex align-items-center justify-content-between px-3 py-2 mb-2">
+            <!-- Info da denúncia -->
+            <div class="d-flex align-items-center">
+                <!-- Ícone/Imagem -->
+                <div class="foto-usuario me-3">
+                    <img src="/static/img/icons/denuncia.png" alt="Denúncia {{ denuncia.id }}" width="50">
+                </div>
+                <!-- Texto da denúncia -->
+                <div>
+                    <h5 class="mb-1 d-flex align-items-center">
+                        {{ denuncia.descricao }}
+                        <span class="tag-usuario tag-cliente">
+                            {{ denuncia.tipo|capitalize }}
+                        </span>
+                    </h5>
+                    <small>
+                        Enviado por: {{ denuncia.usuario.nome if denuncia.usuario else "Usuário desconhecido" }}
+                        | Data: {{ denuncia.dataEnvio }} {{ denuncia.horaEnvio }}
+                    </small>
+                </div>
+            </div>
+
+            <!-- Ações -->
+            <div class="acoes-usuario">
+                <a href="/admin/denuncias/excluir/{{ denuncia.id }}" class="btn btn-sm btn-outline-danger me-2">Excluir</a>
+                <a href="/admin/denuncias/analisar/{{ denuncia.id }}" class="btn btn-sm btn-outline-success me-2">Moderar</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</article>
+{% endblock %}

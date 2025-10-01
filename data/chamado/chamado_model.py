@@ -11,4 +11,5 @@ class Chamado:
     dataEnvio: str
     horaEnvio: str
     visualizacao: bool
+    tipo: str
     usuario: Optional[Usuario] = None
