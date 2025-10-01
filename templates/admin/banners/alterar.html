@@ -1,4 +1,16 @@
 {% extends "index.html" %}
 {%block conteudo%}
-<h1>Alterar</h1>
+<article>
+    <div class="container">
+        <h1 class="titulo-home"><b>Alterar Banner</b></h1>
+        
+        <form action="/admin/banners/alterar/{{ banner_id }}" method="post">
+            <div class="mb-3">
+                <label for="imagem" class="form-label">Imagem</label>
+                <input type="file" class="form-control" id="imagem" name="imagem" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+</article>
 {%endblock%}

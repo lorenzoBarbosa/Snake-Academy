@@ -23,9 +23,10 @@ async def post_cadastrar(request: Request, usuario_logado: dict = None, foto: Up
     banner = Banner(id=0, idAdmin=usuario_logado['id'], status=True, imagem=imagem)
     banner_repo.inserir_banner(banner)
     # 1. Validar tipo de arquivo
-    tipos_permitidos = ["image/jpeg", "image/png", "image/jpg", "image/svg"]
+    tipos_permitidos = ["image/jpeg", "image/png", "image/jpg", "image/svg+xml"]
     if foto.content_type not in tipos_permitidos:
-        return templates.TemplateResponse("admin/banners/cadastrar.html",{"request": request, "usuario": usuario_logado, "erro": f"Erro ao cadastrar imagem. Tente novamente."})
+        banner_repo.deletar_banner(banner.id)
+        return templates.TemplateResponse("admin/banners/cadastrar.html",{"request": request, "usuario": usuario_logado, "erro": f"Erro ao cadastrar imagem, tipo incorreto de extensão da imagem. Tente novamente."})
 
     # 2. Criar diretório se não existir
     upload_dir = "static/uploads/carrossel"
@@ -50,6 +51,7 @@ async def post_cadastrar(request: Request, usuario_logado: dict = None, foto: Up
         banner_repo.atualizar_banner(banner)
 
     except Exception as e:
+        banner_repo.deletar_banner(banner.id)
         return templates.TemplateResponse("admin/banners/cadastrar.html",{"request": request, "usuario": usuario_logado, "erro": f"Erro ao salvar a foto. Tente novamente. {e}"})
 
     return templates.TemplateResponse("admin/banners/cadastrar.html",{"request": request, "usuario": usuario_logado, "sucesso": f"Banner cadastrado com sucesso!"})
