@@ -52,3 +52,12 @@ async def post_alterar(request: Request, usuario_logado: dict = None, banner_id:
         return templates.TemplateResponse("admin/banners/alterar.html",{"request": request, "usuario": usuario_logado, "erro": f"Erro ao salvar a foto. Tente novamente. {e}", "banner": banner})
 
     return templates.TemplateResponse("admin/banners/alterar.html",{"request": request, "usuario": usuario_logado, "sucesso": f"Banner alterado com sucesso!", "banner": banner})
+
+
+@router.get("/admin/banners/excluir/{banner_id}")
+@requer_autenticacao(["admin"])
+async def get_excluir(request: Request, usuario_logado: dict = None, banner_id: int = None):
+    banner = banner_repo.obter_banner_por_id(banner_id)
+    banner_repo.deletar_banner(banner_id)
+    response = templates.TemplateResponse("admin/banners/excluir.html", {"request": request, "usuario": usuario_logado, "banner": banner, "sucesso": "Banner excluído com sucesso!"})
+    return response

@@ -347,7 +347,7 @@
 .botao-excluir{
     background-color: #cc3737;
     color: white;
-    padding: 12px 20px;
+    padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -355,5 +355,19 @@
 }
 .botao-excluir:hover{
     background-color: #661f1f;
+    text-decoration: none;
+}
+
+.botao-cancelar{
+    background-color: #919191;
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.botao-cancelar:hover{
+    background-color: #8a7f7f;
     text-decoration: none;
 }

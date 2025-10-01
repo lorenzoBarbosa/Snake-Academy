@@ -37,7 +37,6 @@ from routes.admin_routes.curso_admin_routes import router as curso_admin_router
 from routes.admin_routes.denuncias_routes import router as denuncias_router
 from routes.admin_routes.detalhes_usuario_routes import router as detalhes_usuario_router
 from routes.admin_routes.excluir_categoria_routes import router as excluir_categoria_router
-from routes.admin_routes.excluir_routes import router as excluir_router
 from routes.admin_routes.inserir_categoria_routes import router as inserir_categoria_router
 from routes.admin_routes.moderar_comentario_routes import router as moderar_comentario_router
 from routes.admin_routes.moderar_denuncia_routes import router as moderar_denuncia_router
@@ -165,7 +164,6 @@ app.include_router(curso_admin_router)
 app.include_router(denuncias_router)
 app.include_router(detalhes_usuario_router)
 app.include_router(excluir_categoria_router)
-app.include_router(excluir_router)
 app.include_router(inserir_categoria_router)
 app.include_router(moderar_comentario_router)
 app.include_router(moderar_denuncia_router)
