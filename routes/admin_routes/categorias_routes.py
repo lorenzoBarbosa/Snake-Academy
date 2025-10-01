@@ -9,3 +9,9 @@ templates = Jinja2Templates(directory="templates")
 async def get_categorias(request: Request, usuario_logado: dict = None):
     response = templates.TemplateResponse("admin/categorias/categorias.html", {"request": request, "usuario": usuario_logado})
     return response
+
+@router.post("/admin/categorias")
+@requer_autenticacao(["admin"])
+async def post_categorias(request: Request, usuario_logado: dict = None):
+    response = templates.TemplateResponse("admin/categorias/categorias.html", {"request": request, "usuario": usuario_logado})
+    return response
