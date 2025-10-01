@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS usuario (
     email TEXT NOT NULL UNIQUE,
     senha TEXT NOT NULL,
     telefone TEXT NOT NULL,
-    dataNascimento TEXT NOT NULL,
+    data_nascimento TEXT NOT NULL,
     perfil TEXT NOT NULL DEFAULT 'usuario',
     token_redefinicao TEXT,
     data_token TIMESTAMP,
@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS usuario (
 )
 """
 INSERIR_USUARIO = """
-INSERT INTO usuario (nome, email, senha, telefone, dataNascimento, perfil)
-VALUES (?, ?, ?, ?, ?, ?)
+INSERT INTO usuario (nome, email, senha, telefone, data_nascimento, perfil, token_redefinicao, data_token, data_cadastro, foto)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 """
 
 OBTER_USUARIOS = """
@@ -41,7 +41,7 @@ WHERE email = ?
 
 OBTER_USUARIO_POR_ID = """
 SELECT 
-    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
+    id, nome, email, senha, telefone, data_nascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
 FROM usuario
 WHERE id = ?
 """
