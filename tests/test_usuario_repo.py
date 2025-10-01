@@ -15,12 +15,18 @@ class TestUsuarioRepo:
         criar_tabela_usuario()
         #Act
         usuario = Usuario(
-                0,
-                "lorenzo",
-                "lorenzo@gmail.com",
-                "hfevh",
-                "3175549-98",
-                "210109")
+                id=None,
+                nome="lorenzo",
+                email="lorenzo@gmail.com",
+                senha="hfevh",
+                telefone="3175549-98",
+                data_nascimento="210109",
+                perfil="cliente",
+                token_redefinicao="abc",
+                data_token="20231010",
+                data_cadastro="2023-12-09",
+                foto=None)
+        
         usuario_inserido = inserir_usuario(usuario)
         usuario_db = obter_usuario_por_id(usuario_inserido)
         #Assert
@@ -30,7 +36,8 @@ class TestUsuarioRepo:
         assert usuario_db.email == "lorenzo@gmail.com", "O email inserido está incorreto"
         assert usuario_db.senha == "hfevh", "A senha inserida está incorreta"
         assert usuario_db.telefone == "3175549-98", "O telefone inserido está incorreto"
-        assert usuario_db.dataCriacao == "210109", "A data de criação inserida está incorreta"
+        assert usuario_db.data_nascimento == "210109", "A data de criação inserida está incorreta"
+        assert usuario_db.perfil == "cliente", "O perfil inserido está incorreto"
     
     def test_obter_todos_usuarios(self, test_db):
         #Arrange
