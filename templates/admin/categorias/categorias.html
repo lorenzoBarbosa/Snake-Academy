@@ -6,7 +6,7 @@
         <div class="container">
             <div class="d-flex align-items-center justify-content-between">
                 <h1 class="titulo-home"><b>Categorias</b></h1>
-                <a href="/admin/categorias/inserir_categoria" class="botao-cadastrar-banner" title="Adicionar Categoria">
+                <a href="/admin/categorias/inserir-categoria" class="botao-cadastrar-banner" title="Adicionar Categoria">
                     <i class="bi bi-plus"></i>
                 </a>
             </div>
@@ -31,7 +31,7 @@
                     <td>{{ "{:06d}".format(categoria.id) }}</td>
                     <td>{{ categoria.nome }}</td>
                     <td class="text-center">
-                        <a href="/admin/categorias/alterar/{{ categoria.id }}" class="btn btn-success btn-sm" title="Alterar">
+                        <a href="/admin/categorias/alterar-categoria/{{ categoria.id }}" class="btn btn-success btn-sm" title="Alterar">
                             <i class="bi-pencil"></i>
                         </a>
                         <a href="/admin/categorias/excluir/{{ categoria.id }}" class="btn btn-danger btn-sm" title="Excluir">
