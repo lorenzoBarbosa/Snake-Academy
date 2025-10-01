@@ -6,7 +6,11 @@
                     <div class="carousel-inner">
                         {%for banner in banners%}
                         <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            {% if banner.id %}
                             <img src="/static/img/carrossel/{{banner.id}}.svg" class="d-block w-100" alt="carrosel">
+                            {% else %}
+                            <img src="/static/img/banner_exemplo.png" class="d-block w-100" alt="carrosel">
+                            {% endif %}
                         </div>
                     {% endfor %}
                     </div>
