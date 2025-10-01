@@ -1,44 +1,53 @@
 {% extends "index.html" %}
-{%block conteudo%}
+
+{% block conteudo %}
 <article>
     <div class="sombra-baixo">
         <div class="container">
-            <p class="titulo-home"><b>Categorias</b></p>
             <div class="d-flex align-items-center justify-content-between">
-                <h1>Categorias</h1>
-                <a href="/admin/categorias/inserir_categoria" class="botao-cadastrar-banner">
-                </a><i class="bi bi-plus"></i>
+                <h1 class="titulo-home"><b>Categorias</b></h1>
+                <a href="/admin/categorias/inserir_categoria" class="botao-cadastrar-banner" title="Adicionar Categoria">
+                    <i class="bi bi-plus"></i>
                 </a>
             </div>
+
             <hr>
-            {% if categorias %}
-            <table class="table table-striped table-admin center-column-1">
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Nome</th>
-                        <th class="text-center">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for categoria in categorias %}
-                    <tr>
-                        <td>{{"{:06d}".format(categoria.id)}}</td>
-                        <td>{{categoria.nome}}</td>
-                        <td class="text-center">
-                            <a href="/admin/categorias/alterar/{{categoria.id}}" class="btn btn-success btn-sm" title="Alterar"><i class="bi-pencil"></i></a>
-                            <a href="/admin/categorias/excluir/{{categoria.id}}" class="btn btn-danger btn-sm"><i class="bi-trash"></i></a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {% else %}
-            <div class="alert alert-warning" role="alert">
-                Nenhuma categoria cadastrada.
-            </div>
+        </div> <!-- Fecha .container -->
+    </div> <!-- Fecha .sombra-baixo -->
+
+    <div class="container mt-3">
+        {% if categorias %}
+        <table class="table table-striped table-admin center-column-1">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categoria in categorias %}
+                <tr>
+                    <td>{{ "{:06d}".format(categoria.id) }}</td>
+                    <td>{{ categoria.nome }}</td>
+                    <td class="text-center">
+                        <a href="/admin/categorias/alterar/{{ categoria.id }}" class="btn btn-success btn-sm" title="Alterar">
+                            <i class="bi-pencil"></i>
+                        </a>
+                        <a href="/admin/categorias/excluir/{{ categoria.id }}" class="btn btn-danger btn-sm" title="Excluir">
+                            <i class="bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="alert alert-warning" role="alert">
+            Nenhuma categoria cadastrada.
         </div>
-    </div>
+        {% endif %}
+    </div> <!-- Fecha nova .container -->
+
 </article>
-{% endif %}
-{%endblock%}
+{% endblock %}
