@@ -22,7 +22,12 @@ class TestAdminRepo:
             email="professor.teste@example.com",
             senha="senha123",
             telefone="123456789",
-            dataCriacao="2023-01-01"
+            data_nascimento="2023-01-01",
+            perfil="professor",
+            token_redefinicao=None,
+            data_token=None,
+            data_cadastro="2023-10-10",
+            foto=None
         )
         
         id_usuario = inserir_usuario(usuario)

@@ -49,7 +49,12 @@ class TestUsuarioRepo:
                 f"lorenzo{i+1}@gmail.com",
                 f"abc{i+1}",
                 f"1234{i+1}",
-                f"4321{i+1}")
+                f"2005-05-06{i+1}",
+                f"cliente{i+1}",
+                None,
+                None,
+                None,
+                None)
             inserir_usuario(usuario)
         #Act
         usuarios = obter_todos_usuarios()
@@ -66,7 +71,12 @@ class TestUsuarioRepo:
                 "lorenzo@gmail.com",
                 "hfevh",
                 "3175549-98",
-                "210109")
+                "210109",
+                "cliente",
+                None,
+                None,
+                None,
+                None)
         usuario_inserido = inserir_usuario(usuario)
         #Act
         usuario_db = obter_usuario_por_id(usuario_inserido)
@@ -83,7 +93,12 @@ class TestUsuarioRepo:
                 "lorenzo@gmail.com",
                 "hfevh",
                 "3175549-98",
-                "210109")
+                "210109",
+                "cliente",
+                None,
+                None,
+                None,
+                None)
         usuario_inserido = inserir_usuario(usuario)
         usuario_db = obter_usuario_por_id(usuario_inserido)
         # Act
@@ -96,20 +111,25 @@ class TestUsuarioRepo:
     def test_obter_quantidade_usuario(self, test_db):
         #Arrange
         criar_tabela_usuario()
-        for i in range(10):
+        for i in range(15):
             usuario = Usuario(
                 i+1,
                 f"lorenzo{i+1}",
                 f"lorenzo{i+1}@gmail.com",
                 f"abc{i+1}",
                 f"1234{i+1}",
-                f"4321{i+1}")
+                f"2005-05-06{i+1}",
+                f"cliente{i+1}",
+                None,
+                None,
+                None,
+                None)
             inserir_usuario(usuario)
         #Act
         usuarios = obter_quantidade_usuario()
         #Arrange
         assert usuarios is not None, "Não deveria ser None"
-        assert usuarios == 10, "Na lista deveria ter 10 usuários"
+        assert usuarios == 15, "Na lista deveria ter 10 usuários"
     
     def test_obter_usuario_paginado(self, test_db):
         #Arrange
@@ -121,7 +141,12 @@ class TestUsuarioRepo:
                 f"lorenzo{i+1}@gmail.com",
                 f"abc{i+1}",
                 f"1234{i+1}",
-                f"4321{i+1}")
+                f"2005-05-06{i+1}",
+                f"cliente{i+1}",
+                None,
+                None,
+                None,
+                None)
             inserir_usuario(usuario)
         #Act
         usuarios1 = obter_usuario_paginado(1, 4)
@@ -142,15 +167,20 @@ class TestUsuarioRepo:
                 "lorenzo@gmail.com",
                 "hfevh",
                 "3175549-98",
-                "210109")
+                "210109",
+                "cliente",
+                None,
+                None,
+                None,
+                None)
         usuario_inserido = inserir_usuario(usuario)
         usuario_db = obter_usuario_por_id(usuario_inserido)
         # act
         usuario_db.nome = "lorenzo2"
         usuario_db.email = "lorenzo@email.com"
-        usuario_db.telefone = "123456"
         usuario_db.senha = "123"
-        usuario_db.dataCriacao = "121212"
+        usuario_db.telefone = "123456"
+        usuario_db.data_cadastro = "2024-10-05 11:25:22"
         resultado = atualizar_usuario_por_id(usuario_db)
         # assert
         assert resultado == True, "A alteração "
@@ -159,44 +189,56 @@ class TestUsuarioRepo:
         assert usuario_db.email == "lorenzo@email.com", "O email inserido está incorreto"
         assert usuario_db.senha == "123", "A senha inserida está incorreta"
         assert usuario_db.telefone == "123456", "O telefone inserido está incorreto"
-        assert usuario_db.dataCriacao =="121212", "A data de criação está correta"
+        assert usuario_db.data_cadastro == "2024-10-05 11:25:22", "A data de criação está correta"
     
     def test_atualizar_usuario_por_email(self, test_db):
         # Arrange
         criar_tabela_usuario()
         usuario = Usuario(
                 0,
-                "lorenzo",
-                "lorenzo@gmail.com",
+                "Marcos",
+                "marcos@gmail.com",
                 "hfevh",
                 "3175549-98",
-                "210109")
+                "210109",
+                "cliente",
+                None,
+                None,
+                None,
+                None)
         usuario_inserido = inserir_usuario(usuario)
         usuario_db = obter_usuario_por_id(usuario_inserido)
         # act
-        usuario_db.nome = "lorenzo2"
+        usuario_db.nome = "Marcos2"
+        usuario_db.senha = "1234"
         usuario_db.telefone = "123456"
-        usuario_db.senha = "123"
-        usuario_db.dataCriacao = "121212"
-        resultado = atualizar_usuario_por_email(usuario_db)
+        usuario_db.data_cadastro = "2024-08-07 10:15:27"
+        usuario_db.data_nascimento = "2000-01-01"
+        resultado = atualizar_usuario_por_email(usuario_db, usuario_db.email)
         # assert
         assert resultado == True, "A alteração "
         assert usuario_db is not None, "A inserção de dados não deveria retornar None"
-        assert usuario_db.nome == "lorenzo2", "O nome inserido está incorreto"
-        assert usuario_db.senha == "123", "A senha inserida está incorreta"
-        assert usuario_db.telefone == "123456", "O telefone inserido está incorreto"
-        assert usuario_db.dataCriacao =="121212", "A data de criação está correta"
+        assert usuario_db.nome == "Marcos2", "O nome inserido está incorreto"
+        assert usuario_db.senha == "1234", "A senha inserida está incorreta"
+        assert usuario_db.telefone ==  "123456", "O telefone inserido está incorreto"
+        assert usuario_db.data_cadastro == "2024-08-07 10:15:27", "A data de criação está correta"
+        assert usuario_db.data_nascimento == "2000-01-01", "A data de nascimento está incorreta"
 
     def test_excluir_usuario_por_id(self, test_db):
         #Arrange
         criar_tabela_usuario()
         usuario = Usuario(
-            0,
-            "lorenzo",
-            "lorenzo@gmail.com",
-            "hfevh",
-            "3175549-98",
-            "210109")
+                0,
+                "Marcos",
+                "marcos@gmail.com",
+                "hfevh",
+                "3175549-98",
+                "210109",
+                "cliente",
+                None,
+                None,
+                None,
+                None)
         usuario_inserido = inserir_usuario(usuario)
         usuario_db = obter_usuario_por_id(usuario_inserido)
         #Act
@@ -212,11 +254,16 @@ class TestUsuarioRepo:
         criar_tabela_usuario()
         usuario = Usuario(
             0,
-            "lorenzo",
-            "lorenzo@gmail.com",
-            "hfevh",
-            "3175549-98",
-            "210109")
+                "lorenzo",
+                "lorenzo@gmail.com",
+                "hfevh",
+                "3175549-98",
+                "210109",
+                "cliente",
+                None,
+                None,
+                None,
+                None)
         usuario_inserido = inserir_usuario(usuario)
         usuario_db = obter_usuario_por_id(usuario_inserido)
         #Act
