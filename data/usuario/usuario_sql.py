@@ -20,21 +20,21 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 
 OBTER_USUARIOS = """
 SELECT 
-    id, nome, email, senha, telefone, data_nascimento as dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
+    id, nome, email, senha, telefone, data_nascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
 FROM usuario
 ORDER BY id 
 """
 
 OBTER_USUARIO_POR_PERFIL= """
 SELECT 
-    id, nome, email, senha, telefone, data_nascimento as dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
+    id, nome, email, senha, telefone, data_nascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
 FROM usuario
 WHERE perfil LIKE ?
 """
 
 OBTER_USUARIO_POR_EMAIL = """
 SELECT 
-    id, nome, email, senha, telefone, data_nascimento as dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
+    id, nome, email, senha, telefone, data_nascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
 FROM usuario
 WHERE email = ?
 """
@@ -48,7 +48,7 @@ WHERE id = ?
 
 OBTER_USUARIO_PAGINADO = """
 SELECT 
-    id, nome, email, senha, telefone, data_nascimento as dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
+    id, nome, email, senha, telefone, data_nascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
     FROM usuario
     ORDER BY id
     LIMIT ? OFFSET ?"""

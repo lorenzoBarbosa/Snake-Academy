@@ -54,7 +54,7 @@ def obter_todos_usuarios() -> list[Usuario]:
                 email=tupla["email"],
                 senha=tupla["senha"],
                 telefone=tupla["telefone"],
-                dataNascimento=tupla["dataNascimento"],
+                data_nascimento=tupla["data_nascimento"],
                 perfil=tupla["perfil"],
                 token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
                 data_token=None if tupla["data_token"] is None else tupla["data_token"],
@@ -79,7 +79,7 @@ def obter_usuario_por_perfil(perfil: str) -> list[Usuario]:
                 email=tupla["email"],
                 senha=tupla["senha"],
                 telefone=tupla["telefone"],
-                dataNascimento=tupla["dataNascimento"],
+                data_nascimento=tupla["data_nascimento"],
                 perfil=tupla["perfil"],
                 token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
                 data_token=None if tupla["data_token"] is None else tupla["data_token"],
@@ -106,7 +106,7 @@ def obter_usuario_por_email(email: str) -> Usuario:
             email=tupla["email"],
             senha=tupla["senha"],
             telefone=tupla["telefone"],
-            data_nascimento=tupla["dataNascimento"],
+            data_nascimento=tupla["data_nascimento"],
             perfil=tupla["perfil"],
             token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
             data_token=None if tupla["data_token"] is None else tupla["data_token"],
@@ -153,7 +153,7 @@ def obter_usuario_paginado(pg_num: int, pg_size: int) -> list[Usuario]:
                 email=tupla["email"],
                 senha=tupla["senha"],
                 telefone=tupla["telefone"],
-                dataNascimento=tupla["dataNascimento"],
+                data_nascimento=tupla["data_nascimento"],
                 perfil=tupla["perfil"],
                 token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
                 data_token=None if tupla["data_token"] is None else tupla["data_token"],
@@ -186,7 +186,7 @@ def atualizar_usuario_por_id(usuario:Usuario) -> bool:
                 usuario.nome,
                 usuario.email,
                 usuario.telefone,
-                usuario.dataNascimento,
+                usuario.data_nascimento,
                 usuario.perfil,
                 usuario.id))
             conn.commit()
@@ -204,7 +204,7 @@ def atualizar_usuario_por_email(usuario: Usuario, email: str) -> bool:
             usuario.nome,
             usuario.email,
             usuario.telefone,
-            usuario.dataNascimento,
+            usuario.data_nascimento,
             usuario.perfil,
             email))
         conn.commit()
