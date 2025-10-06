@@ -41,3 +41,5 @@ Grupo: Jhonatan Lima Mota Lourenço, Lorenzo Barbosa Alves, Lucas Oliveira Silva
 6 - Clicar no botão "Publish Branch", escolher um nome para o repositório e confirmar
 
 7 - IMPORTANTE: ALT + Z -> QUEBRA LINHA
+
+8 - Ctrl + Shift + P -> MCP
