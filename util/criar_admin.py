@@ -17,7 +17,7 @@ def criar_admin_padrao():
             email="admin@admin.com",
             senha=senha_hash,
             telefone="123456789",
-            dataNascimento="2000-01-01",
+            data_nascimento="2000-01-01",
             perfil="admin",
             token_redefinicao=None,
             data_token=None,
