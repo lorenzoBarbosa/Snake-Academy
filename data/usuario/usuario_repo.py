@@ -129,7 +129,6 @@ def obter_usuario_por_id(id: int) -> Usuario:
             email=tupla[2],
             senha=tupla[3],
             telefone=tupla[4],
-            data_nascimento=tupla[5],
             perfil=tupla[6],
             token_redefinicao=None if tupla[7] is None else tupla[7],
             data_token=None if tupla[8] is None else tupla[8],
