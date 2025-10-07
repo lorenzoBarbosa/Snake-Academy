@@ -4,7 +4,8 @@
     <div class="login-container">
         <div class="login-esquerda">
             <div class="imagem-login">
-                <img src="/static/img/telas_de_fundo/snake_login_sem_fundo.svg" alt="" style="width: 4500px; height: auto; max-width: 100%;">
+                <img src="/static/img/telas_de_fundo/snake_login_sem_fundo.svg" alt=""
+                    style="width: 4500px; height: auto; max-width: 100%;">
             </div>
         </div>
         <div class="login-direita">
@@ -12,17 +13,40 @@
                 <h3 class="mb-4 text-start">Login</h3>
                 <form action="/login" method="post">
                     {% if redirect %}
-                        <input type="hidden" name="redirect" value="{{ redirect }}">
+                    <input type="hidden" name="redirect" value="{{ redirect }}">
                     {% endif %}
                     <div class="mb-3">
-                        <input type="email" class="form-control {% if erro and 'email' in erro.lower() %}is-invalid{% endif %}"placeholder="Email ou nome de usuário" id="email" name="email" value="{{ dados.nome if dados else '' }}" required autofocus>
-                    <label for="email">Email</label>
-                    {% if erro and 'nome' in erro.lower() %}
-                    <div class="invalid-feedback">{{ erro }}</div>
-                    {% endif %}</div>
+                        <input type="email"
+                            class="form-control {% if erro and 'email' in erro.lower() %}is-invalid{% endif %}"
+                            placeholder="Email ou nome de usuário" id="email" name="email"
+                            value="{{ dados.email if dados else '' }}" required autofocus>
+
+                        {% if erro and 'email' in erro.lower() %}
+                        {% set partes = erro.split('|') %}
+                        {% for parte in partes %}
+                        {% if 'email' in parte.lower() %}
+                        <div class="invalid-feedback">{{ parte.strip() }}</div>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </div>
                     <div class="mb-4">
-                        <input type="password" class="form-control {% if erro and 'senha' in erro.lower() %}is-invalid{% endif %}" placeholder="Senha" name="senha" id="senha">
-                        <div id="acessar-recuperar-senha-login"  class="mt-3 text-center"> <a href="/validacao_email">Esqueci minha senha</a> </div>
+                        <input type="password"
+                            class="form-control {% if erro and 'senha' in erro.lower() %}is-invalid{% endif %}"
+                            placeholder="Senha" name="senha" id="senha"
+                            required autofocus>
+                            
+
+                        {% if erro and 'senha' in erro.lower() %}
+                        {% set partes = erro.split('|') %}
+                        {% for parte in partes %}
+                        {% if 'senha' in parte.lower() %}
+                        <div class="invalid-feedback">{{ parte.strip() }}</div>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        <div id="acessar-recuperar-senha-login" class="mt-3 text-center"> <a
+                                href="/validacao_email">Esqueci minha senha</a> </div>
                     </div>
                     <button type="submit" class="btn botao-roxo-lc w-100">Entrar</button>
                     {% if mensagem %}

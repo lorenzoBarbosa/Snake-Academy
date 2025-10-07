@@ -40,7 +40,7 @@ async def post_login(
         id = usuario.id if usuario else None
 
         if not usuario or not verificar_senha(login_dto.senha, usuario.senha):
-            return templates.TemplateResponse("publico/login.html", {"request": request, "mensagem": "Email ou senha inválidos."})
+            return templates.TemplateResponse("publico/login.html", {"request": request, 'dados': dados_formulario, "mensagem": "Email ou senha inválidos."})
 
         usuario_dict = {
             "id": usuario.id,
@@ -62,6 +62,10 @@ async def post_login(
         for erro in e.errors():
             campo = erro['loc'][0] if erro['loc'] else 'campo'
             mensagem = erro['msg']
+            mensagem = (
+                mensagem.replace("Value error,", "")
+                .replace("ValueError", "")
+                .strip())
             erros.append(f"{campo.capitalize()}: {mensagem}")
 
         erro_msg = " | ".join(erros)

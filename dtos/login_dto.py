@@ -12,7 +12,6 @@ class LoginDTO (BaseModel):
            raise ValueError("O campo email é obrigatório.")
         if '@' not in email or '.' not in email:
            raise ValueError("O campo email deve ser um email válido.")
-        
         return email
    
    @field_validator("senha")
