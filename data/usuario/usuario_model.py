@@ -9,7 +9,7 @@ class Usuario:
     email: str
     senha: str
     telefone: str
-    data_nascimento: str
+    dataNascimento: str
     perfil: str
     token_redefinicao: Optional[str]
     data_token: Optional[str]

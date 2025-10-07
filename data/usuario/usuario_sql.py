@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS usuario (
     email TEXT NOT NULL UNIQUE,
     senha TEXT NOT NULL,
     telefone TEXT NOT NULL,
-    data_nascimento TEXT NOT NULL,
+    dataNascimento TEXT NOT NULL,
     perfil TEXT NOT NULL DEFAULT 'usuario',
     token_redefinicao TEXT,
     data_token TIMESTAMP,
@@ -14,41 +14,41 @@ CREATE TABLE IF NOT EXISTS usuario (
 )
 """
 INSERIR_USUARIO = """
-INSERT INTO usuario (nome, email, senha, telefone, data_nascimento, perfil, token_redefinicao, data_token, data_cadastro, foto)
+INSERT INTO usuario (nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 """
 
 OBTER_USUARIOS = """
 SELECT 
-    id, nome, email, senha, telefone, data_nascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
 FROM usuario
 ORDER BY id 
 """
 
 OBTER_USUARIO_POR_PERFIL= """
 SELECT 
-    id, nome, email, senha, telefone, data_nascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
 FROM usuario
 WHERE perfil LIKE ?
 """
 
 OBTER_USUARIO_POR_EMAIL = """
 SELECT 
-    id, nome, email, senha, telefone, data_nascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
 FROM usuario
 WHERE email = ?
 """
 
 OBTER_USUARIO_POR_ID = """
 SELECT 
-    id, nome, email, senha, telefone, data_nascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
 FROM usuario
 WHERE id = ?
 """
 
 OBTER_USUARIO_PAGINADO = """
 SELECT 
-    id, nome, email, senha, telefone, data_nascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
     FROM usuario
     ORDER BY id
     LIMIT ? OFFSET ?"""
@@ -63,7 +63,7 @@ SET
     nome = ?, 
     email = ?,  
     telefone = ?, 
-    data_nascimento = ?, 
+    dataNascimento = ?, 
     perfil = ?
 WHERE id = ?
 """
@@ -74,7 +74,7 @@ SET
     nome = ?, 
     email = ?,  
     telefone = ?, 
-    data_nascimento = ?, 
+    dataNascimento = ?, 
     perfil = ?
 WHERE email = ?
 """

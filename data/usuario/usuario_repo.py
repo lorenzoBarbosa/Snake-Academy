@@ -26,7 +26,7 @@ def inserir_usuario(usuario: Usuario) -> Optional[int]:
                 usuario.email,
                 usuario.senha,
                 usuario.telefone,
-                usuario.data_nascimento,
+                usuario.dataNascimento,
                 usuario.perfil,
                 usuario.token_redefinicao,
                 usuario.data_token,
@@ -35,9 +35,8 @@ def inserir_usuario(usuario: Usuario) -> Optional[int]:
             )
         )
         conn.commit()
-        user_id = cursor.lastrowid
         conn.close()
-        return user_id
+        return cursor.lastrowid
     except Exception as e:
         print(f"Erro ao inserir dados: {e}")
 
@@ -54,7 +53,7 @@ def obter_todos_usuarios() -> list[Usuario]:
                 email=tupla["email"],
                 senha=tupla["senha"],
                 telefone=tupla["telefone"],
-                data_nascimento=tupla["data_nascimento"],
+                dataNascimento=tupla["dataNascimento"],
                 perfil=tupla["perfil"],
                 token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
                 data_token=None if tupla["data_token"] is None else tupla["data_token"],
@@ -79,7 +78,7 @@ def obter_usuario_por_perfil(perfil: str) -> list[Usuario]:
                 email=tupla["email"],
                 senha=tupla["senha"],
                 telefone=tupla["telefone"],
-                data_nascimento=tupla["data_nascimento"],
+                dataNascimento=tupla["dataNascimento"],
                 perfil=tupla["perfil"],
                 token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
                 data_token=None if tupla["data_token"] is None else tupla["data_token"],
@@ -106,7 +105,7 @@ def obter_usuario_por_email(email: str) -> Usuario:
             email=tupla["email"],
             senha=tupla["senha"],
             telefone=tupla["telefone"],
-            data_nascimento=tupla["data_nascimento"],
+            dataNascimento=tupla["dataNascimento"],
             perfil=tupla["perfil"],
             token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
             data_token=None if tupla["data_token"] is None else tupla["data_token"],
@@ -124,16 +123,17 @@ def obter_usuario_por_id(id: int) -> Usuario:
         tupla = cursor.fetchone()
         conn.close()
         return Usuario(
-            id=tupla[0],
-            nome=tupla[1],
-            email=tupla[2],
-            senha=tupla[3],
-            telefone=tupla[4],
-            perfil=tupla[6],
-            token_redefinicao=None if tupla[7] is None else tupla[7],
-            data_token=None if tupla[8] is None else tupla[8],
-            data_cadastro=None if tupla[9] is None else tupla[9],
-            foto=None if tupla[10] is None else tupla[10]        
+            id=tupla["id"],
+            nome=tupla["nome"],
+            email=tupla["email"],
+            senha=tupla["senha"],
+            telefone=tupla["telefone"],
+            dataNascimento=tupla["dataNascimento"],
+            perfil=tupla["perfil"],
+            token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+            data_token=None if tupla["data_token"] is None else tupla["data_token"],
+            data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+            foto=None if tupla["foto"] is None else tupla["foto"]
         )
     except Exception as e:
         print(f"Erro ao obter usuário por id: {e}")
@@ -153,7 +153,7 @@ def obter_usuario_paginado(pg_num: int, pg_size: int) -> list[Usuario]:
                 email=tupla["email"],
                 senha=tupla["senha"],
                 telefone=tupla["telefone"],
-                data_nascimento=tupla["data_nascimento"],
+                dataNascimento=tupla["dataNascimento"],
                 perfil=tupla["perfil"],
                 token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
                 data_token=None if tupla["data_token"] is None else tupla["data_token"],
@@ -186,7 +186,7 @@ def atualizar_usuario_por_id(usuario:Usuario) -> bool:
                 usuario.nome,
                 usuario.email,
                 usuario.telefone,
-                usuario.data_nascimento,
+                usuario.dataNascimento,
                 usuario.perfil,
                 usuario.id))
             conn.commit()
@@ -204,7 +204,7 @@ def atualizar_usuario_por_email(usuario: Usuario, email: str) -> bool:
             usuario.nome,
             usuario.email,
             usuario.telefone,
-            usuario.data_nascimento,
+            usuario.dataNascimento,
             usuario.perfil,
             email))
         conn.commit()
