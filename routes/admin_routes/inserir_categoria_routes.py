@@ -30,6 +30,7 @@ async def post_inserir_categoria(request: Request,
         nova_categoria = Categoria(nome=dados.nome)
         categoria_repo.inserir_categoria(nova_categoria)
         informar_sucesso(request, f"Categoria inserida com sucesso.")
+        print("Categoria inserida com sucesso.")
         return RedirectResponse("/admin/categorias", status_code=303)
     except ValidationError as e:
         erros = []
@@ -40,14 +41,16 @@ async def post_inserir_categoria(request: Request,
             erros.append(mensagem)
         erro_msg = " | ".join(erros)
         informar_erro(request, f"Há erros no formulário")
-        return templates.TemplateResponse("cadastrar.html", {
+        print(f"Erros de validação: {erro_msg}")
+        return templates.TemplateResponse("admin/categorias/inserir_categoria.html", {
             "request": request,
             "erro": erro_msg,
             "dados": dados_originais  # Preservar dados digitados
         })
     except Exception as e:
         # logger.error(f"Erro ao processar cadastro: {e}")
-        return templates.TemplateResponse("cadastrar.html", {
+        print(f"Erro ao processar cadastro: {e}")
+        return templates.TemplateResponse("admin/categorias/inserir_categoria.html", {
             "request": request,
             "erro": "Erro ao processar cadastro. Tente novamente.",
             "dados": dados_originais
