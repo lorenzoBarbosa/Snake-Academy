@@ -1,9 +1,11 @@
 from fastapi import APIRouter, Request
 from fastapi.params import Form
+from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 
 from data.categoria import categoria_repo
 from data.categoria.categoria_model import Categoria
+from dtos.categorais_dto import InserirCategoriaDTO
 from util.auth_decorator import requer_autenticacao
 
 router = APIRouter()
@@ -20,8 +22,12 @@ async def get_inserir_categoria(request: Request, usuario_logado: dict = None):
 async def post_inserir_categoria(request: Request,
                                   usuario_logado: dict = None,
                                   nome: str = Form(...)):
-    categoria = Categoria(id=0, nome=nome)
+    dados_originais = {"nome": nome}
     try:
-        categoria_repo.inserir_categoria(categoria)
+        dados = InserirCategoriaDTO(nome=nome)
+        nova_categoria = Categoria(nome=dados.nome)
+        categoria_repo.inserir_categoria(nova_categoria)
+        return RedirectResponse("/admin/categorias", status_code=303)
+
     except Exception as e:
         return templates.TemplateResponse("admin/categorias/inserir_categoria.html", {"request": request, "erro": "Algo deu errado, tente novamente.", "usuario": usuario_logado})
