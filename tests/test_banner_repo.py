@@ -16,18 +16,24 @@ class TestBannerRepo:
 
         usuario = Usuario(
             id=None,
-            nome="Professor Teste",
-            email="oi@ogyoghkc.oi",
+            nome="Cliente Teste",
+            email="testebanner@gmail.com",
             senha="senha123",
             telefone="123456789",
-            dataCriacao="2023-01-01"
+            dataNascimento="2015-09-10",
+            perfil="cliente",
+            token_redefinicao="abc",
+            data_token=None,
+            data_cadastro=None,
+            foto=None
         )
         id_usuario = inserir_usuario(usuario)
         usuario.id = id_usuario  # Atualiza o objeto com o ID retornado
-        admin = Admin(usuario.id, usuario.nome, usuario.email, usuario.senha, usuario.telefone, usuario.dataCriacao, "1")
+        admin = Admin(usuario.id, usuario.nome, usuario.email, usuario.senha, usuario.telefone, usuario.dataNascimento, usuario.perfil, 
+        usuario.token_redefinicao, usuario.data_token, usuario.data_cadastro, usuario.foto, "1")
         # Act
         admin_inserido = inserir_admin(admin, id_usuario)
-        banner = Banner(id=0, idAdmin=admin_inserido, status=False)
+        banner = Banner(id=0, idAdmin=admin_inserido, status=False, imagem="imagem_teste.jpg")
         idBanner = inserir_banner(banner)
         banner_inserido = obter_banner_por_id(idBanner)
         # Assert
@@ -47,7 +53,7 @@ class TestBannerRepo:
             email="oi@oi.i",
             senha="senha123",
             telefone="123456789",
-            dataCriacao="2023-01-01"
+            dataCriacao=None
         )
         id_usuario = inserir_usuario(usuario)
         usuario.id = id_usuario  # Atualiza o objeto com o ID retornado
@@ -73,7 +79,7 @@ class TestBannerRepo:
             email="oi@oi.i",
             senha="senha123",
             telefone="123456789",
-            dataCriacao="2023-01-01"
+            dataCriacao=None
         )
         id_usuario = inserir_usuario(usuario)
         usuario.id = id_usuario
@@ -100,7 +106,7 @@ class TestBannerRepo:
             email="oi@oi.i",
             senha="senha123",
             telefone="123456789",
-            dataCriacao="2023-01-01"
+            dataCriacao=None
         )
         id_usuario = inserir_usuario(usuario)
         usuario.id = id_usuario
@@ -126,7 +132,7 @@ class TestBannerRepo:
             email="oi@oi.i",
             senha="senha123",
             telefone="123456789",
-            dataCriacao="2023-01-01"
+            dataCriacao=None
         )
         id_usuario = inserir_usuario(usuario)
         usuario.id = id_usuario
@@ -156,7 +162,7 @@ class TestBannerRepo:
             email="oi@oi.i",
             senha="senha123",
             telefone="123456789",
-            dataCriacao="2023-01-01"
+            dataCriacao=None
         )
         id_usuario = inserir_usuario(usuario)
         usuario.id = id_usuario

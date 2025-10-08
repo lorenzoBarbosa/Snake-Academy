@@ -1,3 +1,4 @@
+import os
 import secrets
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
@@ -108,15 +109,13 @@ usuario_repo.criar_tabela_usuario()
 app = FastAPI()
 
 # Gerar chave secreta (em produção, use variável de ambiente!)
-SECRET_KEY = secrets.token_urlsafe(32)
-
-# Adicionar middleware de sessão
+SECRET_KEY = os.getenv("SECRET_KEY", "sua-chave-secreta-aqui")
 app.add_middleware(
-    SessionMiddleware, 
+    SessionMiddleware,
     secret_key=SECRET_KEY,
-    max_age=3600,  # Sessão expira em 1 hora
+    max_age=3600,  # 1 hora
     same_site="lax",
-    https_only=False  # Em produção, mude para True com HTTPS
+    https_only=False  # True em produção com HTTPS
 )
 
 app.mount("/static", StaticFiles(directory="static"), name="static")

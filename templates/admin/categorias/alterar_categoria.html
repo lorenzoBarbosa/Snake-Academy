@@ -5,7 +5,7 @@
         <div class="card-body">
             <h2>Alteração de Categoria</h2>
             <hr>
-            <form action="/admin/categorias/alterar" method="post">
+            <form action="/admin/categorias/alterar-categoria/{{ categoria.id }}" method="post">
                 <input type="hidden" name="id" value="{{ categoria.id }}">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome da Categoria" required value="{{ categoria.nome }}">

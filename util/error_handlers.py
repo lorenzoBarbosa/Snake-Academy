@@ -7,7 +7,7 @@ from typing import Callable, Optional
 from fastapi import Request
 from fastapi.templating import Jinja2Templates
 from pydantic import ValidationError
-from util.exceptions import ValidacaoError, RecursoNaoEncontradoError, LojaVirtualError
+from util.exceptions import SnakeAcademyError, ValidacaoError, RecursoNaoEncontradoError
 from util.flash_messages import informar_erro, informar_sucesso
 
 
@@ -59,7 +59,7 @@ def tratar_erro_rota(template_erro: Optional[str] = None,
                 # logger.info("Recurso não encontrado", erro=e, rota=str(request.url))
                 informar_erro(request, e.mensagem)
 
-            except LojaVirtualError as e:
+            except SnakeAcademyError as e:
                 # logger.error("Erro de negócio", erro=e, rota=str(request.url))
                 informar_erro(request, e.mensagem)
 

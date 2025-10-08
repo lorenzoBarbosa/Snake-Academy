@@ -6,16 +6,10 @@ Agrupa todas as validações e estruturas de dados para operações com usuário
 from pydantic import EmailStr, Field, field_validator
 from typing import Optional
 from .base_dto import BaseDTO
-from util.validacoes_dto import (
-    validar_texto_obrigatorio, validar_telefone
-)
+from util.validacoes_dto import *
 
 
-class CriarUsuarioDTO(BaseDTO):
-    """
-    DTO para criação de novo usuário.
-    Usado em formulários de registro.
-    """
+class InserirUsuarioDTO(BaseDTO):
 
     nome: str = Field(
         ...,
@@ -32,10 +26,40 @@ class CriarUsuarioDTO(BaseDTO):
         min_length=10,
         description="Telefone com DDD"
     )
-    cpf: Optional[str] = Field(
-        None,
-        description="CPF (opcional)"
+    senha: str = Field(
+        ...,
+        min_length=6,
+        max_length=100,
+        description="Senha do usuário"
     )
+    confirmar_senha: str = Field(
+        ...,
+        min_length=6,
+        max_length=100,
+        description="Confirmação da senha do usuário"
+    )
+
+    @field_validator('senha')
+    @classmethod
+    def validar_senha(cls, v: str) -> str:
+        validador = cls.validar_campo_wrapper(
+            lambda valor, campo: validar_senha(
+                valor, campo, min_chars=6, max_chars=100
+            ),
+            "Senha"
+        )
+        return validador(v)
+
+    @field_validator('confirmar_senha')
+    @classmethod
+    def senhas_devem_coincidir(cls, v, info):
+        validador = cls.validar_campo_wrapper(
+            lambda valor, campo: validar_senhas_coincidem(
+                valor, info.data.get('senha'), campo
+            ),
+            "Confirmar Senha"
+        )
+        return validador(v)
 
     @field_validator('nome')
     @classmethod
@@ -47,6 +71,17 @@ class CriarUsuarioDTO(BaseDTO):
             "Nome"
         )
         return validador(v)
+    
+    @field_validator('email')
+    @classmethod
+    def validar_email(cls, v: str) -> str:
+        validador = cls.validar_campo_wrapper(
+            lambda valor, campo: validar_texto_obrigatorio(
+                valor, campo, min_chars=5, max_chars=100
+            ),
+            "Email"
+        )
+        return validador(v)
 
     @field_validator('telefone')
     @classmethod
@@ -56,18 +91,6 @@ class CriarUsuarioDTO(BaseDTO):
             "Telefone"
         )
         return validador(v)
-
-    @classmethod
-    def criar_exemplo_json(cls, **overrides) -> dict:
-        """Exemplo de dados para documentação da API"""
-        exemplo = {
-            "nome": "João Silva",
-            "email": "joao.silva@email.com",
-            "telefone": "(11) 99999-9999",
-            "cpf": "123.456.789-01"
-        }
-        exemplo.update(overrides)
-        return exemplo
 
 
 class AtualizarUsuarioDTO(BaseDTO):
@@ -113,8 +136,8 @@ class AtualizarUsuarioDTO(BaseDTO):
 
 
 # Configurar exemplos JSON nos model_config
-CriarUsuarioDTO.model_config.update({
+InserirUsuarioDTO.model_config.update({
     "json_schema_extra": {
-        "example": CriarUsuarioDTO.criar_exemplo_json()
+        "example": InserirUsuarioDTO.criar_exemplo_json()
     }
 })

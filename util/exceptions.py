@@ -2,7 +2,7 @@
 Exceções customizadas da aplicação
 """
 
-class LojaVirtualError(Exception):
+class SnakeAcademyError(Exception):
     """Exceção base para erros da aplicação"""
     def __init__(self, mensagem: str, erro_original: Exception = None):
         self.mensagem = mensagem
@@ -10,7 +10,7 @@ class LojaVirtualError(Exception):
         super().__init__(self.mensagem)
 
 
-class ValidacaoError(LojaVirtualError):
+class ValidacaoError(SnakeAcademyError):
     """Erro de validação de dados"""
     def __init__(self, mensagem: str, campo: str = None, valor: any = None):
         super().__init__(mensagem)
@@ -18,7 +18,7 @@ class ValidacaoError(LojaVirtualError):
         self.valor = valor
 
 
-class RecursoNaoEncontradoError(LojaVirtualError):
+class RecursoNaoEncontradoError(SnakeAcademyError):
     """Erro quando um recurso não é encontrado"""
     def __init__(self, recurso: str, identificador: any):
         mensagem = f"{recurso} não encontrado: {identificador}"
@@ -27,7 +27,7 @@ class RecursoNaoEncontradoError(LojaVirtualError):
         self.identificador = identificador
 
 
-class BancoDadosError(LojaVirtualError):
+class BancoDadosError(SnakeAcademyError):
     """Erro relacionado ao banco de dados"""
     def __init__(self, mensagem: str, operacao: str, erro_original: Exception = None):
         super().__init__(mensagem, erro_original)
