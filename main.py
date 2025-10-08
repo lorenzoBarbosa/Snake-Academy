@@ -81,6 +81,7 @@ from routes.professor_routes.cursos.criar_curso_routes import router as criar_cu
 from routes.professor_routes.cursos.criar_modulo_routes import router as criar_modulo_router
 from routes.professor_routes.cadastro_professor_routes import router as cadastro_professor_router
 from util.criar_admin import criar_admin_padrao
+from util.criar_dados import criar_dados_iniciais
 
 admin_repo.criar_tabela_admin()
 aula_repo.criar_tabela_aula()
@@ -100,6 +101,8 @@ progresso_repo.criar_tabela_progresso()
 resposta_chamado_repo.criar_tabela_rchamado()
 topico_repo.criar_tabela_topico()
 usuario_repo.criar_tabela_usuario()
+
+
 
 
 app = FastAPI()
