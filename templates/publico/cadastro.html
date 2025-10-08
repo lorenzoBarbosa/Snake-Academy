@@ -5,7 +5,8 @@
     <div class="login-container">
         <div class="login-esquerda">
             <div class="imagem-login">
-                <img src="/static/img/telas_de_fundo/snake_login_sem_fundo.svg" alt="" style="width: 4500px; height: auto; max-width: 100%;">
+                <img src="/static/img/telas_de_fundo/snake_login_sem_fundo.svg" alt=""
+                    style="width: 4500px; height: auto; max-width: 100%;">
             </div>
         </div>
         <div class="login-direita">
@@ -16,13 +17,26 @@
                         <input type="email" class="form-control" name="email" id="email" placeholder="Email">
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome completo">
+                        <label for="nome" class="form-label">Nome Completo *</label>
+                        <input type="text"
+                            class="form-control {% if erro and 'nome' in erro.lower() %}is-invalid{% endif %}" id="nome"
+                            name="nome" value="{{ dados.nome if dados else '' }}" required>
+
+                        {% if erro and 'email' in erro.lower() %}
+                        {% set partes = erro.split('|') %}
+                        {% for parte in partes %}
+                        {% if 'email' in parte.lower() %}
+                        <div class="invalid-feedback">{{ parte.strip() }}</div>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
                     </div>
                     <div class="mb-3">
                         <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="Telefone">
                     </div>
                     <div class="mb-3">
-                        <input type="date" class="form-control" name="dataNascimento" id="dataNascimento" placeholder="Data de Nascimento">
+                        <input type="date" class="form-control" name="dataNascimento" id="dataNascimento"
+                            placeholder="Data de Nascimento">
                     </div>
                     <div class="mb-3">
                         <input type="hidden" class="form-control" name="perfil" id="perfil" value="cliente">
@@ -31,27 +45,31 @@
                         <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha">
                     </div>
                     <div class="mb-4">
-                        <input type="password" class="form-control" name="confirmar_senha" id="confirmar_senha" placeholder="Confirme sua senha">
+                        <input type="password" class="form-control" name="confirmar_senha" id="confirmar_senha"
+                            placeholder="Confirme sua senha">
                         {% if erro %}
                         <div>
-                            <p class="text-danger mt-2">{{ erro }}</p>
+                            <p class="text-danger mt-2">{{'passa todos os erros em um só lugar',erro }}</p>
                         </div>
                         {% endif %}
                     </div>
                     <button type="submit" class="btn botao-roxo-lc w-100">Cadastrar-se</button>
+                    {% if mensagem %}
+                    <div class="alert alert-danger mt-3">{{ mensagem }}</div>
+                    {% endif %}
                 </form>
 
-                    <div class="text-center mt-4">
-                        <p>Ou cadastre-se com:</p>
-                        <div class="social-icons d-flex justify-content-center gap-3">
-                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="32">
-                            <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google" width="32">
-                            <img src="https://cdn-icons-png.flaticon.com/512/732/732221.png" alt="Microsoft" width="32">
-                        </div>
+                <div class="text-center mt-4">
+                    <p>Ou cadastre-se com:</p>
+                    <div class="social-icons d-flex justify-content-center gap-3">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="32">
+                        <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google" width="32">
+                        <img src="https://cdn-icons-png.flaticon.com/512/732/732221.png" alt="Microsoft" width="32">
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </article>
 
