@@ -11,22 +11,13 @@ from util.validacoes_dto import (
 )
 
 
-class InserirUsuarioDTO(BaseDTO):
+class InserirCategoriaDTO(BaseDTO):
 
     nome: str = Field(
         ...,
         min_length=2,
         max_length=100,
-        description="Nome completo do usuário"
-    )
-    email: EmailStr = Field(
-        ...,
-        description="E-mail válido do usuário"
-    )
-    telefone: str = Field(
-        ...,
-        min_length=10,
-        description="Telefone com DDD"
+        description="Nome completo da categoria"
     )
 
     @field_validator('nome')
@@ -39,31 +30,11 @@ class InserirUsuarioDTO(BaseDTO):
             "Nome"
         )
         return validador(v)
-    
-    @field_validator('email')
-    @classmethod
-    def validar_email(cls, v: str) -> str:
-        validador = cls.validar_campo_wrapper(
-            lambda valor, campo: validar_texto_obrigatorio(
-                valor, campo, min_chars=5, max_chars=100
-            ),
-            "Email"
-        )
-        return validador(v)
-
-    @field_validator('telefone')
-    @classmethod
-    def validar_telefone_campo(cls, v: str) -> str:
-        validador = cls.validar_campo_wrapper(
-            lambda valor, campo: validar_telefone(valor),
-            "Telefone"
-        )
-        return validador(v)
 
 
-class AtualizarUsuarioDTO(BaseDTO):
+class AtualizarCategoriaDTO(BaseDTO):
     """
-    DTO para atualização de dados do usuário.
+    DTO para atualização de dados da categoria.
     Campos opcionais para atualização parcial.
     """
 
@@ -72,10 +43,6 @@ class AtualizarUsuarioDTO(BaseDTO):
         min_length=2,
         max_length=100,
         description="Nome completo"
-    )
-    telefone: Optional[str] = Field(
-        None,
-        description="Telefone"
     )
 
     @field_validator('nome')
@@ -91,21 +58,10 @@ class AtualizarUsuarioDTO(BaseDTO):
         )
         return validador(v)
 
-    @field_validator('telefone')
-    @classmethod
-    def validar_telefone_campo(cls, v: Optional[str]) -> Optional[str]:
-        if not v:
-            return v
-        validador = cls.validar_campo_wrapper(
-            lambda valor, campo: validar_telefone(valor),
-            "Telefone"
-        )
-        return validador(v)
-
 
 # Configurar exemplos JSON nos model_config
-InserirUsuarioDTO.model_config.update({
+InserirCategoriaDTO.model_config.update({
     "json_schema_extra": {
-        "example": InserirUsuarioDTO.criar_exemplo_json()
+        "example": InserirCategoriaDTO.criar_exemplo_json()
     }
 })
