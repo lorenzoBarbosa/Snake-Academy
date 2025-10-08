@@ -218,12 +218,15 @@ def atualizar_admin_por_id(admin: Admin, id):
     except Exception as e:
         print(f"Erro ao atualizar admin por id: {e}")
 
-def excluir_admin_por_id(id: int):
+def excluir_admin_por_id(id: int) -> bool:
     try:
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute(EXCLUIR_ADMIN_POR_ID, (id,))
         conn.commit()
+        sucesso = cursor.rowcount > 0  # True se algum registro foi excluído
         conn.close()
+        return sucesso
     except Exception as e:
         print(f"Erro ao excluir admin por id: {e}")
+        return False
