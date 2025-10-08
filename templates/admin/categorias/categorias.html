@@ -41,6 +41,11 @@
                 </tr>
                 {% endfor %}
             </tbody>
+            {% if message %}
+            <div class="valid-feedback">
+                {{ message }}
+            </div>
+            {% endif %}
         </table>
         {% else %}
         <div class="alert alert-warning" role="alert">
