@@ -23,8 +23,8 @@ class TestUsuarioRepo:
                 dataNascimento="210109",
                 perfil="cliente",
                 token_redefinicao="abc",
-                data_token="20231010",
-                data_cadastro="2023-12-09",
+                data_token="2023-10-10 14:00:00",
+                data_cadastro="2023-12-09 14:00:00",
                 foto=None)
         
         usuario_inserido = inserir_usuario(usuario)
@@ -38,6 +38,10 @@ class TestUsuarioRepo:
         assert usuario_db.telefone == "3175549-98", "O telefone inserido está incorreto"
         assert usuario_db.dataNascimento == "210109", "A data de criação inserida está incorreta"
         assert usuario_db.perfil == "cliente", "O perfil inserido está incorreto"
+        assert usuario_db.token_redefinicao == "abc", "O token de redefinição inserido está incorreto"
+        assert usuario_db.data_token == "2023-10-10 14:00:00", "A data do token inserida está incorreta"
+        assert usuario_db.data_cadastro == "2023-12-09 14:00:00", "A data de cadastro inserida está incorreta"
+        assert usuario_db.foto is None, "A foto inserida está incorreta"
     
     def test_obter_todos_usuarios(self, test_db):
         #Arrange
