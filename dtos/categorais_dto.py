@@ -49,8 +49,6 @@ class AtualizarCategoriaDTO(BaseDTO):
     
     @field_validator("id")
     def validar_id(cls, valor):
-        # if valor < 1:
-        #     raise ValueError(f"ID da Categoria deve ser maior ou igual a 1, e você forneceu: {valor}.")
         validar_numero_inteiro("ID da Categoria", valor, True, 1)
         return valor
 
