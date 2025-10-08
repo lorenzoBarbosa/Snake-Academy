@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Request
 from fastapi.params import Form
+from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from pydantic_core import ValidationError
 
@@ -27,11 +28,11 @@ async def post_alterar_categoria(request: Request, id: int = None, usuario_logad
     categoria = categoria_repo.obter_categoria_por_id(id)
     dados_originais = {"nome": nome}
     try:
-        dados = AtualizarCategoriaDTO(id=id, nome=nome)
-        nova_categoria = Categoria(id=dados.id, nome=dados.nome)
+        dados = AtualizarCategoriaDTO(nome=nome)
+        nova_categoria = Categoria(id=id, nome=dados.nome)
         categoria_repo.atualizar_categoria_por_id(nova_categoria.id, nova_categoria.nome)
         informar_sucesso(request, f"Categoria atualizada com sucesso.")
-        return templates.TemplateResponse("admin/categorias/alterar_categoria.html", {"request": request, "usuario": usuario_logado, "categorias": categorias, "categoria": categoria})
+        return RedirectResponse(url="/admin/categorias", status_code=303)
     except ValidationError as e:
         erros = []
         for erro in e.errors():

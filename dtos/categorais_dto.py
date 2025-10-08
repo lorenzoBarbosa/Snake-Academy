@@ -38,7 +38,7 @@ class AtualizarCategoriaDTO(BaseDTO):
         max_length=100,
         description="Nome completo"
     )
-    id: int = Field(ge=1, description="ID da Categoria")
+
 
     @field_validator('nome')
     @classmethod
@@ -46,11 +46,6 @@ class AtualizarCategoriaDTO(BaseDTO):
         if v is not None:
             validar_texto_obrigatorio(v, "Nome", min_chars=2, max_chars=100)
         return v
-    
-    @field_validator("id")
-    def validar_id(cls, valor):
-        validar_numero_inteiro("ID da Categoria", valor, True, 1)
-        return valor
 
 
 

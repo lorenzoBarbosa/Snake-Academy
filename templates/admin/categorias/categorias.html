@@ -34,7 +34,7 @@
                         <a href="/admin/categorias/alterar-categoria/{{ categoria.id }}" class="btn btn-success btn-sm" title="Alterar">
                             <i class="bi-pencil"></i>
                         </a>
-                        <a href="/admin/categorias/excluir/{{ categoria.id }}" class="btn btn-danger btn-sm" title="Excluir">
+                        <a href="/admin/categorias/excluir-categoria/{{ categoria.id }}" class="btn btn-danger btn-sm" title="Excluir">
                             <i class="bi-trash"></i>
                         </a>
                     </td>
@@ -42,7 +42,7 @@
                 {% endfor %}
             </tbody>
             {% if message %}
-            <div class="valid-feedback">
+            <div class="alert alert-info mt-3" role="alert">
                 {{ message }}
             </div>
             {% endif %}
