@@ -285,3 +285,89 @@
     background-color: #2e8b6e;
     text-decoration: none;
 }
+
+.card-editar-banner{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 20px;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.atributos-banner{
+    padding: 20px;
+    width: 100%;
+    display: flex;
+}
+.container-editar-banner{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+    min-height: 40vh;
+    font-size: 20px;
+}
+.input-editar-banner{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.alterar-foto-banner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.form-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
+    width: 100%;
+}
+
+.col-esquerda, .col-direita {
+    flex: 1; /* Cada coluna ocupa metade */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.botao-excluir{
+    background-color: #cc3737;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.botao-excluir:hover{
+    background-color: #661f1f;
+    text-decoration: none;
+}
+
+.botao-cancelar{
+    background-color: #919191;
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.botao-cancelar:hover{
+    background-color: #8a7f7f;
+    text-decoration: none;
+}

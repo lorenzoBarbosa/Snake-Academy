@@ -1,4 +1,24 @@
 {% extends "index.html" %}
-{%block conteudo%}
-<h1>Inserir Categoria</h1>
-{%endblock%}
+{% block conteudo %}
+<article>
+    <div class="card container">
+        <div class="card-body">
+            <h2>Cadastro de Categoria</h2>
+            <hr>
+            <form action="/admin/categorias/inserir-categoria" method="post">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome da Categoria" required>
+                    <label for="nome">Nome da Categoria</label>
+                </div>
+                {% if erro %}
+                <div class="alert alert-danger" role="alert">
+                    {{ erro }}
+                </div>
+                {% endif %}
+                <button type="submit" class="btn btn-primary me-2">Cadastrar Categoria</button>
+                <a href="/admin/categorias" class="btn btn-secondary">Cancelar Cadastro</a>
+            </form>
+        </div>
+    </div>
+</article>
+{% endblock %}

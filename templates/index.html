@@ -38,7 +38,7 @@
                         </div>
                     </form>
                     <div class="tornar-se-ofertante">
-                        <a href="/professor/cadastro-professor">Tornar-se Ofertante de Cursos
+                        <a href="{% if usuario.perfil == 'cliente' %}/professor/cadastro-professor{% elif usuario.perfil == 'professor' %}/admin/banners/cadastro{% endif %}">Tornar-se Ofertante de Cursos
                             <i class="bi bi-pencil"></i>
                         </a>
                     </div>
@@ -46,7 +46,6 @@
                         <a href="/cliente/carrinho" class="icone-carrinho">
                             <div class="carrinho">
                                 <i class="bi bi-cart3"></i>
-                                <span class="carrinho-badge">3</span>
                             </div>
                         </a>
                     </div>
@@ -137,7 +136,7 @@
                 </div>
                 <div class="icone-admin">
                     <a href="/admin/denuncias">
-                        <i class="bi bi-exclamation-octagon"></i>
+                        <i class="bi bi-exclamation-octagon-fill"></i>
                         <div class="texto-icone">Reportes</div>
                     </a>
                 </div>
