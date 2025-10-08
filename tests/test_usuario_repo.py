@@ -20,7 +20,7 @@ class TestUsuarioRepo:
                 email="lorenzo@gmail.com",
                 senha="hfevh",
                 telefone="3175549-98",
-                data_nascimento="210109",
+                dataNascimento="210109",
                 perfil="cliente",
                 token_redefinicao="abc",
                 data_token="20231010",
@@ -36,7 +36,7 @@ class TestUsuarioRepo:
         assert usuario_db.email == "lorenzo@gmail.com", "O email inserido está incorreto"
         assert usuario_db.senha == "hfevh", "A senha inserida está incorreta"
         assert usuario_db.telefone == "3175549-98", "O telefone inserido está incorreto"
-        assert usuario_db.data_nascimento == "210109", "A data de criação inserida está incorreta"
+        assert usuario_db.dataNascimento == "210109", "A data de criação inserida está incorreta"
         assert usuario_db.perfil == "cliente", "O perfil inserido está incorreto"
     
     def test_obter_todos_usuarios(self, test_db):
@@ -213,7 +213,7 @@ class TestUsuarioRepo:
         usuario_db.senha = "1234"
         usuario_db.telefone = "123456"
         usuario_db.data_cadastro = "2024-08-07 10:15:27"
-        usuario_db.data_nascimento = "2000-01-01"
+        usuario_db.dataNascimento = "2000-01-01"
         resultado = atualizar_usuario_por_email(usuario_db, usuario_db.email)
         # assert
         assert resultado == True, "A alteração "
@@ -222,7 +222,7 @@ class TestUsuarioRepo:
         assert usuario_db.senha == "1234", "A senha inserida está incorreta"
         assert usuario_db.telefone ==  "123456", "O telefone inserido está incorreto"
         assert usuario_db.data_cadastro == "2024-08-07 10:15:27", "A data de criação está correta"
-        assert usuario_db.data_nascimento == "2000-01-01", "A data de nascimento está incorreta"
+        assert usuario_db.dataNascimento == "2000-01-01", "A data de nascimento está incorreta"
 
     def test_excluir_usuario_por_id(self, test_db):
         #Arrange
