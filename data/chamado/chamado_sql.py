@@ -6,25 +6,26 @@ CREATE TABLE IF NOT EXISTS chamado (
     dataEnvio TEXT NOT NULL,
     horaEnvio TEXT NOT NULL,
     visualizacao BOOLEAN NOT NULL,
+    tipo TEXT NOT NULL,
     FOREIGN KEY (idUsuario) REFERENCES usuario(id)
 )
     """
 
 GERAR_CHAMADO = """
-INSERT INTO chamado (idUsuario, descricao, dataEnvio, horaEnvio, visualizacao)
-VALUES (?, ?, ?, ?, ?)
+INSERT INTO chamado (idUsuario, descricao, dataEnvio, horaEnvio, visualizacao, tipo)
+VALUES (?, ?, ?, ?, ?, ?)
 """
 
 OBTER_CHAMADOS = """
 SELECT 
-    id, idUsuario, descricao, dataEnvio, horaEnvio, visualizacao  
+    id, idUsuario, descricao, dataEnvio, horaEnvio, visualizacao, tipo
 FROM chamado
 ORDER BY id ASC
 """
 
 OBTER_CHAMADO_PAGINADO = """
 SELECT
-    c.id, c.idUsuario, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, u.nome as nomeUsuario
+    c.id, c.idUsuario, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, c.tipo,u.nome as nomeUsuario
 FROM chamado c
 JOIN usuario u ON c.idUsuario = u.id
 ORDER BY c.idUsuario
@@ -33,7 +34,7 @@ LIMIT ? OFFSET ?
 
 OBTER_CHAMADO_POR_TERMO_PAGINADO = """
 SELECT
-    c.id, c.idUsuario, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, u.nome as nomeUsuario
+    c.id, c.idUsuario, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, c.tipo, u.nome as nomeUsuario
 FROM chamado c
 JOIN usuario u ON c.idUsuario = u.id
 WHERE c.id LIKE ? OR u.nome LIKE ? or c.descricao LIKE ?
@@ -43,7 +44,7 @@ LIMIT ? OFFSET ?
 
 OBTER_CHAMADO_POR_ID = """
 SELECT 
-    c.id, c.idUsuario, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, u.nome as nomeUsuario
+    c.id, c.idUsuario, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, c.tipo, u.nome as nomeUsuario
 FROM chamado as c
 JOIN usuario as u ON c.idUsuario = u.id
 WHERE c.id = ?
@@ -52,7 +53,7 @@ ORDER BY c.id ASC
 
 OBTER_CHAMADO_POR_NOME_USUARIO = """
 SELECT
-    c.id, c.idUsuario, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, u.nome as nomeUsuario
+    c.id, c.idUsuario, c.descricao, c.dataEnvio, c.horaEnvio, c.visualizacao, c.tipo, u.nome as nomeUsuario
 FROM chamado c
 JOIN usuario u ON c.idUsuario = u.id
 WHERE u.nome = ?
