@@ -114,6 +114,7 @@ def obter_usuario_por_email(email: str) -> Usuario:
         )
     except Exception as e:
         print(f"Erro ao obter usuário por email: {e}")
+        return None
 
 def obter_usuario_por_id(id: int) -> Usuario:
     try:

@@ -34,7 +34,7 @@ class CadastroDTO(BaseModel):
     @field_validator('confirmar_senha')
     @classmethod
     def senhas_devem_coincidir(cls, confirmar_senha, values):
-        senha = values.get('senha')
+        senha = values.data.get('senha')
         if not confirmar_senha:
             raise ValueError('Confirmação de senha é obrigatória.')
         if senha and confirmar_senha != senha:
@@ -79,7 +79,7 @@ class CadastroDTO(BaseModel):
         data_nascimento = data_nascimento.strip()
 
         try:
-            data = datetime.strptime(data_nascimento, "%d/%m/%Y").date()
+            data = datetime.strptime(data_nascimento, "%Y-%m-%d").date()
         except ValueError:
             raise ValueError("Formato inválido. Use DD/MM/AAAA.")
         

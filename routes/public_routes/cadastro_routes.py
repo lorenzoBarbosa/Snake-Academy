@@ -45,15 +45,15 @@ async def post_cadastro(
     }
 
     # Verificar se email já existe
-    if usuario_repo.obter_usuario_por_email(email):
-        return templates.TemplateResponse(
-            "publico/cadastro.html",
-            {
-                "request": request,
-                "dados": dados_formulario,
-                "erros": {"EMAIL": "E-mail já cadastrado"}
-            }
-        )
+    # if usuario_repo.obter_usuario_por_email(email):
+    #     return templates.TemplateResponse(
+    #         "publico/cadastro.html",
+    #         {
+    #             "request": request,
+    #             "dados": dados_formulario,
+    #             "erros": {"EMAIL": "E-mail já cadastrado"}
+    #         }
+    #     )
     try:
         cadastro_dto = CadastroDTO(
             nome=nome,
@@ -67,11 +67,11 @@ async def post_cadastro(
         # Criar usuário com senha hash
         usuario = Usuario(
             id=0,
-            nome=nome,
-            email=email,
-            senha=criar_hash_senha(senha),
-            telefone=telefone,
-            dataNascimento= data_nascimento,
+            nome=cadastro_dto.nome,
+            email=cadastro_dto.email,
+            senha=criar_hash_senha(cadastro_dto.senha),
+            telefone=cadastro_dto.telefone,
+            dataNascimento=cadastro_dto.data_nascimento,
             perfil='cliente',
             token_redefinicao=None,
             data_token=None,
@@ -129,6 +129,7 @@ async def post_cadastro(
         #logger.warning(f"Erro de validação no cadastro: {erro_msg}")
 
         # Retornar template com dados preservados e erro
+        print(f"Erro de validação: {e}")
         return templates.TemplateResponse("publico/cadastro.html", {
             "request": request,
             "erros": erros,
@@ -137,6 +138,7 @@ async def post_cadastro(
 
     except Exception as e:
         #logger.error(f"Erro ao processar cadastro: {e}")
+        print(f"Algo deu errado: {e}")
 
         return templates.TemplateResponse("publico/cadastro.html", {
             "request": request,

@@ -31,7 +31,7 @@
                     <div class="mb-3">
                         <input type="text"
                             class="form-control {% if erros and 'NOME' in erros.keys() %}is-invalid{% endif %}" id="nome"
-                            name="nome" value="{{ dados.nome if dados else '' }}" required>
+                            name="nome" value="{{ dados.nome if dados else '' }}" placeholder="Nome" required>
 
                         {% if erros and "NOME" in erros.keys() %}
                         <div class="invalid-feedback">
