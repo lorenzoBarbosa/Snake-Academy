@@ -12,44 +12,68 @@
         <div class="login-direita">
             <div style="width: 100%; max-width: 400px;">
                 <h3 class="mb-4 text-start">Cadastre-se</h3>
+
+                {% if erros and "GERAL" in erros %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ erros['GERAL'] }}
+                    </div>
+                    {% endif %}
+
                 <form action="/cadastro" method="post">
                     <div class="mb-3">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                        <input type="email" class="form-control {% if erros and 'EMAIL' in erros.keys() %}is-invalid{% endif %}" name="email" id="email" placeholder="Email" value="{{ dados['email'] if dados and 'email' in dados.keys() }}" required>
+                        {% if erros and "EMAIL" in erros.keys() %}
+                        <div class="invalid-feedback">
+                            {{ erros['EMAIL'] }}
+                        </div>
+                        {% endif %}
                     </div>
                     <div class="mb-3">
-                        <label for="nome" class="form-label">Nome Completo *</label>
                         <input type="text"
-                            class="form-control {% if erro and 'nome' in erro.lower() %}is-invalid{% endif %}" id="nome"
+                            class="form-control {% if erros and 'NOME' in erros.keys() %}is-invalid{% endif %}" id="nome"
                             name="nome" value="{{ dados.nome if dados else '' }}" required>
 
-                        {% if erro and 'email' in erro.lower() %}
-                        {% set partes = erro.split('|') %}
-                        {% for parte in partes %}
-                        {% if 'email' in parte.lower() %}
-                        <div class="invalid-feedback">{{ parte.strip() }}</div>
-                        {% endif %}
-                        {% endfor %}
+                        {% if erros and "NOME" in erros.keys() %}
+                        <div class="invalid-feedback">
+                            {{ erros['NOME'] }}
+                        </div>
                         {% endif %}
                     </div>
                     <div class="mb-3">
-                        <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="Telefone">
+                        <input type="tel" class="form-control {% if erros and 'TELEFONE' in erros.keys() %}is-invalid{% endif %}" name="telefone" id="telefone" placeholder="Telefone" value="{{ dados['telefone'] if dados and 'telefone' in dados.keys() }}"
+                                        pattern="\(\d{2}\) \d{4,5}-\d{4}"
+                                        title="Formato: (00) 0000-0000 ou (00) 00000-0000" required>
+
+                        {% if erros and "TELEFONE" in erros.keys() %}
+                        <div class="invalid-feedback">
+                            {{ erros['TELEFONE'] }}
+                        </div>
+                        {% endif %}
+
                     </div>
                     <div class="mb-3">
-                        <input type="date" class="form-control" name="dataNascimento" id="dataNascimento"
-                            placeholder="Data de Nascimento">
+                        <input type="date" class="form-control {% if erros and 'DATA_NASCIMENTO' in erros.keys() %}is-invalid{% endif %}" name="data_nascimento" id="data_nascimento"
+                            placeholder="Data de Nascimento" value="{{ dados['data_nascimento'] if dados and 'data_nascimento' in dados.keys() }}" required>
                     </div>
                     <div class="mb-3">
                         <input type="hidden" class="form-control" name="perfil" id="perfil" value="cliente">
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha">
+                        <input type="password" class="form-control {% if erros and 'SENHA' in erros.keys() %}is-invalid{% endif %}" name="senha" id="senha" placeholder="Senha" minlength="6" required>
+
+                        {% if erros and "SENHA" in erros.keys() %}
+                        <div class="invalid-feedback">
+                            {{ erros['SENHA'] }}
+                        </div>
+                        {% endif %}
                     </div>
                     <div class="mb-4">
-                        <input type="password" class="form-control" name="confirmar_senha" id="confirmar_senha"
-                            placeholder="Confirme sua senha">
-                        {% if erro %}
-                        <div>
-                            <p class="text-danger mt-2">{{'passa todos os erros em um só lugar',erro }}</p>
+                        <input type="password" class="form-control {% if erros and 'CONFIRMAR_SENHA' in erros.keys() %}is-invalid{% endif %}" name="confirmar_senha" id="confirmar_senha"
+                            placeholder="Confirme sua senha" minlength="6" required>
+
+                        {% if erros and "CONFIRMAR_SENHA" in erros.keys() %}
+                        <div class="invalid-feedback">
+                            {{ erros['CONFIRMAR_SENHA'] }}
                         </div>
                         {% endif %}
                     </div>

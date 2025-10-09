@@ -12,7 +12,7 @@ Imports facilitados para os DTOs mais comuns:
 from .base_dto import BaseDTO
 
 # Usuário
-from .usuario_dtos import (
+from .usuario_dto import (
     InserirUsuarioDTO,
     AtualizarUsuarioDTO
 )

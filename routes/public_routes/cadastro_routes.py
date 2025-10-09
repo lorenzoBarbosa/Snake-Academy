@@ -2,7 +2,7 @@ from fastapi import APIRouter, Request, logger
 from fastapi.params import Form
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
-from pydantic import ValidationError
+from pydantic_core import ValidationError
 from data.cliente import cliente_repo
 from data.cliente.cliente_model import Cliente
 from data.util import get_connection
@@ -34,16 +34,26 @@ async def post_cadastro(
             senha: str = Form(...),  
             confirmar_senha: str = Form(...), 
             telefone: str = Form(...),
-            dataNascimento: str = Form(...),
+            data_nascimento: str = Form(...),
             perfil: str = Form("cliente")):
     
     dados_formulario = {
         "nome": nome,
         "email": email,
         "telefone": telefone,
-        "dataNascimento": dataNascimento,
+        "data_nascimento": data_nascimento,
     }
 
+    # Verificar se email já existe
+    if usuario_repo.obter_usuario_por_email(email):
+        return templates.TemplateResponse(
+            "publico/cadastro.html",
+            {
+                "request": request,
+                "dados": dados_formulario,
+                "erros": {"EMAIL": "E-mail já cadastrado"}
+            }
+        )
     try:
         cadastro_dto = CadastroDTO(
             nome=nome,
@@ -51,24 +61,8 @@ async def post_cadastro(
             senha=senha,
             confirmar_senha=confirmar_senha,
             telefone=telefone,
-            data_nascimento=dataNascimento
+            data_nascimento=data_nascimento
         )
-
-        # Processar cadastro
-        if usuario_repo.obter_usuario_por_email(email):
-            return templates.TemplateResponse(
-            "publico/cadastro.html",
-            {
-                "request": request,
-                "erro": "Este email já está cadastrado",
-                "nome": nome,
-                "telefone": telefone,
-                "dataNascimento": dataNascimento,
-                "perfil": perfil
-            }
-        )
-        usuario = usuario_repo.obter_usuario_por_email(cadastro_dto.email)
-        id = usuario.id if usuario else None
 
         # Criar usuário com senha hash
         usuario = Usuario(
@@ -77,7 +71,7 @@ async def post_cadastro(
             email=email,
             senha=criar_hash_senha(senha),
             telefone=telefone,
-            dataNascimento=dataNascimento,
+            dataNascimento= data_nascimento,
             perfil='cliente',
             token_redefinicao=None,
             data_token=None,
@@ -94,7 +88,7 @@ async def post_cadastro(
             email=email,
             senha=senha,
             telefone=telefone,
-            dataNascimento=dataNascimento,
+            dataNascimento=data_nascimento,
             perfil='cliente',
             token_redefinicao=None,
             data_token=None,
@@ -113,7 +107,7 @@ async def post_cadastro(
             "nome": nome,
             "email": email,
             "telefone": telefone,
-            "dataNascimento": dataNascimento,
+            "dataNascimento": data_nascimento,
             "perfil": 'cliente',
         }
         
@@ -126,27 +120,26 @@ async def post_cadastro(
         
     except ValidationError as e:
         # Extrair mensagens de erro do Pydantic
-        erros = []
+        erros = dict()
         for erro in e.errors():
             campo = erro['loc'][0] if erro['loc'] else 'campo'
             mensagem = erro['msg']
-            erros.append(f"{campo.capitalize()}: {mensagem}")
+            erros[campo.upper()] = mensagem.replace('Value error, ', '')
 
-        erro_msg = " | ".join(erros)
         #logger.warning(f"Erro de validação no cadastro: {erro_msg}")
 
         # Retornar template com dados preservados e erro
         return templates.TemplateResponse("publico/cadastro.html", {
             "request": request,
-            "erro": erro_msg,
+            "erros": erros,
             "dados": dados_formulario  # Preservar dados digitados
         })
 
     except Exception as e:
-        logger.error(f"Erro ao processar cadastro: {e}")
+        #logger.error(f"Erro ao processar cadastro: {e}")
 
         return templates.TemplateResponse("publico/cadastro.html", {
             "request": request,
-            "erro": "Erro ao processar cadastro. Tente novamente.",
+            "erros": {"GERAL": "Erro ao processar cadastro. Tente novamente."},
             "dados": dados_formulario
         })

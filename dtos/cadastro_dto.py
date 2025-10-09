@@ -17,12 +17,14 @@ class CadastroDTO(BaseModel):
         if not email:
            raise ValueError("O campo email é obrigatório.")
         if '@' not in email or '.' not in email:
-           raise ValueError("O campo email deve ser um email válido.")
+           raise ValueError("Eemail inválido.")
         return email
 
     @field_validator('senha')
     @classmethod
     def validar_senha_forte(cls, senha):
+        if not senha:
+            raise ValueError('Senha é obrigatória.')
         if len(senha) < 6:
             raise ValueError('Senha deve ter no mínimo 6 caracteres')
         if not any(c.isdigit() for c in senha):
@@ -31,18 +33,23 @@ class CadastroDTO(BaseModel):
 
     @field_validator('confirmar_senha')
     @classmethod
-    def senhas_devem_coincidir(cls, confirmar_senha, info):
-        if 'senha' in info.data and confirmar_senha != info.data['senha']:
-            raise ValueError('As senhas não coincidem')
+    def senhas_devem_coincidir(cls, confirmar_senha, values):
+        senha = values.get('senha')
+        if not confirmar_senha:
+            raise ValueError('Confirmação de senha é obrigatória.')
+        if senha and confirmar_senha != senha:
+            raise ValueError('Senhas não coincidem.')
         return confirmar_senha
 
     @field_validator("nome")
     @classmethod
     def validar_nome(cls, nome):
-        if len(nome) < 3 or len(nome) > 50:
-            raise ValueError("O campo nome deve ter entre 3 e 50 caracteres.")
         if not nome:
             raise ValueError("O campo nome é obrigatório.")
+        if len(nome) < 3 or len(nome) > 50:
+            raise ValueError("O campo nome deve ter entre 3 e 50 caracteres.")
+        if len(nome.split()) < 2:
+            raise ValueError('Nome deve ter pelo menos 2 palavras.')
         return nome
 
     @field_validator("telefone")
