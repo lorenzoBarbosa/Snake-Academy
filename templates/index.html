@@ -38,7 +38,7 @@
                         </div>
                     </form>
                     <div class="tornar-se-ofertante">
-                        <a href="{% if usuario.perfil == 'cliente' %}/professor/cadastro-professor{% elif usuario.perfil == 'professor' %}/admin/banners/cadastro{% endif %}">Tornar-se Ofertante de Cursos
+                        <a href="{% if usuario.perfil == 'cliente' %}/professor/cadastro-professor{% elif usuario.perfil == 'professor' %}/professor{% endif %}"> {% if usuario.perfil == 'cliente' %}Tornar-se {% endif %}Ofertante de Cursos
                             <i class="bi bi-pencil"></i>
                         </a>
                     </div>

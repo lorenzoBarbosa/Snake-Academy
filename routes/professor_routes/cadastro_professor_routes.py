@@ -51,6 +51,14 @@ async def post_cadastro_professor(request: Request,
 
         professor_repo.inserir_professor(professor, usuario_logado.get("id"))
 
+        criar_sessao(request, {
+            "id": professor.id,
+            "nome": professor.nome,
+            "email": professor.email,
+            "perfil": professor.perfil,
+            "foto": professor.foto
+        })
+
         return RedirectResponse(f"/professor", status.HTTP_303_SEE_OTHER)
 
     except Exception as e:

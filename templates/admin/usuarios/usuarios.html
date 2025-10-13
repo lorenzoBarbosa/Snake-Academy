@@ -35,36 +35,37 @@
     </div>
     <div class="container mt-3">
         {% for usuario_filtro in usuarios %}
-        <a href="/admin/usuarios/detalhes_usuario/{{ usuario_filtro.id }}"></a>
-        <div class="linha-usuario d-flex align-items-center justify-content-between px-3 py-2 mb-2">
-            <!-- Foto + Nome + Cursos -->
-            <div class="d-flex align-items-center">
-                <!-- Foto -->
-                <div class="foto-usuario me-3">
-                    <img src="{{ usuario_filtro.foto }}" alt="{{ usuario_filtro.nome }}">
+        <a href="/admin/usuarios/detalhes-usuario/{{ usuario_filtro.id }}">
+            <div class="linha-usuario d-flex align-items-center justify-content-between px-3 py-2 mb-2">
+                <!-- Foto + Nome + Cursos -->
+                <div class="d-flex align-items-center">
+                    <!-- Foto -->
+                    <div class="foto-usuario me-3">
+                        <img src="{{ usuario_filtro.foto }}" alt="{{ usuario_filtro.nome }}">
+                    </div>
+                    <!-- Nome + Perfil + Cursos -->
+                    <div>
+                        <h5 class="mb-1 d-flex align-items-center">
+                            {{ usuario_filtro.nome }}
+                            <span class="tag-usuario 
+                                {% if usuario_filtro.perfil == 'cliente' %}tag-cliente{% endif %}
+                                {% if usuario_filtro.perfil == 'professor' %}tag-professor{% endif %}
+                                {% if usuario_filtro.perfil == 'admin' %}tag-admin{% endif %}
+                            ">
+                                {{ usuario_filtro.perfil|capitalize }}
+                            </span>
+                        </h5>
+                        <small>Cursos: {{ usuario_filtro.cursos|length }}</small>
+                    </div>
                 </div>
-                <!-- Nome + Perfil + Cursos -->
-                <div>
-                    <h5 class="mb-1 d-flex align-items-center">
-                        {{ usuario_filtro.nome }}
-                        <span class="tag-usuario 
-                            {% if usuario_filtro.perfil == 'cliente' %}tag-cliente{% endif %}
-                            {% if usuario_filtro.perfil == 'professor' %}tag-professor{% endif %}
-                            {% if usuario_filtro.perfil == 'admin' %}tag-admin{% endif %}
-                        ">
-                            {{ usuario_filtro.perfil|capitalize }}
-                        </span>
-                    </h5>
-                    <small>Cursos: {{ usuario_filtro.cursos|length }}</small>
-                </div>
-            </div>
 
-            <!-- Ações -->
-            <div class="acoes-usuario">
-                <button class="btn btn-sm btn-outline-primary me-2"><a href="/admin/denuncias/notificar-usuario/{{ usuario_filtro.id }}">Notificar</a></button>
-                <button class="btn btn-sm btn-outline-success me-2"><a href="/admin/usuarios/confirmar-alteracao-status-admin/{{ usuario_filtro.id }}">Tornar Admin</a></button>
+                <!-- Ações -->
+                <div class="acoes-usuario">
+                    <button class="btn btn-sm btn-outline-primary me-2"><a href="/admin/denuncias/notificar-usuario/{{ usuario_filtro.id }}">Notificar</a></button>
+                    <button class="btn btn-sm btn-outline-success me-2"><a href="/admin/usuarios/confirmar-alteracao-status-admin/{{ usuario_filtro.id }}">Tornar Admin</a></button>
+                </div>
             </div>
-        </div>
+        </a>
         {% endfor %}
     </div>
 
