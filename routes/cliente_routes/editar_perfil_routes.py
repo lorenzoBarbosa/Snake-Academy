@@ -125,8 +125,15 @@ async def alterar_foto(request: Request,
 
         # 6. Atualizar sessão do usuário
         usuario_logado['foto'] = caminho_relativo
+        usuario_dict = {
+            "id": usuario_logado['id'],
+            "nome": usuario_logado['nome'],
+            "email": usuario_logado['email'],
+            "perfil": usuario_logado['perfil'],
+            "foto": usuario_logado['foto']
+        }
         from util.auth_decorator import criar_sessao
-        criar_sessao(request, usuario_logado)
+        criar_sessao(request, usuario_dict)
 
     except Exception as e:
         return templates.TemplateResponse("cliente/editar_perfil.html",{"request": request, "usuario": usuario_logado, "erro": f"Erro ao salvar a foto. Tente novamente. {e}"})

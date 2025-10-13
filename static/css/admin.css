@@ -371,3 +371,56 @@
     background-color: #8a7f7f;
     text-decoration: none;
 }
+
+.detalhes-usuario {
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container-foto-detalhes-usuario {
+    flex-shrink: 0;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: none;
+}
+
+.botao-editar-usuario{
+    padding: 15px 30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+}
+.botao-editar-usuario:hover{
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+}
+
+.notificar-usuario{
+    background-color: #38BC8E;
+    color: white;
+}
+.notificar-usuario:hover{
+    background-color: #2e8b6e;
+    text-decoration: none;
+}
+.excluir-usuario{
+    background-color: #cc3737;
+    color: white;
+}
+.excluir-usuario:hover{
+    background-color: #661f1f;
+    text-decoration: none;
+}

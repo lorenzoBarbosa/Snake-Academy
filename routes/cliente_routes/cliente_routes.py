@@ -47,7 +47,7 @@ async def get_cliente(request: Request, usuario_logado: dict = None):
             if curso:
                 lista_historico.append(curso)
 
-
+    print(usuario_logado.get("foto"))
     return templates.TemplateResponse("cliente/cliente.html", {"request": request,                                      
                                                                 "usuario":usuario_logado,
                                                                 "categorias": categorias, 

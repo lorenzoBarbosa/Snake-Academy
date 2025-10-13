@@ -109,6 +109,7 @@ async def post_cadastro(
             "telefone": telefone,
             "dataNascimento": data_nascimento,
             "perfil": 'cliente',
+            "foto": None
         }
         
          # Sucesso - Redirecionar com mensagem flash
