@@ -1,4 +1,93 @@
 {% extends "index.html" %}
-{%block conteudo%}
-<h1>Área do professor</h1>
-{%endblock%}
+{% block conteudo %}
+
+<article>
+  <aside
+    id="offcanvasSidebar"
+    class="offcanvas offcanvas-start show"
+    data-bs-scroll="true"
+    data-bs-backdrop="false"
+    tabindex="-1"
+    aria-labelledby="offcanvasSidebarLabel"
+    style="visibility: visible; position: fixed; top: 0; left: 0; height: 100vh; width: 260px; border-right: 1px solid rgba(0,0,0,0.1); z-index: 1030; background-color: #fff;"
+  >
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Painel do Professor</h5>
+      <button type="button" class="btn-close d-md-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body">
+      <p>Bem-vindo ao painel do professor.</p>
+      <nav>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-decoration-none">Dúvidas</a></li>
+          <li><a href="#" class="text-decoration-none">Criar Curso</a></li>
+          <li><a href="#" class="text-decoration-none">Configurações</a></li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+
+  <main id="mainContent" class="pt-4" style="margin-left: 260px;">
+    <div class="container">
+      <h2 class="mb-4 p-4">Meus Cursos</h2>
+
+      <div class="row g-4 card-curso-professor">
+
+        
+        <!-- CARD 1 -->
+        <div class="col-sm-6 col-md-4">
+          <div class="card h-100 shadow-sm">
+            <img src="/static/img/nossos_cursos/1.jpeg" class="card-img-top" alt="Curso de Ciência de Dados">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Curso de Ciência de Dados</h5>
+              <p class="card-text">Aprenda a dominar análise e visualização de dados com Python e SQL.</p>
+              <p class="card-text"><small class="text-body-secondary">Instrutor: Marcos Andrade</small></p>
+              <p class="card-text mb-2">★★★★★ 5,0 <small class="text-muted">(765 avaliações)</small></p>
+              <div class="mt-auto">
+                <p class="cor-preco-carde-curso-professor">R$39,90</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- CARD 2 -->
+        <div class="col-sm-6 col-md-4">
+          <div class="card h-100 shadow-sm">
+            <img src="/static/img/nossos_cursos/2.png" class="card-img-top" alt="Curso de Front-End Moderno">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Curso de Front-End Moderno</h5>
+              <p class="card-text">HTML, CSS e JavaScript do básico ao avançado, com projetos práticos.</p>
+              <p class="card-text"><small class="text-body-secondary">Instrutor: Ana Ribeiro</small></p>
+              <p class="card-text mb-2">★★★★☆ 4,8 <small class="text-muted">(542 avaliações)</small></p>
+              <div class="mt-auto">
+                <p class="cor-preco-carde-curso-professor">R$49,90</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- CARD 3 -->
+        <div class="col-sm-6 col-md-4">
+          <div class="card h-100 shadow-sm">
+            <img src="/static/img/nossos_cursos/3.jpg" class="card-img-top" alt="Curso de Inteligência Artificial">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Curso de Inteligência Artificial</h5>
+              <p class="card-text">Introdução ao aprendizado de máquina e redes neurais com Python.</p>
+              <p class="card-text"><small class="text-body-secondary">Instrutor: João Nunes</small></p>
+              <p class="card-text mb-2">★★★★★ 5,0 <small class="text-muted">(1.034 avaliações)</small></p>
+              <div class="cor-preco-carde-curso-professor mt-auto">
+                <p class="cor-preco-carde-curso-professor">R$59,90</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        
+      </div> 
+    </div> 
+  </main>
+</article>
+
+{% endblock %}

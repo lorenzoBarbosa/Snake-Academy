@@ -7,7 +7,7 @@ templates = Jinja2Templates(directory="templates")
 router = APIRouter()
 
 @router.get("/professor")
-@requer_autenticacao(["professor", "admin"])
+@requer_autenticacao(["professor", "admin", "cliente"])
 async def get_professor(request: Request, usuario_logado: dict = None):
     response = templates.TemplateResponse("professor/professor.html", {"request": request, "usuario": usuario_logado})
     return response

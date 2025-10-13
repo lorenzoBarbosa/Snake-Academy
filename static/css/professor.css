@@ -1,0 +1,21 @@
+.card-curso-professor {
+  display: flex;
+  justify-content: center;    
+  align-items: stretch;
+  gap: 22px;
+  flex-wrap: wrap;
+  padding: 12px 12px;
+  box-sizing: border-box;
+}
+
+.cor-preco-carde-curso-professor {
+    font-size: 15px;
+    color: #ffffff;
+    margin: 0;
+    background-color: #5c22add3;
+    display: inline;
+    border-radius: 5px;
+    padding: 5px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
