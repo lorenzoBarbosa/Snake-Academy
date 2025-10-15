@@ -2,12 +2,16 @@ from fastapi import APIRouter, Request
 from fastapi.params import Form
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
+from pydantic import ValidationError
 
-from data.admin.admin_repo import obter_todos_admins
+from data.admin.admin_repo import inserir_admin, obter_todos_admins
+from data.chamado.chamado_model import Chamado
+from data.chamado.chamado_repo import gerar_chamado
 from data.cliente.cliente_repo import excluir_cliente_por_id, obter_todos_clientes
 from data.matricula.matricula_repo import obter_todas_matriculas
 from data.professor.professor_repo import excluir_professor_por_id, obter_todos_professores
 from data.usuario.usuario_repo import *
+from dtos.chamado_dto import chamadoDTO
 from util.auth_decorator import requer_autenticacao
 from util.flash_messages import *
 
@@ -74,3 +78,49 @@ async def excluir_usuario(request: Request, usuario_id: int, usuario_logado: dic
             "usuario": usuario_logado,
             "detalhes_usuario": detalhes_usuario
         })
+    
+@router.post("/admin/usuarios/detalhes-usuario/{usuario_id}/notificar")
+@requer_autenticacao(["admin"])
+async def notificar_usuario(request: Request, usuario_id: int, usuario_logado: dict = None, mensagem: str = Form(...)):
+    dados_formulario = {"mensagem": mensagem}
+    try:
+        chamado_dto = chamadoDTO(idUsuario=usuario_id, descricao=mensagem)
+        chamado = Chamado(id=0, idUsuario=usuario_id, descricao=mensagem, dataEnvio="", horaEnvio="", visualizacao=False, tipo="notificação")
+        gerar_chamado(chamado)
+        informar_sucesso(request, "Notificação enviada com sucesso.")
+    except ValidationError as e:
+        # Extrair mensagens de erro do Pydantic
+        erros = dict()
+        for erro in e.errors():
+            campo = erro['loc'][0] if erro['loc'] else 'campo'
+            mensagem = erro['msg']
+            erros[campo.upper()] = mensagem.replace('Value error, ', '')
+        return templates.TemplateResponse("admin/usuarios/usuarios.html", {
+            "request": request,
+            "erros": erros,
+            "dados": dados_formulario  # Preservar dados digitados
+        })
+
+    except Exception as e:
+        #logger.error(f"Erro ao processar login: {e}")
+
+        return templates.TemplateResponse("admin/usuarios/usuarios.html", {
+            "request": request,
+            "erros": {"GERAL": "Erro ao processar login. Tente novamente."},
+            "dados": dados_formulario
+        })
+    
+    return RedirectResponse(f"/admin/usuarios", status_code=303)
+
+@router.post("/admin/usuarios/detalhes-usuario/{usuario_id}/tornar-admin")
+@requer_autenticacao(["admin"])
+async def tornar_admin(request: Request, usuario_id: int, usuario_logado: dict = None):
+    try:
+        admin = obter_usuario_por_id(usuario_id)
+        atualizar_perfil(usuario_id, "admin")
+        inserir_admin(admin, usuario_id)
+        informar_sucesso(request, "Usuário promovido a administrador com sucesso.")
+    except Exception as e:
+        informar_erro(request, "Erro ao promover usuário. Tente novamente.")
+    return RedirectResponse(f"/admin/usuarios", status_code=303)
+

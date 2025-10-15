@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Optional
 from data.chamado.chamado_model import Chamado
 from data.chamado.chamado_sql import *
@@ -21,6 +22,10 @@ def gerar_chamado(chamado: Chamado) -> Optional[int]:
     try:
         conn = get_connection()
         cursor = conn.cursor()
+        data = datetime.now().date()
+        chamado.dataEnvio = data.strftime("%d-%m-%Y")
+        hora = datetime.now().time()
+        chamado.horaEnvio = hora.strftime("%H:%M:%S")
         cursor.execute(GERAR_CHAMADO, (
             chamado.idUsuario,
             chamado.descricao,

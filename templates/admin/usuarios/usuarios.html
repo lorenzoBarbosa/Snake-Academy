@@ -1,19 +1,20 @@
 {% extends "index.html" %}
-{%block conteudo%}
+{% block conteudo %}
 <article>
     <div class="container mt-5">
         <h1 class="titulo-home"><b>Usuários do Snake Academy</b></h1>
     </div>
+
+    <!-- Filtros -->
     <div class="container mt-4">
         {% if redirect %}
         <input type="hidden" name="redirect" value="{{ redirect }}">
         {% endif %}
 
         {% if erros and "GERAL" in erros.keys() %}
-        <div class="alert alert-danger">
-            {{ erros['GERAL'] }}
-        </div>
+        <div class="alert alert-danger">{{ erros['GERAL'] }}</div>
         {% endif %}
+
         <form method="post" action="/admin/usuarios/filtro">
             <div class="row g-3">
                 <div class="col-md-4">
@@ -26,7 +27,6 @@
                     </select>
                 </div>
 
-                <!-- Subfiltro: Usuários -->
                 <div class="col-md-4" id="filtro_usuarios" style="display:none;">
                     <label for="status_usuario" class="form-label">Status do Cliente</label>
                     <select id="status_usuario" name="status_usuario" class="form-select">
@@ -35,6 +35,7 @@
                         <option value="sem_matricula">Sem matrícula</option>
                     </select>
                 </div>
+
                 <div class="col text-end mb-5">
                     <button type="submit" class="botao-login botao-filtro">Filtrar</button>
                     <a href="/usuarios" class="btn btn-secondary">Limpar</a>
@@ -42,61 +43,128 @@
             </div>
         </form>
     </div>
-    <div class="container mt-3">
-        {% for usuario_filtro in usuarios %}
-        <a href="/admin/usuarios/detalhes-usuario/{{ usuario_filtro.id }}">
-            <div class="linha-usuario d-flex align-items-center justify-content-between px-3 py-2 mb-2">
-                <!-- Foto + Nome + Cursos -->
-                <div class="d-flex align-items-center">
-                    <!-- Foto -->
-                    <div class="foto-usuario me-3">
-                        <img src="{{ usuario_filtro.foto }}" alt="{{ usuario_filtro.nome }}">
-                    </div>
-                    <!-- Nome + Perfil + Cursos -->
-                    <div>
-                        <h5 class="mb-1 d-flex align-items-center">
-                            {{ usuario_filtro.nome }}
-                            <span class="tag-usuario 
-                                {% if usuario_filtro.perfil == 'cliente' %}tag-cliente{% endif %}
-                                {% if usuario_filtro.perfil == 'professor' %}tag-professor{% endif %}
-                                {% if usuario_filtro.perfil == 'admin' %}tag-admin{% endif %}
-                            ">
-                                {{ usuario_filtro.perfil|capitalize }}
-                            </span>
-                            {% if usuario_filtro.id == usuario.id %}
-                                <span class="badge bg-info">Você</span>
-                            {% endif %}
-                        </h5>
-                        {% if usuario_filtro.perfil == "admin"%}
-                            <small>Administrador do sistema</small>
-                        {% endif %}
-                        {% if usuario_filtro.perfil == 'cliente' %}
-                            <small>Cursos: {{ usuario_filtro.cursos|length }}</small>
-                        {% endif %}
-                        {% if usuario_filtro.perfil == 'professor' %}
-                            <small>Cursos Ministrados: {{ usuario_filtro.cursosPostados|length }}</small>
-                        {% endif %}
-                    </div>
-                </div>
 
-                <!-- Ações -->
-                <div class="acoes-usuario">
-                    <button class="btn btn-sm btn-outline-primary me-2"><a href="/admin/denuncias/notificar-usuario/{{ usuario_filtro.id }}"><i class="bi bi-bell"></i>Notificar</a></button>
-                    {% if usuario_filtro.perfil == "cliente" or usuario_filtro.perfil == "professor" %}
-                    <button class="btn btn-sm btn-outline-success me-2"><a href="/admin/usuarios/confirmar-alteracao-status-admin/{{ usuario_filtro.id }}"><i class="bi bi-person-gear"></i>Tornar Admin</a></button>
+    <!-- Lista de Usuários -->
+    <div class="container">
+        {% for usuario_filtro in usuarios %}
+        <div class="linha-usuario d-flex justify-content-between align-items-center px-3 py-2 mb-2">
+            <!-- Informações do usuário -->
+            <a href="/admin/usuarios/detalhes-usuario/{{ usuario_filtro.id }}" class="d-flex align-items-center text-decoration-none">
+                <div class="foto-usuario me-3">
+                    <img src="{{ usuario_filtro.foto }}" alt="{{ usuario_filtro.nome }}">
+                </div>
+                <div>
+                    <h5 class="mb-1 d-flex align-items-center">
+                        {{ usuario_filtro.nome }}
+                        <span class="tag-usuario 
+                            {% if usuario_filtro.perfil == 'cliente' %}tag-cliente{% endif %}
+                            {% if usuario_filtro.perfil == 'professor' %}tag-professor{% endif %}
+                            {% if usuario_filtro.perfil == 'admin' %}tag-admin{% endif %}">
+                            {{ usuario_filtro.perfil|capitalize }}
+                        </span>
+                        {% if usuario_filtro.id == usuario.id %}
+                        <span class="badge bg-info">Você</span>
+                        {% endif %}
+                    </h5>
+                    {% if usuario_filtro.perfil == "admin"%}
+                    <small>Administrador do sistema</small>
+                    {% endif %}
+                    {% if usuario_filtro.perfil == 'cliente' %}
+                    <small>Cursos: {{ usuario_filtro.cursos|length }}</small>
+                    {% endif %}
+                    {% if usuario_filtro.perfil == 'professor' %}
+                    <small>Cursos Ministrados: {{ usuario_filtro.cursosPostados|length }}</small>
                     {% endif %}
                 </div>
+            </a>
+
+            <!-- Botões à direita -->
+            <div class="acoes-usuario d-flex gap-2">
+                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#notificarModal"
+                        data-usuario-id="{{ usuario_filtro.id }}" data-usuario-nome="{{ usuario_filtro.nome }}">
+                    <i class="bi bi-bell"></i> Notificar
+                </button>
+
+                {% if usuario_filtro.perfil == "cliente" or usuario_filtro.perfil == "professor" %}
+                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#confirmModal" data-id-usuario="{{ usuario_filtro.id }}">
+                    <i class="bi bi-shield-lock"></i> Tornar Admin
+                </button>
+                {% endif %}
             </div>
-        </a>
+        </div>
         {% endfor %}
     </div>
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirmação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza que deseja tornar este usuário um administrador?
+                </div>
+                <div class="modal-footer">
+                    <form id="formConfirmar" method="post" action="/admin/usuarios/detalhes-usuario/{{usuario_filtro.id}}/tornar-admin">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Confirmar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Modal Único para Notificação -->
+    <div class="modal fade" id="notificarModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Notificar Usuário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <form id="formNotificacao" class="modal-footer" method="post">
+                    <p id="mensagemLabel"></p>
+                    <textarea class="form-control" name="mensagem" id="mensagem" rows="4" placeholder="Digite sua mensagem aqui..." required></textarea>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </article>
+
 <script>
+    // Atualiza o form e o texto do modal dinamicamente
+    const notificarModal = document.getElementById('notificarModal');
+    notificarModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget;
+        const usuarioId = button.getAttribute('data-usuario-id');
+        const usuarioNome = button.getAttribute('data-usuario-nome');
+
+        // Atualiza o label do modal
+        document.getElementById('mensagemLabel').textContent = `Escreva a mensagem para ${usuarioNome}:`;
+
+        // Atualiza a action do form
+        const form = document.getElementById('formNotificacao');
+        form.action = `/admin/usuarios/detalhes-usuario/${usuarioId}/notificar`;
+        form.method = "post";
+    });
+    const confirmModal = document.getElementById('confirmModal');
+    confirmModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget;
+        const usuarioId = button.getAttribute('data-usuario-id');
+
+        // Atualiza a action do form
+        const form = document.getElementById('formConfirmar');
+        form.action = `/admin/usuarios/detalhes-usuario/${usuarioId}/tornar-admin`;
+        form.method = "post";
+    });
+
+    // Mostrar subfiltros conforme seleção
     function mostrarSubfiltros() {
         const tipo = document.getElementById("tipo_usuario").value;
         document.getElementById("filtro_usuarios").style.display = (tipo === "clientes") ? "block" : "none";
     }
 </script>
-{%endblock%}
+{% endblock %}

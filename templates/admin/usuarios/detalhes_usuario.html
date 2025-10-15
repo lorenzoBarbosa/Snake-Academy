@@ -73,22 +73,22 @@
             </div>
         </div>
         <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalLabel">Confirmação</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-            </div>
-            <div class="modal-body">
-                Tem certeza que deseja apagar este usuário?
-            </div>
-            <form class="modal-footer" method="post" action="/admin/usuarios/detalhes-usuario/{{ detalhes_usuario.id }}/excluir">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-                <button type="submit" class="btn btn-danger" id="confirmDelete">Sim</button>
-            </form>
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Confirmação</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        Tem certeza que deseja apagar este usuário?
+                    </div>
+                    <form class="modal-footer" method="post" action="/admin/usuarios/detalhes-usuario/{{ detalhes_usuario.id }}/excluir">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                        <button type="submit" class="btn btn-danger" id="confirmDelete">Sim</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </article>
 {%endblock%}
