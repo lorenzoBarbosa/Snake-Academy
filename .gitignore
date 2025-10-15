@@ -5,3 +5,4 @@ __pycache__
 *.pyd
 dados.db
 teste.py
+node_modules

@@ -3,6 +3,8 @@ from fastapi.templating import Jinja2Templates
 from util.auth_decorator import requer_autenticacao
 from data.chamado.chamado_repo import obter_todos_chamados
 from data.usuario.usuario_repo import obter_todos_usuarios  # importa usuários se ainda não tiver
+from fastapi.responses import RedirectResponse
+from data.chamado.chamado_repo import obter_chamado_por_id
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
@@ -76,3 +78,72 @@ async def filtro_denuncias(
             "usuarios": usuarios
         }
     )
+
+
+@router.get("/admin/denuncias/analisar/{denuncia_id}")
+@requer_autenticacao(["admin"])
+async def analisar_denuncia(request: Request, denuncia_id: int, usuario_logado: dict = None):
+    """
+    Exibe a página de moderação de uma denúncia específica.
+    """
+    denuncia = obter_chamado_por_id(denuncia_id)
+    if not denuncia:
+        return RedirectResponse("/admin/denuncias", status_code=303)
+
+    return templates.TemplateResponse(
+        "admin/denuncias/moderar_denuncia.html",
+        {
+            "request": request,
+            "usuario": usuario_logado,
+            "denuncia": denuncia
+        }
+    )
+
+
+@router.get("/admin/denuncias/notificar_usuario/{denuncia_id}")
+@requer_autenticacao(["admin"])
+async def get_notificar_usuario(request: Request, denuncia_id: int, usuario_logado: dict = None):
+    """
+    Abre o formulário de notificação do usuário denunciado.
+    """
+    denuncia = obter_chamado_por_id(denuncia_id)
+    if not denuncia:
+        return RedirectResponse("/admin/denuncias", status_code=303)
+
+    return templates.TemplateResponse(
+        "admin/denuncias/notificar_usuario.html",
+        {
+            "request": request,
+            "usuario": usuario_logado,
+            "denuncia": denuncia
+        }
+    )
+
+
+@router.post("/admin/denuncias/notificar_usuario/{denuncia_id}")
+@requer_autenticacao(["admin"])
+async def post_notificar_usuario(
+    request: Request,
+    denuncia_id: int,
+    assunto: str = Form(...),
+    mensagem: str = Form(...),
+    usuario_logado: dict = None
+):
+    """
+    Processa o envio de notificação ao usuário denunciado.
+    """
+    from data.usuario.usuario_repo import obter_usuario_por_id, enviar_notificacao_usuario
+    denuncia = obter_chamado_por_id(denuncia_id)
+    if not denuncia or not getattr(denuncia, "usuario_id", None):
+        return RedirectResponse("/admin/denuncias", status_code=303)
+
+    usuario = obter_usuario_por_id(denuncia.usuario_id)
+    if usuario:
+        enviar_notificacao_usuario(
+            usuario.id,
+            titulo=assunto,
+            mensagem=mensagem
+        )
+
+    # redireciona de volta à lista
+    return RedirectResponse("/admin/denuncias", status_code=303)
