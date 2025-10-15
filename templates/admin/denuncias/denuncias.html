@@ -1,5 +1,6 @@
 {% extends "index.html" %}
 {% block conteudo %}
+
 <article>
     <div class="container mt-5">
         <h1 class="titulo-home"><b>Reportes - Snake Academy</b></h1>
@@ -8,8 +9,9 @@
     <div class="container mt-4">
         <form method="post" action="/admin/denuncias/filtro">
             <div class="row g-3 align-items-end">
+
                 <!-- Filtro por tipo -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label for="tipo_denuncia" class="form-label">Tipo de denúncia</label>
                     <select id="tipo_denuncia" name="tipo_denuncia" class="form-select">
                         <option value="todas">Todas</option>
@@ -20,17 +22,35 @@
                     </select>
                 </div>
 
-                <!-- Filtro por ordenação -->
-                <div class="col-md-4 ms-auto">
+                <!-- Filtro por usuário -->
+                <div class="col-md-3">
+                    <label for="usuario_id" class="form-label">Usuário</label>
+                    <select id="usuario_id" name="usuario_id" class="form-select">
+                        <option value="">Todos</option>
+                        {% for u in usuarios %}
+                            <option value="{{ u.id }}">{{ u.nome }} {% if u.email %}- {{ u.email }}{% endif %}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Busca livre -->
+                <div class="col-md-3">
+                    <label for="q" class="form-label">Buscar</label>
+                    <input id="q" name="q" type="text" class="form-control" placeholder="nome, email ou texto">
+                </div>
+
+                <!-- Ordenação -->
+                <div class="col-md-3">
                     <label for="ordenar_por" class="form-label">Ordenar</label>
                     <select id="ordenar_por" name="ordenar_por" class="form-select">
                         <option value="">-- Selecione --</option>
                         <option value="recentes">Mais recentes</option>
+                        <option value="antigos">Mais antigos</option>
                     </select>
                 </div>
 
                 <!-- Botões -->
-                <div class="col text-end mb-3">
+                <div class="col-12 text-end mt-3">
                     <button type="submit" class="botao-login botao-filtro">Filtrar</button>
                     <a href="/admin/denuncias" class="btn btn-secondary">Limpar</a>
                 </div>
@@ -39,24 +59,33 @@
     </div>
 
     <div class="container mt-3">
+        {% if denuncias|length == 0 %}
+            <div class="alert alert-info">Nenhuma denúncia encontrada com estes filtros.</div>
+        {% endif %}
+
         {% for denuncia in denuncias %}
         <div class="linha-usuario d-flex align-items-center justify-content-between px-3 py-2 mb-2">
             <!-- Info da denúncia -->
             <div class="d-flex align-items-center">
-                <!-- Ícone/Imagem -->
                 <div class="foto-usuario me-3">
                     <img src="/static/img/icons/denuncia.png" alt="Denúncia {{ denuncia.id }}" width="50">
                 </div>
-                <!-- Texto da denúncia -->
+
                 <div>
                     <h5 class="mb-1 d-flex align-items-center">
                         {{ denuncia.descricao }}
-                        <span class="tag-usuario tag-cliente">
+                        <span class="tag-usuario tag-cliente ms-2">
                             {{ denuncia.tipo|capitalize }}
                         </span>
                     </h5>
                     <small>
-                        Enviado por: {{ denuncia.usuario.nome if denuncia.usuario else "Usuário desconhecido" }}
+                        Enviado por:
+                        {% if denuncia.usuario %}
+                            {{ denuncia.usuario.nome }}
+                            {% if denuncia.usuario.email %}| {{ denuncia.usuario.email }}{% endif %}
+                        {% else %}
+                            Usuário desconhecido
+                        {% endif %}
                         | Data: {{ denuncia.dataEnvio }} {{ denuncia.horaEnvio }}
                     </small>
                 </div>
@@ -65,10 +94,11 @@
             <!-- Ações -->
             <div class="acoes-usuario">
                 <a href="/admin/denuncias/excluir/{{ denuncia.id }}" class="btn btn-sm btn-outline-danger me-2">Excluir</a>
-                <a href="/admin/denuncias/analisar/{{ denuncia.id }}" class="btn btn-sm btn-outline-success me-2">Moderar</a>
+                <a href="/admin/denuncias/analisar/{{ denuncia.id }}" class="btn btn-sm btn-outline-success">Moderar</a>
             </div>
         </div>
         {% endfor %}
     </div>
 </article>
+
 {% endblock %}
