@@ -38,6 +38,11 @@ Grupo: Jhonatan Lima Mota Lourenço, Lorenzo Barbosa Alves, Lucas Oliveira Silva
 
         pip install passlib[bcrypt]
 
+        npm install cypress --save-dev
+
+        npx cypress open (só escreva isso depois de iniciar com f5 isso que vai automatizar o cadastro por enquanto)
+
+
 6 - Clicar no botão "Publish Branch", escolher um nome para o repositório e confirmar
 
 7 - IMPORTANTE: ALT + Z -> QUEBRA LINHA
