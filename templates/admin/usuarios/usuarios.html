@@ -5,6 +5,15 @@
         <h1 class="titulo-home"><b>Usuários do Snake Academy</b></h1>
     </div>
     <div class="container mt-4">
+        {% if redirect %}
+        <input type="hidden" name="redirect" value="{{ redirect }}">
+        {% endif %}
+
+        {% if erros and "GERAL" in erros.keys() %}
+        <div class="alert alert-danger">
+            {{ erros['GERAL'] }}
+        </div>
+        {% endif %}
         <form method="post" action="/admin/usuarios/filtro">
             <div class="row g-3">
                 <div class="col-md-4">
@@ -54,15 +63,28 @@
                             ">
                                 {{ usuario_filtro.perfil|capitalize }}
                             </span>
+                            {% if usuario_filtro.id == usuario.id %}
+                                <span class="badge bg-info">Você</span>
+                            {% endif %}
                         </h5>
-                        <small>Cursos: {{ usuario_filtro.cursos|length }}</small>
+                        {% if usuario_filtro.perfil == "admin"%}
+                            <small>Administrador do sistema</small>
+                        {% endif %}
+                        {% if usuario_filtro.perfil == 'cliente' %}
+                            <small>Cursos: {{ usuario_filtro.cursos|length }}</small>
+                        {% endif %}
+                        {% if usuario_filtro.perfil == 'professor' %}
+                            <small>Cursos Ministrados: {{ usuario_filtro.cursosPostados|length }}</small>
+                        {% endif %}
                     </div>
                 </div>
 
                 <!-- Ações -->
                 <div class="acoes-usuario">
-                    <button class="btn btn-sm btn-outline-primary me-2"><a href="/admin/denuncias/notificar-usuario/{{ usuario_filtro.id }}">Notificar</a></button>
-                    <button class="btn btn-sm btn-outline-success me-2"><a href="/admin/usuarios/confirmar-alteracao-status-admin/{{ usuario_filtro.id }}">Tornar Admin</a></button>
+                    <button class="btn btn-sm btn-outline-primary me-2"><a href="/admin/denuncias/notificar-usuario/{{ usuario_filtro.id }}"><i class="bi bi-bell"></i>Notificar</a></button>
+                    {% if usuario_filtro.perfil == "cliente" or usuario_filtro.perfil == "professor" %}
+                    <button class="btn btn-sm btn-outline-success me-2"><a href="/admin/usuarios/confirmar-alteracao-status-admin/{{ usuario_filtro.id }}"><i class="bi bi-person-gear"></i>Tornar Admin</a></button>
+                    {% endif %}
                 </div>
             </div>
         </a>
