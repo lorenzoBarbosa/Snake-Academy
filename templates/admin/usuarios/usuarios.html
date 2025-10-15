@@ -86,7 +86,8 @@
                 </button>
 
                 {% if usuario_filtro.perfil == "cliente" or usuario_filtro.perfil == "professor" %}
-                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#confirmModal" data-id-usuario="{{ usuario_filtro.id }}">
+                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#confirmModal" data-id-usuario="{{ usuario_filtro.id }}
+                ">
                     <i class="bi bi-shield-lock"></i> Tornar Admin
                 </button>
                 {% endif %}
