@@ -1,4 +1,73 @@
 {% extends "index.html" %}
-{%block conteudo%}
-<h1>Moderar Denuncias</h1>
-{%endblock%}
+{% block conteudo %}
+
+<article>
+    <div class="container mt-5">
+        <h1 class="titulo-home"><b>Moderar Denúncia</b></h1>
+        <hr>
+    </div>
+
+    <div class="container mt-4">
+        {% if denuncia %}
+        <div class="card sombra-baixo p-4 mb-5">
+            <!-- Cabeçalho -->
+            <div class="d-flex align-items-center mb-4">
+                <div class="foto-usuario me-3">
+                    <img src="/static/img/icons/denuncia.png" alt="Denúncia {{ denuncia.id }}" width="60">
+                </div>
+                <div>
+                    <h4 class="mb-0">
+                        Denúncia #{{ denuncia.id }}
+                        <span class="tag-usuario ms-2
+                            {% if denuncia.tipo == 'usuario' %}tag-cliente{% endif %}
+                            {% if denuncia.tipo == 'curso' %}tag-professor{% endif %}
+                            {% if denuncia.tipo == 'comentario' %}tag-admin{% endif %}
+                            {% if denuncia.tipo == 'sistema' %}tag-admin{% endif %}
+                        ">
+                            {{ denuncia.tipo|capitalize }}
+                        </span>
+                    </h4>
+                    <small class="text-muted">
+                        Enviada em {{ denuncia.dataEnvio }} às {{ denuncia.horaEnvio }}
+                    </small>
+                </div>
+            </div>
+
+            <!-- Corpo -->
+            <div class="mb-4">
+                <h5><b>Descrição</b></h5>
+                <p>{{ denuncia.descricao }}</p>
+            </div>
+
+            <!-- Usuário -->
+            <div class="mb-4">
+                <h5><b>Usuário que enviou</b></h5>
+                {% if denuncia.usuario %}
+                    <p class="mb-1"><b>Nome:</b> {{ denuncia.usuario.nome }}</p>
+                    <p class="mb-1"><b>Email:</b> {{ denuncia.usuario.email }}</p>
+                    <p class="mb-1"><b>ID:</b> {{ denuncia.usuario.id }}</p>
+                {% else %}
+                    <p class="text-muted">Usuário não identificado.</p>
+                {% endif %}
+            </div>
+
+            <!-- Ações -->
+            <div class="d-flex justify-content-end mt-4">
+                <a href="/admin/denuncias/excluir/{{ denuncia.id }}" class="btn btn-outline-danger me-3">
+                    <i class="bi bi-trash"></i> Excluir denúncia
+                </a>
+                <a href="/admin/denuncias" class="btn btn-secondary me-3">
+                    <i class="bi bi-arrow-left"></i> Voltar
+                </a>
+                <a href="/admin/denuncias/resolver/{{ denuncia.id }}" class="btn btn-success">
+                    <i class="bi bi-check-circle"></i> Marcar como resolvida
+                </a>
+            </div>
+        </div>
+        {% else %}
+        <div class="alert alert-warning">Denúncia não encontrada.</div>
+        {% endif %}
+    </div>
+</article>
+
+{% endblock %}
