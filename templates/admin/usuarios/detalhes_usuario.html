@@ -59,18 +59,36 @@
                                 <i class="bi bi-arrow-left"></i>
                             </a>
                         </div>
-                        <div class="col-4 botao-editar-usuario notificar-usuario ms-5 me-5">
+                        {% if detalhes_usuario.id != usuario.id %}
+                        <div class="col-4 botao-editar-usuario notificar-usuario" style="margin-left: 60%;">
                                 <i class="bi bi-bell"></i>
                         </div>
-                        <form class="col-4 botao-editar-usuario excluir-usuario ms-5" method="post" action="/admin/usuarios/detalhes-usuario/{{ detalhes_usuario.id }}/excluir">
-                            <button type="submit" class="botao-login" style="color: white;">
-                                <i class="bi bi-trash"></i>
+                            <button type="button" class="col-4 botao-editar-usuario excluir-usuario ms-5 botao-login" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                            <i class="bi bi-trash"></i>
                             </button>
-                        </form>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Confirmação</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja apagar este usuário?
+            </div>
+            <form class="modal-footer" method="post" action="/admin/usuarios/detalhes-usuario/{{ detalhes_usuario.id }}/excluir">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                <button type="submit" class="btn btn-danger" id="confirmDelete">Sim</button>
+            </form>
+            </div>
+        </div>
+    </div>
     </div>
 </article>
 {%endblock%}

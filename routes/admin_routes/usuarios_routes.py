@@ -18,7 +18,6 @@ templates = Jinja2Templates(directory="templates")
 @requer_autenticacao(["admin"])
 async def get_usuarios(request: Request, usuario_logado: dict = None):
     usuarios = obter_todos_usuarios()
-    print(usuarios)
     response = templates.TemplateResponse("admin/usuarios/usuarios.html", {"request": request, "usuario": usuario_logado, "usuarios": usuarios})
     return response
 
