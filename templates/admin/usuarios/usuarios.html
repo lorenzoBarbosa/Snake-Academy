@@ -1,172 +1,92 @@
 {% extends "index.html" %}
 {% block conteudo %}
+
 <article>
-    <div class="container mt-5">
-        <h1 class="titulo-home"><b>Usuários do Snake Academy</b></h1>
-    </div>
-
-    <!-- Filtros -->
-    <div class="container mt-4">
-        {% if redirect %}
-        <input type="hidden" name="redirect" value="{{ redirect }}">
-        {% endif %}
-
-        {% if erros and "GERAL" in erros.keys() %}
-        <div class="alert alert-danger">{{ erros['GERAL'] }}</div>
-        {% endif %}
-
-        <form method="post" action="/admin/usuarios/filtro">
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <label for="tipo_usuario" class="form-label">Tipo</label>
-                    <select id="tipo_usuario" name="tipo_usuario" class="form-select" onchange="mostrarSubfiltros()">
-                        <option value="todos">Todos</option>
-                        <option value="clientes">Clientes</option>
-                        <option value="professores">Professores</option>
-                        <option value="administradores">Administradores</option>
-                    </select>
-                </div>
-
-                <div class="col-md-4" id="filtro_usuarios" style="display:none;">
-                    <label for="status_usuario" class="form-label">Status do Cliente</label>
-                    <select id="status_usuario" name="status_usuario" class="form-select">
-                        <option value="">Todos</option>
-                        <option value="matriculados">Matriculados</option>
-                        <option value="sem_matricula">Sem matrícula</option>
-                    </select>
-                </div>
-
-                <div class="col text-end mb-5">
-                    <button type="submit" class="botao-login botao-filtro">Filtrar</button>
-                    <a href="/usuarios" class="btn btn-secondary">Limpar</a>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <!-- Lista de Usuários -->
-    <div class="container">
-        {% for usuario_filtro in usuarios %}
-        <div class="linha-usuario d-flex justify-content-between align-items-center px-3 py-2 mb-2">
-            <!-- Informações do usuário -->
-            <a href="/admin/usuarios/detalhes-usuario/{{ usuario_filtro.id }}" class="d-flex align-items-center text-decoration-none">
-                <div class="foto-usuario me-3">
-                    <img src="{{ usuario_filtro.foto }}" alt="{{ usuario_filtro.nome }}">
-                </div>
-                <div>
-                    <h5 class="mb-1 d-flex align-items-center">
-                        {{ usuario_filtro.nome }}
-                        <span class="tag-usuario 
-                            {% if usuario_filtro.perfil == 'cliente' %}tag-cliente{% endif %}
-                            {% if usuario_filtro.perfil == 'professor' %}tag-professor{% endif %}
-                            {% if usuario_filtro.perfil == 'admin' %}tag-admin{% endif %}">
-                            {{ usuario_filtro.perfil|capitalize }}
-                        </span>
-                        {% if usuario_filtro.id == usuario.id %}
-                        <span class="badge bg-info">Você</span>
-                        {% endif %}
-                    </h5>
-                    {% if usuario_filtro.perfil == "admin"%}
-                    <small>Administrador do sistema</small>
-                    {% endif %}
-                    {% if usuario_filtro.perfil == 'cliente' %}
-                    <small>Cursos: {{ usuario_filtro.cursos|length }}</small>
-                    {% endif %}
-                    {% if usuario_filtro.perfil == 'professor' %}
-                    <small>Cursos Ministrados: {{ usuario_filtro.cursosPostados|length }}</small>
-                    {% endif %}
-                </div>
-            </a>
-
-            <!-- Botões à direita -->
-            <div class="acoes-usuario d-flex gap-2">
-                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#notificarModal"
-                        data-usuario-id="{{ usuario_filtro.id }}" data-usuario-nome="{{ usuario_filtro.nome }}">
-                    <i class="bi bi-bell"></i> Notificar
-                </button>
-
-                {% if usuario_filtro.perfil == "cliente" or usuario_filtro.perfil == "professor" %}
-                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#confirmModal" data-id-usuario="{{ usuario_filtro.id }}
-                ">
-                    <i class="bi bi-shield-lock"></i> Tornar Admin
-                </button>
-                {% endif %}
-            </div>
-        </div>
-         <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="confirmModalLabel">Confirmação</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                    </div>
-                    <div class="modal-body">
-                        Tem certeza que deseja tornar este usuário um administrador?
-                    </div>
-                    <div class="modal-footer">
-                        <form id="formConfirmar" method="post" action="/admin/usuarios/detalhes-usuario/{{ usuario_filtro.id }}/tornar-admin">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success">Confirmar</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+    <!-- Painel lateral -->
+    <div class="painel-lateral" id="painelLateral">
+        <div class="painel-topo">
+            <button id="btnToggle" class="toggle-btn">☰</button>
         </div>
 
-        <!-- Modal Único para Notificação -->
-        <div class="modal fade" id="notificarModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalLabel">Notificar Usuário</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                    </div>
-                    <form id="formNotificacao" class="modal-footer" method="post">
-                        <p id="mensagemLabel"></p>
-                        <textarea class="form-control" name="mensagem" id="mensagem" rows="4" placeholder="Digite sua mensagem aqui..." required></textarea>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success">Enviar</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        {% endfor %}
+        <ul>
+            <li><i class="icone">🎓</i><span class="label">Meus Cursos</span></li>
+            <li><i class="icone">📤</i><span class="label">Lançar um Curso</span></li>
+            <li><i class="icone">⚙️</i><span class="label">Configurações</span></li>
+            <li><i class="icone">🚪</i><span class="label">Logout</span></li>
+        </ul>
     </div>
-   
+
+    <!-- Conteúdo principal -->
+    <main id="mainContent" class="pt-4" style="margin-left: 70px;">
+        <div class="container">
+            <h2 class="mb-4 p-4">Meus Cursos</h2>
+            <div class="row g-4 card-curso-professor">
+
+                <!-- CARD 1 -->
+                <div class="col-sm-6 col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="/static/img/nossos_cursos/1.jpeg" class="card-img-top" alt="Curso de Ciência de Dados">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Curso de Ciência de Dados</h5>
+                            <p class="card-text">Aprenda a dominar análise e visualização de dados com Python e SQL.</p>
+                            <p class="card-text"><small class="text-body-secondary">Instrutor: Marcos Andrade</small></p>
+                            <p class="card-text mb-2">★★★★★ 5,0 <small class="text-muted">(765 avaliações)</small></p>
+                            <div class="mt-auto">
+                                <p class="cor-preco-carde-curso-professor">R$39,90</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="col-sm-6 col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="/static/img/nossos_cursos/2.png" class="card-img-top" alt="Curso de Front-End Moderno">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Curso de Front-End Moderno</h5>
+                            <p class="card-text">HTML, CSS e JavaScript do básico ao avançado, com projetos práticos.</p>
+                            <p class="card-text"><small class="text-body-secondary">Instrutor: Ana Ribeiro</small></p>
+                            <p class="card-text mb-2">★★★★☆ 4,8 <small class="text-muted">(542 avaliações)</small></p>
+                            <div class="mt-auto">
+                                <p class="cor-preco-carde-curso-professor">R$49,90</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="col-sm-6 col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="/static/img/nossos_cursos/3.jpg" class="card-img-top" alt="Curso de Inteligência Artificial">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Curso de Inteligência Artificial</h5>
+                            <p class="card-text">Introdução ao aprendizado de máquina e redes neurais com Python.</p>
+                            <p class="card-text"><small class="text-body-secondary">Instrutor: João Nunes</small></p>
+                            <p class="card-text mb-2">★★★★★ 5,0 <small class="text-muted">(1.034 avaliações)</small></p>
+                            <div class="cor-preco-carde-curso-professor mt-auto">
+                                <p class="cor-preco-carde-curso-professor">R$59,90</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> 
+        </div> 
+    </main>
 </article>
 
+<!-- JavaScript para abrir/fechar painel -->
 <script>
-    // Atualiza o form e o texto do modal dinamicamente
-    const notificarModal = document.getElementById('notificarModal');
-    notificarModal.addEventListener('show.bs.modal', event => {
-        const button = event.relatedTarget;
-        const usuarioId = button.getAttribute('data-usuario-id');
-        const usuarioNome = button.getAttribute('data-usuario-nome');
+document.addEventListener("DOMContentLoaded", () => {
+    const btnToggle = document.getElementById("btnToggle");
+    const painel = document.getElementById("painelLateral");
+    const main = document.getElementById("mainContent");
 
-        // Atualiza o label do modal
-        document.getElementById('mensagemLabel').textContent = `Escreva a mensagem para ${usuarioNome}:`;
-
-        // Atualiza a action do form
-        const form = document.getElementById('formNotificacao');
-        form.action = `/admin/usuarios/detalhes-usuario/${usuarioId}/notificar`;
-        form.method = "post";
+    btnToggle.addEventListener("click", () => {
+        painel.classList.toggle("expandido");
+        main.classList.toggle("expandido");
     });
-    const confirmModal = document.getElementById('confirmModal');
-    confirmModal.addEventListener('show.bs.modal', event => {
-        const button = event.relatedTarget;
-        const usuarioId = button.getAttribute('data-usuario-id');
-
-        // Atualiza a action do form
-        const form = document.getElementById('formConfirmar');
-        form.action = `/admin/usuarios/detalhes-usuario/${usuarioId}/tornar-admin`;
-        form.method = "post";
-    });
-
-    // Mostrar subfiltros conforme seleção
-    function mostrarSubfiltros() {
-        const tipo = document.getElementById("tipo_usuario").value;
-        document.getElementById("filtro_usuarios").style.display = (tipo === "clientes") ? "block" : "none";
-    }
+});
 </script>
+
 {% endblock %}

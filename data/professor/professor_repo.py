@@ -111,6 +111,46 @@ def obter_professor_por_email(email: str) -> Optional[Professor]:
     except Exception as e:
         print(f"Erro ao obter professor por email: {e}")
         return None
+    
+def obter_professor_por_termo_paginado(termo: str, pagina: int, tamanho_pagina: int) -> list[Professor]:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        offset = (pagina - 1) * tamanho_pagina
+        termo_like = f"%{termo}%"
+        cursor.execute(OBTER_PROFESSOR_POR_TERMO_PAGINADO, (termo_like, tamanho_pagina, offset))
+        tuplas = cursor.fetchall()
+        professores = []
+        for tupla in tuplas:
+            historicoCursos = json.loads(tupla["historicoCursos"])
+            cursosPostados = json.loads(tupla["cursosPostados"])
+            professor = Professor(
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=tupla["token_redefinicao"],
+                data_token=tupla["data_token"],
+                data_cadastro=tupla["data_cadastro"],
+                foto=tupla["foto"],
+                dataUltimoAcesso=tupla["dataUltimoAcesso"],
+                statusConta=tupla["statusConta"],
+                historicoCursos=historicoCursos,
+                indentificacaoProfessor=tupla["indentificacaoProfessor"],
+                cursosPostados=cursosPostados,
+                quantidadeAlunos=tupla["quantidadeAlunos"],
+                dataCriacaoProfessor=tupla["dataCriacaoProfessor"],
+                descricaoProfessor=tupla["descricaoProfessor"]
+            )
+            professores.append(professor)
+        conn.close()
+        return professores
+    except Exception as e:
+        print(f"Erro ao obter professores por termo paginado: {e}")
+        return []
 
 
 def obter_professor_por_id(id: int) -> Optional[Professor]:

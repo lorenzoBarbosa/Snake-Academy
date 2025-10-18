@@ -86,6 +86,30 @@ JOIN usuario u ON c.id = u.id
 ORDER BY id 
 """
 
+OBTER_PROFESSOR_POR_TERMO_PAGINADO = """
+SELECT
+    c.id as id,
+    u.nome as nome,
+    u.email as email,
+    u.senha as senha,
+    u.telefone as telefone,
+    u.dataNascimento as dataNascimento,
+    c.dataUltimoAcesso as dataUltimoAcesso,
+    c.statusConta as statusConta,
+    c.historicoCursos as historicoCursos,
+    c.indentificacaoProfessor as indentificacaoProfessor,
+    p.cursosPostados,
+    p.quantidadeAlunos,
+    p.dataCriacaoProfessor,
+    p.descricaoProfessor
+FROM professor p
+JOIN cliente c ON p.id = c.id
+JOIN usuario u ON c.id = u.id
+WHERE u.nome LIKE ? OR u.email LIKE ?
+ORDER BY id
+LIMIT ?, OFFSET ?
+"""
+
 ATUALIZAR_PROFESSOR_POR_ID= """
 UPDATE professor
 SET 

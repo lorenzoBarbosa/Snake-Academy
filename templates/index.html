@@ -99,7 +99,7 @@
                 <div class="linha-triangulo">
                     <div class="triangulo-roxo"></div>
                     <div class="texto-triangulo">
-                        <a href="/cliente/alterar_senha.html">Alterar Senha</a>
+                        <a href="/redefinir-senha">Alterar Senha</a>
                     </div>
                 </div>
                 <div class="linha-triangulo">
@@ -130,13 +130,15 @@
                     <a class="navbar-brand" href="/administrador">
                         <img src="/static/img/nossas_Logos/SNAKE ACADEMY LOGO.png" alt="snake" style="height:80px;">
                     </a>
-                    <form class="d-flex flex-grow-1 justify-content-center mx-3" role="search">
+                    <form class="d-flex flex-grow-1 justify-content-center mx-3" role="search" action="/admin/pesquisar" method="get">
                         <div class="input-group w-75">
                             <input
                                 class="form-control barra-pesquisa"
                                 type="search"
                                 placeholder="Procure pelos cursos, usuários ou professores..."
                                 aria-label="Search"
+                                name="termo_pesquisa"
+                                id="termo_pesquisa"
                             >
                             <button class="btn-lupa" type="submit">🔍︎</button>
                         </div>
@@ -193,7 +195,6 @@
             </div>
             <div class="linha-sombra"></div>
             <div class="offcanvas-body p-5 corpo">
-                <div class="linha-roxa"></div>
                 <div class="linha-triangulo">
                     <div class="triangulo-roxo"></div>
                     <div class="texto-triangulo">
@@ -203,7 +204,7 @@
                 <div class="linha-triangulo">
                     <div class="triangulo-roxo"></div>
                     <div class="texto-triangulo">
-                        <a href="/cliente/alterar_senha.html">Alterar Senha</a>
+                        <a href="/redefinir-senha">Alterar Senha</a>
                     </div>
                 </div>
                 <div class="linha-triangulo">
