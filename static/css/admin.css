@@ -106,6 +106,18 @@
     background-color: #6c5ce7;
 }
 
+#offcanvasCentralizado {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    max-width: 90%;
+    height: auto;
+    max-height: 80vh;
+    border-radius: 10px;
+}
+
 /* Professor = verde */
 .tag-professor {
     background-color: #38bc8e;
