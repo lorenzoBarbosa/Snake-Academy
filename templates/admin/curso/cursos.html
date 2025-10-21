@@ -72,8 +72,8 @@
 
             <!-- Ações -->
             <div class="acoes-usuario">
-                <button class="btn btn-sm btn-outline-primary me-2"><a href="/admin/cursos/curso-admin/{{ curso_filtro.id }}">Detalhes do Curso</a></button>
-                <button class="btn btn-sm btn-outline-success me-2"><a href="/admin/usuarios/detalhes-usuario/{{ curso_filtro.idProfessor }}">Ver Professor</a></button>
+                <button class="btn btn-sm btn-outline-primary me-2"><a href="/admin/cursos/curso-admin/{{ curso_filtro.curso.id }}">Detalhes do Curso</a></button>
+                <button class="btn btn-sm btn-outline-success me-2"><a href="/admin/usuarios/detalhes-usuario/{{ curso_filtro.curso.idProfessor }}">Ver Professor</a></button>
             </div>
         </div>
         {% endfor %}

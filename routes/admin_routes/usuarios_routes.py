@@ -56,6 +56,7 @@ async def filtro_usuarios(
 @requer_autenticacao(["admin"])
 async def get_usuario_detalhes(request: Request, usuario_id: int, usuario_logado: dict = None):
     usuario = obter_usuario_por_id(usuario_id)
+    print(usuario)
 
     return templates.TemplateResponse("admin/usuarios/detalhes_usuario.html", {"request": request, "usuario": usuario_logado, "detalhes_usuario": usuario})
 
