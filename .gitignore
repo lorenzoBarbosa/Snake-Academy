@@ -3,6 +3,5 @@ __pycache__
 *.pyc
 *.pyo
 *.pyd
-dados.db
 teste.py
 node_modules
