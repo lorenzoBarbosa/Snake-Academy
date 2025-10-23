@@ -38,8 +38,12 @@ for curso in cursos:
 @router.get("/cliente")
 @requer_autenticacao(["cliente", "professor", "admin"])
 async def get_cliente(request: Request, usuario_logado: dict = None):
+    print("USUARIO LOGADO:", usuario_logado)
+    print("ID DO USUARIO LOGADO:", usuario_logado["id"])
+    print("OUTRO ID DO USUARIO LOGADO:", usuario_logado.get("id"))
 
-    cliente = cliente_repo.obter_cliente_por_id(usuario_logado.get("id"))
+    cliente = cliente_repo.obter_cliente_por_id(usuario_logado["id"])
+    print(cliente)
     lista_historico = []
     if cliente.historicoCursos:
         for curso_id in cliente.historicoCursos:

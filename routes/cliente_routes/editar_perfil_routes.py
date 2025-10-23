@@ -87,13 +87,13 @@ async def post_editar_perfil(request: Request,
 
         # Fazer login automático após cadastro
         usuario_dict = {
-            "id": usuario.id,
+            "id": usuario_logado['id'],
             "nome": usuario.nome,
             "email": usuario.email,
             "telefone": usuario.telefone,
             "dataNascimento": usuario.dataNascimento,
             "perfil": usuario.perfil,
-            "foto": usuario.foto
+            "foto": usuario_logado.get('foto')
         }
         criar_sessao(request, usuario_dict)
 
