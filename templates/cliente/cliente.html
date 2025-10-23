@@ -4,11 +4,15 @@
             <div class="mt-3 mb-5">
                 <div id="carouselExampleControls" class="mb-5 carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        {%for rota in rotas%}
-                        <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
-                            <img src="{{ rota }}" class="d-block w-100" alt="carrosel">
+                       {%for banner in banners%}
+                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            {% if banner.id %}
+                            <img src="/static/img/carrossel/{{banner.id}}.svg" class="d-block w-100" alt="carrosel">
+                            {% else %}
+                            <img src="/static/img/banner_exemplo.png" class="d-block w-100" alt="carrosel">
+                            {% endif %}
                         </div>
-                        {% endfor %}
+                        {%endfor%}
                     </div>
                     <button
                         class="carousel-control-prev"
