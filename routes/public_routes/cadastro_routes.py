@@ -6,6 +6,7 @@ from pydantic_core import ValidationError
 from data.cliente import cliente_repo
 from data.cliente.cliente_model import Cliente
 from data.util import get_connection
+from util.email_service import email_service
 
 from data.usuario import usuario_repo
 from data.usuario.usuario_model import Usuario
@@ -115,6 +116,8 @@ async def post_cadastro(
          # Sucesso - Redirecionar com mensagem flash
         informar_sucesso(request, f"Cadastro realizado com sucesso! Bem-vindo(a), {nome}!")
         criar_sessao(request, usuario_dict)
+        email_service.enviar_boas_vindas(email, nome)
+
         return RedirectResponse(f"/cliente/editar-perfil", status.HTTP_303_SEE_OTHER)
         
         
