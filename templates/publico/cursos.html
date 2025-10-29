@@ -1,253 +1,839 @@
-{%extends "index_publico.html" %}
-{% block conteudo %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos - Plataforma de Ensino</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap');
+        
+        :root {
+            --cor-roxo-escuro: #220031;
+            --cor-roxo-claro: #5C22AD;
+            --cor-verde: #38BC8E;
+            --cor-cinza-claro: #f8f9fa;
+            --cor-cinza-medio: #e9ecef;
+            --cor-texto: #2d3748;
+            --cor-texto-secundario: #718096;
+            --fonte-principal: 'Inter', sans-serif;
+            --fonte-secundaria: 'Open Sans', sans-serif;
+        }
 
-<div class="filtros-container">
-  <button class="btn-filtros" type="button" data-bs-toggle="offcanvas"
-    data-bs-target="#offcanvasFiltros" aria-controls="offcanvasFiltros">
-    Filtros
-  </button>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <div class="btn-group">
-    <button class="btn-atalhos dropdown-toggle" type="button" data-bs-toggle="dropdown">
-      Avaliação
-    </button>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item filtro-atalho" data-filtro="avaliacao" data-valor="5">5 Estrelas</a></li>
-      <li><a class="dropdown-item filtro-atalho" data-filtro="avaliacao" data-valor="4">4+ Estrelas</a></li>
-      <li><a class="dropdown-item filtro-atalho" data-filtro="avaliacao" data-valor="3">3+ Estrelas</a></li>
-      <li><a class="dropdown-item filtro-atalho" data-filtro="avaliacao" data-valor="">Todos</a></li>
-    </ul>
-  </div>
+        body {
+            font-family: var(--fonte-principal);
+            background-color: #fff;
+            color: var(--cor-texto);
+            overflow-x: hidden;
+        }
 
-  <div class="btn-group">
-    <button class="btn-atalhos dropdown-toggle" type="button" data-bs-toggle="dropdown">
-      Idioma
-    </button>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item filtro-atalho" data-filtro="idioma" data-valor="pt">Português</a></li>
-      <li><a class="dropdown-item filtro-atalho" data-filtro="idioma" data-valor="en">Inglês</a></li>
-      <li><a class="dropdown-item filtro-atalho" data-filtro="idioma" data-valor="">Todos</a></li>
-    </ul>
-  </div>
-  
-  <div class="btn-group">
-    <button class="btn-atalhos dropdown-toggle" type="button" data-bs-toggle="dropdown">
-      Níveis
-    </button>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item filtro-atalho" data-filtro="classificacao" data-valor="in">Iniciante</a></li>
-      <li><a class="dropdown-item filtro-atalho" data-filtro="classificacao" data-valor="it">Intermediario</a></li>
-      <li><a class="dropdown-item filtro-atalho" data-filtro="classificacao" data-valor="av">Avançado</a></li>
-      <li><a class="dropdown-item filtro-atalho" data-filtro="classificacao" data-valor="tn">Todos os Níveis</a></li>
-    </ul>
-  </div>
-</div>
+        /* Header com filtros */
+        .filtros-header {
+            background: #fff;
+            border-bottom: 1px solid var(--cor-cinza-medio);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
 
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1"
-  id="offcanvasFiltros" aria-labelledby="offcanvasFiltrosLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasFiltrosLabel">Filtros de Cursos</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    
-    <h6>Avaliação</h6>
-<div class="filtro-list">
-  <label class="filtro-item">
-    <input type="radio" name="avaliacao" value="5" id="av5">
-    <span class="fake-radio"></span>
-    <div class="label-text">
-      <div class="stars" aria-hidden>
-        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-      </div>
-      <div>4.5 &amp; up</div>
+        .filtros-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn-filtros {
+            background: var(--cor-verde);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .btn-filtros:hover {
+            background: #2da076;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(56, 188, 142, 0.3);
+        }
+
+        .filtro-tag {
+            background: var(--cor-cinza-claro);
+            border: 1px solid var(--cor-cinza-medio);
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            color: var(--cor-texto);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filtro-tag:hover {
+            background: var(--cor-roxo-claro);
+            color: white;
+            border-color: var(--cor-roxo-claro);
+            transform: translateY(-1px);
+        }
+
+        .filtro-tag.ativo {
+            background: var(--cor-roxo-claro);
+            color: white;
+            border-color: var(--cor-roxo-claro);
+        }
+
+        /* Offcanvas de filtros */
+        .offcanvas {
+            width: 340px !important;
+            max-width: 90vw;
+        }
+
+        .offcanvas-header {
+            border-bottom: 1px solid var(--cor-cinza-medio);
+            padding: 1.5rem;
+        }
+
+        .offcanvas-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cor-roxo-escuro);
+        }
+
+        .offcanvas-body {
+            padding: 1.5rem;
+        }
+
+        .filtro-secao {
+            margin-bottom: 2rem;
+        }
+
+        .filtro-secao h6 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--cor-texto);
+            margin-bottom: 1rem;
+        }
+
+        .filtro-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-bottom: 0.5rem;
+        }
+
+        .filtro-item:hover {
+            background: var(--cor-cinza-claro);
+        }
+
+        .filtro-item input[type="radio"],
+        .filtro-item input[type="checkbox"] {
+            display: none;
+        }
+
+        .fake-radio, .fake-check {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e0;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            position: relative;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .fake-check {
+            border-radius: 4px;
+        }
+
+        .filtro-item input:checked + .fake-radio,
+        .filtro-item input:checked + .fake-check {
+            border-color: var(--cor-roxo-claro);
+            background: var(--cor-roxo-claro);
+        }
+
+        .fake-radio::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.2s;
+        }
+
+        .filtro-item input:checked + .fake-radio::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .fake-check::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.2s;
+        }
+
+        .filtro-item input:checked + .fake-check::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .stars {
+            display: flex;
+            gap: 2px;
+            color: #f59e0b;
+            font-size: 0.9rem;
+        }
+
+        /* Container principal */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .resultados-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .resultados-info {
+            font-size: 1.1rem;
+            color: var(--cor-texto);
+        }
+
+        .resultados-info strong {
+            color: var(--cor-roxo-claro);
+            font-weight: 600;
+        }
+
+        .ordenar-select {
+            padding: 0.6rem 1rem;
+            border: 1px solid var(--cor-cinza-medio);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        .ordenar-select:focus {
+            outline: none;
+            border-color: var(--cor-roxo-claro);
+            box-shadow: 0 0 0 3px rgba(92, 34, 173, 0.1);
+        }
+
+        /* Grid de cursos */
+        .cursos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Card do curso */
+        .curso-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .curso-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .curso-imagem {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .curso-conteudo {
+            padding: 1.25rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .curso-titulo {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--cor-texto);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .curso-descricao {
+            font-size: 0.9rem;
+            color: var(--cor-texto-secundario);
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .curso-instrutor {
+            font-size: 0.85rem;
+            color: var(--cor-texto-secundario);
+            margin-bottom: 0.75rem;
+        }
+
+        .curso-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--cor-cinza-medio);
+            margin-top: auto;
+        }
+
+        .curso-avaliacao {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .curso-nota {
+            font-weight: 600;
+            color: var(--cor-texto);
+        }
+
+        .curso-avaliacoes {
+            font-size: 0.85rem;
+            color: var(--cor-texto-secundario);
+        }
+
+        .curso-preco {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--cor-roxo-claro);
+        }
+
+        .curso-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-nivel {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .badge-idioma {
+            background: #fef3c7;
+            color: #92400e;
+            margin-left: 0.5rem;
+        }
+
+        /* Paginação */
+        .paginacao {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 3rem 0;
+        }
+
+        .paginacao button {
+            padding: 0.6rem 1rem;
+            border: 1px solid var(--cor-cinza-medio);
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .paginacao button:hover {
+            background: var(--cor-roxo-claro);
+            color: white;
+            border-color: var(--cor-roxo-claro);
+        }
+
+        .paginacao button.ativo {
+            background: var(--cor-roxo-claro);
+            color: white;
+            border-color: var(--cor-roxo-claro);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .filtros-container {
+                padding: 0 1rem;
+            }
+
+            .main-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .cursos-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .resultados-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .offcanvas {
+                width: 100% !important;
+            }
+
+            .filtro-tag {
+                font-size: 0.85rem;
+                padding: 0.5rem 0.8rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .cursos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .cursos-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Estados vazios */
+        .sem-resultados {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .sem-resultados h3 {
+            color: var(--cor-texto);
+            margin-bottom: 1rem;
+        }
+
+        .sem-resultados p {
+            color: var(--cor-texto-secundario);
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .curso-card {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .curso-card:nth-child(1) { animation-delay: 0.05s; }
+        .curso-card:nth-child(2) { animation-delay: 0.1s; }
+        .curso-card:nth-child(3) { animation-delay: 0.15s; }
+        .curso-card:nth-child(4) { animation-delay: 0.2s; }
+    </style>
+</head>
+<body>
+    <!-- Header com filtros rápidos -->
+    <div class="filtros-header">
+        <div class="filtros-container">
+            <button class="btn-filtros" onclick="abrirFiltros()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="4" y1="21" x2="4" y2="14"></line>
+                    <line x1="4" y1="10" x2="4" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12" y2="3"></line>
+                    <line x1="20" y1="21" x2="20" y2="16"></line>
+                    <line x1="20" y1="12" x2="20" y2="3"></line>
+                    <line x1="1" y1="14" x2="7" y2="14"></line>
+                    <line x1="9" y1="8" x2="15" y2="8"></line>
+                    <line x1="17" y1="16" x2="23" y2="16"></line>
+                </svg>
+                Filtros
+            </button>
+
+            <div class="filtro-tag" onclick="filtrarRapido('avaliacao', '5')">
+                ⭐ 5 Estrelas
+            </div>
+            <div class="filtro-tag" onclick="filtrarRapido('idioma', 'pt')">
+                🇧🇷 Português
+            </div>
+            <div class="filtro-tag" onclick="filtrarRapido('idioma', 'en')">
+                🇺🇸 Inglês
+            </div>
+            <div class="filtro-tag" onclick="filtrarRapido('nivel', 'iniciante')">
+                📘 Iniciante
+            </div>
+        </div>
     </div>
-  </label>
 
-  <label class="filtro-item">
-    <input type="radio" name="avaliacao" value="4" id="av4">
-    <span class="fake-radio"></span>
-    <div class="label-text">
-      <div class="stars" aria-hidden>
-        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">☆</span>
-      </div>
-      <div>4.0 &amp; up</div>
+    <!-- Offcanvas de filtros -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasFiltros">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Filtrar Cursos</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Avaliação -->
+            <div class="filtro-secao">
+                <h6>Avaliação</h6>
+                <label class="filtro-item">
+                    <input type="radio" name="avaliacao" value="5">
+                    <span class="fake-radio"></span>
+                    <div>
+                        <div class="stars">★★★★★</div>
+                        <small>4.5 e acima</small>
+                    </div>
+                </label>
+                <label class="filtro-item">
+                    <input type="radio" name="avaliacao" value="4">
+                    <span class="fake-radio"></span>
+                    <div>
+                        <div class="stars">★★★★☆</div>
+                        <small>4.0 e acima</small>
+                    </div>
+                </label>
+                <label class="filtro-item">
+                    <input type="radio" name="avaliacao" value="3">
+                    <span class="fake-radio"></span>
+                    <div>
+                        <div class="stars">★★★☆☆</div>
+                        <small>3.0 e acima</small>
+                    </div>
+                </label>
+            </div>
+
+            <!-- Idioma -->
+            <div class="filtro-secao">
+                <h6>Idioma</h6>
+                <label class="filtro-item">
+                    <input type="checkbox" name="idioma" value="pt">
+                    <span class="fake-check"></span>
+                    <span>Português</span>
+                </label>
+                <label class="filtro-item">
+                    <input type="checkbox" name="idioma" value="en">
+                    <span class="fake-check"></span>
+                    <span>Inglês</span>
+                </label>
+                <label class="filtro-item">
+                    <input type="checkbox" name="idioma" value="es">
+                    <span class="fake-check"></span>
+                    <span>Espanhol</span>
+                </label>
+            </div>
+
+            <!-- Nível -->
+            <div class="filtro-secao">
+                <h6>Nível</h6>
+                <label class="filtro-item">
+                    <input type="checkbox" name="nivel" value="iniciante">
+                    <span class="fake-check"></span>
+                    <span>Iniciante</span>
+                </label>
+                <label class="filtro-item">
+                    <input type="checkbox" name="nivel" value="intermediario">
+                    <span class="fake-check"></span>
+                    <span>Intermediário</span>
+                </label>
+                <label class="filtro-item">
+                    <input type="checkbox" name="nivel" value="avancado">
+                    <span class="fake-check"></span>
+                    <span>Avançado</span>
+                </label>
+            </div>
+
+            <!-- Duração -->
+            <div class="filtro-secao">
+                <h6>Duração</h6>
+                <label class="filtro-item">
+                    <input type="checkbox" name="duracao" value="curta">
+                    <span class="fake-check"></span>
+                    <span>Até 2 horas</span>
+                </label>
+                <label class="filtro-item">
+                    <input type="checkbox" name="duracao" value="media">
+                    <span class="fake-check"></span>
+                    <span>2h - 10h</span>
+                </label>
+                <label class="filtro-item">
+                    <input type="checkbox" name="duracao" value="longa">
+                    <span class="fake-check"></span>
+                    <span>Mais de 10h</span>
+                </label>
+            </div>
+
+            <!-- Preço -->
+            <div class="filtro-secao">
+                <h6>Preço</h6>
+                <label class="filtro-item">
+                    <input type="checkbox" name="preco" value="gratis">
+                    <span class="fake-check"></span>
+                    <span>Gratuito</span>
+                </label>
+                <label class="filtro-item">
+                    <input type="checkbox" name="preco" value="ate50">
+                    <span class="fake-check"></span>
+                    <span>Até R$ 50</span>
+                </label>
+                <label class="filtro-item">
+                    <input type="checkbox" name="preco" value="50a100">
+                    <span class="fake-check"></span>
+                    <span>R$ 50 - R$ 100</span>
+                </label>
+                <label class="filtro-item">
+                    <input type="checkbox" name="preco" value="100plus">
+                    <span class="fake-check"></span>
+                    <span>Acima de R$ 100</span>
+                </label>
+            </div>
+        </div>
     </div>
-  </label>
 
-  <label class="filtro-item">
-    <input type="radio" name="avaliacao" value="3" id="av3">
-    <span class="fake-radio"></span>
-    <div class="label-text">
-      <div class="stars" aria-hidden>
-        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">☆</span><span class="star">☆</span>
-      </div>
-      <div>3.5 &amp; up</div>
-    </div>
-  </label>
-
-  <label class="filtro-item">
-    <input type="radio" name="avaliacao" value="" id="avTodos" checked>
-    <span class="fake-radio"></span>
-    <div class="label-text">
-      <div class="stars" aria-hidden>
-        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">☆</span>
-      </div>
-      <div>3.0 &amp; up</div>
-    </div>
-  </label>
-
-  <div class="show-more" role="button" tabindex="0">
-    Show more <span class="caret">▾</span>
-  </div>
-</div>
-
-    
-    <hr>
-    
-    <h6>Idioma</h6>
-    <div>
-      <label class="filtro-checkbox">
-      <input type="checkbox" name="idioma" value="pt" id="pt">
-      <span class="fake-check" aria-hidden></span>
-      <span style="font-size:15px;color:#222;"> Português <span class="sub">(2,473)</span></span>
-      </label>
-      <label class="filtro-checkbox">
-      <input type="checkbox" name="idioma" value="pt" id="pt">
-      <span class="fake-check" aria-hidden></span>
-      <span style="font-size:15px;color:#222;"> Inglês <span class="sub">(2,473)</span></span>
-      </label>
-      
-    </div>
-    
-    <hr>
-
-    <h6>Níveis</h6>
-    <div>
-      <input type="checkbox" name="classificacao" value="in" id="in">
-      <label for="in">Iniciante</label><br>
-      <input type="checkbox" name="classificacao" value="it" id="it">
-      <label for="it">Intermediario</label><br>
-      <input type="checkbox" name="classificacao" value="av" id="av">
-      <label for="av">Avançado</label><br>
-      <input type="checkbox" name="classificacao" value="" id="tn" checked>
-      <label for="tn">Todos</label>
-    </div>
-
-    <hr>
-
-    <h6>Duração das aulas</h6>
-    <div>
-      <input type="checkbox" name="duracao" value="c" id="dur-curta">
-      <label for="dur-curta">Até 2h (Curta)</label><br>
-      <input type="checkbox" name="duracao" value="m" id="dur-media">
-      <label for="dur-media">2h a 10h (Média)</label><br>
-      <input type="checkbox" name="duracao" value="l" id="dur-longa">
-      <label for="dur-longa">Mais de 10h (Longa)</label><br>
-      <input type="checkbox" name="duracao" value="" id="dur-todas" checked>
-      <label for="dur-todas">Todas</label>
-    </div>
-
-    <hr>
-
-    <h6>Exercícios</h6>
-        <div>
-          <input type="checkbox" name="exer" value="c" id="dur-curta">
-          <label for="dur-curta">Questionários</label><br>
-          <input type="checkbox" name="exer" value="m" id="dur-media">
-          <label for="dur-media">Exercícios de codificação</label><br>
-          <input type="checkbox" name="exer" value="l" id="dur-longa">
-          <label for="dur-longa">Testes Práticos</label><br>
-          <input type="checkbox" name="exer" value="" id="dur-todas" checked>
-          <label for="dur-todas">Todos</label>
+    <!-- Container principal -->
+    <div class="main-container">
+        <!-- Header de resultados -->
+        <div class="resultados-header">
+            <div class="resultados-info">
+                <strong id="totalCursos">12</strong> cursos encontrados
+            </div>
+            <select class="ordenar-select">
+                <option value="relevancia">Mais relevantes</option>
+                <option value="avaliacao">Melhor avaliados</option>
+                <option value="preco-menor">Menor preço</option>
+                <option value="preco-maior">Maior preço</option>
+                <option value="recentes">Mais recentes</option>
+            </select>
         </div>
 
-    <hr>
+        <!-- Grid de cursos -->
+        <div class="cursos-grid" id="cursosGrid">
+            <!-- Curso 1 -->
+            <div class="curso-card" data-avaliacao="5" data-idioma="pt" data-nivel="iniciante">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400" alt="Curso" class="curso-imagem">
+                <div class="curso-conteudo">
+                    <div>
+                        <span class="curso-badge badge-nivel">Iniciante</span>
+                        <span class="curso-badge badge-idioma">PT</span>
+                    </div>
+                    <h3 class="curso-titulo">Ciência de Dados Completa</h3>
+                    <p class="curso-descricao">Aprenda análise de dados, visualização e machine learning do zero com Python e suas principais bibliotecas.</p>
+                    <p class="curso-instrutor">Por Marcos Andrade</p>
+                    <div class="curso-footer">
+                        <div class="curso-avaliacao">
+                            <span class="stars">★★★★★</span>
+                            <span class="curso-nota">5.0</span>
+                            <span class="curso-avaliacoes">(765)</span>
+                        </div>
+                        <span class="curso-preco">R$ 39,90</span>
+                    </div>
+                </div>
+            </div>
 
-    <h6>Tópicos</h6>
-    <div>
-      <input type="checkbox" name="topico" value="ds" id="top-ds">
-      <label for="top-ds">Data Science</label><br>
-      <input type="checkbox" name="topico" value="wd" id="top-wd">
-      <label for="top-wd">Web Development</label><br>
-      <input type="checkbox" name="topico" value="ml" id="top-ml">
-      <label for="top-ml">Machine Learning</label><br>
-      <input type="checkbox" name="topico" value="" id="top-todos" checked>
-      <label for="top-todos">Todos</label>
-    </div>
+            <!-- Curso 2 -->
+            <div class="curso-card" data-avaliacao="4" data-idioma="en" data-nivel="intermediario">
+                <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400" alt="Curso" class="curso-imagem">
+                <div class="curso-conteudo">
+                    <div>
+                        <span class="curso-badge badge-nivel">Intermediário</span>
+                        <span class="curso-badge badge-idioma">EN</span>
+                    </div>
+                    <h3 class="curso-titulo">Node.js Backend Development</h3>
+                    <p class="curso-descricao">Construa aplicações backend modernas e escaláveis com Node.js, Express e MongoDB.</p>
+                    <p class="curso-instrutor">Por Ana Silva</p>
+                    <div class="curso-footer">
+                        <div class="curso-avaliacao">
+                            <span class="stars">★★★★☆</span>
+                            <span class="curso-nota">4.3</span>
+                            <span class="curso-avaliacoes">(320)</span>
+                        </div>
+                        <span class="curso-preco">R$ 59,90</span>
+                    </div>
+                </div>
+            </div>
 
-    <hr>
+            <!-- Curso 3 -->
+            <div class="curso-card" data-avaliacao="3" data-idioma="pt" data-nivel="avancado">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400" alt="Curso" class="curso-imagem">
+                <div class="curso-conteudo">
+                    <div>
+                        <span class="curso-badge badge-nivel">Avançado</span>
+                        <span class="curso-badge badge-idioma">PT</span>
+                    </div>
+                    <h3 class="curso-titulo">Excel Avançado para Análise</h3>
+                    <p class="curso-descricao">Domine fórmulas avançadas, tabelas dinâmicas, macros e Power Query para análise profissional.</p>
+                    <p class="curso-instrutor">Por João Pereira</p>
+                    <div class="curso-footer">
+                        <div class="curso-avaliacao">
+                            <span class="stars">★★★☆☆</span>
+                            <span class="curso-nota">3.7</span>
+                            <span class="curso-avaliacoes">(150)</span>
+                        </div>
+                        <span class="curso-preco">R$ 29,90</span>
+                    </div>
+                </div>
+            </div>
 
-    <h6>Preços</h6>
-    <div>
-      <input type="checkbox" name="preco" value="gratis" id="pre-gratis">
-      <label for="pre-gratis">Gratuitos</label><br>
-      <input type="checkbox" name="preco" value="ate50" id="pre-ate50">
-      <label for="pre-ate50">Até R$50</label><br>
-      <input type="checkbox" name="preco" value="50a100" id="pre-50a100">
-      <label for="pre-50a100">R$50 a R$100</label><br>
-      <input type="checkbox" name="preco" value="100plus" id="pre-100plus">
-      <label for="pre-100plus">Acima de R$100</label><br>
-      <input type="checkbox" name="preco" value="" id="pre-todos" checked>
-      <label for="pre-todos">Todos</label>
-    </div>
-  </div>
-</div>
+            <!-- Curso 4 -->
+            <div class="curso-card" data-avaliacao="5" data-idioma="pt" data-nivel="iniciante">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400" alt="Curso" class="curso-imagem">
+                <div class="curso-conteudo">
+                    <div>
+                        <span class="curso-badge badge-nivel">Iniciante</span>
+                        <span class="curso-badge badge-idioma">PT</span>
+                    </div>
+                    <h3 class="curso-titulo">Desenvolvimento Web Moderno</h3>
+                    <p class="curso-descricao">HTML5, CSS3, JavaScript e React do zero ao avançado. Crie sites profissionais responsivos.</p>
+                    <p class="curso-instrutor">Por Maria Costa</p>
+                    <div class="curso-footer">
+                        <div class="curso-avaliacao">
+                            <span class="stars">★★★★★</span>
+                            <span class="curso-nota">4.9</span>
+                            <span class="curso-avaliacoes">(1,234)</span>
+                        </div>
+                        <span class="curso-preco">R$ 49,90</span>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Curso 5 -->
+            <div class="curso-card" data-avaliacao="4" data-idioma="en" data-nivel="intermediario">
+                <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=400" alt="Curso" class="curso-imagem">
+                <div class="curso-conteudo">
+                    <div>
+                        <span class="curso-badge badge-nivel">Intermediário</span>
+                        <span class="curso-badge badge-idioma">EN</span>
+                    </div>
+                    <h3 class="curso-titulo">Python para Machine Learning</h3>
+                    <p class="curso-descricao">Aprenda algoritmos de ML, redes neurais e deep learning com TensorFlow e Scikit-learn.</p>
+                    <p class="curso-instrutor">Por Carlos Souza</p>
+                    <div class="curso-footer">
+                        <div class="curso-avaliacao">
+                            <span class="stars">★★★★☆</span>
+                            <span class="curso-nota">4.6</span>
+                            <span class="curso-avaliacoes">(892)</span>
+                        </div>
+                        <span class="curso-preco">R$ 79,90</span>
+                    </div>
+                </div>
+            </div>
 
-
-<article class="card-tela-toda">
-
-  <div class="card mb-3 curso" data-avaliacao="5" data-idioma="pt">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="/static/img/nossos_cursos/1.jpeg" class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Curso de Ciência de Dados</h5>
-          <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos est veritatis sunt alias doloremque sint? Labore facilis qui officiis harum nostrum excepturi aut tempora rerum hic, aspernatur, animi veritatis eaque sapiente inventore iusto repellendus minima veniam aliquid laboriosam iste. Dolorum corporis accusamus, cumque vero deserunt perferendis veritatis nobis iste ducimus adipisci velit dolore odit minima, placeat architecto sed iusto perspiciatis. Tempore repellat ratione illum adipisci esse sunt non iusto hic?</p>
-          <p class="card-text"><small class="text-body-secondary">Instrutor: Marcos Andrade</small></p>
-          <p class="card-text">★★★★★ 5,0 <small class="text-muted">(765 avaliações)</small></p>
-          <p class="carde-preco-favoritos">R$39,90</p>
+            <!-- Curso 6 -->
+            <div class="curso-card" data-avaliacao="5" data-idioma="pt" data-nivel="avancado">
+                <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400" alt="Curso" class="curso-imagem">
+                <div class="curso-conteudo">
+                    <div>
+                        <span class="curso-badge badge-nivel">Avançado</span>
+                        <span class="curso-badge badge-idioma">PT</span>
+                    </div>
+                    <h3 class="curso-titulo">DevOps e Cloud Computing</h3>
+                    <p class="curso-descricao">Docker, Kubernetes, AWS e CI/CD. Automatize deploys e gerencie infraestrutura como código.</p>
+                    <p class="curso-instrutor">Por Ricardo Lima</p>
+                    <div class="curso-footer">
+                        <div class="curso-avaliacao">
+                            <span class="stars">★★★★★</span>
+                            <span class="curso-nota">4.8</span>
+                            <span class="curso-avaliacoes">(567)</span>
+                        </div>
+                        <span class="curso-preco">R$ 89,90</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="card mb-3 curso" data-avaliacao="4" data-idioma="en">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="/static/img/nossos_cursos/33.png" class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Node.js Backend</h5>
-          <p class="card-text">Curso prático de back-end moderno...</p>
-          <p class="card-text"><small class="text-body-secondary">Instrutor: Ana Silva</small></p>
-          <p class="card-text">★★★★☆ 4,3 <small class="text-muted">(320 avaliações)</small></p>
-          <p class="carde-preco-favoritos">R$59,90</p>
+        <!-- Paginação -->
+        <div class="paginacao">
+            <button>← Anterior</button>
+            <button class="ativo">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>Próxima →</button>
         </div>
-      </div>
     </div>
-  </div>
 
-  <div class="card mb-3 curso" data-avaliacao="3" data-idioma="pt">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="/static/img/nossos_cursos/34.jpeg" class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Excel Avançado</h5>
-          <p class="card-text">Curso completo de planilhas...</p>
-          <p class="card-text"><small class="text-body-secondary">Instrutor: João Pereira</small></p>
-          <p class="card-text">★★★☆☆ 3,7 <small class="text-muted">(150 avaliações)</small></p>
-          <p class="carde-preco-favoritos">R$29,90</p>
-        </div>
-      </div>
-    </div>
-  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function abrirFiltros() {
+            const offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasFiltros'));
+            offcanvas.show();
+        }
 
-</article>
-{% endblock %}
+        function filtrarRapido(tipo, valor) {
+            console.log(`Filtrar por ${tipo}: ${valor}`);
+            // Aqui você implementaria a lógica de filtro real
+            // Por exemplo, fazer uma requisição AJAX ou filtrar os cards visíveis
+        }
+
+        // Animação de scroll suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Atualizar contagem de cursos
+        function atualizarContagem() {
+            const cursos = document.querySelectorAll('.curso-card');
+            document.getElementById('totalCursos').textContent = cursos.length;
+        }
+
+        atualizarContagem();
+    </script>
+</body>
+</html>
