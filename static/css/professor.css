@@ -309,13 +309,6 @@ textarea.form-control {
     background-color: #d0d0d0;
 }
 
-.demo-footer {
-    background-color: #333;
-    color: white;
-    padding: 30px;
-    text-align: center;
-    margin-top: 50px;
-}
 
 .badge-contador {
     background-color: #5C22AD;
@@ -324,4 +317,121 @@ textarea.form-control {
     border-radius: 15px;
     font-size: 0.9rem;
     margin-left: 10px;
+}
+
+
+ .lista-container {
+    border: 2px dashed #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    min-height: 200px;
+    background-color: #fafafa;
+}
+
+.lista-vazia {
+    text-align: center;
+    color: #999;
+    padding: 40px 20px;
+}
+
+.lista-vazia i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    opacity: 0.3;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-titulo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.item-descricao {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
+
+.item-duracao {
+    font-size: 0.85rem;
+    color: #5C22AD;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.item-duracao i {
+    margin-right: 5px;
+}
+
+.item-acoes {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-item {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-editar {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.btn-editar:hover {
+    background-color: #1976d2;
+    color: white;
+}
+
+.btn-excluir {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+.btn-excluir:hover {
+    background-color: #d32f2f;
+    color: white;
+}
+
+.btn-adicionar-item {
+    background-color: #5C22AD;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.btn-adicionar-item:hover {
+    background-color: #4a1b8d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(92, 34, 173, 0.3);
+}
+
+.numero-modulo {
+    background-color: #5C22AD;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 15px;
 }

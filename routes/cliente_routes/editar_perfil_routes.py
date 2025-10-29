@@ -93,7 +93,8 @@ async def post_editar_perfil(request: Request,
             "telefone": usuario.telefone,
             "dataNascimento": usuario.dataNascimento,
             "perfil": usuario.perfil,
-            "foto": usuario_logado.get('foto')
+            "foto": usuario_logado.get('foto'),
+            "identificacaoProfessor": False
         }
         criar_sessao(request, usuario_dict)
 
