@@ -69,12 +69,6 @@
     color: white;
 }
 
-/* Novos estilos para a sidebar dentro do article */
-article {
-    display: flex;
-    position: relative;
-    min-height: 100vh;
-}
 
 .sidebar-container {
     position: relative;
