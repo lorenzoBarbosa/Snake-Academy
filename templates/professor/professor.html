@@ -1,76 +1,108 @@
-{% extends "index.html" %}
+{% extends 'index.html' %}
 {% block conteudo %}
-
 <article>
-  <button class="btn botao-login" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasProfessor" aria-controls="offcanvasProfessor"><i class="bi bi-list"></i></button>
+<div class="sidebar-container">
+    <div class="sidebar-content">
+        <a href="/professor" class="sidebar-item">
+            <i class="bi bi-house-door sidebar-icon"></i>
+            <span class="sidebar-text">Página Inicial</span>
+        </a>
+        <a href="#" class="sidebar-item">
+            <i class="bi bi-book sidebar-icon"></i>
+            <span class="sidebar-text">Meus Cursos</span>
+        </a>
+        <a href="#" class="sidebar-item">
+            <i class="bi bi-plus-circle sidebar-icon"></i>
+            <span class="sidebar-text">Criar Novo Curso</span>
+        </a>
+        <a href="#" class="sidebar-item">
+            <i class="bi bi-people sidebar-icon"></i>
+            <span class="sidebar-text">Alunos</span>
+        </a>
+        <a href="#" class="sidebar-item">
+            <i class="bi bi-bar-chart sidebar-icon"></i>
+            <span class="sidebar-text">Estatísticas</span>
+        </a>
+        <a href="#" class="sidebar-item">
+            <i class="bi bi-chat-dots sidebar-icon"></i>
+            <span class="sidebar-text">Mensagens</span>
+        </a>
+        <a href="#" class="sidebar-item">
+            <i class="bi bi-gear sidebar-icon"></i>
+            <span class="sidebar-text">Configurações</span>
+        </a>
+        <a href="#" class="sidebar-item">
+            <i class="bi bi-question-circle sidebar-icon"></i>
+            <span class="sidebar-text">Ajuda e Suporte</span>
+        </a>
+    </div>
+</div>
+  <div class="container">
+      <p class="titulo-home"><b>Bem vindo à área do professor!</b></p>
+      <p class="titulo-home">Seus cursos mais recentes</p>
+      
+      <div class="caixa-borda-cinza d-flex">
+          <div class="row w-100 p-3">
+              <div class="card col m-2" style="width: 18rem;">
+                  <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Curso exemplo">
+                  <div class="card-body">
+                      <p class="card-text">Curso de exemplo para demonstração da interface do professor.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <p class="titulo-home mt-5">Suas Estatísticas</p>
+      <div class="caixa-borda-cinza p-3">      
+          <div class="row" style="gap: 80px; padding: 20px;">
+              <div class="col d-flex justify-content-center">
+                  <div class="estatistica-professor text-center align-self-center">
+                      <p class="estatistica-numero">10</p>
+                      <p class="estatistica-descricao">Cursos Criados</p>
+                  </div>
+              </div>
+              <div class="col d-flex justify-content-center">
+                  <div class="estatistica-professor text-center align-self-center">
+                      <p class="estatistica-numero">247</p>
+                      <p class="estatistica-descricao">Alunos Ativos</p>
+                  </div>
+              </div>
+              <div class="col d-flex justify-content-center">
+                  <div class="estatistica-professor text-center align-self-center">
+                      <p class="estatistica-numero">4.8</p>
+                      <p class="estatistica-descricao">Avaliação Média</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <p class="titulo-home mt-5">Ações Rápidas</p>
+      <div class="justify-content-center align-items-center">
+          <div class="row">
+              <div class="col d-flex justify-content-center p-4">
+                  <button class="btn botao-acao-rapida">Criar Novo Curso</button>
+              </div>
+              <div class="col d-flex justify-content-center p-4">
+                  <button class="btn botao-acao-rapida">Gerenciar Cursos</button>
+              </div>
+              <div class="col d-flex justify-content-center p-4">
+                  <button class="btn botao-acao-rapida">Ver Estatísticas Detalhadas</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</article>
 
-  <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasProfessor" aria-labelledby="offcanvasProfessorLabel">
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasProfessor" aria-labelledby="offcanvasProfessorLabel">
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasProfessorLabel">Offcanvas with body scrolling</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <h5 class="offcanvas-title" id="offcanvasProfessorLabel">Menu Professor</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <p>Try scrolling the rest of the page to see this option in action.</p>
+        <p>Conteúdo do menu lateral aqui.</p>
     </div>
-  </div>
+</div>
 
-    <!-- Conteúdo principal -->
-  <main id="mainContent" class="pt-4" style="margin-left: 70px;">
-    <div class="container">
-      <h2 class="mb-4 p-4">Meus Cursos</h2>
-
-      <div class="row g-4 card-curso-professor">
-
-        <!-- CARD 1 -->
-        <div class="col-sm-6 col-md-4">
-          <div class="card h-100 shadow-sm">
-            <img src="/static/img/nossos_cursos/1.jpeg" class="card-img-top" alt="Curso de Ciência de Dados">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Curso de Ciência de Dados</h5>
-              <p class="card-text">Aprenda a dominar análise e visualização de dados com Python e SQL.</p>
-              <p class="card-text"><small class="text-body-secondary">Instrutor: Marcos Andrade</small></p>
-              <p class="card-text mb-2">★★★★★ 5,0 <small class="text-muted">(765 avaliações)</small></p>
-              <div class="mt-auto">
-                <p class="cor-preco-carde-curso-professor">R$39,90</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 2 -->
-        <div class="col-sm-6 col-md-4">
-          <div class="card h-100 shadow-sm">
-            <img src="/static/img/nossos_cursos/2.png" class="card-img-top" alt="Curso de Front-End Moderno">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Curso de Front-End Moderno</h5>
-              <p class="card-text">HTML, CSS e JavaScript do básico ao avançado, com projetos práticos.</p>
-              <p class="card-text"><small class="text-body-secondary">Instrutor: Ana Ribeiro</small></p>
-              <p class="card-text mb-2">★★★★☆ 4,8 <small class="text-muted">(542 avaliações)</small></p>
-              <div class="mt-auto">
-                <p class="cor-preco-carde-curso-professor">R$49,90</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 3 -->
-        <div class="col-sm-6 col-md-4">
-          <div class="card h-100 shadow-sm">
-            <img src="/static/img/nossos_cursos/3.jpg" class="card-img-top" alt="Curso de Inteligência Artificial">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">Curso de Inteligência Artificial</h5>
-              <p class="card-text">Introdução ao aprendizado de máquina e redes neurais com Python.</p>
-              <p class="card-text"><small class="text-body-secondary">Instrutor: João Nunes</small></p>
-              <p class="card-text mb-2">★★★★★ 5,0 <small class="text-muted">(1.034 avaliações)</small></p>
-              <div class="mt-auto">
-                <p class="cor-preco-carde-curso-professor">R$59,90</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div> 
-    </div> 
-  </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </article>
 {% endblock %}

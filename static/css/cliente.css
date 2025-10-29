@@ -167,11 +167,12 @@
     width: 100%;
     height: 80px;
     display: flex;
-    position: absolute;
     bottom: 0;
     background-color: transparent;
     left: 0;
     gap: 20px;
+    margin-top: 10vh;
+    background: #000000;
 }
 
 .design-roxo-1 {
