@@ -178,6 +178,36 @@ def obter_quantidade_usuario() -> int:
         return quantidade
     except Exception as e:
         print(f"Erro ao obter quantidade de usuários: {e}")
+
+def obter_usuario_por_termo_paginado(termo: str, pg_num: int, pg_size: int) -> list[Usuario]:
+    try:
+        limite = pg_size
+        offset = (pg_num - 1) * pg_size
+        termo_like = f"%{termo}%"
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(OBTER_USUARIO_POR_TERMO_PAGINADO, (termo_like, termo_like, limite, offset))
+        tuplas = cursor.fetchall()
+        usuarios = [
+            Usuario(
+                id=tupla["id"],
+                nome=tupla["nome"],
+                email=tupla["email"],
+                senha=tupla["senha"],
+                telefone=tupla["telefone"],
+                dataNascimento=tupla["dataNascimento"],
+                perfil=tupla["perfil"],
+                token_redefinicao=None if tupla["token_redefinicao"] is None else tupla["token_redefinicao"],
+                data_token=None if tupla["data_token"] is None else tupla["data_token"],
+                data_cadastro=None if tupla["data_cadastro"] is None else tupla["data_cadastro"],
+                foto=None if tupla["foto"] is None else tupla["foto"]
+            ) for tupla in tuplas
+        ]
+        conn.close()
+        return usuarios
+    except Exception as e:
+        print(f"Erro ao obter usuários por termo paginado: {e}")
+        return []
     
 def atualizar_usuario_por_id(usuario:Usuario) -> bool:
         try:

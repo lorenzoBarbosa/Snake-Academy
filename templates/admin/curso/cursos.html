@@ -51,6 +51,7 @@
         </form>
     </div>
     <div class="container mt-3">
+        {% if cursos_qtdAlunos %}
         {% for curso_filtro in cursos_qtdAlunos %}
         <div class="linha-usuario d-flex align-items-center justify-content-between px-3 py-2 mb-2">
             <div class="d-flex align-items-center">
@@ -61,8 +62,8 @@
                 <div>
                     <h5 class="mb-1 d-flex align-items-center">
                         {{ curso_filtro.curso.nome }}
-                        <span class="tag-usuario">
-                            {{ curso_filtro.curso.avaliacao }}
+                        <span class="tag-usuario tag-curso">
+                            {{ curso_filtro.curso.avaliacao }} <i class="bi bi-star-fill"></i>
                         </span>
                     </h5>
                     <small>Qtd de assinantes: {{ curso_filtro.qtdAlunos }}</small>
@@ -71,11 +72,15 @@
 
             <!-- Ações -->
             <div class="acoes-usuario">
-                <button class="btn btn-sm btn-outline-primary me-2"><a href="/admin/cursos/curso-admin/{{ curso_filtro.id }}">Detalhes do Curso</a></button>
-                <button class="btn btn-sm btn-outline-success me-2"><a href="/admin/usuarios/detalhes-usuario/{{ curso_filtro.idProfessor }}">Ver Professor</a></button>
+                <button class="btn btn-sm btn-outline-primary me-2"><a href="/admin/cursos/curso-admin/{{ curso_filtro.curso.id }}">Detalhes do Curso</a></button>
+                <button class="btn btn-sm btn-outline-success me-2"><a href="/admin/usuarios/detalhes-usuario/{{ curso_filtro.curso.idProfessor }}">Ver Professor</a></button>
             </div>
         </div>
         {% endfor %}
+        {% else %}
+            <p class="texto-home">Não há nenhum curso com essas características.</p>
+            <div class="tamanho-icone-livro text-center"><i class="bi bi-journal-x"></i></div>
+        {% endif %}
     </div>
 </article>
 

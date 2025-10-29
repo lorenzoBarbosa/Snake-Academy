@@ -1,6 +1,60 @@
 {% extends "index.html" %}
 {%block conteudo%}
 <article>
-<h1>Curso Admin</h1>
+    <div class="container mt-5">
+        <h1 class="titulo-home">
+            <a href="/admin/cursos">
+                <b>Detalhes do Curso</b>
+            </a>
+        </h1>
+        <div class="detalhes-curso">
+            <div>
+                <div class="container-foto-detalhes-curso ms-5">
+                    <img src="{{ detalhes_curso.foto }}" alt="foto do curso" class="foto-detalhes-curso">
+                </div>
+                <div class=" ms-5">
+                    <p>
+                        <strong>ID:</strong> {{ detalhes_curso.id }}
+                    </p>
+                    <p>
+                        <strong>Nome:</strong> {{ detalhes_curso.nome }}
+                    </p>
+                    <p>
+                        <strong>Descrição:</strong> {{ detalhes_curso.descricaoCurso }}
+                    </p>
+                    <p>
+                        <strong>Id do Tópico:</strong> {{ detalhes_curso.idTopico }} | <b>Nome do Tópico:</b> {{ detalhes_curso.topico.nome }}
+                    </p>
+                    <p>
+                        <strong>Data de Criação:</strong> {{ detalhes_curso.dataCriacao }}
+                    </p>
+                    <p>
+                        <strong>Status Curso:</strong> {{ detalhes_curso.statusCurso }}
+                    </p>
+                    <p>
+                        <strong>Duração do Curso:</strong> {{ detalhes_curso.duracaoCurso }}
+                    </p>
+                    <p>
+                        <b>Avaliação:</b> {{ detalhes_curso.avaliacao }}
+                    </p>
+                    <p>
+                        <b>Professor:</b> O professor: {{ detalhes_curso.professor.nome }} <b>de id:</b> {{ detalhes_curso.idProfessor }} é o responsável por este curso.
+                    </p>
+                    <p>
+                        <b>Preço:</b> R$ {{ detalhes_curso.custo }}
+                    </p>
+                </div>
+            </div>
+            <div style="flex-direction: row; gap: 30px; margin-top: 20px;">
+                <div class="row">
+                    <div class="col-1">
+                        <a href="/admin/cursos" class="botao-editar-curso me-5">
+                            <i class="bi bi-arrow-left"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </article>
 {%endblock%}

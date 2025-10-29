@@ -2,40 +2,25 @@
 {% block conteudo %}
 
 <article>
-  <aside
-    id="offcanvasSidebar"
-    class="offcanvas offcanvas-start show"
-    data-bs-scroll="true"
-    data-bs-backdrop="false"
-    tabindex="-1"
-    aria-labelledby="offcanvasSidebarLabel"
-    style="visibility: visible; position: fixed; top: 0; left: 0; height: 100vh; width: 260px; border-right: 1px solid rgba(0,0,0,0.1); z-index: 1030; background-color: #fff;"
-  >
+  <button class="btn botao-login" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasProfessor" aria-controls="offcanvasProfessor"><i class="bi bi-list"></i></button>
+
+  <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasProfessor" aria-labelledby="offcanvasProfessorLabel">
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Painel do Professor</h5>
-      <button type="button" class="btn-close d-md-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <h5 class="offcanvas-title" id="offcanvasProfessorLabel">Offcanvas with body scrolling</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-
     <div class="offcanvas-body">
-      <p>Bem-vindo ao painel do professor.</p>
-      <nav>
-        <ul class="list-unstyled">
-          <li><a href="#" class="text-decoration-none">Dúvidas</a></li>
-          <li><a href="#" class="text-decoration-none">Criar Curso</a></li>
-          <li><a href="#" class="text-decoration-none">Configurações</a></li>
-        </ul>
-      </nav>
+      <p>Try scrolling the rest of the page to see this option in action.</p>
     </div>
-  </aside>
+  </div>
 
-
-  <main id="mainContent" class="pt-4" style="margin-left: 260px;">
+    <!-- Conteúdo principal -->
+  <main id="mainContent" class="pt-4" style="margin-left: 70px;">
     <div class="container">
       <h2 class="mb-4 p-4">Meus Cursos</h2>
 
       <div class="row g-4 card-curso-professor">
 
-        
         <!-- CARD 1 -->
         <div class="col-sm-6 col-md-4">
           <div class="card h-100 shadow-sm">
@@ -51,7 +36,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- CARD 2 -->
         <div class="col-sm-6 col-md-4">
           <div class="card h-100 shadow-sm">
@@ -67,7 +52,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- CARD 3 -->
         <div class="col-sm-6 col-md-4">
           <div class="card h-100 shadow-sm">
@@ -77,17 +62,15 @@
               <p class="card-text">Introdução ao aprendizado de máquina e redes neurais com Python.</p>
               <p class="card-text"><small class="text-body-secondary">Instrutor: João Nunes</small></p>
               <p class="card-text mb-2">★★★★★ 5,0 <small class="text-muted">(1.034 avaliações)</small></p>
-              <div class="cor-preco-carde-curso-professor mt-auto">
+              <div class="mt-auto">
                 <p class="cor-preco-carde-curso-professor">R$59,90</p>
               </div>
             </div>
           </div>
         </div>
-        </div>
-        
+
       </div> 
     </div> 
   </main>
 </article>
-
 {% endblock %}

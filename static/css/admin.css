@@ -106,6 +106,18 @@
     background-color: #6c5ce7;
 }
 
+#offcanvasCentralizado {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    max-width: 90%;
+    height: auto;
+    max-height: 80vh;
+    border-radius: 10px;
+}
+
 /* Professor = verde */
 .tag-professor {
     background-color: #38bc8e;
@@ -424,4 +436,19 @@
 .excluir-usuario:hover{
     background-color: #661f1f;
     text-decoration: none;
+}
+
+.tag-curso {
+    color: #ff9c3d; 
+}
+
+.detalhes-curso {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    width: 100%;
+    min-height: 40vh;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

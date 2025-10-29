@@ -1,7 +1,7 @@
-{% extends "index.html" %}
+{% extends 'index.html' %}
 {% block conteudo %}
 <article>
-    <div class="container mt-5">
+     <div class="container mt-5">
         <h1 class="titulo-home"><b>Usuários do Snake Academy</b></h1>
     </div>
 
@@ -35,17 +35,14 @@
                         <option value="sem_matricula">Sem matrícula</option>
                     </select>
                 </div>
-
                 <div class="col text-end mb-5">
                     <button type="submit" class="botao-login botao-filtro">Filtrar</button>
                     <a href="/usuarios" class="btn btn-secondary">Limpar</a>
                 </div>
             </div>
         </form>
-    </div>
 
-    <!-- Lista de Usuários -->
-    <div class="container">
+         <div class="container">
         {% for usuario_filtro in usuarios %}
         <div class="linha-usuario d-flex justify-content-between align-items-center px-3 py-2 mb-2">
             <!-- Informações do usuário -->
@@ -84,7 +81,6 @@
                         data-usuario-id="{{ usuario_filtro.id }}" data-usuario-nome="{{ usuario_filtro.nome }}">
                     <i class="bi bi-bell"></i> Notificar
                 </button>
-
                 {% if usuario_filtro.perfil == "cliente" or usuario_filtro.perfil == "professor" %}
                 <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#confirmModal" data-id-usuario="{{ usuario_filtro.id }}
                 ">
@@ -93,79 +89,43 @@
                 {% endif %}
             </div>
         </div>
-        {% endfor %}
-    </div>
-    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmModalLabel">Confirmação</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel">Confirmação</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        Tem certeza que deseja tornar este usuário um administrador?
+                    </div>
+                    <div class="modal-footer">
+                        <form id="formConfirmar" method="post" action="/admin/usuarios/detalhes-usuario/{{ usuario_filtro.id }}/tornar-admin">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success">Confirmar</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    Tem certeza que deseja tornar este usuário um administrador?
-                </div>
-                <div class="modal-footer">
-                    <form id="formConfirmar" method="post" action="/admin/usuarios/detalhes-usuario/{{usuario_filtro.id}}/tornar-admin">
+            </div>
+        </div>
+         <!-- Modal Único para Notificação -->
+        <div class="modal fade" id="notificarModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Notificar Usuário</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                        </div>
+                    <form id="formNotificacao" class="modal-footer" method="post">
+                        <p id="mensagemLabel"></p>
+                        <textarea class="form-control" name="mensagem" id="mensagem" rows="4" placeholder="Digite sua mensagem aqui..." required></textarea>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success">Confirmar</button>
+                        <button type="submit" class="btn btn-success">Enviar</button>
                     </form>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-
-    <!-- Modal Único para Notificação -->
-    <div class="modal fade" id="notificarModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Notificar Usuário</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <form id="formNotificacao" class="modal-footer" method="post">
-                    <p id="mensagemLabel"></p>
-                    <textarea class="form-control" name="mensagem" id="mensagem" rows="4" placeholder="Digite sua mensagem aqui..." required></textarea>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Enviar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
 </article>
-
-<script>
-    // Atualiza o form e o texto do modal dinamicamente
-    const notificarModal = document.getElementById('notificarModal');
-    notificarModal.addEventListener('show.bs.modal', event => {
-        const button = event.relatedTarget;
-        const usuarioId = button.getAttribute('data-usuario-id');
-        const usuarioNome = button.getAttribute('data-usuario-nome');
-
-        // Atualiza o label do modal
-        document.getElementById('mensagemLabel').textContent = `Escreva a mensagem para ${usuarioNome}:`;
-
-        // Atualiza a action do form
-        const form = document.getElementById('formNotificacao');
-        form.action = `/admin/usuarios/detalhes-usuario/${usuarioId}/notificar`;
-        form.method = "post";
-    });
-    const confirmModal = document.getElementById('confirmModal');
-    confirmModal.addEventListener('show.bs.modal', event => {
-        const button = event.relatedTarget;
-        const usuarioId = button.getAttribute('data-usuario-id');
-
-        // Atualiza a action do form
-        const form = document.getElementById('formConfirmar');
-        form.action = `/admin/usuarios/detalhes-usuario/${usuarioId}/tornar-admin`;
-        form.method = "post";
-    });
-
-    // Mostrar subfiltros conforme seleção
-    function mostrarSubfiltros() {
-        const tipo = document.getElementById("tipo_usuario").value;
-        document.getElementById("filtro_usuarios").style.display = (tipo === "clientes") ? "block" : "none";
-    }
-</script>
 {% endblock %}

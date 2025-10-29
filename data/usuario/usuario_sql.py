@@ -31,6 +31,15 @@ SELECT
 FROM usuario
 WHERE perfil LIKE ?
 """
+OBTER_USUARIO_POR_TERMO_PAGINADO= """
+SELECT
+    id, nome, email, senha, telefone, dataNascimento, perfil, token_redefinicao, data_token, data_cadastro, foto
+FROM usuario
+WHERE nome LIKE ? OR email LIKE ?
+ORDER BY id
+LIMIT ? OFFSET ?
+"""
+
 
 OBTER_USUARIO_POR_EMAIL = """
 SELECT 

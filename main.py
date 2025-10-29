@@ -32,7 +32,6 @@ from routes.admin_routes.banners_routes import router as banners_router
 from routes.admin_routes.cadastrar_routes import router as cadastrar_router
 from routes.admin_routes.categorias_routes import router as categorias_router
 from routes.admin_routes.comentarios_routes import router as comentarios_router
-from routes.admin_routes.confirmar_alteracao_status_admin_routes import router as confirmar_alteracao_status_admin_router
 from routes.admin_routes.confirmar_alteracao_status_curso_routes import router as confirmar_alteracao_status_curso_router
 from routes.admin_routes.curso_admin_routes import router as curso_admin_router
 from routes.admin_routes.denuncias_routes import router as denuncias_router
@@ -160,7 +159,6 @@ app.include_router(banners_router)
 app.include_router(cadastrar_router)
 app.include_router(categorias_router)
 app.include_router(comentarios_router)
-app.include_router(confirmar_alteracao_status_admin_router)
 app.include_router(confirmar_alteracao_status_curso_router)
 app.include_router(curso_admin_router)
 app.include_router(denuncias_router)

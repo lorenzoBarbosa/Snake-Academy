@@ -38,18 +38,17 @@ for curso in cursos:
 @router.get("/cliente")
 @requer_autenticacao(["cliente", "professor", "admin"])
 async def get_cliente(request: Request, usuario_logado: dict = None):
-
-    cliente = cliente_repo.obter_cliente_por_id(usuario_logado.get("id"))
+    banners = banner_repo.obter_todos_banners()
+    cliente = cliente_repo.obter_cliente_por_id(usuario_logado["id"])
     lista_historico = []
     if cliente.historicoCursos:
         for curso_id in cliente.historicoCursos:
             curso = obter_curso_por_id(curso_id)
             if curso:
                 lista_historico.append(curso)
-
-    print(usuario_logado.get("foto"))
     return templates.TemplateResponse("cliente/cliente.html", {"request": request,                                      
                                                                 "usuario":usuario_logado,
+                                                                "banners": banners,
                                                                 "categorias": categorias, 
                                                                 "cursos1": cursos1, 
                                                                 "cursos2": cursos2, 

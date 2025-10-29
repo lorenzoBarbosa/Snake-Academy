@@ -45,15 +45,15 @@ async def post_cadastro(
     }
 
     # Verificar se email já existe
-    # if usuario_repo.obter_usuario_por_email(email):
-    #     return templates.TemplateResponse(
-    #         "publico/cadastro.html",
-    #         {
-    #             "request": request,
-    #             "dados": dados_formulario,
-    #             "erros": {"EMAIL": "E-mail já cadastrado"}
-    #         }
-    #     )
+    if usuario_repo.obter_usuario_por_email(email):
+        return templates.TemplateResponse(
+            "publico/cadastro.html",
+            {
+                "request": request,
+                "dados": dados_formulario,
+                "erros": {"EMAIL": "E-mail já cadastrado"}
+            }
+        )
     try:
         cadastro_dto = CadastroDTO(
             nome=nome,
@@ -103,7 +103,7 @@ async def post_cadastro(
 
         # Fazer login automático após cadastro
         usuario_dict = {
-            "id": usuario_id,
+            "id": cliente.id,
             "nome": nome,
             "email": email,
             "telefone": telefone,

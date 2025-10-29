@@ -33,12 +33,12 @@ def verificar_forca_senha(senha: str) -> str:
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
 
-@router.get("/redefinir_senha")
+@router.get("/redefinir-senha")
 async def get_restaurar_senha(request: Request):
     response = templates.TemplateResponse("publico/redefinir_senha.html", {"request": request, "usuario": None})
     return response
 
-@router.post("/redefinir_senha", response_class=HTMLResponse)
+@router.post("/redefinir-senha", response_class=HTMLResponse)
 async def post_restaurar_senha(
     request: Request,
     senha_nova: str = Form(...),

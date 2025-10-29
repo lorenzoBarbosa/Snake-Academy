@@ -64,8 +64,9 @@ async def get_curso_admin(
 
 
 
-@router.get("/admin/cursos/curso-admin")
+@router.get("/admin/cursos/curso-admin/{curso_id}")
 @requer_autenticacao(["admin"])
-async def get_curso_admin(request: Request, usuario_logado: dict = None):
-    response = templates.TemplateResponse("admin/curso/curso_admin.html", {"request": request, "usuario": usuario_logado})
+async def get_curso_admin(request: Request, usuario_logado: dict = None, curso_id: int = None):
+    detalhes_curso = curso_repo.obter_curso_por_id(curso_id)
+    response = templates.TemplateResponse("admin/curso/curso_admin.html", {"request": request, "usuario": usuario_logado, "detalhes_curso": detalhes_curso})
     return response

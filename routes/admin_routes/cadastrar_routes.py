@@ -1,6 +1,7 @@
 import os
 from fastapi import APIRouter, File, Request, UploadFile
 from fastapi.params import Form
+from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 
 from data.banner import banner_repo
@@ -54,4 +55,4 @@ async def post_cadastrar(request: Request, usuario_logado: dict = None, foto: Up
         banner_repo.deletar_banner(banner.id)
         return templates.TemplateResponse("admin/banners/cadastrar.html",{"request": request, "usuario": usuario_logado, "erro": f"Erro ao salvar a foto. Tente novamente. {e}"})
 
-    return templates.TemplateResponse("admin/banners/cadastrar.html",{"request": request, "usuario": usuario_logado, "sucesso": f"Banner cadastrado com sucesso!"})
+    return RedirectResponse("/admin/banners", status_code=303)

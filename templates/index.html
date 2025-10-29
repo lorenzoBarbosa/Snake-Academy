@@ -38,7 +38,8 @@
                         </div>
                     </form>
                     <div class="tornar-se-ofertante">
-                        <a href="{% if usuario.perfil == 'cliente' %}/professor/cadastro-professor{% elif usuario.perfil == 'professor' %}/professor{% endif %}"> {% if usuario.perfil == 'cliente' %}Tornar-se {% endif %}Ofertante de Cursos
+                        <a href="{% if usuario.perfil == 'cliente' %}/professor/cadastro-professor{% elif usuario.perfil == 'professor' %}/professor{% endif %}">
+                            {% if usuario.perfil == 'cliente' %}Tornar-se {% endif %}Ofertante de Cursos
                             <i class="bi bi-pencil"></i>
                         </a>
                     </div>
@@ -79,7 +80,7 @@
                     <img class="imagem-foto-perfil" src="{{ usuario.foto }}" alt="Foto de perfil">
                     {% endif %}
                 </div>
-                <h5 class="offcanvas-title ms-3" id="offcanvasExampleLabel">{{ usuario.nome  }}</h5>
+                <h5 class="titulo-home" id="offcanvasExampleLabel">{{ usuario.nome  }}</h5>
                 <button
                     type="button"
                     class="btn-close"
@@ -87,6 +88,7 @@
                     aria-label="Close"
                 ></button>
             </div>
+            <div class="linha-sombra"></div>
             <div class="offcanvas-body p-5 corpo">
                 <div class="linha-triangulo">
                     <div class="triangulo-roxo"></div>
@@ -97,7 +99,7 @@
                 <div class="linha-triangulo">
                     <div class="triangulo-roxo"></div>
                     <div class="texto-triangulo">
-                        <a href="/cliente/alterar_senha.html">Alterar Senha</a>
+                        <a href="/redefinir-senha">Alterar Senha</a>
                     </div>
                 </div>
                 <div class="linha-triangulo">
@@ -106,101 +108,126 @@
                         <a href="/cliente/logout">Logout</a>
                     </div>
                 </div>
+                <div class="linha-design">
+                    <div class="design-roxo-1"></div>
+                    <div class="design-roxo-2"></div>
+                    <div class="design-roxo-3"></div>
+                    <div class="design-roxo-4"></div>
+                    <div class="design-roxo-5"></div>
+                    <div class="design-roxo-6"></div>
+                    <div class="design-roxo-7"></div>
+                    <div class="design-roxo-8"></div>
+                    <div class="design-roxo-9"></div>
+                </div>
             </div>
         </div>
-    {% endif %}
+        {% endif %}
         {% if usuario.perfil == "admin" %}
-    <header>
-        <div class="topo"></div>
-        <nav class="navbar navbar-expand-lg bg-navbar-roxo">
-            <div class="container-fluid d-flex align-items-center justify-content-between">
-                <a class="navbar-brand" href="/administrador">
-                    <img src="/static/img/nossas_Logos/SNAKE ACADEMY LOGO.png" alt="snake" style="height:80px;">
-                </a>
-                <form class="d-flex flex-grow-1 justify-content-center mx-3" role="search">
-                    <div class="input-group w-75">
-                        <input
-                            class="form-control barra-pesquisa"
-                            type="search"
-                            placeholder="Procure pelos cursos, usuários ou professores..."
-                            aria-label="Search"
-                        >
-                        <button class="btn-lupa" type="submit">🔍︎</button>
+        <header>
+            <div class="topo"></div>
+            <nav class="navbar navbar-expand-lg bg-navbar-roxo">
+                <div class="container-fluid d-flex align-items-center justify-content-between">
+                    <a class="navbar-brand" href="/administrador">
+                        <img src="/static/img/nossas_Logos/SNAKE ACADEMY LOGO.png" alt="snake" style="height:80px;">
+                    </a>
+                    <form class="d-flex flex-grow-1 justify-content-center mx-3" role="search" action="/admin/pesquisar" method="get">
+                        <div class="input-group w-75">
+                            <input
+                                class="form-control barra-pesquisa"
+                                type="search"
+                                placeholder="Procure pelos cursos, usuários ou professores..."
+                                aria-label="Search"
+                                name="termo_pesquisa"
+                                id="termo_pesquisa"
+                            >
+                            <button class="btn-lupa" type="submit">🔍︎</button>
+                        </div>
+                    </form>
+                    <div class="icone-admin">
+                        <a href="/admin/usuarios">
+                            <i class="bi bi-people-fill"></i>
+                            <div class="texto-icone">Usuários</div>
+                        </a>
                     </div>
-                </form>
-                <div class="icone-admin">
-                    <a href="/admin/usuarios">
-                        <i class="bi bi-people-fill"></i>
-                        <div class="texto-icone">Usuários</div>
-                    </a>
+                    <div class="icone-admin">
+                        <a href="/admin/denuncias">
+                            <i class="bi bi-exclamation-octagon-fill"></i>
+                            <div class="texto-icone">Reportes</div>
+                        </a>
+                    </div>
+                    <button
+                        class="botao-login foto-perfil "
+                        type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasExample"
+                        aria-controls="offcanvasExample"
+                    >
+                        {% if usuario.foto %}
+                        <img class="imagem-foto-perfil" src="{{ usuario.foto }}" alt="Foto de perfil">
+                        {% else %}
+                        <img class="imagem-foto-perfil" src="{{ '/static/img/user-default.png' }}" alt="Foto de perfil">
+                        {% endif %}
+                    </button>
                 </div>
-                <div class="icone-admin">
-                    <a href="/admin/denuncias">
-                        <i class="bi bi-exclamation-octagon-fill"></i>
-                        <div class="texto-icone">Reportes</div>
-                    </a>
-                </div>
-                <button
-                    class="botao-login foto-perfil "
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasExample"
-                    aria-controls="offcanvasExample"
-                >
-                    {% if usuario.foto %}
-                    <img class="imagem-foto-perfil" src="{{ usuario.foto }}" alt="Foto de perfil">
-                    {% else %}
+            </nav>
+        </header>
+        <div
+            class="offcanvas offcanvas-end acesso-perfil"
+            tabindex="-1"
+            id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel"
+        >
+            <div class="offcanvas-header">
+                <div class="foto-perfil">
+                    {% if not usuario %}
                     <img class="imagem-foto-perfil" src="{{ '/static/img/user-default.png' }}" alt="Foto de perfil">
+                    {% else %}
+                    <img class="imagem-foto-perfil" src="{{ usuario.foto }}" alt="Foto de perfil">
                     {% endif %}
-                </button>
+                </div>
+                <h5 class="titulo-home" id="offcanvasExampleLabel">{{ usuario.nome  }}</h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                ></button>
             </div>
-        </nav>
+            <div class="linha-sombra"></div>
+            <div class="offcanvas-body p-5 corpo">
+                <div class="linha-triangulo">
+                    <div class="triangulo-roxo"></div>
+                    <div class="texto-triangulo">
+                        <a href="/cliente/editar-perfil">Editar Perfil</a>
+                    </div>
+                </div>
+                <div class="linha-triangulo">
+                    <div class="triangulo-roxo"></div>
+                    <div class="texto-triangulo">
+                        <a href="/redefinir-senha">Alterar Senha</a>
+                    </div>
+                </div>
+                <div class="linha-triangulo">
+                    <div class="triangulo-roxo"></div>
+                    <div class="texto-triangulo">
+                        <a href="/cliente/logout">Logout</a>
+                    </div>
+                </div>
+                <div class="linha-design">
+                    <div class="design-roxo-1"></div>
+                    <div class="design-roxo-2"></div>
+                    <div class="design-roxo-3"></div>
+                    <div class="design-roxo-4"></div>
+                    <div class="design-roxo-5"></div>
+                    <div class="design-roxo-6"></div>
+                    <div class="design-roxo-7"></div>
+                    <div class="design-roxo-8"></div>
+                    <div class="design-roxo-9"></div>
+                </div>
+            </div>
+        </div>
     </header>
-    <div
-        class="offcanvas offcanvas-end acesso-perfil"
-        tabindex="-1"
-        id="offcanvasExample"
-        aria-labelledby="offcanvasExampleLabel"
-    >
-        <div class="offcanvas-header">
-            <div class="foto-perfil">
-                {% if not usuario %}
-                <img class="imagem-foto-perfil" src="{{ '/static/img/user-default.png' }}" alt="Foto de perfil">
-                {% else %}
-                <img class="imagem-foto-perfil" src="{{ usuario.foto }}" alt="Foto de perfil">
-                {% endif %}
-            </div>
-            <h5 class="offcanvas-title ms-3" id="offcanvasExampleLabel">{{ usuario.nome  }}</h5>
-            <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-            ></button>
-        </div>
-        <div class="offcanvas-body p-5 corpo">
-            <div class="linha-triangulo">
-                <div class="triangulo-roxo"></div>
-                <div class="texto-triangulo">
-                    <a href="/cliente/editar-perfil">Editar Perfil</a>
-                </div>
-            </div>
-            <div class="linha-triangulo">
-                <div class="triangulo-roxo"></div>
-                <div class="texto-triangulo">
-                    <a href="/cliente/alterar_senha.html">Alterar Senha</a>
-                </div>
-            </div>
-            <div class="linha-triangulo">
-                <div class="triangulo-roxo"></div>
-                <div class="texto-triangulo">
-                    <a href="/cliente/logout">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-{% endif %}
+    {% endif %}
 
         {% block conteudo %}
         {% endblock %}
@@ -228,7 +255,7 @@
             <div class="row">
                 <div class="col d-flex align-items-center justify-content-center">
                     <img src="/static/img/nossas_Logos/logo branca sem nome.png" alt="Snake Academy logo" style="height: 30px; margin-right: 10px;">
-                    <p class="mb-0">&copy; 2023 Snake Academy. Todos os direitos reservados.</p>
+                    <p class="mb-0">&copy; 2025 Snake Academy. Todos os direitos reservados.</p>
                 </div>
             </div>
         </div>
@@ -237,7 +264,6 @@
     <!-- Scripts -->
     <script src="/static/js/bootstrap.bundle.min.js"></script>
     <script src="/static/js/toast-manager.js"></script>
-
     <!-- Handler automático de toasts -->
     {% include 'components/toast-handler.html' %}
 

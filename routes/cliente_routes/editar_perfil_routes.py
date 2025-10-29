@@ -3,6 +3,8 @@ from fastapi import APIRouter, File, Request, UploadFile
 from fastapi.params import Form
 from fastapi.templating import Jinja2Templates
 
+from data.admin import admin_repo
+from data.admin.admin_model import Admin
 from data.cliente import cliente_repo
 from data.cliente.cliente_model import Cliente
 from data.usuario import usuario_repo
@@ -35,7 +37,7 @@ async def post_editar_perfil(request: Request,
             senha=None,
             telefone=telefone,
             dataNascimento=data_nascimento,
-            perfil='cliente',
+            perfil=usuario_logado.get("perfil"),
             token_redefinicao=None,
             data_token=None,
             data_cadastro=None,
@@ -43,40 +45,63 @@ async def post_editar_perfil(request: Request,
         )
         
         atualizar_usuario_por_email(usuario, usuario_logado.get("email"))
-        cliente = cliente_repo.obter_cliente_por_id(usuario_logado.get("id"))
-    
-        cliente = Cliente(
-            id=cliente.id,
-            nome=cliente.nome,
-            email=cliente.email,
-            senha=None,
-            telefone=cliente.telefone,
-            dataNascimento=cliente.dataNascimento,
-            perfil=usuario.perfil,
-            token_redefinicao=cliente.token_redefinicao,
-            data_token=cliente.data_token,
-            data_cadastro=cliente.data_cadastro,
-            dataUltimoAcesso=cliente.dataUltimoAcesso,
-            foto=usuario.foto,
-            statusConta=cliente.statusConta,
-            historicoCursos= cliente.historicoCursos,
-            indentificacaoProfessor= cliente.indentificacaoProfessor,
-        )
-        cliente_repo.atualizar_cliente_por_id(cliente, usuario.id)
+        if usuario_logado.get("perfil") == "cliente":
+            cliente = cliente_repo.obter_cliente_por_id(usuario_logado.get("id"))
+        
+            cliente = Cliente(
+                id=cliente.id,
+                nome=cliente.nome,
+                email=cliente.email,
+                senha=None,
+                telefone=cliente.telefone,
+                dataNascimento=cliente.dataNascimento,
+                perfil=usuario.perfil,
+                token_redefinicao=cliente.token_redefinicao,
+                data_token=cliente.data_token,
+                data_cadastro=cliente.data_cadastro,
+                dataUltimoAcesso=cliente.dataUltimoAcesso,
+                foto=usuario.foto,
+                statusConta=cliente.statusConta,
+                historicoCursos= cliente.historicoCursos,
+                indentificacaoProfessor= cliente.indentificacaoProfessor,
+            )
+            cliente_repo.atualizar_cliente_por_id(cliente, usuario.id)
+        
+        elif usuario_logado.get("perfil") == "admin":
+            administrador = admin_repo.obter_admin_por_id(usuario_logado.get("id"))
+            admin = Admin(
+                id=administrador.id,
+                nome=administrador.nome,
+                email=administrador.email,
+                senha=administrador.senha,
+                telefone=administrador.telefone,
+                dataNascimento=administrador.dataNascimento,
+                perfil=usuario.perfil,
+                token_redefinicao=administrador.token_redefinicao,
+                data_token=administrador.data_token,
+                data_cadastro=administrador.data_cadastro,
+                foto=usuario.foto,
+                nivelAcesso=administrador.nivelAcesso
+            )
+            admin_repo.atualizar_admin_por_id(admin, usuario.id)
 
         # Fazer login automático após cadastro
         usuario_dict = {
-            "id": cliente.id,
-            "nome": cliente.nome,
-            "email": cliente.email,
-            "telefone": cliente.telefone,
-            "dataNascimento": cliente.dataNascimento,
-            "perfil": 'cliente',
-            "foto": cliente.foto
+            "id": usuario_logado['id'],
+            "nome": usuario.nome,
+            "email": usuario.email,
+            "telefone": usuario.telefone,
+            "dataNascimento": usuario.dataNascimento,
+            "perfil": usuario.perfil,
+            "foto": usuario_logado.get('foto')
         }
         criar_sessao(request, usuario_dict)
 
-        return RedirectResponse(f"/cliente", status.HTTP_303_SEE_OTHER)
+        if usuario_logado['perfil'] == 'admin':
+            return RedirectResponse(f"/administrador", status.HTTP_303_SEE_OTHER)
+        
+        else:
+            return RedirectResponse(f"/cliente", status.HTTP_303_SEE_OTHER)
 
     except Exception as e:
         return templates.TemplateResponse(
