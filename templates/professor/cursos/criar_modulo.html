@@ -1,4 +1,218 @@
-{% extends "index.html" %}
-{%block conteudo%}
-<h1>Criar Módulo</h1>
-{%endblock%}
+{% extends 'index.html' %}
+{% block conteudo %}
+</head>
+<body>
+
+<article class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar-container">
+        <div class="sidebar-content">
+            <a href="#" class="sidebar-item">
+                <i class="bi bi-house-door sidebar-icon"></i>
+                <span class="sidebar-text">Página Inicial</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="bi bi-book sidebar-icon"></i>
+                <span class="sidebar-text">Meus Cursos</span>
+            </a>
+            <a href="#" class="sidebar-item" style="background-color: #f0f0f0;">
+                <i class="bi bi-collection sidebar-icon"></i>
+                <span class="sidebar-text">Criar Curso</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="bi bi-people sidebar-icon"></i>
+                <span class="sidebar-text">Alunos</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="bi bi-bar-chart sidebar-icon"></i>
+                <span class="sidebar-text">Estatísticas</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="bi bi-chat-dots sidebar-icon"></i>
+                <span class="sidebar-text">Mensagens</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="bi bi-gear sidebar-icon"></i>
+                <span class="sidebar-text">Configurações</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="bi bi-question-circle sidebar-icon"></i>
+                <span class="sidebar-text">Ajuda e Suporte</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="content-wrapper">
+        <div class="container" style="max-width: 1200px; padding: 20px;">
+            <h1 class="titulo-pagina"><i class="bi bi-collection-fill" style="color: #5C22AD;"></i> Criar Módulo do Curso</h1>
+            <p class="subtitulo-pagina">Configure o módulo com aulas e exercícios</p>
+
+            <div class="numero-modulo">
+                <i class="bi bi-hash"></i> Módulo 1
+            </div>
+
+            <!-- Card Informações do Módulo -->
+            <div class="card-criacao">
+                <h2 class="secao-titulo"><i class="bi bi-info-circle-fill"></i> Informações do Módulo</h2>
+                
+                <div class="mb-4">
+                    <label class="form-label">Título do Módulo *</label>
+                    <input type="text" class="form-control" placeholder="Ex: Introdução à Programação" id="tituloModulo">
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Descrição do Módulo *</label>
+                    <textarea class="form-control" placeholder="Descreva o que será abordado neste módulo..." id="descricaoModulo"></textarea>
+                </div>
+            </div>
+
+            <!-- Card Lista de Aulas -->
+            <div class="card-criacao">
+                <h2 class="secao-titulo">
+                    <i class="bi bi-play-circle-fill"></i> 
+                    Aulas do Módulo
+                    <span class="badge-contador" id="contadorAulas">0 aulas</span>
+                </h2>
+                <div class="lista-container" id="listaAulas">
+                    <div class="lista-vazia">
+                        <i class="bi bi-camera-video"></i>
+                        <p>Nenhuma aula adicionada ainda</p>
+                        <small>Clique no botão abaixo para adicionar a primeira aula</small>
+                    </div>
+                </div>
+
+                <button class="btn-adicionar-item" onclick="location.href='/professor/cursos/criar-curso/criar-aula'">
+                    <i class="bi bi-plus-lg"></i> Adicionar Nova Aula
+                </button>
+            </div>
+
+            <!-- Card Lista de Exercícios -->
+            <div class="card-criacao">
+                <h2 class="secao-titulo">
+                    <i class="bi bi-file-earmark-text-fill"></i> 
+                    Exercícios do Módulo
+                    <span class="badge-contador" id="contadorExercicios">0 exercícios</span>
+                </h2>
+                
+                <div class="lista-container" id="listaExercicios">
+                    <div class="lista-vazia">
+                        <i class="bi bi-pencil-square"></i>
+                        <p>Nenhum exercício adicionado ainda</p>
+                        <small>Clique no botão abaixo para adicionar o primeiro exercício</small>
+                    </div>
+                </div>
+
+                <button class="btn-adicionar-item" onclick="adicionarExercicio()">
+                    <i class="bi bi-plus-lg"></i> Adicionar Novo Exercício
+                </button>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="botoes-acao">
+                <button class="btn-cancelar" onclick="cancelar()">
+                    <i class="bi bi-x-lg"></i> Cancelar
+                </button>
+                <button class="btn-salvar" onclick="salvarModulo()">
+                    <i class="bi bi-check-lg"></i> Salvar Módulo
+                </button>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Arrays para armazenar aulas e exercícios
+    let aulas = [];
+    let exercicios = [];
+
+
+    // Função para renderizar aulas
+    function renderizarAulas() {
+        const container = document.getElementById('listaAulas');
+        const contador = document.getElementById('contadorAulas');
+        
+        contador.textContent = `${aulas.length} aula${aulas.length !== 1 ? 's' : ''}`;
+        
+        if (aulas.length === 0) {
+            container.innerHTML = `
+                <div class="lista-vazia">
+                    <i class="bi bi-camera-video"></i>
+                    <p>Nenhuma aula adicionada ainda</p>
+                    <small>Clique no botão abaixo para adicionar a primeira aula</small>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = aulas.map(aula => `
+            <div class="item-card">
+                <div class="item-info">
+                    <div class="item-titulo">
+                        <i class="bi bi-play-circle" style="color: #5C22AD; margin-right: 8px;"></i>
+                        ${aula.titulo}
+                    </div>
+                    <p class="item-descricao">${aula.descricao}</p>
+                    <div class="item-duracao">
+                        <i class="bi bi-clock"></i>
+                        ${aula.duracao}
+                    </div>
+                </div>
+                <div class="item-acoes">
+                    <button class="btn-item btn-editar" onclick="editarAula(${aula.id})" title="Editar">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn-item btn-excluir" onclick="excluirAula(${aula.id})" title="Excluir">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Função para renderizar exercícios
+    function renderizarExercicios() {
+        const container = document.getElementById('listaExercicios');
+        const contador = document.getElementById('contadorExercicios');
+        
+        contador.textContent = `${exercicios.length} exercício${exercicios.length !== 1 ? 's' : ''}`;
+        
+        if (exercicios.length === 0) {
+            container.innerHTML = `
+                <div class="lista-vazia">
+                    <i class="bi bi-pencil-square"></i>
+                    <p>Nenhum exercício adicionado ainda</p>
+                    <small>Clique no botão abaixo para adicionar o primeiro exercício</small>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = exercicios.map(ex => `
+            <div class="item-card">
+                <div class="item-info">
+                    <div class="item-titulo">
+                        <i class="bi bi-file-earmark-text" style="color: #5C22AD; margin-right: 8px;"></i>
+                        ${ex.titulo}
+                    </div>
+                    <p class="item-descricao">${ex.descricao}</p>
+                    <div class="item-duracao">
+                        <i class="bi bi-question-circle"></i>
+                        ${ex.questoes} questões
+                    </div>
+                </div>
+                <div class="item-acoes">
+                    <button class="btn-item btn-editar" onclick="editarExercicio(${ex.id})" title="Editar">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn-item btn-excluir" onclick="excluirExercicio(${ex.id})" title="Excluir">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    }
+</script>
+{% endblock %}

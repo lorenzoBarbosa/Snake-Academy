@@ -207,6 +207,19 @@ def atualizar_cliente_por_email(email:str, cliente: Cliente) -> bool:
     except Exception as e:
         print(f"Erro ao atualizar cliente: {e}")
 
+def atualizar_identificacao_professor_por_id(id: int, identificacao: bool) -> bool:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(ATUALIZAR_IDENTIFICACAO_PROFESSOR_POR_ID, (
+            identificacao,
+            id))
+        conn.commit()
+        conn.close()
+        return cursor.rowcount > 0
+    except Exception as e:
+        print(f"Erro ao atualizar identificação de professor: {e}")
+
 def excluir_cliente_por_email(email: str) -> bool:
     try:
         conn = get_connection()

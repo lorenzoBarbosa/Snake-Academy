@@ -47,7 +47,8 @@ async def post_login(
             "nome": usuario.nome,
             "email": usuario.email,
             "perfil": usuario.perfil,
-            "foto": usuario.foto
+            "foto": usuario.foto,
+            "identificacaoProfessor": False
         }
         criar_sessao(request, usuario_dict)
         if usuario.perfil == "admin":

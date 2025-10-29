@@ -71,6 +71,12 @@ SET
 WHERE id = (SELECT id FROM usuario WHERE email = ?)
 """
 
+ATUALIZAR_IDENTIFICACAO_PROFESSOR_POR_ID = """
+UPDATE cliente
+SET identificacaoProfessor = ?
+WHERE id = ?
+"""
+
 EXCLUIR_CLIENTE_POR_EMAIL = """
 DELETE FROM cliente
 WHERE id = (SELECT id FROM usuario WHERE email = ?)

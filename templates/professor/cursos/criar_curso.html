@@ -1,8 +1,133 @@
-{% extends "index.html" %}
-{%block conteudo%}
-<article>
-    <div class="container">
-        <p class="titulo-home"><b>Criar Novo Curso</b></p>
+{% extends 'index.html' %}
+{% block conteudo %}
+
+<article class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar-container">
+        <div class="sidebar-content">
+            <a href="#" class="sidebar-item">
+                <i class="bi bi-house-door sidebar-icon"></i>
+                <span class="sidebar-text">Página Inicial</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="bi bi-book sidebar-icon"></i>
+                <span class="sidebar-text">Meus Cursos</span>
+            </a>
+            <a href="#" class="sidebar-item" style="background-color: #f0f0f0;">
+                <i class="bi bi-plus-circle sidebar-icon"></i>
+                <span class="sidebar-text">Criar Novo Curso</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="bi bi-people sidebar-icon"></i>
+                <span class="sidebar-text">Alunos</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="bi bi-bar-chart sidebar-icon"></i>
+                <span class="sidebar-text">Estatísticas</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="bi bi-chat-dots sidebar-icon"></i>
+                <span class="sidebar-text">Mensagens</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="bi bi-gear sidebar-icon"></i>
+                <span class="sidebar-text">Configurações</span>
+            </a>
+            <a href="#" class="sidebar-item">
+                <i class="bi bi-question-circle sidebar-icon"></i>
+                <span class="sidebar-text">Ajuda e Suporte</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="content-wrapper">
+        <form class="container" action="professor/cursos/criar-curso" method="post" style="max-width: 1200px; padding: 20px;">
+            <h1 class="titulo-pagina"><i class="bi bi-plus-circle-fill" style="color: #5C22AD;"></i> Criar Novo Curso</h1>
+            <p class="subtitulo-pagina">Preencha as informações abaixo para criar seu curso</p>
+
+            <!-- Card Informações Básicas -->
+            <div class="card-criacao">
+                <h2 class="secao-titulo"><i class="bi bi-info-circle-fill"></i> Informações Básicas</h2>
+                
+                <div class="mb-4">
+                    <label class="form-label">Nome do Curso *</label>
+                    <input type="text" class="form-control" placeholder="Ex: Introdução ao Python para Iniciantes" id="nomeCurso">
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Custo do Curso (R$) *</label>
+                    <input type="number" class="form-control" placeholder="0.00" step="0.01" min="0" id="custoCurso">
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Descrição do Curso *</label>
+                    <textarea class="form-control" placeholder="Descreva o que os alunos irão aprender neste curso..." id="descricaoCurso"></textarea>
+                </div>
+            </div>
+
+            <!-- Card Tópicos -->
+            <div class="card-criacao">
+                <h2 class="secao-titulo">
+                    <i class="bi bi-tags-fill"></i> 
+                    Tópicos do Curso
+                    <span class="badge-contador" id="contadorTopicos">0 selecionados</span>
+                </h2>
+                <p style="color: #666; margin-bottom: 20px;">Selecione os tópicos que melhor descrevem seu curso</p>
+                
+                <div class="topicos-container" id="topicosList">
+                    {% for topico in topicos %}
+                    <div class="topico-item" data-topico="{{ topico.id }}">
+                         {{ topico.nome }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Card Criação de Módulos -->
+            <div class="modulos-card">
+                <div class="modulos-titulo">
+                    <i class="bi bi-collection"></i> Criação de Módulos
+                </div>
+                <p class="modulos-descricao">
+                    Organize o conteúdo do seu curso em módulos e aulas para uma melhor experiência de aprendizado
+                </p>
+                <button class="btn-criar-modulos" type="button" onclick="window.location.href='/professor/cursos/criar-curso/criar-modulo'">
+                    <i class="bi bi-plus-lg"></i> Criar Módulos do Curso
+                </button>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="botoes-acao">
+                <button class="btn-cancelar" type="reset">
+                    <i class="bi bi-x-lg"></i> Cancelar
+                </button>
+                <button class="btn-salvar" type="submit">
+                    <i class="bi bi-check-lg"></i> Salvar Curso
+                </button>
+            </div>
+        </form>
     </div>
 </article>
-{%endblock%}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Sistema de seleção de tópico (apenas 1)
+    const topicos = document.querySelectorAll('.topico-item');
+    const contador = document.getElementById('contadorTopicos');
+    let topicoSelecionado = null;
+
+    topicos.forEach(topico => {
+        topico.addEventListener('click', function() {
+            // Remove seleção de todos os tópicos
+            topicos.forEach(t => t.classList.remove('selecionado'));
+            
+            // Seleciona o tópico clicado
+            this.classList.add('selecionado');
+            topicoSelecionado = this.getAttribute('data-topico');
+            
+            contador.textContent = '1 selecionado';
+        });
+    });
+</script>
+{% endblock %}

@@ -49,6 +49,8 @@ async def post_cadastro_professor(request: Request,
             foto=cliente.foto
         )
 
+        cliente_repo.atualizar_identificacao_professor_por_id(True, cliente.id)
+
         professor_repo.inserir_professor(professor, usuario_logado.get("id"))
 
         criar_sessao(request, {
@@ -56,7 +58,8 @@ async def post_cadastro_professor(request: Request,
             "nome": professor.nome,
             "email": professor.email,
             "perfil": professor.perfil,
-            "foto": professor.foto
+            "foto": professor.foto,
+            "identificacaoProfessor": True
         })
 
         return RedirectResponse(f"/professor", status.HTTP_303_SEE_OTHER)
