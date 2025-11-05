@@ -34,6 +34,8 @@ Grupo: Jhonatan Lima Mota Lourenço, Lorenzo Barbosa Alves, Lucas Oliveira Silva
 
         pip uninstall -y bcrypt
 
+        pip install resend
+
         pip install bcrypt==4.0.1
 
         pip install passlib[bcrypt]
