@@ -73,7 +73,7 @@ WHERE id = (SELECT id FROM usuario WHERE email = ?)
 
 ATUALIZAR_IDENTIFICACAO_PROFESSOR_POR_ID = """
 UPDATE cliente
-SET identificacaoProfessor = ?
+SET indentificacaoProfessor = ?
 WHERE id = ?
 """
 

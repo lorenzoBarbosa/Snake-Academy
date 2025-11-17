@@ -1,4 +1,731 @@
-{% extends 'index.html' %}
-{% block conteudo %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Aulas do Módulo</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
 
-{% endblock %}
+        /* Estilos da sidebar */
+        article {
+            display: flex;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .sidebar-container {
+            position: relative;
+            width: 50px;
+            background-color: #ffffff;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            transition: width 0.3s ease;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .sidebar-container:hover {
+            width: 250px;
+        }
+
+        .sidebar-content {
+            padding: 20px 0;
+            width: 250px;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 12px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .sidebar-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .sidebar-icon {
+            min-width: 26px;
+            font-size: 22px;
+            color: #5C22AD;
+            display: flex;
+            justify-content: center;
+        }
+
+        .sidebar-text {
+            margin-left: 15px;
+            white-space: nowrap;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-container:hover .sidebar-text {
+            opacity: 1;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            padding: 0;
+        }
+
+        /* Navbar */
+        .demo-navbar {
+            background-color: #5C22AD;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Estilos da página */
+        .titulo-pagina {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #333;
+            margin: 30px 0 10px 0;
+        }
+
+        .subtitulo-pagina {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .card-criacao {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .secao-titulo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #5C22AD;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .secao-titulo i {
+            margin-right: 10px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #5C22AD;
+            box-shadow: 0 0 0 0.2rem rgba(92, 34, 173, 0.25);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+        }
+
+        /* Upload de vídeo */
+        .upload-area {
+            border: 3px dashed #5C22AD;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            background-color: #f9f5ff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .upload-area:hover {
+            background-color: #f0e6ff;
+            border-color: #4a1b8d;
+        }
+
+        .upload-area i {
+            font-size: 3rem;
+            color: #5C22AD;
+            margin-bottom: 15px;
+        }
+
+        .upload-area p {
+            color: #5C22AD;
+            font-weight: 600;
+            margin: 10px 0 5px 0;
+        }
+
+        .upload-area small {
+            color: #666;
+        }
+
+        .video-preview {
+            background-color: #f9f5ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .video-preview-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #5C22AD;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .video-preview-info {
+            flex: 1;
+        }
+
+        .video-preview-nome {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .video-preview-tamanho {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .btn-remover-video {
+            background-color: #ffebee;
+            color: #d32f2f;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-remover-video:hover {
+            background-color: #d32f2f;
+            color: white;
+        }
+
+        /* Lista de vídeos */
+        .videos-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .video-card {
+            background-color: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover {
+            border-color: #5C22AD;
+            box-shadow: 0 4px 12px rgba(92, 34, 173, 0.15);
+        }
+
+        .video-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .video-numero {
+            background-color: #5C22AD;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .video-acoes {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-acao {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-editar {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .btn-editar:hover {
+            background-color: #1976d2;
+            color: white;
+        }
+
+        .btn-excluir {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+
+        .btn-excluir:hover {
+            background-color: #d32f2f;
+            color: white;
+        }
+
+        .video-info h4 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .video-info p {
+            color: #666;
+            margin: 0;
+        }
+
+        .badge-contador {
+            background-color: #5C22AD;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        /* Botões de ação */
+        .btn-adicionar-video {
+            background-color: #5C22AD;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-adicionar-video:hover {
+            background-color: #4a1b8d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 34, 173, 0.3);
+        }
+
+        .btn-adicionar-video:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .botoes-acao {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn-salvar {
+            background-color: #5C22AD;
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-salvar:hover {
+            background-color: #4a1b8d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(92, 34, 173, 0.3);
+        }
+
+        .btn-cancelar {
+            background-color: #e0e0e0;
+            color: #333;
+            border: none;
+            padding: 12px 35px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancelar:hover {
+            background-color: #d0d0d0;
+        }
+
+        .demo-footer {
+            background-color: #333;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .input-file {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="demo-navbar">
+        Plataforma de Cursos - Criação de Aulas
+    </div>
+
+    <article>
+        <!-- Sidebar -->
+        <div class="sidebar-container">
+            <div class="sidebar-content">
+                <a href="#" class="sidebar-item">
+                    <i class="bi bi-house-door sidebar-icon"></i>
+                    <span class="sidebar-text">Página Inicial</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <i class="bi bi-book sidebar-icon"></i>
+                    <span class="sidebar-text">Meus Cursos</span>
+                </a>
+                <a href="#" class="sidebar-item" style="background-color: #f0f0f0;">
+                    <i class="bi bi-play-circle sidebar-icon"></i>
+                    <span class="sidebar-text">Criar Aulas</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <i class="bi bi-people sidebar-icon"></i>
+                    <span class="sidebar-text">Alunos</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <i class="bi bi-bar-chart sidebar-icon"></i>
+                    <span class="sidebar-text">Estatísticas</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <i class="bi bi-chat-dots sidebar-icon"></i>
+                    <span class="sidebar-text">Mensagens</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <i class="bi bi-gear sidebar-icon"></i>
+                    <span class="sidebar-text">Configurações</span>
+                </a>
+                <a href="#" class="sidebar-item">
+                    <i class="bi bi-question-circle sidebar-icon"></i>
+                    <span class="sidebar-text">Ajuda e Suporte</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div class="content-wrapper">
+            <div class="container" style="max-width: 1200px; padding: 20px;">
+                <h1 class="titulo-pagina">
+                    <i class="bi bi-camera-video-fill" style="color: #5C22AD;"></i> 
+                    Adicionar Aulas ao Módulo
+                </h1>
+                <p class="subtitulo-pagina">Faça upload dos vídeos das aulas com título e descrição</p>
+
+                <!-- Card Adicionar Nova Aula -->
+                <div class="card-criacao">
+                    <h2 class="secao-titulo">
+                        <i class="bi bi-plus-circle-fill"></i> 
+                        Nova Aula
+                    </h2>
+
+                    <!-- Upload de Vídeo -->
+                    <div class="mb-4">
+                        <label class="form-label">Vídeo da Aula *</label>
+                        <input type="file" id="inputVideo" class="input-file" accept="video/*" onchange="selecionarVideo(event)">
+                        
+                        <div id="uploadArea" class="upload-area" onclick="document.getElementById('inputVideo').click()">
+                            <i class="bi bi-cloud-upload"></i>
+                            <p>Clique para fazer upload do vídeo</p>
+                            <small>Formatos aceitos: MP4, AVI, MOV (máx. 500MB)</small>
+                        </div>
+
+                        <div id="videoPreview" style="display: none;"></div>
+
+                        <!-- Alternativa: URL do vídeo -->
+                        <div class="mt-3">
+                            <label class="form-label">Ou insira a URL do vídeo (YouTube, Vimeo, etc.)</label>
+                            <input type="url" class="form-control" id="urlVideo" placeholder="https://youtube.com/watch?v=...">
+                        </div>
+                    </div>
+
+                    <!-- Título da Aula -->
+                    <div class="mb-4">
+                        <label class="form-label">Título da Aula *</label>
+                        <input type="text" class="form-control" id="tituloAula" placeholder="Ex: Introdução ao Python - Variáveis">
+                    </div>
+
+                    <!-- Descrição da Aula -->
+                    <div class="mb-4">
+                        <label class="form-label">Descrição da Aula *</label>
+                        <textarea class="form-control" id="descricaoAula" placeholder="Descreva o conteúdo que será abordado nesta aula..."></textarea>
+                    </div>
+
+                    <button class="btn-adicionar-video" onclick="adicionarAulaLista()">
+                        <i class="bi bi-plus-lg"></i> Adicionar Aula à Lista
+                    </button>
+                </div>
+
+                <!-- Card Lista de Aulas -->
+                <div class="card-criacao">
+                    <h2 class="secao-titulo">
+                        <i class="bi bi-collection-play-fill"></i> 
+                        Aulas Adicionadas
+                        <span class="badge-contador" id="contadorAulas">0 aulas</span>
+                    </h2>
+
+                    <div id="listaAulas" class="videos-lista">
+                        <div style="text-align: center; padding: 40px; color: #999;">
+                            <i class="bi bi-camera-video" style="font-size: 3rem; opacity: 0.3;"></i>
+                            <p style="margin-top: 15px;">Nenhuma aula adicionada ainda</p>
+                            <small>Preencha o formulário acima e clique em "Adicionar Aula à Lista"</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botões de Ação -->
+                <div class="botoes-acao">
+                    <button class="btn-cancelar" onclick="cancelar()">
+                        <i class="bi bi-x-lg"></i> Cancelar
+                    </button>
+                    <button class="btn-salvar" onclick="salvarAulas()">
+                        <i class="bi bi-check-lg"></i> Salvar Todas as Aulas
+                    </button>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <div class="demo-footer">
+        <p>Plataforma de Cursos © 2025 - Todos os direitos reservados</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let aulas = [];
+        let videoAtual = null;
+
+        // Selecionar vídeo
+        function selecionarVideo(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // Validar tamanho (500MB)
+            const maxSize = 500 * 1024 * 1024;
+            if (file.size > maxSize) {
+                alert('O arquivo é muito grande! Máximo permitido: 500MB');
+                return;
+            }
+
+            videoAtual = file;
+
+            // Mostrar preview
+            const preview = document.getElementById('videoPreview');
+            const uploadArea = document.getElementById('uploadArea');
+            
+            preview.innerHTML = `
+                <div class="video-preview">
+                    <div class="video-preview-icon">
+                        <i class="bi bi-film"></i>
+                    </div>
+                    <div class="video-preview-info">
+                        <div class="video-preview-nome">${file.name}</div>
+                        <div class="video-preview-tamanho">${(file.size / (1024 * 1024)).toFixed(2)} MB</div>
+                    </div>
+                    <button class="btn-remover-video" onclick="removerVideo()">
+                        <i class="bi bi-trash"></i> Remover
+                    </button>
+                </div>
+            `;
+            
+            uploadArea.style.display = 'none';
+            preview.style.display = 'block';
+        }
+
+        // Remover vídeo
+        function removerVideo() {
+            videoAtual = null;
+            document.getElementById('inputVideo').value = '';
+            document.getElementById('videoPreview').style.display = 'none';
+            document.getElementById('uploadArea').style.display = 'block';
+        }
+
+        // Adicionar aula à lista
+        function adicionarAulaLista() {
+            const titulo = document.getElementById('tituloAula').value.trim();
+            const descricao = document.getElementById('descricaoAula').value.trim();
+            const urlVideo = document.getElementById('urlVideo').value.trim();
+
+            // Validações
+            if (!titulo || !descricao) {
+                alert('Por favor, preencha o título e a descrição da aula!');
+                return;
+            }
+
+            if (!videoAtual && !urlVideo) {
+                alert('Por favor, faça upload de um vídeo ou insira uma URL!');
+                return;
+            }
+
+            // Criar objeto da aula
+            const novaAula = {
+                id: Date.now(),
+                titulo: titulo,
+                descricao: descricao,
+                video: videoAtual ? videoAtual.name : urlVideo,
+                tipo: videoAtual ? 'arquivo' : 'url'
+            };
+
+            aulas.push(novaAula);
+            renderizarAulas();
+
+            // Limpar formulário
+            limparFormulario();
+
+            alert('Aula adicionada à lista com sucesso!');
+        }
+
+        // Renderizar lista de aulas
+        function renderizarAulas() {
+            const container = document.getElementById('listaAulas');
+            const contador = document.getElementById('contadorAulas');
+
+            contador.textContent = `${aulas.length} aula${aulas.length !== 1 ? 's' : ''}`;
+
+            if (aulas.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #999;">
+                        <i class="bi bi-camera-video" style="font-size: 3rem; opacity: 0.3;"></i>
+                        <p style="margin-top: 15px;">Nenhuma aula adicionada ainda</p>
+                        <small>Preencha o formulário acima e clique em "Adicionar Aula à Lista"</small>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = aulas.map((aula, index) => `
+                <div class="video-card">
+                    <div class="video-card-header">
+                        <div class="video-numero">
+                            <i class="bi bi-play-circle"></i> Aula ${index + 1}
+                        </div>
+                        <div class="video-acoes">
+                            <button class="btn-acao btn-editar" onclick="editarAula(${aula.id})" title="Editar">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="btn-acao btn-excluir" onclick="excluirAula(${aula.id})" title="Excluir">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h4><i class="bi bi-camera-video" style="color: #5C22AD; margin-right: 8px;"></i>${aula.titulo}</h4>
+                        <p>${aula.descricao}</p>
+                        <p style="margin-top: 10px; color: #5C22AD; font-size: 0.9rem;">
+                            <i class="bi bi-${aula.tipo === 'arquivo' ? 'file-earmark-play' : 'link-45deg'}"></i> 
+                            ${aula.video}
+                        </p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Editar aula
+        function editarAula(id) {
+            const aula = aulas.find(a => a.id === id);
+            if (!aula) return;
+
+            document.getElementById('tituloAula').value = aula.titulo;
+            document.getElementById('descricaoAula').value = aula.descricao;
+            
+            if (aula.tipo === 'url') {
+                document.getElementById('urlVideo').value = aula.video;
+            }
+
+            // Remover da lista (será adicionada novamente ao salvar)
+            excluirAula(id, false);
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            alert('Aula carregada para edição! Faça as alterações e clique em "Adicionar Aula à Lista".');
+        }
+
+        // Excluir aula
+        function excluirAula(id, confirmar = true) {
+            if (confirmar && !confirm('Tem certeza que deseja excluir esta aula?')) {
+                return;
+            }
+
+            aulas = aulas.filter(a => a.id !== id);
+            renderizarAulas();
+        }
+
+        // Limpar formulário
+        function limparFormulario() {
+            document.getElementById('tituloAula').value = '';
+            document.getElementById('descricaoAula').value = '';
+            document.getElementById('urlVideo').value = '';
+            removerVideo();
+        }
+
+        // Salvar todas as aulas
+        function salvarAulas() {
+            if (aulas.length === 0) {
+                alert('Adicione pelo menos uma aula antes de salvar!');
+                return;
+            }
+
+            console.log('Aulas para enviar ao backend:', aulas);
+            alert(`${aulas.length} aula${aulas.length !== 1 ? 's' : ''} salva${aulas.length !== 1 ? 's' : ''} com sucesso!\n\nAgora você pode voltar para a página do módulo.`);
+            
+            // Aqui você enviaria os dados para o backend
+            // fetch('/api/salvar-aulas', { method: 'POST', body: JSON.stringify(aulas) })
+        }
+
+        // Cancelar
+        function cancelar() {
+            if (aulas.length > 0) {
+                if (!confirm('Você tem aulas não salvas. Tem certeza que deseja sair?')) {
+                    return;
+                }
+            }
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

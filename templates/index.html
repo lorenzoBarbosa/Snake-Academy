@@ -143,9 +143,9 @@
                         </div>
                     </form>
                     <div class="tornar-se-ofertante">
-                        <a href="{% if usuario.identificacaoProfessor == true %}/cliente{% elif usuario.identificacaoProfessor == false %}/professor{% endif %}">
-                            {% if usuario.identificacaoProfessor == false %}Página do aluno <i class="bi bi-person"></i>
-                            {% elif usuario.identificacaoProfessor == true %}Página do professor <i class="bi bi-pencil"></i>
+                        <a href="{% if usuario.identificacaoProfessor == 1 %}/cliente{% elif usuario.identificacaoProfessor == 0 %}/professor{% endif %}">
+                            {% if usuario.identificacaoProfessor == 1 %} Página do aluno <i class="bi bi-person"></i>
+                            {% elif usuario.identificacaoProfessor == 0 %} Ofertante de Cursos <i class="bi bi-pencil"></i>
                             {% endif %}
                         </a>
                     </div>

@@ -242,6 +242,19 @@ def obter_quantidade_clientes() -> int:
     except Exception as e:
         print(f"Erro ao obter quantidade de clientes: {e}")
 
+def atualizar_identificacao_professor_por_id(identificacao: bool, id: int) -> bool:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(ATUALIZAR_IDENTIFICACAO_PROFESSOR_POR_ID, (
+            identificacao,
+            id))
+        conn.commit()
+        conn.close()
+        return cursor.rowcount > 0
+    except Exception as e:
+        print(f"Erro ao atualizar identificação de professor: {e}")
+
 def atualizar_cliente_por_id(cliente: Cliente, id: int):
     try:
         conn = get_connection()
