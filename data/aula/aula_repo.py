@@ -26,8 +26,9 @@ def inserir_aula(aula: Aula):
                 aula.titulo,
                 aula.descricaoAula,
                 aula.duracaoAula,
-                aula.tipo,
-                aula.ordem,
+                aula.url,
+                aula.videoId,
+                aula.status,
                 aula.dataDisponibilidade
             )
         )
@@ -51,8 +52,9 @@ def obter_todas_aulas() -> list[Aula]:
                 titulo=tupla["titulo"],
                 descricaoAula=tupla["descricaoAula"],
                 duracaoAula=tupla["duracaoAula"],
-                tipo=tupla["tipo"],
-                ordem=tupla["ordem"],
+                url=tupla["url"],
+                videoId=tupla["videoId"],
+                status=tupla["status"],
                 dataDisponibilidade=tupla["dataDisponibilidade"]    
                 ) for tupla in tuplas ]
         return usuarios
@@ -73,8 +75,9 @@ def obter_aula_por_id(id: int) -> Aula:
                 titulo=tupla["titulo"],
                 descricaoAula=tupla["descricaoAula"],
                 duracaoAula=tupla["duracaoAula"],
-                tipo=tupla["tipo"],
-                ordem=tupla["ordem"],
+                url=tupla["url"],
+                videoId=tupla["videoId"],
+                status=tupla["status"],
                 dataDisponibilidade=tupla["dataDisponibilidade"],
                 modulo = obter_modulo_por_id(tupla["idModulo"]),
                 nomeCurso = tupla["nomeCurso"]
@@ -97,8 +100,9 @@ def obter_aula_paginada_por_modulo(id_modulo: int, limite: int, offset: int) -> 
                 titulo=tupla["titulo"],
                 descricaoAula=tupla["descricaoAula"],
                 duracaoAula=tupla["duracaoAula"],
-                tipo=tupla["tipo"],
-                ordem=tupla["ordem"],
+                url=tupla["url"],
+                videoId=tupla["videoId"],
+                status=tupla["status"],
                 dataDisponibilidade=tupla["dataDisponibilidade"]
             ) for tupla in tuplas ]
         return aulas
@@ -120,8 +124,9 @@ def obter_aula_por_titulo(titulo: str, limite: int, offset: int) -> list[Aula]:
                 titulo=tupla["titulo"],
                 descricaoAula=tupla["descricaoAula"],
                 duracaoAula=tupla["duracaoAula"],
-                tipo=tupla["tipo"],
-                ordem=tupla["ordem"],
+                url=tupla["url"],
+                videoId=tupla["videoId"],
+                status=tupla["status"],
                 dataDisponibilidade=tupla["dataDisponibilidade"]
             ) for tupla in tuplas ]
         return aulas
@@ -164,8 +169,9 @@ def atualizar_aula_por_id(aula: Aula):
                 aula.titulo,
                 aula.descricaoAula,
                 aula.duracaoAula,
-                aula.tipo,
-                aula.ordem,
+                aula.url,
+                aula.videoId,
+                aula.status,
                 aula.dataDisponibilidade,
                 aula.id
             )

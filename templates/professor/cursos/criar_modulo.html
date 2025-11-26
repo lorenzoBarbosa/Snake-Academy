@@ -7,7 +7,7 @@
             <p class="subtitulo-pagina">Configure o módulo com aulas e exercícios</p>
 
             <div class="numero-modulo">
-                <i class="bi bi-hash"></i> Módulo 1
+                <i class="bi bi-hash"></i> Módulo 
             </div>
 
             <!-- Card Informações do Módulo -->
@@ -44,34 +44,12 @@
                     <i class="bi bi-plus-lg"></i> Adicionar Nova Aula
                 </button>
             </div>
-
-            <!-- Card Lista de Exercícios -->
-            <div class="card-criacao">
-                <h2 class="secao-titulo">
-                    <i class="bi bi-file-earmark-text-fill"></i> 
-                    Exercícios do Módulo
-                    <span class="badge-contador" id="contadorExercicios">0 exercícios</span>
-                </h2>
-                
-                <div class="lista-container" id="listaExercicios">
-                    <div class="lista-vazia">
-                        <i class="bi bi-pencil-square"></i>
-                        <p>Nenhum exercício adicionado ainda</p>
-                        <small>Clique no botão abaixo para adicionar o primeiro exercício</small>
-                    </div>
-                </div>
-
-                <button class="btn-adicionar-item" onclick="adicionarExercicio()">
-                    <i class="bi bi-plus-lg"></i> Adicionar Novo Exercício
-                </button>
-            </div>
-
             <!-- Botões de Ação -->
             <div class="botoes-acao">
-                <button class="btn-cancelar" onclick="cancelar()">
+                <button class="btn-cancelar" type="reset">
                     <i class="bi bi-x-lg"></i> Cancelar
                 </button>
-                <button class="btn-salvar" onclick="salvarModulo()">
+                <button class="btn-salvar" type="submit">
                     <i class="bi bi-check-lg"></i> Salvar Módulo
                 </button>
             </div>
@@ -130,47 +108,5 @@
         `).join('');
     }
 
-    // Função para renderizar exercícios
-    function renderizarExercicios() {
-        const container = document.getElementById('listaExercicios');
-        const contador = document.getElementById('contadorExercicios');
-        
-        contador.textContent = `${exercicios.length} exercício${exercicios.length !== 1 ? 's' : ''}`;
-        
-        if (exercicios.length === 0) {
-            container.innerHTML = `
-                <div class="lista-vazia">
-                    <i class="bi bi-pencil-square"></i>
-                    <p>Nenhum exercício adicionado ainda</p>
-                    <small>Clique no botão abaixo para adicionar o primeiro exercício</small>
-                </div>
-            `;
-            return;
-        }
-
-        container.innerHTML = exercicios.map(ex => `
-            <div class="item-card">
-                <div class="item-info">
-                    <div class="item-titulo">
-                        <i class="bi bi-file-earmark-text" style="color: #5C22AD; margin-right: 8px;"></i>
-                        ${ex.titulo}
-                    </div>
-                    <p class="item-descricao">${ex.descricao}</p>
-                    <div class="item-duracao">
-                        <i class="bi bi-question-circle"></i>
-                        ${ex.questoes} questões
-                    </div>
-                </div>
-                <div class="item-acoes">
-                    <button class="btn-item btn-editar" onclick="editarExercicio(${ex.id})" title="Editar">
-                        <i class="bi bi-pencil"></i>
-                    </button>
-                    <button class="btn-item btn-excluir" onclick="excluirExercicio(${ex.id})" title="Excluir">
-                        <i class="bi bi-trash"></i>
-                    </button>
-                </div>
-            </div>
-        `).join('');
-    }
 </script>
 {% endblock %}

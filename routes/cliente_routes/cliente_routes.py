@@ -41,6 +41,9 @@ async def get_cliente(request: Request, usuario_logado: dict = None):
     banners = banner_repo.obter_todos_banners()
     cliente = cliente_repo.obter_cliente_por_id(usuario_logado["id"])
     lista_historico = []
+    identificacaoProfessor = False
+    resultado = cliente_repo.atualizar_identificacao_professor_por_id(identificacaoProfessor, cliente.id)
+    usuario_logado['indentificacaoProfessor'] = identificacaoProfessor
     if cliente.historicoCursos:
         for curso_id in cliente.historicoCursos:
             curso = obter_curso_por_id(curso_id)

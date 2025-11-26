@@ -11,8 +11,9 @@ class Aula:
     titulo: str
     descricaoAula: str
     duracaoAula: str
-    tipo: str
-    ordem: int
+    url: str
+    videoId: str
     dataDisponibilidade: str
+    status: int
     modulo: Optional[Modulo] = None
     nomeCurso: Optional[str] = None
