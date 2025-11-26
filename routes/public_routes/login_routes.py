@@ -4,6 +4,7 @@ from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.params import Form
 from pydantic_core import ValidationError
+from fastapi import status
 
 from data.usuario import usuario_repo
 from dtos.login_dto import LoginDTO
