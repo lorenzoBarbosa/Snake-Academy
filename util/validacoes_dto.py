@@ -231,7 +231,6 @@ class ValidadorWrapper:
                 raise ValueError(str(e))
         return validador
 
-
 VALIDADOR_NOME = ValidadorWrapper.criar_validador(validar_nome_pessoa, "Nome")
 VALIDADOR_TELEFONE = ValidadorWrapper.criar_validador(validar_telefone, "Telefone")
 VALIDADOR_SENHA = ValidadorWrapper.criar_validador(validar_senha, "Senha")
