@@ -82,6 +82,19 @@ def validar_nome_pessoa(nome: str, min_chars: int = 2, max_chars: int = 100) -> 
 
     return nome_limpo
 
+def  validar_titulo(titulo: str, min_chars: int = 3, max_chars: int = 100) -> str:
+    if not titulo or not titulo.strip():
+        raise ValidacaoError('Título é obrigatório')
+    
+    titulo_limpo = ' '.join(titulo.split())
+
+    if len(titulo_limpo) < min_chars:
+        raise ValidacaoError(f'Título deve ter pelo menos {min_chars} caracteres')
+
+    if len(titulo_limpo) > max_chars:
+        raise ValidacaoError(f'Título deve ter no máximo {max_chars} caracteres')
+
+    return titulo_limpo
 
 def validar_texto_obrigatorio(texto: str, campo: str, min_chars: int = 1, max_chars: int = 1000) -> str:
     if not texto or not texto.strip():

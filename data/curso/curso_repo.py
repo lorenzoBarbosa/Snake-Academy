@@ -49,18 +49,18 @@ def obter_todos_cursos() -> list[Curso]:
         conn.close()
         cursos = [
             Curso(
-                id=tupla[0],
-                idTopico=tupla[1],
-                nome=tupla[2],
-                idProfessor=tupla[3],
-                custo=tupla[5],
-                descricaoCurso=tupla[6],
-                duracaoCurso=tupla[7],
-                avaliacao=tupla[8],
-                dataCriacao=tupla[9],
-                statusCurso=tupla[10],
-                professor = professor_repo.obter_professor_por_id(tupla[3]),
-                topico = topico_repo.obter_topico_por_id(tupla[1])
+                id=tupla["id"],
+                idTopico=tupla["idTopico"],
+                nome=tupla["nome"],
+                idProfessor=tupla["idProfessor"],
+                custo=tupla["custo"],
+                descricaoCurso=tupla["descricaoCurso"],
+                duracaoCurso=tupla["duracaoCurso"],
+                avaliacao=tupla["Avaliacao"],
+                dataCriacao=tupla["dataCriacao"],
+                statusCurso=tupla["statusCurso"],
+                professor = professor_repo.obter_professor_por_id(tupla["idProfessor"]),
+                topico = topico_repo.obter_topico_por_id(tupla["idTopico"])
             ) for tupla in tuplas ]
         return cursos
     except Exception as e:
@@ -78,8 +78,8 @@ def obter_cursos_paginado(pg_num: int, pg_size: int) -> list[Curso]:
         conn.close()
         cursos = [
             Curso(
-                id=tupla[0],
-                idTopico=tupla[1],
+                id=tupla["id"],
+                idTopico=tupla["idTopico"],
                 nome=tupla[2],
                 idProfessor=tupla[3],
                 custo=tupla[5],
@@ -89,7 +89,7 @@ def obter_cursos_paginado(pg_num: int, pg_size: int) -> list[Curso]:
                 dataCriacao=tupla[9],
                 statusCurso=tupla[10],
                 professor = professor_repo.obter_professor_por_id(tupla[3]),
-                topico = topico_repo.obter_topico_por_id(tupla[1])
+                topico = topico_repo.obter_topico_por_id(tupla["idTopico"])
             ) for tupla in tuplas ]
         return cursos
     except Exception as e:
@@ -104,7 +104,7 @@ def obter_curso_por_id(id: int) -> Optional[Curso]:
         conn.close()
         curso = Curso(
                 id=tupla[0],
-                idTopico=tupla[1],
+                idTopico=tupla["idTopico"],
                 nome=tupla[2],
                 idProfessor=tupla[3],
                 custo=tupla[4],
@@ -114,7 +114,7 @@ def obter_curso_por_id(id: int) -> Optional[Curso]:
                 dataCriacao=tupla[8],
                 statusCurso= bool(tupla[9]),
                 professor = professor_repo.obter_professor_por_id(tupla[3]),
-                topico = topico_repo.obter_topico_por_id(tupla[1])
+                topico = topico_repo.obter_topico_por_id(tupla["idTopico"])
             )
         return curso
     except Exception as e:
@@ -123,7 +123,7 @@ def obter_curso_por_id(id: int) -> Optional[Curso]:
 def obter_curso_por_termo_paginado(termo: str, pg_num: int, pg_size: int) -> list[Curso]:
     try:
         limit = pg_size
-        offset = (pg_num - 1) * pg_size
+        offset = (pg_num - "idTopico") * pg_size
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute(OBTER_CURSO_POR_TERMO_PAGINADO, ('%' + termo + '%', '%' + termo + '%', '%' + termo + '%', limit, offset))
@@ -132,7 +132,7 @@ def obter_curso_por_termo_paginado(termo: str, pg_num: int, pg_size: int) -> lis
         cursos = [
             Curso(
                 id=tupla[0],
-                idTopico=tupla[1],
+                idTopico=tupla["idTopico"],
                 nome=tupla[2],
                 idProfessor=tupla[3],
                 custo=tupla[4],
@@ -142,7 +142,7 @@ def obter_curso_por_termo_paginado(termo: str, pg_num: int, pg_size: int) -> lis
                 dataCriacao=tupla[8],
                 statusCurso=tupla[9],
                 professor = professor_repo.obter_professor_por_id(tupla[3]),
-                topico = topico_repo.obter_topico_por_id(tupla[1])
+                topico = topico_repo.obter_topico_por_id(tupla["idTopico"])
             ) for tupla in tuplas ]
         return cursos
     except Exception as e:
@@ -180,7 +180,7 @@ def obter_curso_por_topico(idTopico: int) -> list[Curso]:
         cursos = [
             Curso(
                 id=tupla[0],
-                idTopico=tupla[1],
+                idTopico=tupla["idTopico"],
                 nome=tupla[2],
                 idProfessor=tupla[3],
                 custo=tupla[4],
@@ -190,7 +190,7 @@ def obter_curso_por_topico(idTopico: int) -> list[Curso]:
                 dataCriacao=tupla[8],
                 statusCurso=bool(tupla[9]),
                 professor=professor_repo.obter_professor_por_id(tupla[3]),
-                topico=topico_repo.obter_topico_por_id(tupla[1])
+                topico=topico_repo.obter_topico_por_id(tupla["idTopico"])
             ) for tupla in tuplas
         ]
         return cursos

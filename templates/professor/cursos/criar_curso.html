@@ -1,9 +1,28 @@
 {% extends 'index.html' %}
 {% block conteudo %}
 
+    {% if erros %}
+        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+            <div class="toast show alert alert-danger" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header bg-danger text-white">
+                    <strong class="me-auto">
+                        <i class="bi bi-exclamation-triangle-fill"></i> Erro ao criar curso
+                    </strong>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <ul style="margin: 0; padding-left: 20px;">
+                        {% for campo, mensagem in erros.items() %}
+                            <li><strong>{{ campo }}:</strong> {{ mensagem }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 
     <div class="content-wrapper">
-        <form class="container" action="professor/cursos/criar-curso" method="post" style="max-width: 1200px; padding: 20px;">
+        <form class="container" action="/professor/cursos/criar-curso" method="post" style="max-width: 1200px; padding: 20px;">
             <h1 class="titulo-pagina"><i class="bi bi-plus-circle-fill" style="color: #5C22AD;"></i> Criar Novo Curso</h1>
             <p class="subtitulo-pagina">Preencha as informações abaixo para criar seu curso</p>
 
@@ -13,17 +32,36 @@
                 
                 <div class="mb-4">
                     <label class="form-label">Nome do Curso *</label>
-                    <input type="text" class="form-control" placeholder="Ex: Introdução ao Python para Iniciantes" id="nomeCurso">
+                    <input type="text" 
+                           class="form-control {% if erros.TITULO %}is-invalid{% endif %}" 
+                           name="titulo" 
+                           placeholder="Ex: Introdução ao Python para Iniciantes" 
+                           id="nomeCurso"
+                           value="{{ dados.titulo if dados else '' }}"
+                           required>
+                    {% if erros.TITULO %}
+                        <div class="invalid-feedback">{{ erros.TITULO }}</div>
+                    {% endif %}
                 </div>
 
                 <div class="mb-4">
                     <label class="form-label">Custo do Curso (R$) *</label>
-                    <input type="number" class="form-control" placeholder="0.00" step="0.01" min="0" id="custoCurso">
+                    <input type="number" name="custo" id="custo" class="form-control {% if erros.CUSTO %}is-invalid{% endif %}" placeholder="0.00" step="0.01" min="0" value="{{ dados.custo if dados else '' }}" required>
+                    {% if erros.CUSTO %}
+                        <div class="invalid-feedback">{{ erros.CUSTO }}</div>
+                    {% endif %}
                 </div>
 
                 <div class="mb-4">
                     <label class="form-label">Descrição do Curso *</label>
-                    <textarea class="form-control" placeholder="Descreva o que os alunos irão aprender neste curso..." id="descricaoCurso"></textarea>
+                    <textarea class="form-control {% if erros.DESCRICAO %}is-invalid{% endif %}" 
+                              name="descricao" 
+                              placeholder="Descreva o que os alunos irão aprender neste curso..." 
+                              id="descricaoCurso"
+                              required>{{ dados.descricao if dados else '' }}</textarea>
+                    {% if erros.DESCRICAO %}
+                        <div class="invalid-feedback">{{ erros.DESCRICAO }}</div>
+                    {% endif %}
                 </div>
             </div>
 
@@ -36,9 +74,23 @@
                 </h2>
                 <p style="color: #666; margin-bottom: 20px;">Selecione os tópicos que melhor descrevem seu curso</p>
                 
+                <!-- Input hidden para enviar o tópico selecionado -->
+                <input type="hidden" 
+                       name="topico_id" 
+                       id="topicoSelecionadoInput" 
+                       value="{{ dados.topico_id if dados else '' }}"
+                       required>
+                
+                {% if erros.TOPICO_ID %}
+                    <div class="alert alert-danger" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill"></i> {{ erros.TOPICO_ID }}
+                    </div>
+                {% endif %}
+                
                 <div class="topicos-container" id="topicosList">
                     {% for topico in topicos %}
-                    <div class="topico-item" data-topico="{{ topico.id }}">
+                    <div class="topico-item {% if dados and dados.topico_id == topico.id %}selecionado{% endif %}" 
+                         data-topico="{{ topico.id }}">
                          {{ topico.nome }}
                     </div>
                     {% endfor %}
@@ -60,7 +112,7 @@
 
             <!-- Botões de Ação -->
             <div class="botoes-acao">
-                <button class="btn-cancelar" type="reset">
+                <button class="btn-cancelar" type="button" onclick="window.history.back()">
                     <i class="bi bi-x-lg"></i> Cancelar
                 </button>
                 <button class="btn-salvar" type="submit">
@@ -76,7 +128,13 @@
     // Sistema de seleção de tópico (apenas 1)
     const topicos = document.querySelectorAll('.topico-item');
     const contador = document.getElementById('contadorTopicos');
-    let topicoSelecionado = null;
+    const topicoInput = document.getElementById('topicoSelecionadoInput');
+    let topicoSelecionado = topicoInput.value || null;
+
+    // Se já tem um tópico selecionado (erro de validação), atualiza o contador
+    if (topicoSelecionado) {
+        contador.textContent = '1 selecionado';
+    }
 
     topicos.forEach(topico => {
         topico.addEventListener('click', function() {
@@ -87,8 +145,33 @@
             this.classList.add('selecionado');
             topicoSelecionado = this.getAttribute('data-topico');
             
+            // Atualiza o input hidden com o ID do tópico selecionado
+            topicoInput.value = topicoSelecionado;
+            
             contador.textContent = '1 selecionado';
         });
     });
+
+    // Validação antes de enviar o formulário
+    document.querySelector('form').addEventListener('submit', function(e) {
+        if (!topicoInput.value) {
+            e.preventDefault();
+            alert('Por favor, selecione um tópico para o curso!');
+            return false;
+        }
+    });
+
+    // Inicializar e mostrar toast de erro automaticamente
+    {% if erros %}
+    document.addEventListener('DOMContentLoaded', function() {
+        const toastElement = document.querySelector('.toast');
+        if (toastElement) {
+            const toast = new bootstrap.Toast(toastElement, {
+                autohide: false  // Não fecha automaticamente
+            });
+            toast.show();
+        }
+    });
+    {% endif %}
 </script>
 {% endblock %}
