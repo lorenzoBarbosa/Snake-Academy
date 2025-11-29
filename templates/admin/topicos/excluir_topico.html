@@ -1,0 +1,47 @@
+{% extends "index.html" %}
+{% block conteudo %}
+<article>
+    <div class="card container mt-5">
+        <div class="card-body">
+            <h2 class="text-danger">Confirmar Exclusão de Tópico</h2>
+            <hr>
+            
+            {% if topico %}
+            <div class="alert alert-warning" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                <strong>Atenção!</strong> Você está prestes a excluir o seguinte tópico:
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <p><strong>Código:</strong> {{ "{:06d}".format(topico.id) }}</p>
+                    <p><strong>Nome:</strong> {{ topico.nome }}</p>
+                    <p><strong>Categoria:</strong> {{ topico.categoria.nome if topico.categoria else '-' }}</p>
+                </div>
+            </div>
+
+            <div class="alert alert-danger" role="alert">
+                <i class="bi bi-exclamation-circle-fill me-2"></i>
+                Esta ação não pode ser desfeita. Tem certeza que deseja continuar?
+            </div>
+
+            <form action="/admin/topicos/excluir-topico/{{ topico.id }}" method="post" class="d-inline">
+                <button type="submit" class="btn btn-danger me-2">
+                    <i class="bi bi-trash me-1"></i>
+                    Confirmar Exclusão
+                </button>
+                <a href="/admin/topicos" class="btn btn-secondary">
+                    <i class="bi bi-x-circle me-1"></i>
+                    Cancelar
+                </a>
+            </form>
+            {% else %}
+            <div class="alert alert-danger" role="alert">
+                Tópico não encontrado.
+            </div>
+            <a href="/admin/topicos" class="btn btn-secondary">Voltar para Lista de Tópicos</a>
+            {% endif %}
+        </div>
+    </div>
+</article>
+{% endblock %}

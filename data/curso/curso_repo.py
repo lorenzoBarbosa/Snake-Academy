@@ -56,7 +56,7 @@ def obter_todos_cursos() -> list[Curso]:
                 custo=tupla["custo"],
                 descricaoCurso=tupla["descricaoCurso"],
                 duracaoCurso=tupla["duracaoCurso"],
-                avaliacao=tupla["Avaliacao"],
+                avaliacao=tupla["avaliacao"],
                 dataCriacao=tupla["dataCriacao"],
                 statusCurso=tupla["statusCurso"],
                 professor = professor_repo.obter_professor_por_id(tupla["idProfessor"]),

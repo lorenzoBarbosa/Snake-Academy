@@ -42,6 +42,7 @@ from routes.admin_routes.moderar_comentario_routes import router as moderar_come
 from routes.admin_routes.moderar_denuncia_routes import router as moderar_denuncia_router
 from routes.admin_routes.notificar_usuario_routes import router as notificar_usuario_router
 from routes.admin_routes.usuarios_routes import router as usuarios_router
+from routes.admin_routes.topicos_routes import router as topicos_router
 
 from routes.public_routes.cadastro_routes import router as cadastro_router
 from routes.public_routes.home_routes import router as home_router
@@ -82,6 +83,7 @@ from routes.professor_routes.cursos.criar_modulo_routes import router as criar_m
 from routes.professor_routes.cadastro_professor_routes import router as cadastro_professor_router
 from util.criar_admin import criar_admin_padrao
 from util.criar_dados import criar_dados_iniciais
+
 
 admin_repo.criar_tabela_admin()
 aula_repo.criar_tabela_aula()
@@ -171,6 +173,7 @@ app.include_router(notificar_usuario_router)
 app.include_router(usuarios_router)
 app.include_router(codigo_enviado_router)
 app.include_router(cadastro_professor_router)
+app.include_router(topicos_router)
 
 
 if __name__ == "__main__":

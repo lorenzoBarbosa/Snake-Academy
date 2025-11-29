@@ -551,3 +551,304 @@ article.carrinho-article { width: 100%; }
     padding: 20px;
     border-radius: 6px;
 }
+
+.offcanvas-perfil-moderno {
+    width: 380px !important;
+    background: #ffffff;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Header do Offcanvas */
+.offcanvas-header-moderno {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 30px 25px 20px;
+    background: linear-gradient(135deg, #6c5ce7 0%, #5c4ac7 100%);
+    color: white;
+    position: relative;
+}
+
+.perfil-info-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.foto-perfil-offcanvas {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.imagem-foto-perfil-offcanvas {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.usuario-info {
+    flex: 1;
+}
+
+.nome-usuario-offcanvas {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 5px;
+    color: white;
+    line-height: 1.2;
+}
+
+.tipo-usuario-offcanvas {
+    font-size: 14px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+}
+
+.btn-close-moderno {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+.btn-close-moderno:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+/* Linha Gradiente */
+.linha-gradiente-offcanvas {
+    height: 4px;
+    background: linear-gradient(to right, #6c5ce7 0%, #38bc8e 50%, #6c5ce7 100%);
+    box-shadow: 0 2px 8px rgba(108, 92, 231, 0.3);
+}
+
+/* Body do Offcanvas */
+.offcanvas-body-moderno {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 120px);
+    position: relative;
+}
+
+/* Menu de Navegação */
+.menu-offcanvas {
+    padding: 20px 0;
+    flex: 1;
+}
+
+.item-menu-offcanvas {
+    display: flex;
+    align-items: center;
+    padding: 18px 25px;
+    color: #2e2e2e;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    gap: 15px;
+    border-left: 4px solid transparent;
+}
+
+.item-menu-offcanvas::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(108, 92, 231, 0.1) 0%, transparent 100%);
+    transition: width 0.3s ease;
+}
+
+.item-menu-offcanvas:hover::before {
+    width: 100%;
+}
+
+.item-menu-offcanvas:hover {
+    background: rgba(108, 92, 231, 0.05);
+    border-left-color: #6c5ce7;
+}
+
+.icone-container-offcanvas {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #6c5ce7 0%, #5c4ac7 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.item-menu-offcanvas:hover .icone-container-offcanvas {
+    transform: translateX(5px) scale(1.1);
+    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+}
+
+.texto-menu-offcanvas {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 500;
+    color: #2e2e2e;
+}
+
+.seta-offcanvas {
+    color: #6c5ce7;
+    font-size: 16px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.item-menu-offcanvas:hover .seta-offcanvas {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Item de Logout especial */
+.item-logout {
+    margin-top: 10px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.item-logout .icone-container-offcanvas {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+.item-logout:hover {
+    border-left-color: #e74c3c;
+    background: rgba(231, 76, 60, 0.05);
+}
+
+/* Design Decorativo no Rodapé */
+.design-decorativo-offcanvas {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 0 15px;
+    background: linear-gradient(to top, rgba(108, 92, 231, 0.03) 0%, transparent 100%);
+}
+
+.barra-decorativa {
+    flex: 1;
+    background: linear-gradient(to top, #6c5ce7 0%, #8b7ce9 100%);
+    border-radius: 4px 4px 0 0;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.barra-1 { height: 50px; animation-delay: 0s; }
+.barra-2 { height: 30px; background: linear-gradient(to top, #38bc8e 0%, #4ecda4 100%); animation-delay: 0.1s; }
+.barra-3 { height: 45px; animation-delay: 0.2s; }
+.barra-4 { height: 25px; background: linear-gradient(to top, #38bc8e 0%, #4ecda4 100%); animation-delay: 0.3s; }
+.barra-5 { height: 40px; animation-delay: 0.4s; }
+.barra-6 { height: 55px; background: linear-gradient(to top, #38bc8e 0%, #4ecda4 100%); animation-delay: 0.5s; }
+.barra-7 { height: 35px; animation-delay: 0.6s; }
+.barra-8 { height: 50px; background: linear-gradient(to top, #38bc8e 0%, #4ecda4 100%); animation-delay: 0.7s; }
+.barra-9 { height: 60px; animation-delay: 0.8s; }
+
+/* Animação sutil nas barras */
+@keyframes pulse-bar {
+    0%, 100% { transform: scaleY(1); opacity: 0.6; }
+    50% { transform: scaleY(1.1); opacity: 0.8; }
+}
+
+.offcanvas-perfil-moderno.show .barra-decorativa {
+    animation: pulse-bar 2s ease-in-out infinite;
+}
+
+/* Responsividade */
+@media (max-width: 576px) {
+    .offcanvas-perfil-moderno {
+        width: 100% !important;
+        max-width: 380px;
+    }
+    
+    .offcanvas-header-moderno {
+        padding: 25px 20px 15px;
+    }
+    
+    .foto-perfil-offcanvas {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .nome-usuario-offcanvas {
+        font-size: 18px;
+    }
+    
+    .item-menu-offcanvas {
+        padding: 16px 20px;
+    }
+    
+    .icone-container-offcanvas {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+    
+    .texto-menu-offcanvas {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .design-decorativo-offcanvas {
+        height: 80px;
+    }
+    
+    .barra-decorativa {
+        gap: 5px;
+    }
+}
+
+/* Transições suaves ao abrir */
+.offcanvas-perfil-moderno.show .item-menu-offcanvas {
+    animation: slideInRight 0.4s ease-out forwards;
+}
+
+.offcanvas-perfil-moderno.show .item-menu-offcanvas:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.offcanvas-perfil-moderno.show .item-menu-offcanvas:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.offcanvas-perfil-moderno.show .item-menu-offcanvas:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

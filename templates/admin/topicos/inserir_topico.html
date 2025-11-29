@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+{% block conteudo %}
+<article>
+    <div class="card container">
+        <div class="card-body">
+            <h2>Cadastro de Tópico</h2>
+            <hr>
+            <form action="/admin/topicos/inserir-topico" method="post">
+                <div class="form-floating mb-3">
+                    <input
+                        type="text"
+                        class="form-control {% if erro and 'nome' in erro.lower() %}is-invalid{% endif %}"
+                        id="nome"
+                        name="nome"
+                        placeholder="Nome do Tópico"
+                        required
+                        value="{{ dados.nome if dados else '' }}"
+                    >
+                    <label for="nome">Nome do Tópico</label>
+                    {% if erro and 'nome' in erro.lower() %}
+                    <div class="invalid-feedback">{{ erro }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select
+                        class="form-select {% if erro and 'categoria' in erro.lower() %}is-invalid{% endif %}"
+                        id="idCategoria"
+                        name="idCategoria"
+                        required
+                    >
+                        <option value="">Selecione uma categoria</option>
+                        {% for categoria in categorias %}
+                        <option value="{{ categoria.id }}" {% if dados and dados.idCategoria == categoria.id %}selected{% endif %}>
+                            {{ categoria.nome }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <label for="idCategoria">Categoria</label>
+                    {% if erro and 'categoria' in erro.lower() %}
+                    <div class="invalid-feedback">{{ erro }}</div>
+                    {% endif %}
+                </div>
+
+                {% if erro %}
+                <div class="alert alert-danger" role="alert">
+                    {{ erro }}
+                </div>
+                {% endif %}
+
+                <button type="submit" class="btn btn-primary me-2">Cadastrar Tópico</button>
+                <a href="/admin/topicos" class="btn btn-secondary">Cancelar Cadastro</a>
+            </form>
+        </div>
+    </div>
+</article>
+{% endblock %}
