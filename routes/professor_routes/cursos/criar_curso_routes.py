@@ -19,12 +19,14 @@ router = APIRouter()
 async def get_criar_curso(request: Request, usuario_logado: dict = None):
     usuario_logado["indentificacaoProfessor"] = True
     topicos = obter_topicos()
+    erros = None
     response = templates.TemplateResponse(
         "professor/cursos/criar_curso.html", 
         {
             "request": request, 
             "usuario": usuario_logado, 
-            "topicos": topicos
+            "topicos": topicos,
+            "erros": erros
         }
     )
     return response
@@ -69,15 +71,12 @@ async def post_criar_curso(
             statusCurso=True
         )
 
-        # Inserir no banco
-        inserir_curso(curso)
+        curso_id = inserir_curso(curso)
         
-        # Mensagem de sucesso
         informar_sucesso(request, "Curso criado com sucesso!")
         
-        # Redirecionar para lista de cursos ou página de sucesso
         return RedirectResponse(
-            url="/professor/cursos",  # Ajuste para sua rota
+            url=f"/professor/cursos/criar-curso/{curso_id}/criar-modulo", 
             status_code=303
         )
 

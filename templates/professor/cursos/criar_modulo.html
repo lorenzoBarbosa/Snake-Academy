@@ -2,9 +2,29 @@
 {% block conteudo %}
     <!-- Conteúdo Principal -->
     <div class="content-wrapper">
+        {% if mensagens %}
+        <div class="flash-messages">
+            {% for mensagem in mensagens %}
+            <div class="alert alert-{{ mensagem.type }} alert-dismissible fade show" role="alert">
+                {{ mensagem.text }}. Agora crie os módulos para seu curso!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if erros %}
+        <div class="flash-messages">
+            {% for erro in erros %}
+            <div class="alert alert-{{ erro.type }} alert-dismissible fade show" role="alert">
+                {{ erro.msg }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
         <div class="container" style="max-width: 1200px; padding: 20px;">
             <h1 class="titulo-pagina"><i class="bi bi-collection-fill" style="color: #5C22AD;"></i> Criar Módulo do Curso</h1>
-            <p class="subtitulo-pagina">Configure o módulo com aulas e exercícios</p>
+            <p class="subtitulo-pagina">Configure o módulo com aulas</p>
 
             <div class="numero-modulo">
                 <i class="bi bi-hash"></i> Módulo 
@@ -16,12 +36,12 @@
                 
                 <div class="mb-4">
                     <label class="form-label">Título do Módulo *</label>
-                    <input type="text" class="form-control" placeholder="Ex: Introdução à Programação" id="tituloModulo">
+                    <input type="text" class="form-control" placeholder="Ex: Introdução à Programação" id="tituloModulo" value="{%if dados%} {{dados.titulo}} {% endif %}">
                 </div>
 
                 <div class="mb-4">
                     <label class="form-label">Descrição do Módulo *</label>
-                    <textarea class="form-control" placeholder="Descreva o que será abordado neste módulo..." id="descricaoModulo"></textarea>
+                    <textarea class="form-control" placeholder="Descreva o que será abordado neste módulo..." id="descricaoModulo">{%if dados%} {{dados.descricao}} {% endif %}</textarea>
                 </div>
             </div>
 

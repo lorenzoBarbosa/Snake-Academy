@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meus Cursos</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
-    <style>
+{% extends "index.html" %}
+{% block conteudo %}
+<style>
         body {
             background-color: #f8f9fa;
         }
@@ -388,52 +382,6 @@
             margin-top: 50px;
         }
     </style>
-</head>
-<body>
-    <!-- Navbar -->
-    <div class="demo-navbar">
-        Plataforma de Cursos - Meus Cursos
-    </div>
-
-    <article>
-        <!-- Sidebar -->
-        <div class="sidebar-container">
-            <div class="sidebar-content">
-                <a href="#" class="sidebar-item">
-                    <i class="bi bi-house-door sidebar-icon"></i>
-                    <span class="sidebar-text">Página Inicial</span>
-                </a>
-                <a href="#" class="sidebar-item" style="background-color: #f0f0f0;">
-                    <i class="bi bi-book sidebar-icon"></i>
-                    <span class="sidebar-text">Meus Cursos</span>
-                </a>
-                <a href="#" class="sidebar-item">
-                    <i class="bi bi-plus-circle sidebar-icon"></i>
-                    <span class="sidebar-text">Criar Novo Curso</span>
-                </a>
-                <a href="#" class="sidebar-item">
-                    <i class="bi bi-people sidebar-icon"></i>
-                    <span class="sidebar-text">Alunos</span>
-                </a>
-                <a href="#" class="sidebar-item">
-                    <i class="bi bi-bar-chart sidebar-icon"></i>
-                    <span class="sidebar-text">Estatísticas</span>
-                </a>
-                <a href="#" class="sidebar-item">
-                    <i class="bi bi-chat-dots sidebar-icon"></i>
-                    <span class="sidebar-text">Mensagens</span>
-                </a>
-                <a href="#" class="sidebar-item">
-                    <i class="bi bi-gear sidebar-icon"></i>
-                    <span class="sidebar-text">Configurações</span>
-                </a>
-                <a href="#" class="sidebar-item">
-                    <i class="bi bi-question-circle sidebar-icon"></i>
-                    <span class="sidebar-text">Ajuda e Suporte</span>
-                </a>
-            </div>
-        </div>
-
         <!-- Conteúdo Principal -->
         <div class="content-wrapper">
             <div class="container" style="max-width: 1400px; padding: 20px;">
@@ -735,3 +683,4 @@
     </script>
 </body>
 </html>
+{% endblock %}
