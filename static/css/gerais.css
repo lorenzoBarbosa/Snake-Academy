@@ -5,6 +5,10 @@
 
 
     --cor-roxo-escuro: #230d46;
+    --cor-roxo-mais-escuro: hwb(265, 4%, 73%);
+    --cor-roxo-claro-50: hwb(265, 96, 0);
+    --cor-roxo-escuro-50: hwb(265, 4%, 50%);
+
     --cor-roxo-claro: #5C22AD;
     --cor-verde: #38BC8E;
     --cor-cinza-claro: #f3f3f3;
@@ -157,7 +161,7 @@ article{
     font-size: 40px;
     color: #333333;
     font-weight: lighter;
-    font-family:var(--fonte-teste);
+    font-family:var(--fonte-principal);
     font-size: 35px;
 }
 
@@ -219,6 +223,11 @@ article{
     display: inline-block;
     padding: 0;
     font-family: var(--fonte-principal);
+    transition: all 0.5s ease;
+}
+
+.carde-cursos:hover{
+  transform: translateY(-5px);
 }
 
 .carde-favoritos {
@@ -253,6 +262,7 @@ article{
 }
 
 .carde-descricao {
+    color: var(--cor-roxo-escuro);
     text-align: left;
     padding: 10px;
     margin-left: 8px ;
@@ -260,14 +270,15 @@ article{
     font-family: var(--fonte-secundaria);
 }
 .carde-texto-titulo{
+    color: var(--cor-roxo-claro-50);
     font-size: 18px;
-    font-weight: lighter;
+    font-weight: bolder;
     margin: 0;
     font-family: var(--fonte-principal);
 }
 .carde-autor {
     font-size: 14px;
-    color: #555555;
+    color: var(--cor-roxo-claro);
     margin-top: 0;
     margin-bottom: 12px;
 }
@@ -314,7 +325,7 @@ article{
 }
 .carde-texto-titulo-favoritos{
     font-size: 16px;
-    font-weight: lighter;
+    font-weight: bolder;
     margin: 0;
     font-family: var(--fonte-principal);
 }

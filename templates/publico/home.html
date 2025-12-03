@@ -7,9 +7,9 @@
                         {%for banner in banners%}
                         <div class="carousel-item {% if loop.first %}active{% endif %}">
                             {% if banner.id %}
-                            <img src="/static/img/carrossel/{{banner.id}}.svg" class="d-block w-100" alt="carrosel">
+                            <img src="/static/img/carrossel/{{banner.id}}.svg" class="d-block w-100" alt="carrosel" loading="" loading="lazy" loading="lazy">
                             {% else %}
-                            <img src="/static/img/banner_exemplo.png" class="d-block w-100" alt="carrosel">
+                            <img src="/static/img/banner_exemplo.png" class="d-block w-100" alt="carrosel" loading="" loading="lazy" loading="lazy">
                             {% endif %}
                         </div>
                     {% endfor %}
@@ -78,7 +78,7 @@
                         {% if curso.topico.idCategoria == categoria.id %}
                         <div class="carde-cursos col-3 m-3">
                             <a href="/detalhes_curso/ {{ curso.id }}">
-                                <img src="{{ imagem_cursos[curso.id] }}" class="imagem-curso" alt="Ciência dos Dados" >
+                                <img src="{{ imagem_cursos[curso.id] }}" class="imagem-curso" alt="Ciência dos Dados"  loading="lazy">
                             </a>
                             <div class="carde-descricao">
                                 <p class="carde-texto-titulo">{{ curso.nome }}</p>
@@ -104,7 +104,7 @@
                 <div class="carrossel-itens">
                     <div class="carde-favoritos col-3">
                             <a href="/detalhes_curso">
-                                <img src="/static/img/favoritos/Curso-de-Copy.png" class="imagem-curso-favoritos" alt="Ciência dos Dados" >
+                                <img src="/static/img/favoritos/Curso-de-Copy.png" class="imagem-curso-favoritos" alt="Ciência dos Dados"  loading="lazy">
                             </a>
                             <div class="carde-descricao-favoritos">
                                 <p class="carde-texto-titulo-favoritos">Copywriting para Negócios</p>
@@ -115,7 +115,7 @@
                     </div>
                     <div class="carde-favoritos col-3">
                             <a href="/detalhes_curso">
-                                <img src="/static/img/favoritos/Curso-de-IA.png" class="imagem-curso-favoritos" alt="Ciência dos Dados" >
+                                <img src="/static/img/favoritos/Curso-de-IA.png" class="imagem-curso-favoritos" alt="Ciência dos Dados"  loading="lazy">
                             </a>
                             <div class="carde-descricao-favoritos">
                                 <p class="carde-texto-titulo-favoritos">Inteligência Artificial Aplicada</p>
@@ -126,7 +126,7 @@
                     </div>
                     <div class="carde-favoritos col-3">
                             <a href="/detalhes_curso">
-                                <img src="/static/img/favoritos/curso-design.png" class="imagem-curso-favoritos" alt="Ciência dos Dados" >
+                                <img src="/static/img/favoritos/curso-design.png" class="imagem-curso-favoritos" alt="Ciência dos Dados"  loading="lazy">
                             </a>
                             <div class="carde-descricao-favoritos">
                                 <p class="carde-texto-titulo-favoritos">Design Gráfico Moderno</p>
@@ -137,7 +137,7 @@
                     </div>
                     <div class="carde-favoritos col-3">
                             <a href="/detalhes_curso">
-                                <img src="/static/img/favoritos/curso-html.jpg" class="imagem-curso-favoritos" alt="Ciência dos Dados" >
+                                <img src="/static/img/favoritos/curso-html.jpg" class="imagem-curso-favoritos" alt="Ciência dos Dados"  loading="lazy">
                             </a>
                             <div class="carde-descricao-favoritos">
                                 <p class="carde-texto-titulo-favoritos">HTML Avançado</p>
@@ -148,7 +148,7 @@
                     </div>
                     <div class="carde-favoritos col-3">
                             <a href="/detalhes_curso">
-                                <img src="/static/img/favoritos/curso-python.jpg" class="imagem-curso-favoritos" alt="Ciência dos Dados" >
+                                <img src="/static/img/favoritos/curso-python.jpg" class="imagem-curso-favoritos" alt="Ciência dos Dados"  loading="lazy">
                             </a>
                             <div class="carde-descricao-favoritos">
                                 <p class="carde-texto-titulo-favoritos">Python para Data Science</p>
@@ -159,7 +159,7 @@
                     </div>
                     <div class="carde-favoritos col-3">
                             <a href="/detalhes_curso">
-                                <img src="/static/img/favoritos/Banco-de-Dados-curso-SQL-.png" class="imagem-curso-favoritos" alt="Ciência dos Dados" >
+                                <img src="/static/img/favoritos/Banco-de-Dados-curso-SQL-.png" class="imagem-curso-favoritos" alt="Ciência dos Dados"  loading="lazy">
                             </a>
                             <div class="carde-descricao-favoritos">
                                 <p class="carde-texto-titulo-favoritos">Banco de Dados SQL</p>
@@ -170,7 +170,7 @@
                     </div>
                     <div class="carde-favoritos col-3">
                             <a href="/detalhes_curso">
-                                <img src="/static/img/favoritos/excel curso.jpg" class="imagem-curso-favoritos" alt="Ciência dos Dados" >
+                                <img src="/static/img/favoritos/excel curso.jpg" class="imagem-curso-favoritos" alt="Ciência dos Dados"  loading="lazy">
                             </a>
                             <div class="carde-descricao-favoritos">
                                 <p class="carde-texto-titulo-favoritos">Excel Avançado</p>
@@ -181,7 +181,7 @@
                     </div>
                     <div class="carde-favoritos col-3">
                             <a href="/detalhes_curso">
-                                <img src="/static/img/favoritos/css-curso.jpg" class="imagem-curso-favoritos" alt="Ciência dos Dados" >
+                                <img src="/static/img/favoritos/css-curso.jpg" class="imagem-curso-favoritos" alt="Ciência dos Dados"  loading="lazy">
                             </a>
                             <div class="carde-descricao-favoritos">
                                 <p class="carde-texto-titulo-favoritos">CSS Responsivo</p>
@@ -248,22 +248,22 @@
                         <div class="painel-lateral">
                             <div id="painel1" class="collapse show" data-bs-parent=".painel-lateral">
                                 <div>
-                                    <img class="conteudo-painel" src="/static/img/painel/Mercado de Trabalho teste.png" alt="Mercado de Trabalho">
+                                    <img class="conteudo-painel" src="/static/img/painel/Mercado-de-Trabalho-teste.webp" alt="Mercado de Trabalho" loading="lazy">
                                 </div>
                             </div>
                             <div id="painel2" class="collapse" data-bs-parent=".painel-lateral">
                                 <div>
-                                    <img class="conteudo-painel" src="/static/img/painel/qualificação teste.png" alt="Qualificação">
+                                    <img class="conteudo-painel" src="/static/img/painel/qualificação-teste.webp" alt="Qualificação" loading="lazy">
                                 </div>
                             </div>
                             <div id="painel3" class="collapse" data-bs-parent=".painel-lateral">
                                 <div>
-                                    <img class="conteudo-painel" src="/static/img/painel/analises e estatisticas teste.png" alt="Analise">
+                                    <img class="conteudo-painel" src="/static/img/painel/analises-e-estatisticas-teste.webp" loading="lazy">
                                 </div>
                             </div>
                             <div id="painel4" class="collapse" data-bs-parent=".painel-lateral">
                                 <div>
-                                    <img class="conteudo-painel" src="/static/img/painel/profissional-do-futuro teste.png" alt="Futuro">
+                                    <img class="conteudo-painel" src="/static/img/painel/profissional-do-futuro-teste.webp" loading="lazy">
                                 </div>
                             </div>
                         </div>
@@ -279,7 +279,7 @@
             <div class="testimonial-card">
                 <p>“A Snake Academy me ajudou a conseguir meu primeiro emprego como desenvolvedor júnior em menos de 6 meses.”</p>
                 <div class="testimonial-perfil">
-                <img src="/static/img/comentarios/Lucas Andrade.webp" alt="Foto aluno">
+                <img src="/static/img/comentarios/Lucas Andrade.webp" alt="Foto aluno" loading="lazy">
                 <span>Lucas Andrade<br><small>Dev Júnior</small></span>
                 </div>
                 <a href="#">Cursos de Desenvolvimento Web →</a>
@@ -288,7 +288,7 @@
             <div class="testimonial-card">
                 <p>“Com os cursos de Ciência de Dados, aprendi do zero até conseguir minha certificação e hoje trabalho em uma fintech.”</p>
                 <div class="testimonial-perfil">
-                <img src="/static/img/comentarios/Mariana Costa.jpg" alt="Foto aluna">
+                <img src="/static/img/comentarios/Mariana Costa.jpg" alt="Foto aluna" loading="lazy">
                 <span>Mariana Costa<br><small>Analista de Dados</small></span>
                 </div>
                 <a href="#">Cursos de Ciência de Dados →</a>
@@ -297,7 +297,7 @@
             <div class="testimonial-card">
                 <p>“Sempre quis aprender Inteligência Artificial. A trilha da Snake Academy me deu base sólida e apliquei em projetos reais.”</p>
                 <div class="testimonial-perfil">
-                <img src="/static/img/comentarios/Rafael Oliveira.png" alt="Foto aluno">
+                <img src="/static/img/comentarios/Rafael Oliveira.png" alt="Foto aluno" loading="lazy">
                 <span>Rafael Oliveira<br><small>Eng. de IA</small></span>
                 </div>
                 <a href="#">Cursos de Inteligência Artificial →</a>
@@ -306,7 +306,7 @@
             <div class="testimonial-card">
                 <p>“Além do conteúdo top, a Snake Academy me mostrou que é possível aprender e empreender. Já lancei meu primeiro app!”</p>
                 <div class="testimonial-perfil">
-                <img src="/static/img/comentarios/Ana Souza.webp" alt="Foto aluna">
+                <img src="/static/img/comentarios/Ana Souza.webp" alt="Foto aluna" loading="lazy">
                 <span>Ana Souza<br><small>Dev Mobile</small></span>
                 </div>
                 <a href="#">Cursos de Mobile →</a>
