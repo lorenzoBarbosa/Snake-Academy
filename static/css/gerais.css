@@ -4,12 +4,12 @@
 :root {
 
 
-    --cor-roxo-escuro: #220031;
+    --cor-roxo-escuro: #230d46;
     --cor-roxo-claro: #5C22AD;
     --cor-verde: #38BC8E;
     --cor-cinza-claro: #f3f3f3;
     --cor-cinza-escuro: #19171A;
-    --cor-branco: #FFFFFF;
+    --cor-branco: #ffffff;
     --cor-preto: #000000;
 
     --fonte-principal: 'Inter', sans-serif;
@@ -22,7 +22,7 @@ html,body
 {
     overflow-x: hidden;
     width: 100%;
-    background-color: #ffffff;
+    background-color: var(--cor-branco);
     font-family: var(--fonte-principal);
 }  
 
@@ -36,7 +36,7 @@ article{
     width: 100%;
 }
 .bg-navbar-roxo {
-    background-color: #ffffff;
+    background-color: var(--cor-branco);
     box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -51,7 +51,7 @@ article{
 }
 .btn-lupa {
     border: 1px solid #ccc;
-    background-color: #FFFFFF;
+    background-color: var(--cor-branco);
     border-radius: 0 20px 20px 0;
     height: auto;
     display: flex;
@@ -62,9 +62,9 @@ article{
     transition: background-color 0.3s;
 }
 .btn-lupa:hover {
-    background-color: #f0f0f0;
+    background-color: var(--cor-cinza-claro);
     border: 1px solid #ccc;
-    font-family: 'Times New Roman', 'Arial Narrow', Arial, sans-serif;
+
 }
 .botao-login {
     background-color: transparent;
@@ -72,10 +72,10 @@ article{
     cursor: pointer;
 }
 .login {
-    background-color: #38BC8E;
-    color: #ffffff;
+    background-color: var(--cor-verde);
+    color: var(--cor-branco);
     border-radius: 5px;
-    border: 1px solid #38BC8E;
+    border: 1px solid var(--cor-verde);
     font-weight: middle;
     width: 100px;
     height: 40px;
@@ -87,7 +87,7 @@ article{
 }
 .login:hover {
     background-color: #288363;
-    color: #FFFFFF;
+    color: var(--cor-branco);
 }
 
 .login-container {
@@ -103,7 +103,7 @@ article{
 
 .login-direita {
     flex: 1;
-    background-color: #ffffff;
+    background-color: var(--cor-branco);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -120,10 +120,10 @@ article{
 }
 
 .cadastro {
-    background-color: #5C22AD;
-    color: #FFFFFF;
+    background-color: var(--cor-roxo-claro);
+    color: var(--cor-branco);
     border-radius: 5px;
-    border: 1px solid #5C22AD;
+    border: 1px solid var(--cor-roxo-claro);
     font-weight: middle;
     width: 120px;
     height: 40px;
@@ -134,7 +134,7 @@ article{
     font-family: var(--fonte-principal);
 }
 .cadastro:hover {
-    background-color: #3a1572;
+    background-color: var(--cor-roxo-escuro);
 }
 .navbar-brand img {
     max-height: 80px;
@@ -181,12 +181,12 @@ article{
     margin-top: 20px;
     text-align: center;
     font-size: 20px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 .tipos-cursos.ativo {
     text-decoration: underline;
     font-weight: lighter;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 .form-control {
     border-radius: 10px;
@@ -212,19 +212,19 @@ article{
 .carde-cursos {
     width: 18rem;
     min-height: 18rem;
-    background-color: #ffffff;
+    background-color: var(--cor-branco);
     color: rgb(53, 52, 52);
     border-radius: 5px;
     border: 1px solid #cac9ca;
     display: inline-block;
     padding: 0;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 
 .carde-favoritos {
     width: 16rem;
     min-height: 14rem;
-    background-color: #ffffff;
+    background-color: var(--cor-branco);
     color: rgb(53, 52, 52);
     border-radius: 5px;
     border: 1px solid #cac9ca;
@@ -235,7 +235,7 @@ article{
 /* .carde-geral {
     width: 16rem;
     min-height: 14rem;
-    background-color: #ffffff;
+    background-color: var(--cor-branco);
     color: rgb(53, 52, 52);
     border-radius: 5px;
     border: 1px solid #cac9ca;
@@ -257,13 +257,13 @@ article{
     padding: 10px;
     margin-left: 8px ;
     margin-bottom: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--fonte-secundaria);
 }
 .carde-texto-titulo{
     font-size: 18px;
     font-weight: lighter;
     margin: 0;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 .carde-autor {
     font-size: 14px;
@@ -273,27 +273,27 @@ article{
 }
 .carde-avaliacao{
     font-size: 15px;
-    color: #000000;
+    color: var(--cor-preto);
     margin-bottom: 0;
     display: inline;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 .carde-quantidade-avaliacoes {
     font-size: 12px;
     color: #555555;
     margin-bottom: 0;
     display: inline;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 .carde-preco {
     font-size: 15px;
-    color: #ffffff;
+    color: var(--cor-branco);
     margin: 0;
     background-color: #5c22add3;
     display: inline;
     border-radius: 5px;
     padding: 5px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 
 
@@ -310,44 +310,44 @@ article{
     padding: 10px;
     margin-left: 8px ;
     margin-bottom: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--fonte-secundaria);
 }
 .carde-texto-titulo-favoritos{
     font-size: 16px;
     font-weight: lighter;
     margin: 0;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 .carde-autor-favoritos {
     font-size: 12px;
     color: #555555;
     margin-top: 0;
     margin-bottom: 8px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 .carde-avaliacao-favoritos{
     font-size: 15px;
-    color: #000000;
+    color: var(--cor-preto);
     margin-bottom: 0;
     display: inline;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 .carde-quantidade-avaliacoes-favoritos {
     font-size: 12px;
     color: #555555;
     margin-bottom: 0;
     display: inline;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 .carde-preco-favoritos {
     font-size: 15px;
-    color: #ffffff;
+    color: var(--cor-branco);
     margin: 0;
-    background-color: #5c22add3;
+    background-color: var(--cor-roxo-escuro);
     display: inline-block;
     border-radius: 5px;
     padding: 5px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 
 .botao-esquerda {
@@ -356,13 +356,13 @@ article{
     transform: translateY(-50%);;
     border: none;
     color: rgb(0, 0, 0);
-    background-color: #38bc8e67;
+    background-color: var(--cor-verde)67;
     font-size: 30px;
     padding: 5px;
     cursor: pointer;
     z-index: 1;
     border-radius: 0 50%  50% 0; 
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 .botao-direita {
     position: absolute;
@@ -370,13 +370,13 @@ article{
     transform: translateY(-50%);;
     border: none;
     color: rgb(0, 0, 0);
-    background-color: #38bc8e67;
+    background-color: var(--cor-verde)67;
     font-size: 30px;
     padding: 5px;
     cursor: pointer;
     z-index: 1;
     border-radius: 50% 0 0 50%;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 .esquerda {
     left: 0;
@@ -386,7 +386,7 @@ article{
 }
 
 .div-aprendizado-direcionado {
-    background-color: #f3f3f3;
+    background-color: var(--cor-cinza-claro);
     width: 100%;
     min-height: 50vh;
     padding-top: 20px;
@@ -396,7 +396,7 @@ article{
     font-size: 30px;
     color: #333333;
     font-weight: lighter;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 .div-aprendizado-direcionado-container{
     width: 100%;
@@ -416,13 +416,13 @@ article{
 }
 
 .objetivos-aprendizado {
-    background-color: #ffffff;
+    background-color: var(--cor-branco);
     padding: 15px;
     border-radius: 10px;
     font-size: 22px;
     cursor: pointer;
     min-height: 100px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 .painel-lateral {
     margin-left: 100px ;
@@ -438,14 +438,14 @@ article{
 
 .rodape {
     background-color: #19171A;
-    color: #FFFFFF;
+    color: var(--cor-branco);
     width: 100%;
     text-align: center;
     padding-top: 30px;
 }
 
 .fundo-curso{
-    background-color: #220031;
+    background-color: var(--cor-roxo-escuro);
     min-height: 30vh;
     min-width: 100vw;
     position: absolute;
@@ -467,14 +467,14 @@ article{
 .titulo-curso {
     font-size: 38px;
     font-weight: bold;
-    color: #ffffff;
+    color: var(--cor-branco);
     background-color: none;
     margin-left: 120px;
 }
 
 .descricao-curso {
     font-size: 18px;
-    color: #ffffff;
+    color: var(--cor-branco);
     margin-left: 120px;
 }
 
@@ -518,7 +518,7 @@ article{
 .linha-detalhes-imagem-curso-roxo1{
     height: 5px;
     width: 20%;
-    background-color: #220031;
+    background-color: var(--cor-roxo-escuro);
     position: absolute;
     margin-left: 0%;
 }
@@ -526,7 +526,7 @@ article{
 .linha-detalhes-imagem-curso-verde1{
     height: 5px;
     width: 20%;
-    background-color: #38bc8e;
+    background-color: var(--cor-verde);
     position: absolute;
     margin-left: 20%;
     
@@ -535,7 +535,7 @@ article{
 .linha-detalhes-imagem-curso-roxo2{
     height: 5px;
     width: 20%;
-    background-color: #220031;
+    background-color: var(--cor-roxo-escuro);
     position: absolute;
     margin-left: 40%;
     
@@ -544,7 +544,7 @@ article{
 .linha-detalhes-imagem-curso-verde2{
     height: 5px;
     width: 20%;
-    background-color: #38bc8e;
+    background-color: var(--cor-verde);
     position: absolute;
     margin-left: 60%;
     
@@ -553,7 +553,7 @@ article{
 .linha-detalhes-imagem-curso-roxo3{
     height: 5px;
     width: 20%;
-    background-color: #220031;
+    background-color: var(--cor-roxo-escuro);
     position: absolute;
     margin-left: 80%;
     
@@ -561,43 +561,43 @@ article{
 
 .detalhes-curso-carde-titulo{
     font-size: 2em;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 
 .detalhes-curso-carde-informacoes{
     font-size: 1.1em;
     color: #666666;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 
 .detalhes-curso-carde-preco{
     font-size: 1.5em;
-    color: #000000;
-    font-family: 'Times New Roman', Times, serif;
+    color: var(--cor-preto);
+    font-family: var(--fonte-principal);
 }
 
 .container-compra {
-    background-color: #ffffff;
+    background-color: var(--cor-branco);
 }
 
 .botao-comprar{
-    background-color: #3a1572;
+    background-color: var(--cor-roxo-escuro);
     border: none;
-    color: #ffffff;
+    color: var(--cor-branco);
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     margin-left: 5%;
 }
 .botao-comprar:hover{
-    background-color: #230d46;
+    background-color: var(--cor-roxo-escuro);
     transition: 2ms;
 }
 
 .botao-carrinho{
-    background-color: #ffffff;
-    border: 1px solid #3a1572;
-    color: #3a1572;
+    background-color: var(--cor-branco);
+    border: 1px solid var(--cor-roxo-escuro);
+    color: var(--cor-roxo-escuro);
     border-radius: 5px;
     cursor: pointer;
     margin-left: 10%;
@@ -619,7 +619,7 @@ article{
 .titulo-modulo{
     font-size: 38px;
     margin-top: 5vh;
-    color: #000000;
+    color: var(--cor-preto);
     background-color: none;
     margin-left: 8%;
 }
@@ -649,14 +649,14 @@ article{
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--fonte-principal);
 }
 .illustration img {
     width: 100%;
     max-width: 400px;
 }
 .botao-roxo-lc {
-    background-color: #6a0dad;
+    background-color: var(--cor-roxo-claro);
     color: white;
     border-radius: 10px;
 }
@@ -684,13 +684,13 @@ article{
   gap: 20px;
   justify-content: center;
   padding: 30px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--fonte-secundaria);
 }
 
 .testimonial-card {
   width: 260px; /* deixa o quadrado */
   height: 260px;
-  background: #fff;
+  background: var(--cor-branco);
   border: 1px solid #e0e0e0;
   border-radius: 8px; /* cantos levemente arredondados */
   padding: 15px;
@@ -736,7 +736,7 @@ article{
 }
 
 .div-fundo-cinza {
-    background-color: #f3f3f3;
+    background-color: var(--cor-cinza-claro);
     width: 100%;
     min-height: 50vh;
     padding-top: 20px;
@@ -752,7 +752,7 @@ article{
 }
 
 .redefinir-card {
-  background: #fff;
+  background: var(--cor-branco);
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
   padding: 32px;
@@ -860,10 +860,10 @@ article{
 }
 
 .btn-filtros {
-    background-color: #38BC8E;
-    color: #ffffff;
+    background-color: var(--cor-verde);
+    color: var(--cor-branco);
     border-radius: 5px;
-    border: 1px solid #38bc8e;
+    border: 1px solid var(--cor-verde);
     font-weight: middle;
     width: 100px;
     height: 40px;
@@ -877,7 +877,7 @@ article{
 
 .btn-atalhos {
     background-color: #b9b9b9;
-    color: #FFFFFF;
+    color: var(--cor-branco);
     border-radius: 5px;
     border: 1px solid #c9c9c9;
     font-weight: middle;
@@ -904,7 +904,7 @@ article{
 .offcanvas {
   width: 320px; /* largura do painel */
   max-width: 85vw;
-  background-color: #ffffff;
+  background-color: var(--cor-branco);
   border-right: 1px solid rgba(0,0,0,0.06);
   padding-top: 18px;
   font-family: var(--fonte-principal);
@@ -968,7 +968,7 @@ article{
 }
 .filtro-item input:checked + .fake-radio {
   border-color: #6a0dad;
-  background: linear-gradient(180deg,#6a0dad,#3a1572);
+  background: linear-gradient(180deg,#6a0dad,var(--cor-roxo-escuro));
 }
 .filtro-item .fake-radio::after{
   content: "";
@@ -1031,7 +1031,7 @@ article{
   position:relative;
 }
 .filtro-checkbox input:checked + .fake-check {
-  background: linear-gradient(180deg,#6a0dad,#3a1572);
+  background: linear-gradient(180deg,#6a0dad,var(--cor-roxo-escuro));
   border-color: #6a0dad;
 }
 .filtro-checkbox .fake-check::after{
